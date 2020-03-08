@@ -19,7 +19,7 @@
           <v-img
             v-if="post.src"
             height="100%"
-            :src="require(`@/assets/instagram/${post.src}`)"
+            :src="require(`~/assets/instagram/${post.src}`)"
           />
         </base-card>
       </v-flex>

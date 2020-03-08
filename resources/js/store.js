@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    articles: require('@/data/articles.json'),
+    articles: require('~/data/articles.json'),
     drawer: false,
     items: [
       {
@@ -20,15 +20,15 @@ export default new Vuex.Store({
   },
   getters: {
     categories: state => {
-      const categories = []
+      const categories = [];
 
       for (const article of state.articles) {
         if (
           !article.category ||
           categories.find(category => category.text === article.category)
-        ) continue
+        ) continue;
 
-        const text = article.category
+        const text = article.category;
 
         categories.push({
           text,

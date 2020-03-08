@@ -30,9 +30,9 @@
 <script>
   export default {
     components: {
-      NewestPosts: () => import('@/components/NewestPosts'),
-      Instagram: () => import('@/components/Instagram'),
-      Tags: () => import('@/components/Tags')
+      NewestPosts: () => import('~/components/NewestPosts'),
+      Instagram: () => import('~/components/Instagram'),
+      Tags: () => import('~/components/Tags')
     }
   }
 </script>

@@ -12,7 +12,7 @@
         d-flex
       >
         <v-img
-          :src="require(`@/assets/articles/${article.hero}`)"
+          :src="require(`~/assets/articles/${article.hero}`)"
           class="mr-3"
           height="36"
           max-width="36"

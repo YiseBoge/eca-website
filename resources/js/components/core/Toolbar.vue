@@ -5,15 +5,14 @@
   >
     <v-toolbar-side-icon
       class="hidden-md-and-up"
-      @click="toggleDrawer"
-    />
+      @click="toggleDrawer"></v-toolbar-side-icon>
     <v-container
       mx-auto
       py-0
     >
       <v-layout>
         <v-img
-          :src="require('@/assets/logo.png')"
+          :src="require('~/assets/logo.png')"
           class="mr-5"
           contain
           height="48"
