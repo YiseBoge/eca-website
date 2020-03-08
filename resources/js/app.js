@@ -1,18 +1,14 @@
 import Vue from 'vue'
-import store from '~/store'
-import router from '~/router'
-import i18n from '~/plugins/i18n'
-import App from '~/components/App'
-
-import '~/plugins'
-import '~/components'
+import './plugins/vuetify'
+import './plugins/base'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
 new Vue({
-  i18n,
-  store,
   router,
-  ...App
-})
+  store,
+  render: h => h(App)
+}).$mount('#app')
