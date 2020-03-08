@@ -1,96 +1,83 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <div class="container">
-      <router-link :to="{ name: user ? 'home' : 'welcome' }" class="navbar-brand">
-        {{ appName }}
-      </router-link>
+  <v-card class="overflow-hidden">
+    <v-app-bar
+      absolute
+      color="#43a047"
+      dark
+      shrink-on-scroll
+      prominent
+      src="https://picsum.photos/1920/1080?random"
+      fade-img-on-scroll
+      scroll-target="#scrolling-techniques-5"
+      scroll-threshold="500"
+    >
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
+        ></v-img>
+      </template>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
-        <span class="navbar-toggler-icon" />
-      </button>
+      <locale-dropdown/>
 
-      <div id="navbarToggler" class="collapse navbar-collapse">
-        <ul class="navbar-nav">
-          <locale-dropdown />
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li> -->
-        </ul>
+      <v-toolbar-title>Title</v-toolbar-title>
 
-        <ul class="navbar-nav ml-auto">
-          <!-- Authenticated -->
-          <li v-if="user" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark"
-               href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            >
-              <img :src="user.photo_url" class="rounded-circle profile-photo mr-1">
-              {{ user.name }}
-            </a>
-            <div class="dropdown-menu">
-              <router-link :to="{ name: 'settings.profile' }" class="dropdown-item pl-3">
-                <fa icon="cog" fixed-width />
-                {{ $t('settings') }}
-              </router-link>
+      <v-spacer></v-spacer>
 
-              <div class="dropdown-divider" />
-              <a href="#" class="dropdown-item pl-3" @click.prevent="logout">
-                <fa icon="sign-out-alt" fixed-width />
-                {{ $t('logout') }}
-              </a>
-            </div>
-          </li>
-          <!-- Guest -->
-          <template v-else>
-            <li class="nav-item">
-              <router-link :to="{ name: 'login' }" class="nav-link" active-class="active">
-                {{ $t('login') }}
-              </router-link>
-            </li>
-            <li class="nav-item">
-              <router-link :to="{ name: 'register' }" class="nav-link" active-class="active">
-                {{ $t('register') }}
-              </router-link>
-            </li>
-          </template>
-        </ul>
-      </div>
-    </div>
-  </nav>
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
+    </v-app-bar>
+    <v-sheet
+      id="scrolling-techniques-5"
+      class="overflow-y-auto"
+      max-height="600"
+    >
+      <v-container style="height: 1500px;"></v-container>
+    </v-sheet>
+  </v-card>
 </template>
-
 <script>
-import { mapGetters } from 'vuex'
-import LocaleDropdown from './LocaleDropdown'
+    import {mapGetters} from 'vuex'
+    import LocaleDropdown from './LocaleDropdown'
 
-export default {
-  components: {
-    LocaleDropdown
-  },
+    export default {
+        components: {
+            LocaleDropdown
+        },
 
-  data: () => ({
-    appName: window.config.appName
-  }),
+        data: () => ({
+            appName: window.config.appName
+        }),
 
-  computed: mapGetters({
-    user: 'auth/user'
-  }),
+        computed: mapGetters({
+            user: 'auth/user'
+        }),
 
-  methods: {
-    async logout () {
-      // Log out the user.
-      await this.$store.dispatch('auth/logout')
+        methods: {
+            async logout() {
+                // Log out the user.
+                await this.$store.dispatch('auth/logout')
 
-      // Redirect to login.
-      this.$router.push({ name: 'login' })
+                // Redirect to login.
+                this.$router.push({name: 'login'})
+            }
+        }
     }
-  }
-}
 </script>
 
 <style scoped>
-.profile-photo {
-  width: 2rem;
-  height: 2rem;
-  margin: -.375rem 0;
-}
+  .profile-photo {
+    width: 2rem;
+    height: 2rem;
+    margin: -.375rem 0;
+  }
 </style>
