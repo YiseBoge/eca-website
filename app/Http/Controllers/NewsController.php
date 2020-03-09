@@ -6,7 +6,6 @@ use App\Http\Resources\NewsCollection;
 use App\Http\Resources\NewsResource;
 use App\Models\News;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 
 class NewsController extends Controller
 {
@@ -35,7 +34,7 @@ class NewsController extends Controller
             'description' => $request->input("description"),
             'category' => $request->input("category"),
             'image_url' => $request->input("image_url"),
-            'file_url' => $request->input("file_url"),
+//            'file_url' => $request->input("file_url"),
         ]);
         return new NewsResource($model);
     }
@@ -62,7 +61,11 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         $model = News::findOrFail($id);
-        $model->fill(Input::all())->save();
+        $model->title = $request->input("title");
+        $model->description = $request->input("description");
+        $model->category = $request->input("category");
+        $model->image_url = $request->input("image_url");
+        $model->save();
         return new NewsResource($model);
     }
 
@@ -74,7 +77,6 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        $model = News::findOrFail($id);
-        return News::destroy($model);
+        return News::destroy($id);
     }
 }
