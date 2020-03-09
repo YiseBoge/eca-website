@@ -1,32 +1,22 @@
 <template>
-  <v-app>
-    <core-toolbar />
-
-    <core-drawer />
-
-    <core-view />
-
-    <core-footer />
-
-    <core-cta />
-  </v-app>
+    <div id="app">
+        <router-view name="header"></router-view>
+        <main>
+            <fade-transition origin="center" mode="out-in" :duration="250">
+                <router-view/>
+            </fade-transition>
+        </main>
+        <router-view name="footer"></router-view>
+    </div>
 </template>
-
 <script>
+import { FadeTransition } from "vue2-transitions";
+import VueCarousel from 'vue-carousel';
 
-  export default {
-    name: 'App',
-    components: {
-      CoreCta: () => import('~/components/core/Cta'),
-      CoreDrawer: () => import('~/components/core/Drawer'),
-      CoreFooter: () => import('~/components/core/Footer'),
-      CoreToolbar: () => import('~/components/core/Toolbar'),
-      CoreView: () => import('~/components/core/View')
-    },
-    data () {
-      return {
-      //
-      }
-    }
+
+export default {
+  components: {
+    FadeTransition
   }
+};
 </script>
