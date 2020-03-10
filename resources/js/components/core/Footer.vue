@@ -1,46 +1,44 @@
 <template>
   <v-footer
-    dark
-    padless
+    class="shadow-lg"
+    style="background: url('https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg') repeat"
   >
     <v-card
       flat
       tile
-      class="black--text w-100" style="background-color: #eeeeff"
+      class="black--text w-100 transparent"
     >
 
-    <v-card-text class="w-100" style="color: #444444">
-      <v-container
-    grid-list-xl
+      <v-card-text class="w-100" style="color: #444444">
+        <v-container
+          grid-list-xl
   >
 
   <v-layout wrap>
       <v-flex
         xs12
-        md5
+        md4
       >
-      <img src="https://eca.et/wp-content/uploads/2019/10/logo-eca-flag-2.png" style="width: 75%">
+        <img src="https://eca.et/wp-content/uploads/2019/10/logo-eca-flag-2.png" style="width: 300px">
       <p class="mt-3">The Transparent Gateway to Prosperity </p>
       </v-flex>
 
       <v-flex
         xs12
-        md7
+        md8
       >
 
        <v-layout wrap>
-      <v-flex
-        xs12
-        md6
-      >
-        <h6>HEAD OFFICE</h6>
-        <v-divider class="grey w-50"></v-divider>
-        <p>Ethiopian Communications Authority</p>
-        <p>Debrezeit Road</p>
-        <p>Tegene Building</p>
-        <p>P.O.Box 9991</p>
-        <p>Addis Ababa</p>
-      </v-flex>
+         <v-flex
+           xs12
+           md6
+         >
+           <h6>HEAD OFFICE</h6>
+           <v-divider class="grey w-50"></v-divider>
+           <p>Ethiopian Communications Authority</p>
+           <p>Tegene Building, Debrezeit Road</p>
+           <p>P.O.Box 9991; Addis Ababa, Ethiopia</p>
+         </v-flex>
 
       <v-flex
         xs12
@@ -72,7 +70,7 @@
     </v-layout>
       </v-flex>
   </v-layout>
-   
+
   </v-container>
 
     </v-card-text>
@@ -97,20 +95,8 @@
       <v-card-text class="white--text">
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-card-text>-->
-    </v-card> 
-
-    <v-card
-      flat
-      tile
-      class="blue white--text text-center w-100"
-    >
-    <v-card-text class="white--text">
-         Share This: 
-         <v-icon size="24px" class="mt-3">mdi-twitter</v-icon>
-         <v-icon size="24px" class="mt-3">mdi-facebook</v-icon>
-      </v-card-text>
-
     </v-card>
+
   </v-footer>
 </template>
 

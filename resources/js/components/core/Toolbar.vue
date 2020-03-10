@@ -1,7 +1,7 @@
 <template>
   <v-card class="overflow-hidden" raised tile>
     <v-app-bar
-      color="blue accent-4"
+      color="blue accent-2"
       dark
     >
       <template v-slot:img="{ props }">
@@ -10,11 +10,13 @@
           gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
         />
       </template>
-      <v-toolbar-title>
-        <v-img src="/img/brand/white.png" style="width: 200px">
+      <router-link to="/">
+        <v-toolbar-title>
+          <v-img src="/img/brand/white.png" style="width: 200px">
 
-        </v-img>
-      </v-toolbar-title>
+          </v-img>
+        </v-toolbar-title>
+      </router-link>
       <v-spacer/>
       <v-btn
         v-for="(link, i) in links"
@@ -27,15 +29,15 @@
       >
         {{ link.text }}
       </v-btn>
-      <v-spacer></v-spacer>
+      <!--      <v-spacer/>-->
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
+      <!--      <v-btn icon>-->
+      <!--        <v-icon>mdi-magnify</v-icon>-->
+      <!--      </v-btn>-->
 
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <!--      <v-btn icon>-->
+      <!--        <v-icon>mdi-dots-vertical</v-icon>-->
+      <!--      </v-btn>-->
     </v-app-bar>
   </v-card>
 </template>

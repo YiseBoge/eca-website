@@ -1,39 +1,4 @@
 <template>
-  <!--  <base-card dark>-->
-  <!--    <v-img-->
-  <!--      class="grey lighten-2"-->
-  <!--      height="300"-->
-  <!--      width="100%"-->
-  <!--      src="https://images.pexels.com/photos/1624895/pexels-photo-1624895.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"-->
-  <!--    >-->
-  <!--      <v-layout-->
-  <!--        fill-height-->
-  <!--        align-center-->
-  <!--        pa-3-->
-  <!--      >-->
-  <!--        <v-flex-->
-  <!--          xs12-->
-  <!--          md7-->
-  <!--          offset-md5-->
-  <!--        >-->
-  <!--          <h1 class="display-3 font-weight-light">-->
-  <!--            The Art Of Travel-->
-  <!--          </h1>-->
-  <!--          <div class="subheading text-uppercase pl-2 mb-4">-->
-  <!--            Finding Beauty, One flight at a time-->
-  <!--          </div>-->
-  <!--          <v-btn-->
-  <!--            color="primary"-->
-  <!--            depressed-->
-  <!--            round-->
-  <!--          >-->
-  <!--            Subscribe-->
-  <!--          </v-btn>-->
-  <!--        </v-flex>-->
-  <!--      </v-layout>-->
-  <!--    </v-img>-->
-  <!--  </base-card>-->
-
   <v-card
     class="mx-auto row shadow-lg overflow-hidden"
     height="200"
@@ -47,18 +12,10 @@
           <v-list-item-subtitle>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
             industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-            electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-            Aldus PageMaker including versions of Lorem Ipsum.
+            scrambled it to make a type specimen book.
           </v-list-item-subtitle>
         </v-list-item-content>
 
-        <!--        <v-list-item-avatar-->
-        <!--          tile-->
-        <!--          size="100"-->
-        <!--          color="grey"-->
-        <!--        />-->
       </v-list-item>
       <v-card-actions>
         <v-btn
@@ -74,11 +31,5 @@
          background-size: cover;"
     >
     </div>
-
-
-    <!--    <v-card-actions>-->
-    <!--      <v-btn text>Button</v-btn>-->
-    <!--      <v-btn text>Button</v-btn>-->
-    <!--    </v-card-actions>-->
   </v-card>
 </template>

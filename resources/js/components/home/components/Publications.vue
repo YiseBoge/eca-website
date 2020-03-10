@@ -4,8 +4,7 @@
     style="overflow: auto"
   >
     <v-list class="transparent" three-line>
-      <!--            <v-subheader>Headlines</v-subheader>-->
-      <h3 class="px-3 text-primary text-sm">Headlines</h3>
+      <h2 class="px-3 text-primary font-weight-light display-1">Publications</h2>
       <template v-for="(item, index) in items">
         <v-divider
           :inset="item.inset"
@@ -28,7 +27,7 @@
     </v-list>
     <v-flex align-self-end class="float-right">
       <router-link class="btn btn-link nav-link" to="#">
-        More Headlines
+        See All
       </router-link>
     </v-flex>
   </div>
