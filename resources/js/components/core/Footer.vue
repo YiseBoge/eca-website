@@ -6,111 +6,103 @@
     <v-card
       flat
       tile
-      class="black--text w-100" style="background-color: #eeeeff"
+      class="black--text w-100" style="background-color: #f2f2f2"
     >
 
-    <v-card-text class="w-100" style="color: #444444">
+    <v-card-text class="w-100 py-0" style="color: #444444">
       <v-container
-    grid-list-xl
-  >
-
-  <v-layout wrap>
-      <v-flex
-        xs12
-        md5
+        grid-list-xl
       >
-      <img src="https://eca.et/wp-content/uploads/2019/10/logo-eca-flag-2.png" style="width: 75%">
-      <p class="mt-3">The Transparent Gateway to Prosperity </p>
-      </v-flex>
+        <v-layout wrap>
+            <v-flex
+              xs12
+              md5
+            >
+              <img src="https://eca.et/wp-content/uploads/2019/10/logo-eca-flag-2.png" style="width: 75%">
+              <p class="mt-3">The Transparent Gateway to Prosperity </p>
+              <div class="my-0 py-0">
+              <v-btn
+                v-for="icon in icons"
+                :key="icon"
+                class="mr-5 grey--text"
+                icon
+              >
+                <v-icon size="30px">{{ icon }}</v-icon>
+              </v-btn>
+              </div>
+            </v-flex>
 
-      <v-flex
-        xs12
-        md7
-      >
+            <v-flex
+              xs12
+              md7
+            >
+            <v-layout wrap>
+                <v-flex
+                  xs12
+                  md6
+                >
+                  <h6>HEAD OFFICE</h6>
+                  <v-divider class="divider w-50"></v-divider>
+                  <p >Ethiopian Communications Authority</p>
+                  <p >Tegene Building Debrezeit Road</p>
+                  <p > P.O.Box 9991</p>
+                  <p >Addis Ababa, Ethiopia</p>
+                  
+                </v-flex>
 
-       <v-layout wrap>
-      <v-flex
-        xs12
-        md6
-      >
-        <h6>HEAD OFFICE</h6>
-        <v-divider class="grey w-50"></v-divider>
-        <p>Ethiopian Communications Authority</p>
-        <p>Debrezeit Road</p>
-        <p>Tegene Building</p>
-        <p>P.O.Box 9991</p>
-        <p>Addis Ababa</p>
-      </v-flex>
+                <v-flex
+                  xs12
+                  md6
+                >
+                  <h6>CONTACT</h6>
+                  <v-divider class="divider w-50"></v-divider>
+                 <v-btn
+                    class="grey--text"
+                    icon
+                  >
+                    <v-icon size="24px">mdi-email</v-icon>
+                  </v-btn>
+                  <a href="">contact@eca-ethiopia.com</a><br>
+                  <v-btn
+                    class="grey--text"
+                    icon
+                  >
+                    <v-icon size="24px">mdi-phone</v-icon>
+                  </v-btn>
+                  <span>+251 11 465 6011</span><br>
+                  <v-btn
+                    class="grey--text"
+                    icon
+                  >
+                    <v-icon size="24px">mdi-fax</v-icon>
+                  </v-btn>
+                  <span>+251 11 465 5763</span><br>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+        </v-layout>   
+        
+        <v-divider class="divider"></v-divider>
 
-      <v-flex
-        xs12
-        md6
-      >
-      <h6>CONTACT</h6>
-      <v-divider class="grey w-50"></v-divider>
-      <v-icon size="24px">mdi-email</v-icon>
-      <a href="">contact@eca-ethiopia.com</a><br>
-      <v-icon size="24px">mdi-phone</v-icon>
-      <span>+251 11 465 6011</span><br>
-      <v-icon size="24px">mdi-fax</v-icon>
-      <span>+251 11 465 5763</span><br>
+        <div class="container black--text py-0 text-right">
+          <span class="my-0">Share This: </span>
+                <v-btn
+                  class="grey--text"
+                  icon
+                >
+                  <v-icon size="24px">mdi-twitter</v-icon>
+                </v-btn>
 
-      <v-icon size="24px" class="mt-3">mdi-twitter</v-icon>
-      </v-flex>
-
-      <!-- <v-flex
-        xs12
-        md4
-      >
-      <h6>LINKS</h6>
-      <v-divider class="grey w-50"></v-divider>
-      <p><a href="">News</a></p>
-      <p><a href="">Publications</a></p>
-      <p><a href="">Media</a></p>
-      </v-flex> -->
-
-    </v-layout>
-      </v-flex>
-  </v-layout>
-   
-  </v-container>
-
+                <v-btn
+                  class="grey--text"
+                  icon
+                >
+                  <v-icon size="24px">mdi-facebook</v-icon>
+                </v-btn>
+        </div>
+      </v-container>
     </v-card-text>
-
-      <!-- <v-card-text>
-        <v-btn
-          v-for="icon in icons"
-          :key="icon"
-          class="mx-4 black--text"
-          icon
-        >
-          <v-icon size="24px">{{ icon }}</v-icon>
-        </v-btn>
-      </v-card-text>
-
-      <v-card-text class="black--text pt-0">
-        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-      </v-card-text> -->
-
-      <!-- <v-divider></v-divider>
-
-      <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-      </v-card-text>-->
     </v-card> 
-
-    <v-card
-      flat
-      tile
-      class="blue white--text text-center w-100"
-    >
-    <v-card-text class="white--text">
-         Share This: 
-         <v-icon size="24px" class="mt-3">mdi-twitter</v-icon>
-         <v-icon size="24px" class="mt-3">mdi-facebook</v-icon>
-      </v-card-text>
-
-    </v-card>
   </v-footer>
 </template>
 
@@ -126,10 +118,21 @@
             icons: [
                 'mdi-facebook',
                 'mdi-twitter',
-                'mdi-google-plus',
-                'mdi-linkedin',
-                'mdi-instagram',
+                'mdi-linkedin'
             ],
         }),
     }
 </script>
+
+
+<style scoped>
+
+.divider {
+  background-color: #b0b0b0;
+}
+
+.icon {
+  color: #444444;
+}
+
+</style>
