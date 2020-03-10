@@ -1,5 +1,5 @@
 <template>
-  <v-card class="overflow-hidden">
+  <v-card class="overflow-hidden" raised tile>
     <v-app-bar
       color="blue accent-4"
       dark
@@ -8,10 +8,14 @@
         <v-img
           v-bind="props"
           gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
-        ></v-img>
+        />
       </template>
-      <v-toolbar-title>ECA</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-toolbar-title>
+        <v-img src="/img/brand/white.png" style="width: 200px">
+
+        </v-img>
+      </v-toolbar-title>
+      <v-spacer/>
       <v-btn
         v-for="(link, i) in links"
         :key="i"
@@ -38,10 +42,7 @@
 
 <script>
   // Utilities
-  import {
-    mapGetters,
-    mapMutations
-  } from 'vuex'
+  import {mapGetters, mapMutations} from 'vuex'
 
   export default {
     computed: {
@@ -73,5 +74,9 @@
   body::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     outline: 1px solid slategrey;
+  }
+
+  v-app-bar {
+    font-family: 'IBM Plex Serif', serif !important;
   }
 </style>

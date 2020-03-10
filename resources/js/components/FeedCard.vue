@@ -4,13 +4,14 @@
     :class="classes"
   >
     <base-card
-      :height="value.prominent ? 450 : 350"
+      :height="value.prominent ? 450 : 250"
       color="grey lighten-1"
       dark
       href="#!"
+      class="shadow-lg rounded"
     >
       <v-img
-        :src="require(`~/assets/articles/${value.hero}`)"
+        src="https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
         height="100%"
         gradient="rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)"
       >
