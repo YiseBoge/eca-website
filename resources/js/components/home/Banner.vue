@@ -4,7 +4,7 @@
       class="grey lighten-2"
       height="400"
       width="100%"
-      :src="require('~/assets/articles/blurcamera.jpg')"
+      :src="'https://images.unsplash.com/photo-1583796948558-918d2978a923?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=749&q=80'"
     >
       <v-layout
         fill-height
