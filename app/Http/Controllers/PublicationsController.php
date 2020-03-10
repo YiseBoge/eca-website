@@ -6,7 +6,6 @@ use App\Http\Resources\PublicationCollection;
 use App\Http\Resources\PublicationResource;
 use App\Models\Publication;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
 
 class PublicationsController extends Controller
 {
@@ -35,6 +34,7 @@ class PublicationsController extends Controller
             'description' => $request->input("description"),
             'category' => $request->input("category"),
             'image_url' => $request->input("image_url"),
+            'file_url' => $request->input("file_url"),
         ]);
         return new PublicationResource($model);
     }
@@ -54,13 +54,19 @@ class PublicationsController extends Controller
     /**
      * Update the specified resource.
      *
+     * @param Request $request
      * @param int $id
      * @return PublicationResource
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         $model = Publication::findOrFail($id);
-        $model->fill(Input::all())->save();
+        $model->title = $request->input("title");
+        $model->description = $request->input("description");
+        $model->category = $request->input("category");
+        $model->image_url = $request->input("image_url");
+        $model->file_url = $request->input("file_url");
+        $model->save();
         return new PublicationResource($model);
     }
 
@@ -72,7 +78,6 @@ class PublicationsController extends Controller
      */
     public function destroy($id)
     {
-        $model = Publication::findOrFail($id);
-        return Publication::destroy($model);
+        return Publication::destroy($id);
     }
 }

@@ -23,10 +23,15 @@
       CoreToolbar: () => import('~/components/core/Toolbar'),
       CoreView: () => import('~/components/core/View')
     },
-    data () {
+    data() {
       return {
-      //
+        //
       }
     }
   }
 </script>
+<style>
+  body {
+    font-family: 'IBM Plex Serif', serif !important;
+  }
+</style>
