@@ -13,57 +13,134 @@
     </section>
     <section class="section section-skew">
       <div class="container">
-        <card shadow class="card-profile mt--300" no-body>
-          <div class="px-4">
-            <div class="row justify-content-center">
-              <div class="col-lg-3 order-lg-2">
-                <div class="card-profile-image">
-                  <a href="#">
-                    <img v-lazy="'img/theme/team-4-800x800.jpg'" class="rounded-circle">
-                  </a>
-                </div>
+
+        <div class="row">
+
+          <!-- Blog Entries Column -->
+          <div class="col-md-8">
+
+            <h1 class="my-4">Page Heading
+              <small>Secondary Text</small>
+            </h1>
+
+            <!-- Blog Post -->
+            <div class="card mb-4">
+              <img alt="Card image cap" class="card-img-top" src="http://placehold.it/750x300">
+              <div class="card-body">
+                <h2 class="card-title">Post Title</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
+                  nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate
+                  voluptatibus possimus, veniam magni quis!</p>
+                <a class="btn btn-primary" href="#">Read More &rarr;</a>
               </div>
-              <div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
-                <div class="card-profile-actions py-4 mt-lg-0">
-                  <base-button type="info" size="sm" class="mr-4">Connect</base-button>
-                  <base-button type="default" size="sm" class="float-right">Message</base-button>
-                </div>
-              </div>
-              <div class="col-lg-4 order-lg-1">
-                <div class="card-profile-stats d-flex justify-content-center">
-                  <div>
-                    <span class="heading">22</span>
-                    <span class="description">Friends</span>
-                  </div>
-                  <div>
-                    <span class="heading">10</span>
-                    <span class="description">Photos</span>
-                  </div>
-                  <div>
-                    <span class="heading">89</span>
-                    <span class="description">Comments</span>
-                  </div>
-                </div>
+              <div class="card-footer text-muted">
+                January 1, 2017
               </div>
             </div>
-            <div class="text-center mt-5">
-              <h3>Jessica Jones
-                <span class="font-weight-light">, 27</span>
-              </h3>
-              <div class="h6 font-weight-300"><i class="ni location_pin mr-2"></i>Bucharest, Romania</div>
-              <div class="h6 mt-4"><i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer</div>
-              <div><i class="ni education_hat mr-2"></i>University of Computer Science</div>
-            </div>
-            <div class="mt-5 py-5 border-top text-center">
-              <div class="row justify-content-center">
-                <div class="col-lg-9">
-                  <p>An artist of considerable range, Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm, intimate feel with a solid groove structure. An artist of considerable range.</p>
-                  <a href="#">Show more</a>
-                </div>
+
+            <!-- Blog Post -->
+            <div class="card mb-4">
+              <img alt="Card image cap" class="card-img-top" src="http://placehold.it/750x300">
+              <div class="card-body">
+                <h2 class="card-title">Post Title</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
+                  nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate
+                  voluptatibus possimus, veniam magni quis!</p>
+                <a class="btn btn-primary" href="#">Read More &rarr;</a>
+              </div>
+              <div class="card-footer text-muted">
+                Posted on January 1, 2017 by
+                <a href="#">Start Bootstrap</a>
               </div>
             </div>
+
+            <!-- Blog Post -->
+            <div class="card mb-4">
+              <img alt="Card image cap" class="card-img-top" src="http://placehold.it/750x300">
+              <div class="card-body">
+                <h2 class="card-title">Post Title</h2>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque,
+                  nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate
+                  voluptatibus possimus, veniam magni quis!</p>
+                <a class="btn btn-primary" href="#">Read More &rarr;</a>
+              </div>
+              <div class="card-footer text-muted">
+                Posted on January 1, 2017 by
+                <a href="#">Start Bootstrap</a>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <!--            <ul class="pagination justify-content-center mb-4">-->
+            <!--              <li class="page-item">-->
+            <!--                <a class="page-link" href="#">&larr; Older</a>-->
+            <!--              </li>-->
+            <!--              <li class="page-item disabled">-->
+            <!--                <a class="page-link" href="#">Newer &rarr;</a>-->
+            <!--              </li>-->
+            <!--            </ul>-->
+            <pagination>
+              THis is the pagination
+            </pagination>
+
           </div>
-        </card>
+
+          <!-- Sidebar Widgets Column -->
+          <div class="col-md-4">
+
+            <!-- Search Widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Search</h5>
+              <div class="card-body">
+                <div class="input-group">
+                  <input class="form-control" placeholder="Search for..." type="text">
+                  <span class="input-group-btn">
+                <button class="btn btn-secondary" type="button">Go!</button>
+              </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Categories Widget -->
+            <div class="card my-4">
+              <h5 class="card-header">Categories</h5>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="#">Web Design</a>
+                      </li>
+                      <li>
+                        <a href="#">HTML</a>
+                      </li>
+                      <li>
+                        <a href="#">Freebies</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-lg-6">
+                    <ul class="list-unstyled mb-0">
+                      <li>
+                        <a href="#">JavaScript</a>
+                      </li>
+                      <li>
+                        <a href="#">CSS</a>
+                      </li>
+                      <li>
+                        <a href="#">Tutorials</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- /.row -->
+
       </div>
     </section>
   </div>

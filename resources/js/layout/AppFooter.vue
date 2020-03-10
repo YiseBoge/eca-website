@@ -1,6 +1,6 @@
 <template>
-    <footer class="footer has-cards">
-        <div class="container container-lg">
+  <footer class="footer align-bottom bg-gradient-primary mt-5">
+    <!-- <div class="container container-lg">
             <div class="row">
                 <div class="col-md-6 mb-5 mb-md-0">
                     <div class="card card-lift--hover shadow border-0">
@@ -17,65 +17,103 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+    <div class="container container-lg">
+      <div class="row row-grid align-items-center">
+        <div class="col-lg-7">
+          <h3 class="text-white font-weight-bold mb-3">
+            Head Office
+          </h3>
+          <h4 class="mb-0 font-weight-light text-white">
+            Ethiopian Communications Authority
+          </h4>
+
+          <h4 class="mb-0 font-weight-light text-white">
+            Debrezeit Road, Tegene Building
+          </h4>
+
+          <h4 class="mb-0 font-weight-light text-white">
+            P.O.Box 9991
+          </h4>
+          <h4 class="mb-0 font-weight-light text-white">
+            Addis Ababa, Ethiopia
+          </h4>
         </div>
-        <div class="container">
-            <div class="row row-grid align-items-center my-md">
-                <div class="col-lg-6">
-                    <h3 class="text-primary font-weight-light mb-2">Thank you for supporting us!</h3>
-                    <h4 class="mb-0 font-weight-light">Let's get in touch on any of these platforms.</h4>
-                </div>
-                <div class="col-lg-6 text-lg-center btn-wrapper">
-                    <a target="_blank" rel="noopener" href="https://twitter.com/creativetim"
-                       class="btn btn-neutral btn-icon-only btn-twitter btn-round btn-lg" data-toggle="tooltip"
-                       data-original-title="Follow us">
-                        <i class="fa fa-twitter"></i>
-                    </a>
-                    <a target="_blank" rel="noopener" href="https://www.facebook.com/creativetim"
-                       class="btn btn-neutral btn-icon-only btn-facebook btn-round btn-lg" data-toggle="tooltip"
-                       data-original-title="Like us">
-                        <i class="fa fa-facebook-square"></i>
-                    </a>
-                    <a target="_blank" rel="noopener" href="https://dribbble.com/creativetim"
-                       class="btn btn-neutral btn-icon-only btn-dribbble btn-lg btn-round" data-toggle="tooltip"
-                       data-original-title="Follow us">
-                        <i class="fa fa-dribbble"></i>
-                    </a>
-                    <a target="_blank" rel="noopener" href="https://github.com/creativetimofficial"
-                       class="btn btn-neutral btn-icon-only btn-github btn-round btn-lg" data-toggle="tooltip"
-                       data-original-title="Star on Github">
-                        <i class="fa fa-github"></i>
-                    </a>
-                </div>
-            </div>
-            <hr>
-            <div class="row align-items-center justify-content-md-between">
-                <div class="col-md-6">
-                    <div class="copyright">
-                        &copy; {{year}}
-                        <a href="https://www.creative-tim.com" target="_blank" rel="noopener">Creative Tim</a> & <a href="https://www.binarcode.com" target="_blank" rel="noopener">Binar Code</a>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <ul class="nav nav-footer justify-content-end">
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com" class="nav-link" target="_blank" rel="noopener">Creative Tim</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank" rel="noopener">About
-                                Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank" rel="noopener">Blog</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="https://github.com/creativetimofficial/argon-design-system/blob/master/LICENSE.md"
-                               class="nav-link" target="_blank" rel="noopener">MIT License</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+        <!-- <div class="col-lg-4">
+                    <h3 class="text-primary font-weight-light mb-2">Contact us</h3>
+                    <h4 class="mb-0 font-weight-light">+ 1 703-463-4468</h4>
+
+                    <h4 class="mb-0 font-weight-light"> info@stempower.org</h4>
+                </div> -->
+        <div class="col-lg-5 text-lg-center btn-wrapper mt-4">
+          <a class="btn btn-neutral btn-icon-only btn-twitter btn-round btn-lg" data-original-title="Follow us"
+             data-toggle="tooltip"
+             href="https://twitter.com/stempowerusa" rel="noopener"
+             target="_blank"
+          >
+            <i class="fa fa-twitter"/>
+          </a>
+          <a class="btn btn-neutral btn-icon-only btn-facebook btn-round btn-lg" data-original-title="Like us"
+             data-toggle="tooltip"
+             href="https://www.facebook.com/STEMpower" rel="noopener"
+             target="_blank"
+          >
+            <i class="fa fa-facebook-square"/>
+          </a>
+          <a class="btn btn-neutral btn-icon-only btn-instagram btn-lg btn-round" data-original-title="Follow us"
+             data-toggle="tooltip"
+             href="https://www.instagram.com/stempower_africa" rel="noopener"
+             target="_blank"
+          >
+            <i class="fa fa-instagram"/>
+          </a>
+          <a class="btn btn-neutral btn-icon-only btn-linkedin btn-round btn-lg"
+             data-original-title="Follow us on Linkedin" data-toggle="tooltip"
+             href="https://www.linkedin.com/in/gfct-stempower-807902196" rel="noopener"
+             target="_blank"
+          >
+            <i class="fa fa-linkedin"/>
+          </a>
+          <a class="btn btn-neutral btn-icon-only btn-telegram btn-round btn-lg"
+             data-original-title="Talk to us on Telegram" data-toggle="tooltip"
+             href="https://telegram.me/STEMpower_PR" rel="noopener"
+             target="_blank"
+          >
+            <i class="fa fa-telegram"/>
+          </a>
+          <a class="btn btn-neutral btn-icon-only btn-youtube btn-round btn-lg"
+             data-original-title="Subscribe on Youtube" data-toggle="tooltip"
+             href="https://www.youtube.com/channel/UCuzT9QGaRilgE2JKbU9cUOA" rel="noopener"
+             target="_blank"
+          >
+            <i class="fa fa-youtube-play"/>
+          </a>
         </div>
-    </footer>
+      </div>
+      <hr>
+      <div class="row align-items-center justify-content-md-between">
+        <div class="col-md-6">
+          <div class="copyright text-white">
+            <!-- &copy; {{year}} -->
+            <p>© 2020, ECA. All Rights Reserved</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <ul class="nav nav-footer justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.stempower.org" rel="noopener" target="_blank"><i
+                class="fa fa-phone"/> + 1 703-463-4468</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.stempower.org" rel="noopener" target="_blank"><i
+                class="fa fa-envelope-o"/> info@stempower.org
+                Us</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
 <script>
 export default {
