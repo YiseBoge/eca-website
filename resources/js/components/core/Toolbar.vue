@@ -43,30 +43,39 @@
 </template>
 
 <script>
-  // Utilities
-  import {mapGetters, mapMutations} from 'vuex'
+    // Utilities
+    import {mapMutations} from 'vuex'
 
-  export default {
-    computed: {
-      ...mapGetters(['links'])
-    },
+    export default {
+        data () {
+            return {
+                links : [
+                    {text: 'HOME', to: '/'},
+                    {text: 'NEWS', to: '/news/'},
+                    {text: 'EVENTS', to: '/news/events'},
+                    {text: 'PUBLICATIONS', to: '/publications'},
+                ]
+            }
+        },
+        computed: {
+        },
 
-    methods: {
-      ...mapMutations(['toggleDrawer']),
-      onClick (e, item) {
-        e.stopPropagation();
+        methods: {
+            ...mapMutations(['toggleDrawer']),
+            onClick(e, item) {
+                e.stopPropagation();
 
-        if (item.to || !item.href) return;
+                if (item.to || !item.href) return;
 
-        this.$vuetify.goTo(item.href)
-      }
+                this.$vuetify.goTo(item.href)
+            }
+        }
     }
-  }
 </script>
 
 <style scoped>
   body::-webkit-scrollbar {
-    width: 1px!important;
+    width: 1px !important;
   }
 
   body::-webkit-scrollbar-track {
