@@ -27,13 +27,21 @@
         </v-col>
       </v-row>
     </v-card>
+    <v-col cols="6" class="mt-1 mx-auto">
+      <v-pagination v-model="page" :length="pageNumber" @input="fetchEvents"></v-pagination>
+    </v-col>
+
   </v-container>
 </template>
 
 <script>
-    export default {
+  import {store} from "../../store/store";
+
+  export default {
         data() {
             return {
+                page: 1,
+                itemsPerPage: 5,
                 items: [
                     {
                         date: 'MAR 24 2020',
@@ -53,7 +61,6 @@
                         time: '5:00 am – 3:00 pm EDT',
                         location: 'Only online',
                     },
-
                 ]
             }
         },
@@ -62,7 +69,15 @@
                 return `<span>${date.substr(0, 3)}</span><br/>
                         <span class="event-date">${date.substr(4, 2)}</span> <br>
                         <span>${date.substr(6, 5)}</span>`
-            }
+            },
+            fetchEvents() {
+                store.dispatch('setEvents', {page: this.page, size: this.itemsPerPage});
+            },
+        },
+        computed : {
+            pageNumber() {
+                return Math.ceil(store.getters.getEventsCount / this.itemsPerPage);
+            },
         }
     }
 </script>
