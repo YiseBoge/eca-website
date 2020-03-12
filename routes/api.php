@@ -42,6 +42,8 @@ Route::group(['middleware' => 'guest:api'], function () {
 
     Route::apiResources([
         'news' => 'NewsController',
-        'publication' => 'PublicationsController'
+        'publication' => 'PublicationsController',
+        'event' => 'EventsController',
+        'leader' => 'LeadersController'
     ]);
 });

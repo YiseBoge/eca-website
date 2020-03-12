@@ -17,7 +17,15 @@ class NewsController extends Controller
     public function index()
     {
         $category = request()->input("category", "");
-        $models = $category == "" ? News::all() : News::where("category", $category);
+        $featured = request()->has("featured");
+        $size = request()->input("size", 0);
+
+        if($featured){
+            $models = News::orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC')->paginate($size);
+        }else{
+            $models = $category == "" ? News::orderBy('created_at', 'DESC')->paginate($size) : News::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size);
+        }            
+               
         return new NewsCollection($models);
     }
 
@@ -34,6 +42,8 @@ class NewsController extends Controller
             'description' => $request->input("description"),
             'category' => $request->input("category"),
             'image_url' => $request->input("image_url"),
+            'is_featured' => $request->has("is_featured"),
+            'link' => $request->input("link")
 //            'file_url' => $request->input("file_url"),
         ]);
         return new NewsResource($model);
@@ -65,6 +75,8 @@ class NewsController extends Controller
         $model->description = $request->input("description");
         $model->category = $request->input("category");
         $model->image_url = $request->input("image_url");
+        $model->is_featured = $request->has("is_featured");
+        $model->link = $request->input("link");
         $model->save();
         return new NewsResource($model);
     }

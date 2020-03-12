@@ -17,7 +17,9 @@ class PublicationsController extends Controller
     public function index()
     {
         $category = request()->input("category", "");
-        $models = $category == "" ? Publication::all() : Publication::where("category", $category);
+        $size = request()->input("size", 0);
+        $models = $category == "" ? Publication::orderBy('created_at', 'DESC')->paginate($size) : Publication::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size);
+    
         return new PublicationCollection($models);
     }
 
