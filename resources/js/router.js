@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Media from "./views/Media";
 import Events from "./views/Events2";
 import News from "./views/News";
+import NotFound from "./views/errors/NotFound";
 
 const Home = () => import('~/views/Home.vue');
 
@@ -16,5 +17,7 @@ export default new Router({
     {path: '/events', name: 'events', component: Events},
     {path: '/media', name: 'media', component: Media},
     {path: '/news', name: 'news', component: News},
+
+    {path: '*', name: 'NotFound', component: NotFound},
   ]
 })
