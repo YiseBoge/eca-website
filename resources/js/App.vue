@@ -31,7 +31,7 @@
   }
 </script>
 <style>
-  body {
-    font-family: 'IBM Plex Serif', serif !important;
+  .v-pagination__item, .v-pagination__navigation {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
   }
 </style>

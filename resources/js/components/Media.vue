@@ -17,7 +17,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-divider class="mt-0"/>
+    <v-divider class="mt-0 shadow-lg"/>
     <v-row dense>
       <v-col :key="image.href" class="p-3" cols="4" v-for="(image, imageIndex) in images">
         <v-card
@@ -40,17 +40,19 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row class="py-5">
+      <v-pagination
+        :length="len"
+        tile
+        v-model="page"
+      />
+    </v-row>
   </v-container>
 </template>
 
-<style scoped>
-  .image {
-    float: left;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    border: 1px solid #ebebeb;
-    margin: 5px;
+<style>
+  a.close, a.prev, a.next {
+    color: white !important;
   }
 </style>
 
@@ -104,6 +106,8 @@
             poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTtP1IHm_ovH0cDtsBWna_2iKTGQwBtyRxTrbMhogct9UfAn3NL'
           }
         ],
+        page: 1,
+        len: 6,
         index: null
       }
     },
