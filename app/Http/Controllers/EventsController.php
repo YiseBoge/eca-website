@@ -36,8 +36,8 @@ class EventsController extends Controller
             'title' => $request->input("title"),
             'description' => $request->input("description"),
             'category' => $request->input("category"),
-            'date' => $request->input("date"),
-            'time' => $request->input("time"),
+            'start_date' => $request->input("start_date"),
+            'end_date' => $request->input("end_date"),
             'location' => $request->input("location")
         ]);
         return new EventResource($model);
@@ -68,8 +68,8 @@ class EventsController extends Controller
         $model->title = $request->input("title");
         $model->description = $request->input("description");
         $model->category = $request->input("category");
-        $model->date = $request->input("date");
-        $model->time = $request->input("time");
+        $model->start_date = $request->input("start_date");
+        $model->end_date = $request->input("end_date");
         $model->location = $request->input("location");
         $model->save();
         return new EventResource($model);
