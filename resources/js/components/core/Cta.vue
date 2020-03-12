@@ -10,7 +10,7 @@
     v-scroll="onScroll"
     v-show="fab"
   >
-    <v-icon>mdi-minus</v-icon>
+    <v-icon>mdi-chevron-up</v-icon>
   </v-btn>
 </template>
 

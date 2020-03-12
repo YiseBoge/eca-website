@@ -1,17 +1,45 @@
 <template>
-  <v-container pa-0>
+  <v-container>
     <gallery
       :images="images"
       :index="index"
       :options="{youTubeVideoIdProperty: 'youtube', youTubePlayerVars: undefined, youTubeClickToPlay: true}"
       @close="index = null"
     />
-    <div
-      :style="{ backgroundImage: 'url(' + image.poster + ')', width: '300px', height: '200px' }"
-      @click="index = imageIndex"
-      class="image"
-      v-for="image, imageIndex in images"
-    ></div>
+    <v-row class="mt-2">
+      <v-col md="8">
+        <h2 class="text-primary font-weight-light">Check out our Youtube Channel</h2>
+      </v-col>
+      <v-col md="4">
+        <v-btn class="ma-2 text-white float-right shadow-lg" color="red" small>
+          <v-icon left small>mdi-youtube</v-icon>
+          Subscribe
+        </v-btn>
+      </v-col>
+    </v-row>
+    <v-divider class="mt-0"/>
+    <v-row dense>
+      <v-col :key="image.href" class="p-3" cols="4" v-for="(image, imageIndex) in images">
+        <v-card
+          @click="index = imageIndex" class="shadow-lg"
+          hover
+        >
+          <v-img
+            :src="image.poster"
+            height="200px"
+          />
+
+          <v-card-title class="lead">
+            {{image.title}}
+          </v-card-title>
+
+          <v-card-actions>
+            <v-btn color="orange" text>Watch</v-btn>
+          </v-card-actions>
+
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -35,24 +63,45 @@
       return {
         images: [
           {
-            title: 'A YouYube video',
+            title: 'The Mars Homes That NASA Awarded $500k',
             href: 'https://www.youtube.com/watch?v=hNdlUHBJDKs',
             type: 'text/html',
             youtube: 'hNdlUHBJDKs',
             poster: 'https://img.youtube.com/vi/hNdlUHBJDKs/maxresdefault.jpg'
           },
           {
+            title: 'STEMpower Ethiopia, Episode 38: STEMpower\'s STEM Center Students Innovations',
+            href: 'https://www.youtube.com/watch?v=s5iUsaPPtnk',
+            type: 'text/html',
+            youtube: 's5iUsaPPtnk',
+            poster: 'https://louisem.com/wp-content/uploads/2017/07/youtube-thumbnail-templates.jpg'
+          },
+          {
+            title: 'STEMpower Ethiopia, Episode 35: Problem Solving Students Innovation',
+            href: 'https://www.youtube.com/watch?v=s5iUsaPPtnk',
+            type: 'text/html',
+            youtube: 's5iUsaPPtnk',
+            poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTtP1IHm_ovH0cDtsBWna_2iKTGQwBtyRxTrbMhogct9UfAn3NL'
+          },
+          {
             title: 'A YouYube video 2',
             href: 'https://www.youtube.com/watch?v=s5iUsaPPtnk',
             type: 'text/html',
             youtube: 's5iUsaPPtnk',
-            poster: 'https://img.youtube.com/vi/s5iUsaPPtnk/maxresdefault.jpg'
+            poster: 'https://louisem.com/wp-content/uploads/2017/07/youtube-thumbnail-templates.jpg'
+          },
+          {
+            title: 'Top western road trips tahjdfg efger gerhe dghe rfghwer ghweth werwerth wefhy3rt',
+            href: 'https://www.youtube.com/watch?v=hNdlUHBJDKs',
+            type: 'text/html',
+            youtube: 'hNdlUHBJDKs',
+            poster: 'https://img.youtube.com/vi/hNdlUHBJDKs/maxresdefault.jpg'
           },
           {
             title: 'Image',
             href: 'https://dummyimage.com/1600/ffffff/000000',
             type: 'image/jpeg',
-            poster: 'https://dummyimage.com/350/ffffff/000000'
+            poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTtP1IHm_ovH0cDtsBWna_2iKTGQwBtyRxTrbMhogct9UfAn3NL'
           }
         ],
         index: null
