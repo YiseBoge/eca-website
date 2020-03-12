@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Media from "./components/Media";
-import Events from "./components/events/Events";
-
-import {setContent} from "./set-contents";
+import Media from "./views/Media";
+import Events from "./views/Events2";
+import News from "./views/News";
 
 const Home = () => import('~/views/Home.vue');
 
@@ -13,8 +12,9 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
-    {path: '/', name: 'home', component: Home, beforeEnter: setContent},
-    {path: '/news/events', name: 'events', component: Events, beforeEnter: setContent},
-    {path: '/media', name: 'media', component: Media, beforeEnter: setContent},
+    {path: '/', name: 'home', component: Home},
+    {path: '/events', name: 'events', component: Events},
+    {path: '/media', name: 'media', component: Media},
+    {path: '/news', name: 'news', component: News},
   ]
 })

@@ -26,7 +26,7 @@
       </template>
     </v-list>
     <v-flex align-self-end class="float-right">
-      <router-link class="btn btn-link nav-link" to="#">
+      <router-link class="btn btn-link nav-link" to="/publications">
         See All
       </router-link>
     </v-flex>

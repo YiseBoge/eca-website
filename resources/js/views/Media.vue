@@ -1,14 +1,8 @@
 <template>
   <v-container>
-    <gallery
-      :images="images"
-      :index="index"
-      :options="{youTubeVideoIdProperty: 'youtube', youTubePlayerVars: undefined, youTubeClickToPlay: true}"
-      @close="index = null"
-    />
-    <v-row class="mt-2">
+    <v-row class="mt-6">
       <v-col md="8">
-        <h2 class="text-primary font-weight-light">Check out our Youtube Channel</h2>
+        <h1 class="font-weight-thin">Media</h1>
       </v-col>
       <v-col md="4">
         <v-btn class="ma-2 text-white float-right shadow-lg" color="red" small>
@@ -17,36 +11,46 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-divider class="mt-0 shadow-lg"/>
-    <v-row dense>
+
+    <v-row>
       <v-col :key="image.href" class="p-3" cols="4" v-for="(image, imageIndex) in images">
-        <v-card
-          @click="index = imageIndex" class="shadow-lg"
-          hover
+        <v-hover
+          close-delay="50"
+          v-slot:default="{ hover }"
         >
-          <v-img
-            :src="image.poster"
-            height="200px"
-          />
+          <v-card
+            :class="hover ? 'shadow' : 'shadow-lg'" @click="index = imageIndex"
+          >
+            <v-img
+              :src="image.poster"
+              height="200px"
+            />
 
-          <v-card-title class="lead">
-            {{image.title}}
-          </v-card-title>
+            <v-card-title class="lead" height="200px">
+              {{image.title}}
+            </v-card-title>
 
-          <v-card-actions>
-            <v-btn color="orange" text>Watch</v-btn>
-          </v-card-actions>
+            <v-card-actions>
+              <v-btn color="orange" text>Watch</v-btn>
+            </v-card-actions>
 
-        </v-card>
+          </v-card>
+        </v-hover>
       </v-col>
     </v-row>
+
     <v-row class="py-5">
       <v-pagination
         :length="len"
-        tile
         v-model="page"
       />
     </v-row>
+    <gallery
+      :images="images"
+      :index="index"
+      :options="{youTubeVideoIdProperty: 'youtube', youTubePlayerVars: undefined, youTubeClickToPlay: true}"
+      @close="index = null"
+    />
   </v-container>
 </template>
 

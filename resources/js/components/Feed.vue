@@ -18,8 +18,6 @@
 </template>
 
 <script>
-  // Utilities
-  import {mapState} from 'vuex'
 
   export default {
     name: 'Feed',
@@ -29,21 +27,28 @@
     },
 
     data: () => ({
+      paginatedArticles: [
+        {
+          title: "Moroccan Days",
+          author: "It is a long established fact that a reader will be distracted by the readable",
+          category: "Travel",
+          hero: "moroccandays.jpg"
+        },
+        {
+          title: "Swedish Fishing",
+          author: "There are many variations of passages of Lorem Ipsum available",
+          category: "Leisure",
+          hero: "autumnclouds.jpg"
+        }
+      ],
       layout: [2, 2, 1, 2, 2, 3, 3, 3, 3, 3, 3],
       page: 1
     }),
 
     computed: {
-      ...mapState(['articles']),
       pages () {
         return Math.ceil(this.articles.length / 11)
       },
-      paginatedArticles () {
-        const start = (this.page - 1) * 11;
-        const stop = this.page * 11;
-
-        return this.articles.slice(start, stop)
-      }
     },
 
     watch: {
