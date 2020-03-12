@@ -17,7 +17,7 @@ class CreateLeadersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('position');
-            $table->string('description');
+            $table->text('description');
             $table->string('image_url')->nullable();
             $table->integer('level');
             $table->timestamps();
