@@ -71,11 +71,7 @@
     }
 </script>
 
-<style scoped>
-  html, body {
-    height: 100%;
-  }
-
+<style>
   .box {
     text-align: center;
     position: relative;
