@@ -15,7 +15,7 @@
       <v-row>
         <v-col cols="2">
           <div class="date mx-auto text-center mt-4">
-            <p v-html="beautifyDate(item.date)"></p>
+            <p v-html="beautifyDate(item.date)"/>
           </div>
         </v-col>
         <v-col cols="8" class="vertical-parent my-2">
@@ -28,7 +28,7 @@
       </v-row>
     </v-card>
     <v-col cols="6" class="mt-1 mx-auto">
-      <v-pagination v-model="page" :length="pageNumber" @input="fetchEvents"></v-pagination>
+      <v-pagination :length="pageNumber" @input="fetchEvents" v-model="page"/>
     </v-col>
 
   </v-container>

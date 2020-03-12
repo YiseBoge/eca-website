@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Media from "./components/Media";
-import Events from "./components/home/Events";
+import Events from "./components/events/Events";
 
 import {setContent} from "./set-contents";
 
