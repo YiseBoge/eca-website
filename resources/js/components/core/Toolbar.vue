@@ -43,19 +43,20 @@
 </template>
 
 <script>
-    // Utilities
-    import {mapMutations} from 'vuex'
+  // Utilities
+  import {mapMutations} from 'vuex'
 
-    export default {
-        data () {
-            return {
-                links : [
-                    {text: 'HOME', to: '/'},
-                    {text: 'NEWS', to: '/news/'},
-                    {text: 'EVENTS', to: '/news/events'},
-                    {text: 'PUBLICATIONS', to: '/publications'},
-                ]
-            }
+  export default {
+    data() {
+      return {
+        links: [
+          {text: 'HOME', to: '/'},
+          {text: 'NEWS', to: '/news/'},
+          {text: 'EVENTS', to: '/news/events'},
+          {text: 'PUBLICATIONS', to: '/publications'},
+          {text: 'MEDIA', to: '/media'},
+        ]
+      }
         },
         computed: {
         },
