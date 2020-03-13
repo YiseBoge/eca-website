@@ -14,7 +14,7 @@
               v-model="user.email"
               label="Email"
               required
-            ></v-text-field>
+            />
             <v-text-field
               :rules="rules.required"
               :append-icon="!show1 ? 'mdi-eye-off' : 'mdi-eye'"
@@ -23,7 +23,7 @@
               :type="show1 ? 'text' : 'password'"
               required
               @click:append="show1 = !show1"
-            ></v-text-field>
+            />
 
             <div class="my-2 mx-auto align-center align-content-center">
               <v-btn :disabled="!valid" color="primary" class="d-block mx-auto"
@@ -38,22 +38,22 @@
 </template>
 
 <script>
-    import ajax from "../ajax";
-    import router from "../router";
-    import {handleError} from "../auth";
-    import {store} from "../store/store"
+  import ajax from "../ajax";
+  import router from "../router";
+  import {handleError} from "../auth";
+  import {store} from "../store/store"
 
-    export default {
-        name: "LoginComponent.vue",
-        data() {
-            return {
-                valid: false,
-                show1: false,
-                errorMsg: false,
-                user: {
-                    email: "segnih8@gmail.com",
-                    password: '12345678',
-                },
+  export default {
+    name: "LoginComponent.vue",
+    data() {
+      return {
+        valid: false,
+        show1: false,
+        errorMsg: false,
+        user: {
+          email: "segnih8@gmail.com",
+          password: '12345678',
+        },
                 rules: {
                     required: [val => (val || '').length > 0 || 'This field is required'],
                 },

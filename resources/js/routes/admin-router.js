@@ -6,9 +6,9 @@ Vue.use(Router);
 
 export const router = new Router({
   mode: 'history',
-  base: 'admin/',
+  base: 'admin/#',
   routes: [
-    {path: '/', name: 'dashboard', component: () => import('~/admin-dashboard/Dashboard')},
+    {path: '/', name: 'dashboard', component: () => import('~/admin/Dashboard')},
     {path: '*', name: 'NotFound', component: NotFound},
   ]
 });

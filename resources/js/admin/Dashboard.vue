@@ -6,13 +6,14 @@
         v-model="primaryDrawer.model"
         app
         overflow
-        class="shadow-lg elevation-3"
+        class="shadow-lg"
       >
-        <v-img :aspect-ratio="16/9" src="https://cdn.vuetifyjs.com/images/parallax/material.jpg">
+        <v-img :aspect-ratio="16/9"
+               src="https://wonderfulengineering.com/wp-content/uploads/2014/09/blue-wallpaper-37.jpg">
           <v-row align="end" class="lightbox white--text pa-2 fill-height">
             <v-col>
               <div class="subheading"></div>
-              <div class="body-1" ></div>
+              <div class="body-1"></div>
             </v-col>
           </v-row>
         </v-img>
@@ -20,11 +21,11 @@
         <v-list nav>
           <v-list-item-group
             justify="center"
-            active-class="deep-purple--text text--accent-4"
+            active-class="blue--text text--accent-4"
             class="mt-5">
 
             <template v-for="(item, i) in urls">
-              <v-divider v-if="item.divider" :key="i"></v-divider>
+              <v-divider :key="i" v-if="item.divider"/>
               <v-list-item v-else :key="item.title" @click="route(item.link)">
                 <v-list-item-action>
                   <v-icon>{{ item.icon }}</v-icon>
@@ -43,7 +44,7 @@
             v-model="$vuetify.theme.dark"
             primary
             label="Dark Theme"
-          ></v-switch>
+          />
         </v-col>
 
       </v-navigation-drawer>
@@ -86,20 +87,20 @@
 </template>
 
 <script>
-    import {router} from "../routes/admin-router";
-    import {store} from "../store/store";
+  import {router} from "../routes/admin-router";
+  import {store} from "../store/store";
 
-    export default {
+  export default {
 
-        data: () => ({
-            valid: false,
-            drawers: ['Default (no property)', 'Permanent', 'Temporary'],
-            primaryDrawer: {
-                model: null,
-                mini: false,
-            },
-            footer: {
-                inset: false,
+    data: () => ({
+      valid: false,
+      drawers: ['Default (no property)', 'Permanent', 'Temporary'],
+      primaryDrawer: {
+        model: null,
+        mini: false,
+      },
+      footer: {
+        inset: false,
             },
             // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
         }),

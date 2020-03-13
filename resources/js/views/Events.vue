@@ -1,39 +1,55 @@
 <template>
-  <v-container class="mx-auto col-md-7">
+  <v-container>
     <v-row class="mt-6">
-      <v-col>
+      <v-col lg="9">
         <h1 class="font-weight-thin">Events</h1>
       </v-col>
+      <v-col lg="3">
+        <v-tabs
+          fixed-tabs
+        >
+          <v-tab
+            :key="i"
+            v-for="i in ['Upcoming', 'Past']"
+          >
+            {{i}}
+          </v-tab>
+        </v-tabs>
+      </v-col>
     </v-row>
+    <v-row class="px-12 mb-10">
+      <v-col>
+        <v-timeline>
+          <v-timeline-item
+            :color="colors[i%3]"
+            :key="i"
+            small
+            v-for="(item, i) in items"
+          >
+            <template v-slot:opposite>
+        <span
+          :class="`headline font-weight-light ${colors[i%3]}--text`"
+          v-text="beautifyDate(item.start_time)"
+        />
+            </template>
+            <v-card :class="i !== 0 ? 'shadow': 'shadow-lg'"
+                    :style="i !== 0 ? '': 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat'"
+                    class="px-5"
+            >
 
-    <v-row class="px-5">
-      <v-card :class="i !== 0 ? 'shadow-sm': 'shadow-lg'"
-              :key="`card${i}`"
-              :style="i !== 0 ? '': 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat'"
-              class="mb-6 w-100" v-for="(item, i) in items"
-              v-if=""
-      >
-        <v-row>
-          <v-col cols="3" md="2">
-            <div class="date mx-auto text-center mt-4">
-              <p v-html="beautifyDate(item.date)"/>
-            </div>
-          </v-col>
-          <v-col class="vertical-parent my-2" cols="8">
-            <v-card-text class="card-text">
-              <h4>{{ item.title }}</h4>
-              <small class="d-block">{{ item.time }}</small>
-              <small class="d-block">{{ item.location }}</small>
-            </v-card-text>
-          </v-col>
-        </v-row>
-      </v-card>
+              <v-list-item three-line>
+                <v-list-item-content>
+                  <div class="overline"> {{ item.start_time }} - {{ item.end_time }}</div>
+                  <p class="my-3 lead"> {{ item.title }} </p>
+                  <v-list-item-subtitle> {{ item.location }}</v-list-item-subtitle>
+                </v-list-item-content>
+
+              </v-list-item>
+            </v-card>
+          </v-timeline-item>
+        </v-timeline>
+      </v-col>
     </v-row>
-
-    <v-row class="py-5">
-      <v-pagination :length="pageNumber" @input="fetchEvents" v-model="page"/>
-    </v-row>
-
   </v-container>
 </template>
 
@@ -41,78 +57,50 @@
   import {store} from "../store/store";
 
   export default {
-        data() {
-            return {
-                page: 1,
-                itemsPerPage: 5,
-                items: [
-                  {
-                    date: 'MAR 24 2020',
-                    title: 'Communications Security, Reliability, and Interoperability Council VII Meeting',
-                    time: '10:00 am – 3:00 pm EDT',
-                    location: 'Only online',
-                  },
-                  {
-                    date: 'MAR 27 2020',
-                    title: 'Broadband Deployment - March 2020',
-                    time: '5:00 am – 3:00 pm EDT',
-                    location: 'Only online',
-                  },
-                  {
-                    date: 'MAR 27 2020',
-                    title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
-                    time: '5:00 am – 3:00 pm EDT',
-                    location: 'Only online',
-                  },
-                  {
-                    date: 'MAR 27 2020',
-                    title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
-                    time: '5:00 am – 3:00 pm EDT',
-                    location: 'Only online',
-                  },
-                  {
-                    date: 'MAR 27 2020',
-                    title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
-                    time: '5:00 am – 3:00 pm EDT',
-                    location: 'Only online',
-                  },
-                ]
-            }
+    data: () => ({
+      colors: [
+        'blue', 'orange', 'green'
+      ],
+      items: [
+        {
+          title: 'Communications Security, Reliability, and Interoperability Council VII Meeting',
+          start_time: '10:00 am',
+          end_time: '3:00 pm',
+          location: 'Addis Ababa, Ethiopia',
         },
-        methods: {
-            beautifyDate(date) {
-                return `<span>${date.substr(0, 3)}</span><br/>
-                        <span class="event-date">${date.substr(4, 2)}</span> <br>
-                        <span>${date.substr(6, 5)}</span>`
-            },
-            fetchEvents() {
-                store.dispatch('setEvents', {page: this.page, size: this.itemsPerPage});
-            },
+        {
+          title: 'Broadband Deployment - March 2020',
+          start_time: '10:00 am',
+          end_time: '3:00 pm',
+          location: 'Only online',
         },
-        computed : {
-            pageNumber() {
-                return Math.ceil(store.getters.getEventsCount / this.itemsPerPage);
-            },
-        }
-    }
+        {
+          title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
+          start_time: '10:00 am',
+          end_time: '3:00 pm',
+          location: 'ECA Office',
+        },
+        {
+          title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
+          start_time: '10:00 am',
+          end_time: '10:00 am',
+          location: 'Addis Ababa University',
+        },
+        {
+          title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
+          start_time: '10:00 am',
+          end_time: '10:00 am',
+          location: 'Adama, Ethiopia',
+        },
+      ]
+    }),
+    methods: {
+      beautifyDate(date) {
+        return 'Mar 27, 2020'
+      },
+      fetchEvents() {
+        store.dispatch('setEvents', {page: this.page, size: this.itemsPerPage});
+      },
+    },
+  }
 </script>
-<style>
-  /* Helper classes */
-  .vertical-parent {
-    border-left: thin solid orange;
-  }
-
-  .event-date {
-    font-size: 2em;
-  }
-
-  .date {
-    font-weight: 300;
-    font-size: 1.2em;
-    font-family: "Roboto", sans-serif;
-  }
-
-  .card-text h4 {
-    font-weight: 300 !important;
-  }
-</style>

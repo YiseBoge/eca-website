@@ -7,54 +7,47 @@
     </v-row>
 
     <v-row>
-      <v-col class="pr-md-12" md="8">
-        <v-hover
-          :key="i" close-delay="50"
-          v-for="(news, i) in headlines"
-          v-slot:default="{ hover }"
+      <v-col md="8">
+        <v-tabs
+          background-color="primary" class="shadow mb-5 rounded"
+          dark
+          fixed-tabs
         >
-          <v-card
-            :class="hover ? 'shadow' : 'shadow-lg'"
-            @click=""
-            class="mb-12"
+          <v-tab
+            :key="i"
+            v-for="i in ['All', 2020, 2019, 2018, 2017]"
           >
-            <v-list-item three-line>
-              <v-list-item-content>
+            {{i}}
+          </v-tab>
+        </v-tabs>
+        <v-list two-line>
+          <v-list-item-group
+          >
+            <template v-for="(item) in headlines">
+              <v-row>
+                <v-list-item class="py-4">
+                  <v-col cols="12" md="10">
+                    <v-list-item-content>
+                      <v-list-item-title v-text="item.title"/>
+                      <v-list-item-subtitle class="text--primary" v-text="item.description"/>
+                      <v-list-item-subtitle v-text="item.created_at + ' - ' + item.category"/>
+                    </v-list-item-content>
+                  </v-col>
+                  <v-col :style="'height:75%; background: url(' + item.image_url + ') center; background-size:cover;'"
+                         class="d-md-block d-none shadow-sm" cols="2">
+                  </v-col>
+                </v-list-item>
 
-                <v-list-item-title class="headline font-weight-light">{{news.title}}</v-list-item-title>
-                <v-list-item-subtitle class="font-italic">{{news.created_at}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-
-            <div
-              :style="'background: url(' + news.image_url + ') center no-repeat; background-size: cover'"
-              style="height: 250px;"
-            ></div>
-
-            <v-list-item three-line>
-              <v-list-item-content style="height: 50px">
-                <v-list-item-subtitle>{{news.description}}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
-            <v-card-actions class="d-block">
-              <v-chip class="ml-3 mb-2 text-uppercase"
-                      color="grey"
-                      label small text-color="white"
-              >
-                {{news.category}}
-              </v-chip>
-              <v-btn
-                class="float-right"
-                color="primary accent-4" text
-              >
-                Read More
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-
-        </v-hover>
+              </v-row>
+              <v-divider class="my-0"/>
+            </template>
+          </v-list-item-group>
+        </v-list>
+        <v-row class="py-5">
+          <v-pagination :length="len" v-model="page"/>
+        </v-row>
       </v-col>
-      <v-col md="4">
+      <v-col class="px-8" md="4">
 
         <!--        <v-text-field-->
         <!--          label="Search"-->
@@ -65,7 +58,7 @@
           class="mx-auto shadow-lg"
         >
           <v-list>
-            <v-subheader>Popular Categories</v-subheader>
+            <v-subheader>Top Categories</v-subheader>
             <v-list-item-group color="primary" v-model="item">
               <v-list-item
                 :key="i"
@@ -79,9 +72,6 @@
           </v-list>
         </v-card>
       </v-col>
-    </v-row>
-    <v-row class="py-5">
-      <v-pagination :length="len" v-model="page"/>
     </v-row>
 
   </v-container>

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import vuetify from '~/plugins/vuetify'
 import '~/plugins/base'
-import Dashboard from '~/admin-dashboard/Dashboard.vue'
+import Dashboard from '~/admin/Dashboard.vue'
 import {router} from '~/routes/admin-router'
 import {store} from '~/store/store'
 

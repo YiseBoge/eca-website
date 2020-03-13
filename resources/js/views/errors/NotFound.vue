@@ -10,8 +10,7 @@
 
         <p>The page you were looking for does not exist</p>
 
-        <v-btn color="primary" outlined small to="/"
-        >
+        <v-btn @click="backToHome" color="primary" outlined small>
           Get me back home!
         </v-btn>
       </v-col>
@@ -20,6 +19,8 @@
 </template>
 
 <script>
+  import {router} from "../../routes/admin-router";
+
   export default {
     name: 'NotFound',
     props: {
@@ -31,5 +32,10 @@
     created() {
       this.$ssrContext && this.$ssrContext.res.status(404)
     },
+    methods: {
+      backToHome() {
+        router.push('/');
+      }
+    }
   }
 </script>
