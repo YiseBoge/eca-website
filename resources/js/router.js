@@ -5,6 +5,8 @@ import Events from "./views/Events2";
 import News from "./views/News";
 import NotFound from "./views/errors/NotFound";
 
+import {setContent} from "./set-contents";
+
 const Home = () => import('~/views/Home.vue');
 
 Vue.use(Router);
@@ -19,5 +21,6 @@ export default new Router({
     {path: '/news', name: 'news', component: News},
 
     {path: '*', name: 'NotFound', component: NotFound},
+
   ]
 })

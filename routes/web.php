@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('{path}', function () {
+use Illuminate\Support\Facades\Route;
+
+Route::get('/admin', function() {
+    return view('dashboard');
+});
+
+Route::get('/', function() {
     return view('index');
-})->where('path', '(.*)');
+});
