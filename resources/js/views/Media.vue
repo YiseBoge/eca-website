@@ -77,14 +77,14 @@
           },
           {
             title: 'STEMpower Ethiopia, Episode 38: STEMpower\'s STEM Center Students Innovations',
-            href: 'https://www.youtube.com/watch?v=s5iUsaPPtnk',
+            href: 'https://www.youtube.com/watch?v=gKU45zbyedU',
             type: 'text/html',
             youtube: 's5iUsaPPtnk',
             poster: 'https://louisem.com/wp-content/uploads/2017/07/youtube-thumbnail-templates.jpg'
           },
           {
             title: 'STEMpower Ethiopia, Episode 35: Problem Solving Students Innovation',
-            href: 'https://www.youtube.com/watch?v=s5iUsaPPtnk',
+            href: 'https://www.youtube.com/watch?v=gKU45zbyedU',
             type: 'text/html',
             youtube: 's5iUsaPPtnk',
             poster: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTtP1IHm_ovH0cDtsBWna_2iKTGQwBtyRxTrbMhogct9UfAn3NL'

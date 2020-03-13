@@ -2,28 +2,17 @@
   <v-container>
     <v-row class="mt-6">
       <v-col>
-        <h1 class="font-weight-thin">News</h1>
+        <h1 class="font-weight-thin">Publications</h1>
       </v-col>
     </v-row>
 
     <v-row>
       <v-col md="8">
-        <v-tabs
-          background-color="primary" class="shadow mb-5 rounded"
-          dark
-          fixed-tabs
-        >
-          <v-tab
-            :key="i"
-            v-for="i in ['All', 2020, 2019, 2018, 2017]"
-          >
-            {{i}}
-          </v-tab>
-        </v-tabs>
         <v-list two-line>
           <v-list-item-group
           >
             <template v-for="(item) in headlines">
+              <v-divider class="my-0"/>
               <v-row>
                 <v-list-item class="py-2">
                   <v-col cols="12" md="10">
@@ -40,7 +29,6 @@
                 </v-list-item>
 
               </v-row>
-              <v-divider class="my-0"/>
             </template>
           </v-list-item-group>
         </v-list>

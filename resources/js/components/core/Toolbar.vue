@@ -39,8 +39,8 @@
         links: [
           {text: 'HOME', to: '/'},
           {text: 'NEWS', to: '/news'},
-          {text: 'EVENTS', to: '/events'},
           {text: 'PUBLICATIONS', to: '/publications'},
+          {text: 'EVENTS', to: '/events'},
           {text: 'MEDIA', to: '/media'},
         ]
       }

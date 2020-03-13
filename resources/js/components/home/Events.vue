@@ -76,7 +76,7 @@
   }
 
   .box:after {
-    background: linear-gradient(to right, #00B04F 33%, #FE6601 33%, #FE6601 66%, #00B0EF 66%);
+    background: linear-gradient(to right, #00B04F 33%, orange 33%, orange 66%, #00B0EF 66%);
     position: absolute;
     content: '';
     height: 8px;
@@ -92,7 +92,7 @@
     font-size: 1.7em;
   }
   .vertical-parent {
-    border-left: thick solid #FE6601;
+    border-left: thick solid orange;
   }
 
   .date {
