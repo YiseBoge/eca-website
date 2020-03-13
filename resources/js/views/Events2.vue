@@ -20,7 +20,7 @@
           v-text="beautifyDate(item.start_time)"
         />
             </template>
-            <v-card :class="i !== 0 ? 'shadow-sm': 'shadow-lg'"
+            <v-card :class="i !== 0 ? 'shadow': 'shadow-lg'"
                     :style="i !== 0 ? '': 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat'"
                     class="px-5"
             >

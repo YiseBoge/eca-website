@@ -1,12 +1,12 @@
 <template>
-  <v-app>
-    <core-toolbar />
+  <v-app class="bg-white">
+    <core-toolbar/>
 
-    <core-view />
+    <core-view/>
 
-    <core-footer />
+    <core-footer/>
 
-    <core-cta />
+    <core-cta/>
   </v-app>
 </template>
 
@@ -31,5 +31,9 @@
 <style>
   .v-pagination__item, .v-pagination__navigation {
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .v-content__wrap {
+    background: white;
   }
 </style>

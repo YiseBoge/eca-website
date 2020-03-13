@@ -92,7 +92,7 @@
     font-size: 1.7em;
   }
   .vertical-parent {
-    border-left: thick solid orange;
+    border-left: thick solid #FE6601;
   }
 
   .date {
