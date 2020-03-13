@@ -86,7 +86,7 @@
 </template>
 
 <script>
-    import {adminRoute} from "../router";
+    import {router} from "../routes/admin-router";
     import {store} from "../store/store";
 
     export default {
@@ -105,11 +105,11 @@
         }),
         methods: {
             route(link) {
-                adminRoute.push(link);
+                router.push(link);
             },
             logout() {
                 store.dispatch('resetUser');
-                adminRoute.push('/login').then();
+                router.push('/login').then();
             }
         },
         computed: {

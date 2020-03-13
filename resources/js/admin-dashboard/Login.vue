@@ -1,4 +1,3 @@
-
 <template>
   <v-row align="center" justify="center">
     <v-col cols="12" sm="8" md="4">
@@ -43,6 +42,7 @@
     import router from "../router";
     import {handleError} from "../auth";
     import {store} from "../store/store"
+
     export default {
         name: "LoginComponent.vue",
         data() {
