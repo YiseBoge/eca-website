@@ -2,7 +2,7 @@
   <section class="container" id="feed">
     <div class="row">
       <div class="col-md-5">
-        <Headlines/>
+        <headlines/>
       </div>
 
       <div class="col-md-7">

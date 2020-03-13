@@ -1,17 +1,17 @@
 <template>
   <section class="container py-5 my-5">
     <v-row>
-      <v-col md="4">
+      <v-col cols="12" md="4">
         <leadership/>
       </v-col>
-      <v-col md="4">
+      <v-col cols="12" md="4">
         <publications/>
       </v-col>
-      <v-col md="4">
-        <div class="shadow-lg">
+      <v-col cols="12" md="4">
+        <v-card class="shadow-lg">
           <a class="twitter-timeline p-3 text-primary" data-height="490" data-theme="light"
              href="https://twitter.com/eca_ethiopia?ref_src=twsrc%5Etfw">Tweets by ECA</a>
-        </div>
+        </v-card>
       </v-col>
     </v-row>
   </section>

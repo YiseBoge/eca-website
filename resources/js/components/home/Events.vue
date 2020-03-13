@@ -4,45 +4,46 @@
     <v-container>
       <h1 class="my-3 display-1 font-weight-thin">Events</h1>
       <v-row>
-        <v-card
-          class="mx-auto box col-md-3 overflow-hidden shadow-sm"
-          max-height="250"
-          max-width="300"
-        >
-          <v-card-title class="date event-date darken-3 text-muted" style="font-size: 1.5em">
-            March 17, 2020
-          </v-card-title>
-          <v-card-text class="my-3 card-body">
-            <a href="">
-              Communications Security, Reliability, and Interoperability Council VII Meeting
-              Online Only
-            </a>
-            <small class="text-center d-block mx-auto">Online only</small>
-          </v-card-text>
+        <div class="col-md-4 px-md-12 h-100">
+          <v-card
+            class="box overflow-hidden shadow-sm"
+            max-height="250"
+          >
+            <v-card-title class="date event-date darken-3 text-muted" style="font-size: 1.5em">
+              March 17, 2020
+            </v-card-title>
+            <v-card-text class="my-3 card-body">
+              <span> Technological Advisory Council Meeting</span>
+              <br>
+              <p class="small">
+                Commission Meeting Room, 445 12th Street, S.W., Washington, D.C.
+              </p>
+            </v-card-text>
 
-        </v-card>
-        <div class="col-md-4 row mx-auto h-100">
-          <p class="col-md-2 mr-10 date">
+          </v-card>
+        </div>
+        <div class="col-md-4 row h-100">
+          <p class="col-md-4 col-3 date">
             MAR
             <span class="event-date">24</span>
             2020
           </p>
-          <div class="vertical-parent col-md-8">
-            <a href="">Technological Advisory Council Meeting March 24, 2020</a>
+          <div class="vertical-parent col-md-8 col-9">
+            <span> Technological Advisory Council Meeting March 24, 2020</span>
             <br>
             <p class="small">
               Commission Meeting Room, 445 12th Street, S.W., Washington, D.C.
             </p>
           </div>
         </div>
-        <div class="col-md-4 row mx-auto h-100">
-          <p class="col-md-2 mr-10 date">
+        <div class="col-md-4 row h-100">
+          <p class="col-md-4 col-3 date">
             MAR
             <span class="event-date">24</span>
             2020
           </p>
-          <div class="vertical-parent col-md-8">
-            <a href="">Technological Advisory Council Meeting March 24, 2020</a>
+          <div class="vertical-parent col-md-8 col-9">
+            <span>Technological Advisory Council Meeting March 24, 2020</span>
             <br>
             <p class="small">
               Commission Meeting Room, 445 12th Street, S.W., Washington, D.C.
@@ -51,16 +52,11 @@
         </div>
       </v-row>
       <v-row>
-        <v-flex align-self-end class="float-right">
-          <!--          <v-btn dark color="blue darken-2"  tile class="float-right ml-3">Commission Meetings</v-btn>-->
-          <v-btn class="float-right ml-3 shadow" color="blue darken-2" dark tile>All Events</v-btn>
-        </v-flex>
+        <v-col>
+          <v-btn class="float-right shadow" color="blue darken-2" dark tile to="/events">All Events</v-btn>
+        </v-col>
       </v-row>
 
-      <!--      <v-row align="right">-->
-      <!--        <v-btn dark color="blue blue darken-3 float-right mr-12">Commission Meetings</v-btn>-->
-      <!--        <v-btn dark color="blue darken-3 float-right mr-2">All Events</v-btn>-->
-      <!--      </v-row>-->
     </v-container>
   </section>
 </template>

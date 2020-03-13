@@ -19,25 +19,12 @@
       </router-link>
       <v-spacer/>
       <v-btn
-        v-for="(link, i) in links"
-        :key="i"
-        :to="link.to"
-        text
-        class="ml-0 hidden-sm-and-down"
-        flat
+        :key="i" :to="link.to" class="ml-0 hidden-sm-and-down"
+        flat text v-for="(link, i) in links"
         @click="onClick($event, item)"
       >
         {{ link.text }}
       </v-btn>
-      <!--      <v-spacer/>-->
-
-      <!--      <v-btn icon>-->
-      <!--        <v-icon>mdi-magnify</v-icon>-->
-      <!--      </v-btn>-->
-
-      <!--      <v-btn icon>-->
-      <!--        <v-icon>mdi-dots-vertical</v-icon>-->
-      <!--      </v-btn>-->
     </v-app-bar>
   </v-card>
 </template>
@@ -51,8 +38,8 @@
       return {
         links: [
           {text: 'HOME', to: '/'},
-          {text: 'NEWS', to: '/news/'},
-          {text: 'EVENTS', to: '/news/events'},
+          {text: 'NEWS', to: '/news'},
+          {text: 'EVENTS', to: '/events'},
           {text: 'PUBLICATIONS', to: '/publications'},
           {text: 'MEDIA', to: '/media'},
         ]
