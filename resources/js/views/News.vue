@@ -25,8 +25,8 @@
           >
             <template v-for="(item) in headlines">
               <v-row>
-                <v-list-item class="py-2">
-                  <v-col cols="12" md="10">
+                <v-list-item>
+                  <v-col cols="12" md="11">
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>
                       <v-list-item-title v-text="item.title"/>
@@ -34,8 +34,8 @@
                       <v-list-item-subtitle v-text="item.created_at"/>
                     </v-list-item-content>
                   </v-col>
-                  <v-col :style="'height:90%; background: url(' + item.image_url + ') center; background-size:cover;'"
-                         class="d-md-block d-none shadow-sm" cols="2">
+                  <v-col :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
+                         class="d-md-block d-none shadow-sm" cols="1">
                   </v-col>
                 </v-list-item>
 

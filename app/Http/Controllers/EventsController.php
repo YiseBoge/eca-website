@@ -12,14 +12,14 @@ class EventsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return EventCollection
      */
     public function index()
     {
         $category = request()->input("category", "");
         $size = request()->input("size", 0);
 
-        $models = $category == "" ? Event::orderBy('created_at', 'DESC')->paginate($size) : Event::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size); 
+        $models = $category == "" ? Event::orderBy('created_at', 'DESC')->paginate($size) : Event::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size);
 
         return new EventCollection($models);
     }
@@ -27,8 +27,8 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return EventResource
      */
     public function store(Request $request)
     {
@@ -46,8 +46,8 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return EventResource
      */
     public function show($id)
     {
@@ -58,9 +58,9 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return EventResource
      */
     public function update(Request $request, $id)
     {
@@ -78,8 +78,8 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return int
      */
     public function destroy($id)
     {
