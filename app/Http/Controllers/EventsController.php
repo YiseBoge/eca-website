@@ -16,10 +16,16 @@ class EventsController extends Controller
      */
     public function index()
     {
-        $category = request()->input("category", "");
         $size = request()->input("size", 0);
+        $past = request()->has("past");
 
-        $models = $category == "" ? Event::orderBy('created_at', 'DESC')->paginate($size) : Event::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size); 
+        $models = Event::orderBy('created_at', 'DESC');
+        if($past){
+            $models = $models->where('end_date', '<', date('Y-m-d H:i:s'));
+        }else{
+            $models = $models->where('end_date', '>', date('Y-m-d H:i:s'));
+        }
+        $models = $models->paginate($size);
 
         return new EventCollection($models);
     }
@@ -35,7 +41,6 @@ class EventsController extends Controller
         $model = Event::create([
             'title' => $request->input("title"),
             'description' => $request->input("description"),
-            'category' => $request->input("category"),
             'start_date' => $request->input("start_date"),
             'end_date' => $request->input("end_date"),
             'location' => $request->input("location")
@@ -67,7 +72,6 @@ class EventsController extends Controller
         $model = Event::findOrFail($id);
         $model->title = $request->input("title");
         $model->description = $request->input("description");
-        $model->category = $request->input("category");
         $model->start_date = $request->input("start_date");
         $model->end_date = $request->input("end_date");
         $model->location = $request->input("location");

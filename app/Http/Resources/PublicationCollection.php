@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Publication;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
@@ -15,6 +16,9 @@ class PublicationCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'data' => $this->collection,
+            'categories' => Publication::getEnum('Categories')
+        ];
     }
 }
