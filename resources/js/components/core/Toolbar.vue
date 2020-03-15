@@ -42,6 +42,7 @@
           {text: 'PUBLICATIONS', to: '/publications'},
           {text: 'EVENTS', to: '/events'},
           {text: 'MEDIA', to: '/media'},
+          {text: 'ABOUT US', to: '/about'},
         ]
       }
         },
