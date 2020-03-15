@@ -38,11 +38,11 @@
       return {
         links: [
           {text: 'HOME', to: '/'},
+          {text: 'ABOUT US', to: '/about'},
           {text: 'NEWS', to: '/news'},
           {text: 'PUBLICATIONS', to: '/publications'},
           {text: 'EVENTS', to: '/events'},
           {text: 'MEDIA', to: '/media'},
-          {text: 'ABOUT US', to: '/about'},
         ]
       }
         },
