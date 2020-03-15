@@ -2,7 +2,7 @@ import ajax from "../ajax";
 
 const state = {
   events: [],
-  meta: {
+  eventsMeta: {
     current_page: 0,
     from: 0,
     to: 0,
@@ -17,8 +17,8 @@ const getters = {
   getEvents: state => {
     return state.events;
   },
-  getMeta: state => {
-    return state.meta;
+  getEventsMeta: state => {
+    return state.eventsMeta;
   }
 };
 
@@ -26,7 +26,7 @@ const mutations = {
   setEvents: (state, payload) => {
     state.events = payload;
   },
-  setMeta: (state, payload) => {
+  setEventsMeta: (state, payload) => {
     state.meta = payload;
   }
 };
@@ -37,7 +37,7 @@ const actions = {
       response => {
         console.log(response.data.meta);
         commit('setEvents', response.data.data);
-        commit('setMeta', response.data.meta);
+        commit('setEventsMeta', response.data.meta);
       },
       error => {
         console.log(error);

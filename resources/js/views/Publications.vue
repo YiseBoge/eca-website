@@ -11,10 +11,10 @@
         <v-list two-line>
           <v-list-item-group
           >
-            <template v-for="(item) in headlines">
+            <template v-for="(item) in data">
               <v-divider class="my-0"/>
               <v-row>
-                <v-list-item>
+                <v-list-item class="w-100">
                   <v-col cols="12" md="11">
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>
@@ -24,7 +24,7 @@
                     </v-list-item-content>
                   </v-col>
                   <v-col :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
-                         class="d-md-block d-none shadow-sm" cols="1">
+                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none" cols="1">
                   </v-col>
                 </v-list-item>
 
@@ -73,38 +73,32 @@
 <!--</style>-->
 <script>
 
+  import {store} from "../store/store";
+
   export default {
     data() {
       return {
         page: 1,
-        itemsPerPage: 5,
+        size: 5,
         len: 6,
-        headlines: [
-          {
-            title: 'Communications Security, Reliability, and Interoperability Council VII Meeting',
-            description: 'Visit ten places on our planet that are undergoing the biggest changes today. this',
-            created_at: 'MAR 24 2020',
-            image_url: 'https://cdn.vuetifyjs.com/images/cards/mountain.jpg',
-            category: 'Trial Category'
-          },
-          {
-            title: 'Technological Advisory Council Meeting March 24, 2020',
-            description: 'Visit ten places on our planet that are undergoing the biggest changes today. this',
-            created_at: 'JAN 20 2019',
-            image_url: 'https://cdn.vuetifyjs.com/images/cards/mountain.jpg',
-            category: 'Good News'
-          },
-          {
-            title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
-            description: 'Visit ten places on our planet that are undergoing the biggest changes today. this',
-            created_at: 'FEB 27 2019',
-            image_url: 'https://cdn.vuetifyjs.com/images/cards/mountain.jpg',
-            category: 'More News'
-          },
-        ],
         categories: ["Real-Time", "Trial Category", "Conversions"],
         category: 0
       }
-    }
+    },
+    methods: {
+      beautifyDate(date) {
+        return date
+      },
+      fetchPublications() {
+        store.dispatch('setPublications', {page: this.page, size: this.size});
+      },
+    },
+    created() {
+      this.fetchPublications();
+    },
+    computed: {
+      data: () => store.getters.getPublications,
+      meta: () => store.getters.getPublicationsMeta,
+    },
   }
 </script>

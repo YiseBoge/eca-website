@@ -77,7 +77,8 @@
       this.fetchEvents();
     },
     computed: {
-      data: () => store.getters.getEvents
+      data: () => store.getters.getEvents,
+      meta: () => store.getters.getEventsMeta,
     },
   }
 </script>

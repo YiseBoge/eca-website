@@ -3,6 +3,8 @@ import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 
 import events from "./event"
+import news from "./news"
+import publications from "./publication"
 
 Vue.use(Vuex);
 
@@ -41,6 +43,8 @@ export const store = new Vuex.Store({
     }
   },
   modules: {
-    events
+    events,
+    news,
+    publications,
   }
 });
