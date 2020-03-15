@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 
+import home from "./home"
 import events from "./event"
 import news from "./news"
 import publications from "./publication"
@@ -43,6 +44,7 @@ export const store = new Vuex.Store({
     }
   },
   modules: {
+    home,
     events,
     news,
     publications,

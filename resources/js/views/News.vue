@@ -35,7 +35,7 @@
                     </v-list-item-content>
                   </v-col>
                   <v-col :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
-                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none" cols="1">
+                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none rounded" cols="1">
                   </v-col>
                 </v-list-item>
 
@@ -85,7 +85,7 @@
 <!--</style>-->
 <script>
 
-  import {store} from "../store/store";
+  import {store} from "~/store/store";
 
   export default {
     data() {

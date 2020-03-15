@@ -44,6 +44,6 @@ Route::group(['middleware' => 'guest:api'], function () {
         'news' => 'NewsController',
         'publication' => 'PublicationsController',
         'event' => 'EventsController',
-        'leader' => 'LeadersController'
+        'leadership' => 'LeadersController'
     ]);
 });

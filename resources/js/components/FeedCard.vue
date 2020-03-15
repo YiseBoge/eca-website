@@ -11,7 +11,7 @@
       class="shadow-lg rounded"
     >
       <v-img
-        src="https://images.pexels.com/photos/2444429/pexels-photo-2444429.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        :src="value.image_url"
         height="100%"
         gradient="rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)"
       >
@@ -33,12 +33,13 @@
             >
               {{ value.category }}
             </v-chip>
-            <h3 class="title font-weight-bold mb-2">
+            <h3 class="title font-weight-bold">
               {{ value.title }}
             </h3>
-            <div class="caption">
-              {{ value.author }}<br>Date
+            <div class="caption text-truncate">
+              {{ value.description }}
             </div>
+            <p class="overline my-1">{{ beautifyDate(value.created_at) }}</p>
           </v-flex>
           <v-flex align-self-end>
             <v-chip
@@ -69,9 +70,13 @@
         default: () => ({})
       }
     },
-
+    methods: {
+      beautifyDate(date) {
+        return date
+      },
+    },
     computed: {
-      classes () {
+      classes() {
         return {
           'md6': this.size === 2,
           'md4': this.size === 3

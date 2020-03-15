@@ -12,7 +12,6 @@
           <v-list-item-group
           >
             <template v-for="(item) in data">
-              <v-divider class="my-0"/>
               <v-row>
                 <v-list-item class="w-100">
                   <v-col cols="12" md="11">
@@ -24,16 +23,17 @@
                     </v-list-item-content>
                   </v-col>
                   <v-col :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
-                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none" cols="1">
+                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none rounded" cols="1">
                   </v-col>
                 </v-list-item>
 
               </v-row>
+              <v-divider class="my-0"/>
             </template>
           </v-list-item-group>
         </v-list>
         <v-row class="py-5">
-          <v-pagination :length="len" v-model="page"/>
+          <v-pagination :length="meta.to" v-model="page"/>
         </v-row>
       </v-col>
       <v-col class="px-8" md="4">

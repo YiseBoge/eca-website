@@ -6,50 +6,38 @@
       <v-row>
         <div class="col-md-4 px-md-12 h-100">
           <v-card
-            class="box overflow-hidden shadow-sm"
+            class="box overflow-hidden shadow-sm text-center"
             max-height="250"
           >
-            <v-card-title class="date event-date darken-3 text-muted" style="font-size: 1.5em">
-              March 17, 2020
+            <v-card-title class="date event-date darken-3 text-muted justify-center" style="font-size: 1.5em">
+              {{beautifyDate(data[0].start_date)}}
             </v-card-title>
             <v-card-text class="my-3 card-body">
-              <span> Technological Advisory Council Meeting</span>
+              <span> {{data[0].title}} </span>
               <br>
               <p class="small">
-                Commission Meeting Room, 445 12th Street, S.W., Washington, D.C.
+                {{data[0].location}}
               </p>
             </v-card-text>
 
           </v-card>
         </div>
-        <div class="col-md-4 row h-100">
+
+        <div class="col-md-4 row h-100" v-for="event in [data[1], data[2]]">
           <p class="col-md-4 col-3 date">
-            MAR
-            <span class="event-date">24</span>
-            2020
+            {{months[new Date(event.start_date).getMonth()]}}
+            <span class="event-date">{{new Date(event.start_date).getDate()}}</span>
+            {{new Date(event.start_date).getFullYear()}}
           </p>
           <div class="vertical-parent col-md-8 col-9">
-            <span> Technological Advisory Council Meeting March 24, 2020</span>
+            <span> {{event.title}} </span>
             <br>
             <p class="small">
-              Commission Meeting Room, 445 12th Street, S.W., Washington, D.C.
+              {{event.location}}
             </p>
           </div>
         </div>
-        <div class="col-md-4 row h-100">
-          <p class="col-md-4 col-3 date">
-            MAR
-            <span class="event-date">24</span>
-            2020
-          </p>
-          <div class="vertical-parent col-md-8 col-9">
-            <span>Technological Advisory Council Meeting March 24, 2020</span>
-            <br>
-            <p class="small">
-              Commission Meeting Room, 445 12th Street, S.W., Washington, D.C.
-            </p>
-          </div>
-        </div>
+
       </v-row>
       <v-row>
         <v-col>
@@ -62,18 +50,31 @@
 </template>
 
 <script>
-    export default {
-        name: "Events"
-    }
+
+  import {store} from "~/store/store";
+
+  export default {
+    data: () => ({
+      months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    }),
+    methods: {
+      beautifyDate(date) {
+        return date
+      },
+      fetchHomeEvents() {
+        store.dispatch('setHomeEvents', {page: 1, size: 3});
+      },
+    },
+    created() {
+      this.fetchHomeEvents();
+    },
+    computed: {
+      data: () => store.getters.getHomeEvents,
+    },
+  }
 </script>
 
 <style>
-  .box {
-    text-align: center;
-    position: relative;
-    line-height: 100px;
-    background: #fff;
-  }
 
   .box:after {
     background: linear-gradient(to right, #00B04F 33%, orange 33%, orange 66%, #00B0EF 66%);
