@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-5">
+  <v-container>
     <v-row class="mt-6">
       <v-col>
         <h1 class="font-weight-thin">About Us</h1>
