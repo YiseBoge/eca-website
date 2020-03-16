@@ -16,9 +16,9 @@
         >
 
           <v-list-item-content>
-            <p class="overline text-muted">{{beautifyDate(item.created_at)}}</p>
+            <p class="overline text-muted">{{formatToDate(item.created_at)}}</p>
             <v-list-item-title v-html="item.title"/>
-            <v-list-item-subtitle v-html="item.description"/>
+            <v-list-item-subtitle v-text="htmlToText(item.description)"/>
             <a :href="item.file_url" class="small my-1" target="_blank" v-if="item.file_url">Download</a>
           </v-list-item-content>
         </v-list-item>

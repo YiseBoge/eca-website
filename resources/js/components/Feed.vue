@@ -6,20 +6,19 @@
       <v-flex xs12>
         <v-card
           class="mx-auto row shadow-lg overflow-hidden"
-          height="200" outlined
+          height="210" outlined
         >
-          <div class="col-md-7">
+          <div class="col-md-8">
             <v-list-item three-line>
               <v-list-item-content>
                 <div class="overline mb-4">Featured</div>
                 <v-list-item-title class="headline mb-1">{{data[0].title}}</v-list-item-title>
-                <v-list-item-subtitle>
-                  {{data[0].description}}
-                </v-list-item-subtitle>
+                <v-list-item-subtitle v-text="htmlToText(data[0].description)"/>
+                <small class="overline text-muted mt-1" v-text="formatToDate(data[0].created_at)"/>
               </v-list-item-content>
 
             </v-list-item>
-            <v-card-actions>
+            <v-card-actions class="pt-0">
               <v-btn
                 color="primary accent-4" text
               >
@@ -27,7 +26,7 @@
               </v-btn>
             </v-card-actions>
           </div>
-          <div class="col-md-5"
+          <div class="col-md-4"
                style="background: url('https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') center;
          background-size: cover;"
           >

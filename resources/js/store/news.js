@@ -35,7 +35,6 @@ const actions = {
   setNews: ({commit}, {page, size}) => {
     ajax.get(`/news/?page=${page}&size=${size}`).then(
       response => {
-        console.log(response.data.data);
         commit('setNews', response.data.data);
         commit('setNewsMeta', response.data.meta);
       },

@@ -28,7 +28,7 @@
             <template v-slot:opposite>
         <span
           :class="`headline font-weight-light ${colors[i%3]}--text`"
-          v-text="beautifyDate(item.start_date)"
+          v-text="formatToDate(item.start_date)"
         />
             </template>
             <v-card :class="i !== 0 ? 'shadow': 'shadow-lg'"
@@ -38,7 +38,8 @@
 
               <v-list-item three-line>
                 <v-list-item-content>
-                  <div class="overline"> {{ item.start_date }} - {{ item.end_date }}</div>
+                  <div class="overline"> {{ formatToMinute(item.start_date) }} -- {{ formatToMinute(item.end_date) }}
+                  </div>
                   <p class="lead mt-2"> {{ item.title }} </p>
                   <p class="subtitle-2 font-weight-light mb-2">{{ item.description }}</p>
                   <v-list-item-subtitle class="font-italic"> {{ item.location }}</v-list-item-subtitle>

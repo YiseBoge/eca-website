@@ -78,7 +78,6 @@ const actions = {
   setHomeEvents: ({commit}, {page, size}) => {
     ajax.get(`/event/?page=${page}&size=${size}`).then(
       response => {
-        console.log(response.data.data);
         commit('setHomeEvents', response.data.data);
       },
       error => {

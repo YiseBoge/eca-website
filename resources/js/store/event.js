@@ -35,7 +35,6 @@ const actions = {
   setEvents: ({commit}, {page, size}) => {
     ajax.get(`/event/?page=${page}&size=${size}`).then(
       response => {
-        console.log(response.data.meta);
         commit('setEvents', response.data.data);
         commit('setEventsMeta', response.data.meta);
       },

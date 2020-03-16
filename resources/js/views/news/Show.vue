@@ -34,8 +34,9 @@
                       <v-list-item-subtitle v-text="beautifyDate(item.created_at)"/>
                     </v-list-item-content>
                   </v-col>
-                  <v-col :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
-                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none rounded" cols="1">
+                  <v-col :class="item.image_url? 'shadow-sm' : ''"
+                         :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
+                         class="d-md-block d-none rounded" cols="1">
                   </v-col>
                 </v-list-item>
 
@@ -88,6 +89,7 @@
   import {store} from "~/store/store";
 
   export default {
+    name: "news-show",
     data() {
       return {
         page: 1,

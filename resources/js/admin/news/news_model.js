@@ -1,4 +1,4 @@
-export const News = {
+export const NewsModel = {
   title: '',
   image: '',
   link: '',

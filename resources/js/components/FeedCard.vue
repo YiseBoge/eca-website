@@ -37,17 +37,14 @@
               {{ value.title }}
             </h3>
             <div class="caption text-truncate">
-              {{ value.description }}
+              {{ htmlToText(value.description) }}
             </div>
-            <p class="overline my-1">{{ beautifyDate(value.created_at) }}</p>
+            <p class="overline my-1">{{ formatToDate(value.created_at) }}</p>
           </v-flex>
           <v-flex align-self-end>
             <v-chip
-              class="text-uppercase ma-0"
-              color="primary"
-              label
-              small
-              @click.stop=""
+              @click.stop="" class="text-uppercase ma-0"
+              color="primary" label small
             >
               Read More
             </v-chip>

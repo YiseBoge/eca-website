@@ -6,6 +6,7 @@ import home from "./home"
 import events from "./event"
 import news from "./news"
 import publications from "./publication"
+import media from "./media"
 
 Vue.use(Vuex);
 
@@ -48,5 +49,6 @@ export const store = new Vuex.Store({
     events,
     news,
     publications,
+    media,
   }
 });

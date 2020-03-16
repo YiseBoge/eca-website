@@ -54,9 +54,8 @@
   import {VueEditor} from 'vue2-editor';
   import {ImageDrop} from 'quill-image-drop-module';
   import ImageResize from '@taoqf/quill-image-resize-module';
-  import {News, Rules} from "./news";
+  import {NewsModel, Rules} from "./news_model";
   import ajax from "../../ajax";
-  import {router} from "../../routes/admin-router"
 
   export default {
     name: "Add News",
@@ -67,7 +66,7 @@
       return {
         valid: false,
         modal: false,
-        news: News,
+        news: NewsModel,
         rules: Rules,
         button_text: 'Upload Image',
         categories: [

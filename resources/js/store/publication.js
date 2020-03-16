@@ -35,7 +35,6 @@ const actions = {
   setPublications: ({commit}, {page, size}) => {
     ajax.get(`/publication/?page=${page}&size=${size}`).then(
       response => {
-        console.log(response.data.data);
         commit('setPublications', response.data.data);
         commit('setPublicationsMeta', response.data.meta);
       },

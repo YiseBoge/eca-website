@@ -10,7 +10,7 @@
             max-height="250"
           >
             <v-card-title class="date event-date darken-3 text-muted justify-center" style="font-size: 1.5em">
-              {{beautifyDate(data[0].start_date)}}
+              {{formatToDate(data[0].start_date)}}
             </v-card-title>
             <v-card-text class="my-3 card-body">
               <span> {{data[0].title}} </span>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="col-md-4 row h-100" v-for="event in [data[1], data[2]]">
-          <p class="col-md-4 col-3 date">
+          <p class="col-md-4 col-3 date text-center">
             {{months[new Date(event.start_date).getMonth()]}}
             <span class="event-date">{{new Date(event.start_date).getDate()}}</span>
             {{new Date(event.start_date).getFullYear()}}
@@ -91,6 +91,7 @@
   }
   .event-date {
     font-size: 1.7em;
+    font-weight: 400;
   }
   .vertical-parent {
     border-left: thick solid orange;
@@ -98,7 +99,7 @@
 
   .date {
     font-weight: 300;
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-family: "Roboto", sans-serif;
   }
 </style>
