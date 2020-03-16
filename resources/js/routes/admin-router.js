@@ -9,6 +9,7 @@ export const router = new Router({
   base: 'admin/#',
   routes: [
     {path: '/', name: 'dashboard', component: () => import('~/admin/Dashboard')},
+    {path: '/news', name: 'news', component: () => import('~/admin/news/News')},
     {path: '*', name: 'NotFound', component: NotFound},
   ]
 });
