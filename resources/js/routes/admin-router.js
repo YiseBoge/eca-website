@@ -10,6 +10,7 @@ export const router = new Router({
   routes: [
     {path: '/', name: 'dashboard', component: () => import('~/admin/Dashboard')},
     {path: '/news', name: 'news', component: () => import('~/admin/news/News')},
+    {path: '/news/add-news', name: 'add news', component: () => import('~/admin/news/AddNews')},
     {path: '*', name: 'NotFound', component: NotFound},
   ]
 });
