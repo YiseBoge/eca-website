@@ -2,6 +2,7 @@ import ajax from "../ajax";
 
 const state = {
   publications: [],
+  selectedPublication: null,
   publicationsMeta: {
     current_page: 0,
     from: 0,
@@ -17,6 +18,9 @@ const getters = {
   getPublications: state => {
     return state.publications;
   },
+  getSelectedPublication: state => {
+    return state.selectedPublication;
+  },
   getPublicationsMeta: state => {
     return state.publicationsMeta;
   }
@@ -25,6 +29,9 @@ const getters = {
 const mutations = {
   setPublications: (state, payload) => {
     state.publications = payload;
+  },
+  setSelectedPublication: (state, payload) => {
+    state.selectedPublication = payload;
   },
   setPublicationsMeta: (state, payload) => {
     state.publicationsMeta = payload;
@@ -37,6 +44,16 @@ const actions = {
       response => {
         commit('setPublications', response.data.data);
         commit('setPublicationsMeta', response.data.meta);
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  },
+  setSelectedPublication: ({commit}, {id}) => {
+    ajax.get(`/publication/${id}`).then(
+      response => {
+        commit('setSelectedPublication', response.data.data);
       },
       error => {
         console.log(error);

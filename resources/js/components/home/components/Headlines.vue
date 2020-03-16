@@ -12,7 +12,7 @@
 
         <v-list-item
           :key="item.id"
-          @click=""
+          :to="'/news/'+item.id"
           class="pb-2"
         >
 

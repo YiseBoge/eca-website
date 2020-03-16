@@ -7,7 +7,7 @@
       :height="value.prominent ? 450 : 250"
       color="grey lighten-1"
       dark
-      href="#!"
+      :to="'/news/'+value.id"
       class="shadow-lg rounded"
     >
       <v-img

@@ -27,7 +27,7 @@
               height="150px"
             />
 
-            <v-tooltip bottom open-delay="1500">
+            <v-tooltip bottom open-delay="1000">
               <template v-slot:activator="{ on }">
                 <v-card-title class="lead text-truncate d-inline-block w-100 pb-0" style="font-size: 1em" v-on="on">
                   {{image.title}}
@@ -35,7 +35,6 @@
               </template>
               <span>{{image.title}}</span>
             </v-tooltip>
-
 
             <v-card-actions class="pt-0">
               <v-btn color="orange" text>Watch</v-btn>

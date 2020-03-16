@@ -13,7 +13,7 @@
           >
             <template v-for="(item) in data">
               <v-row>
-                <v-list-item class="w-100">
+                <v-list-item :to="'/publications/'+item.id" class="w-100">
                   <v-col cols="12" md="11">
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>
@@ -76,6 +76,7 @@
   import {store} from "../../store/store";
 
   export default {
+    name: "publication-index",
     data() {
       return {
         page: 1,

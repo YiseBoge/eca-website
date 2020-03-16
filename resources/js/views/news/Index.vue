@@ -10,8 +10,7 @@
       <v-col cols="12" md="8">
         <v-tabs
           background-color="primary" class="shadow mb-5 rounded"
-          dark
-          fixed-tabs
+          dark fixed-tabs
         >
           <v-tab
             :key="i"
@@ -25,7 +24,7 @@
           >
             <template v-for="(item) in data">
               <v-row>
-                <v-list-item class="w-100">
+                <v-list-item :to="'/news/'+item.id" class="w-100">
                   <v-col cols="12" md="11">
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>

@@ -21,14 +21,15 @@
             <v-card-actions class="pt-0">
               <v-btn
                 color="primary accent-4" text
+                :to="'/news/'+data[0].id"
               >
                 Read More
               </v-btn>
             </v-card-actions>
           </div>
           <div class="col-md-4"
-               style="background: url('https://images.pexels.com/photos/302743/pexels-photo-302743.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260') center;
-         background-size: cover;"
+               :style="'background: url(' + data[0].image_url +') center;'"
+               style="background-size: cover;"
           >
           </div>
         </v-card>

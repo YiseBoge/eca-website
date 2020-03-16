@@ -1,11 +1,11 @@
 <template>
   <section class="container" id="feed">
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-4">
         <headlines/>
       </div>
 
-      <div class="col-md-7">
+      <div class="col-md-8">
         <feed/>
       </div>
     </div>
