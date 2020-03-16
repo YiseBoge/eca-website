@@ -11,11 +11,10 @@
         <v-list two-line>
           <v-list-item-group
           >
-            <template v-for="(item) in headlines">
-              <v-divider class="my-0"/>
+            <template v-for="(item) in data">
               <v-row>
-                <v-list-item class="py-2">
-                  <v-col cols="12" md="10">
+                <v-list-item class="w-100">
+                  <v-col cols="12" md="11">
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>
                       <v-list-item-title v-text="item.title"/>
@@ -23,17 +22,18 @@
                       <v-list-item-subtitle v-text="item.created_at"/>
                     </v-list-item-content>
                   </v-col>
-                  <v-col :style="'height:90%; background: url(' + item.image_url + ') center; background-size:cover;'"
-                         class="d-md-block d-none shadow-sm" cols="2">
+                  <v-col :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
+                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none rounded" cols="1">
                   </v-col>
                 </v-list-item>
 
               </v-row>
+              <v-divider class="my-0"/>
             </template>
           </v-list-item-group>
         </v-list>
         <v-row class="py-5">
-          <v-pagination :length="len" v-model="page"/>
+          <v-pagination :length="meta.to" v-model="page"/>
         </v-row>
       </v-col>
       <v-col class="px-8" md="4">
@@ -73,38 +73,32 @@
 <!--</style>-->
 <script>
 
+  import {store} from "../store/store";
+
   export default {
     data() {
       return {
         page: 1,
-        itemsPerPage: 5,
+        size: 5,
         len: 6,
-        headlines: [
-          {
-            title: 'Communications Security, Reliability, and Interoperability Council VII Meeting',
-            description: 'Visit ten places on our planet that are undergoing the biggest changes today. this',
-            created_at: 'MAR 24 2020',
-            image_url: 'https://cdn.vuetifyjs.com/images/cards/mountain.jpg',
-            category: 'Trial Category'
-          },
-          {
-            title: 'Technological Advisory Council Meeting March 24, 2020',
-            description: 'Visit ten places on our planet that are undergoing the biggest changes today. this',
-            created_at: 'JAN 20 2019',
-            image_url: 'https://cdn.vuetifyjs.com/images/cards/mountain.jpg',
-            category: 'Good News'
-          },
-          {
-            title: 'Broadband Deployment Advisory Committee Meeting - March 2020',
-            description: 'Visit ten places on our planet that are undergoing the biggest changes today. this',
-            created_at: 'FEB 27 2019',
-            image_url: 'https://cdn.vuetifyjs.com/images/cards/mountain.jpg',
-            category: 'More News'
-          },
-        ],
         categories: ["Real-Time", "Trial Category", "Conversions"],
         category: 0
       }
-    }
+    },
+    methods: {
+      beautifyDate(date) {
+        return date
+      },
+      fetchPublications() {
+        store.dispatch('setPublications', {page: this.page, size: this.size});
+      },
+    },
+    created() {
+      this.fetchPublications();
+    },
+    computed: {
+      data: () => store.getters.getPublications,
+      meta: () => store.getters.getPublicationsMeta,
+    },
   }
 </script>

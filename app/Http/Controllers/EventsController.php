@@ -12,14 +12,20 @@ class EventsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return EventCollection
      */
     public function index()
     {
-        $category = request()->input("category", "");
         $size = request()->input("size", 0);
+        $past = request()->has("past");
 
-        $models = $category == "" ? Event::orderBy('created_at', 'DESC')->paginate($size) : Event::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size); 
+        $models = Event::orderBy('created_at', 'DESC');
+        if($past){
+            $models = $models->where('end_date', '<', date('Y-m-d H:i:s'));
+        }else{
+            $models = $models->where('end_date', '>', date('Y-m-d H:i:s'));
+        }
+        $models = $models->paginate($size);
 
         return new EventCollection($models);
     }
@@ -27,15 +33,14 @@ class EventsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return EventResource
      */
     public function store(Request $request)
     {
         $model = Event::create([
             'title' => $request->input("title"),
             'description' => $request->input("description"),
-            'category' => $request->input("category"),
             'start_date' => $request->input("start_date"),
             'end_date' => $request->input("end_date"),
             'location' => $request->input("location")
@@ -46,8 +51,8 @@ class EventsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return EventResource
      */
     public function show($id)
     {
@@ -58,16 +63,15 @@ class EventsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return EventResource
      */
     public function update(Request $request, $id)
     {
         $model = Event::findOrFail($id);
         $model->title = $request->input("title");
         $model->description = $request->input("description");
-        $model->category = $request->input("category");
         $model->start_date = $request->input("start_date");
         $model->end_date = $request->input("end_date");
         $model->location = $request->input("location");
@@ -78,8 +82,8 @@ class EventsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return int
      */
     public function destroy($id)
     {

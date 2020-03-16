@@ -12,21 +12,21 @@ class LeadersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return LeaderCollection
      */
     public function index()
     {
         $size = request()->input("size", 0);
         $models = Leader::orderBy('level')->paginate($size);
-             
+
         return new LeaderCollection($models);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return LeaderResource
      */
     public function store(Request $request)
     {
@@ -43,8 +43,8 @@ class LeadersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return LeaderResource
      */
     public function show($id)
     {
@@ -55,9 +55,9 @@ class LeadersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int $id
+     * @return LeaderResource
      */
     public function update(Request $request, $id)
     {
@@ -74,8 +74,8 @@ class LeadersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return int
      */
     public function destroy($id)
     {

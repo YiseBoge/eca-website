@@ -6,9 +6,7 @@
       </div>
 
       <div class="col-md-7">
-        <feed>
-          <slot/>
-        </feed>
+        <feed/>
       </div>
     </div>
   </section>

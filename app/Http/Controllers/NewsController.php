@@ -18,13 +18,21 @@ class NewsController extends Controller
     {
         $category = request()->input("category", "");
         $featured = request()->has("featured");
+        $year = request()->input("year", "");
         $size = request()->input("size", 0);
 
         if($featured){
-            $models = News::orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC')->paginate($size);
+            $models = News::orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC');
         }else{
-            $models = $category == "" ? News::orderBy('created_at', 'DESC')->paginate($size) : News::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size);
-        }            
+            $models = News::orderBy('created_at', 'DESC');
+            if($year != ""){
+                $models = $models->whereYear('created_at', strval($year));
+            }else if($category != ""){
+                $models = $models->whereIn('category', explode(', ', $category));
+            }
+        }  
+
+        $models = $models->paginate($size);
                
         return new NewsCollection($models);
     }

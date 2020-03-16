@@ -5,22 +5,21 @@
   >
     <v-list class="transparent" three-line>
       <h2 class="px-3 text-primary font-weight-light display-1">Publications</h2>
-      <template v-for="(item, index) in items">
+      <template v-for="(item) in data">
         <v-divider
-          :inset="item.inset"
-          :key="index"
           class="my-0"
         />
 
         <v-list-item
-          :key="item.title"
-          @click=""
-          class="pb-5"
+          :key="item.id"
+          class="pb-2"
         >
 
           <v-list-item-content>
+            <p class="overline text-muted">{{beautifyDate(item.created_at)}}</p>
             <v-list-item-title v-html="item.title"/>
-            <v-list-item-subtitle v-html="item.subtitle"/>
+            <v-list-item-subtitle v-html="item.description"/>
+            <a :href="item.file_url" class="small my-1" target="_blank" v-if="item.file_url">Download</a>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -34,30 +33,22 @@
 </template>
 
 <script>
+  import {store} from "~/store/store";
+
   export default {
-    data: () => ({
-      items: [
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-          title: 'Brunch this weekend?',
-          subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?",
-        },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
-          subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.",
-        },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-          title: 'Oui oui',
-          subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you  recommendations? Have you  recommendations? Have you  recommendations? Have you  recommendations? Have you ever been?",
-        },
-        {
-          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-          title: 'Oui oui',
-          subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?",
-        }
-      ],
-    }),
+    methods: {
+      beautifyDate(date) {
+        return date
+      },
+      fetchPublications() {
+        store.dispatch('setHomePublications', {page: 1, size: 4});
+      },
+    },
+    created() {
+      this.fetchPublications();
+    },
+    computed: {
+      data: () => store.getters.getHomePublications,
+    },
   }
 </script>

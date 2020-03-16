@@ -21,7 +21,7 @@
       <v-btn
         :key="i" :to="link.to" class="ml-0 hidden-sm-and-down"
         flat text v-for="(link, i) in links"
-        @click="onClick($event, item)"
+        @click="onClick($event, link)"
       >
         {{ link.text }}
       </v-btn>
@@ -38,6 +38,7 @@
       return {
         links: [
           {text: 'HOME', to: '/'},
+          {text: 'ABOUT US', to: '/about'},
           {text: 'NEWS', to: '/news'},
           {text: 'PUBLICATIONS', to: '/publications'},
           {text: 'EVENTS', to: '/events'},
@@ -53,9 +54,9 @@
             onClick(e, item) {
                 e.stopPropagation();
 
-                if (item.to || !item.href) return;
+              if (!item.to) return;
 
-                this.$vuetify.goTo(item.href)
+              this.$vuetify.goTo(item.to)
             }
         }
     }

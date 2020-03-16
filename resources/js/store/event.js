@@ -2,15 +2,23 @@ import ajax from "../ajax";
 
 const state = {
   events: [],
-  eventsCount: 10,
+  eventsMeta: {
+    current_page: 0,
+    from: 0,
+    to: 0,
+    last_page: 0,
+    path: "",
+    per_page: "0",
+    total: 0
+  },
 };
 
 const getters = {
   getEvents: state => {
     return state.events;
   },
-  getEventsCount: state => {
-    return state.eventsCount;
+  getEventsMeta: state => {
+    return state.eventsMeta;
   }
 };
 
@@ -18,18 +26,18 @@ const mutations = {
   setEvents: (state, payload) => {
     state.events = payload;
   },
-  setEventsCount: (state, payload) => {
-    state.eventsCount = payload;
+  setEventsMeta: (state, payload) => {
+    state.meta = payload;
   }
 };
 
 const actions = {
   setEvents: ({commit}, {page, size}) => {
-    ajax.get(`/events/?page=${page}&size=${size}`).then(
+    ajax.get(`/event/?page=${page}&size=${size}`).then(
       response => {
-        console.log(response);
+        console.log(response.data.meta);
         commit('setEvents', response.data.data);
-        commit('setEventsCount', response.data.total);
+        commit('setEventsMeta', response.data.meta);
       },
       error => {
         console.log(error);
