@@ -30,7 +30,8 @@ const actions = {
     const max_results = "12";
     const playlistId = "UUrBY82taQkWw11GjsFgeusg";
     const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${max_results}&playlistId=${playlistId}&key=${api_key}${pageToken ? '&pageToken=' + pageToken : ''}`;
-    console.log(url);
+
+    commit('setLoading', true);
     axios.get(url).then(
       response => {
         console.log(response);
@@ -49,6 +50,7 @@ const actions = {
         });
         commit('addMedia', ret);
         commit('setPageToken', response.data.nextPageToken);
+        commit('setLoading', false);
       },
       error => {
         console.log(error);

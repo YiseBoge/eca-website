@@ -18,7 +18,8 @@ export const store = new Vuex.Store({
   ],
 
   state: {
-    user: null
+    user: null,
+    loading: false
   },
   getters: {
     getApiToken: state => {
@@ -26,6 +27,9 @@ export const store = new Vuex.Store({
         return null;
       return state.user.token;
     },
+    getLoading(state) {
+      return state.loading
+    }
   },
   mutations: {
     resetUser: (state) => {
@@ -33,6 +37,9 @@ export const store = new Vuex.Store({
     },
     setUser: (state, payload) => {
       state.user = payload;
+    },
+    setLoading: (state, payload) => {
+      state.loading = payload;
     }
   },
 

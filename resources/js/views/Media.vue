@@ -43,6 +43,12 @@
           </v-card>
         </v-hover>
       </v-col>
+      <v-col cols="4" v-if="loading">
+        <v-skeleton-loader
+          class="mx-auto shadow-lg"
+          type="card"
+        />
+      </v-col>
     </v-row>
 
     <v-row class="py-5">
@@ -51,8 +57,9 @@
           close-delay="50"
           v-slot:default="{ hover }"
         >
-          <v-btn :class="hover ? 'shadow' : 'shadow-lg'" @click="fetchMedia" color="primary" dark large rounded>Load
-            More
+          <v-btn :class="hover ? 'shadow' : 'shadow-lg'" @click="fetchMedia" color="primary" dark large rounded
+                 v-if="!loading">
+            Load More
           </v-btn>
         </v-hover>
       </v-col>
@@ -95,6 +102,7 @@
     computed: {
       data: () => store.getters.getMedia,
       nextToken: () => store.getters.getPageToken,
+      loading: () => store.getters.getLoading,
     },
   }
 </script>
