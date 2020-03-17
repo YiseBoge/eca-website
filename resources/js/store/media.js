@@ -43,6 +43,7 @@ const actions = {
               href: `https://www.youtube.com/watch?v=${vid.snippet.resourceId.videoId}`,
               type: 'text/html',
               youtube: vid.snippet.resourceId.videoId,
+              date: vid.snippet.publishedAt,
               poster: vid.snippet.thumbnails.high.url
             }
           )
