@@ -6,6 +6,8 @@
       </v-col>
       <v-col lg="3">
         <v-tabs
+          @change="fetchEvents"
+          v-model="time"
           fixed-tabs
         >
           <v-tab
@@ -21,21 +23,20 @@
       <v-col>
         <v-timeline>
           <v-timeline-item
-            :color="colors[i%3]"
+            :color="time===0?colors[i%3]:colors[3]"
             :key="i" small
             v-for="(item, i) in data"
           >
             <template v-slot:opposite>
         <span
-          :class="`headline font-weight-light ${colors[i%3]}--text`"
+          :class="`headline font-weight-light ${time===0?colors[i%3]:colors[3]}--text`"
           v-text="formatToDate(item.start_date)"
         />
             </template>
-            <v-card :class="i !== 0 ? 'shadow': 'shadow-lg'"
-                    :style="i !== 0 ? '': 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat'"
+            <v-card :class="i === 0 && time === 0 && page === 1 ? 'shadow-lg': 'shadow'"
+                    :style="i === 0 && time === 0 && page === 1 ? 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat': ''"
                     class="px-5"
             >
-
               <v-list-item three-line>
                 <v-list-item-content>
                   <div class="overline"> {{ formatToMinute(item.start_date) }} -- {{ formatToMinute(item.end_date) }}
@@ -51,6 +52,20 @@
         </v-timeline>
       </v-col>
     </v-row>
+    <v-row class="py-5">
+      <v-col cols="2">
+        <v-select
+          :items="sizes"
+          @change="fetchEvents" class="justify-start w-75"
+          dense label="Show" outlined
+          v-model="size"
+        />
+      </v-col>
+      <v-col cols="10">
+        <v-pagination :length="meta.last_page" :total-visible="7" @input="fetchEvents" class="justify-end"
+                      v-model="page"/>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -61,15 +76,18 @@
 
     data: () => ({
       page: 1,
-      size: 5,
-      past: false,
-      colors: [
-        'blue', 'orange', 'green'
-      ],
+      size: 10,
+      time: 0,
+      sizes: [10, 25, 50, 100],
+      colors: ['blue', 'orange', 'green', 'grey'],
     }),
     methods: {
       fetchEvents() {
-        store.dispatch('setEvents', {page: this.page, size: this.size});
+        store.dispatch('setEvents', {
+          page: this.page,
+          size: this.size,
+          past: this.time === 1,
+        });
       },
     },
     created() {
