@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Traits\Enums;
+use Illuminate\Database\Eloquent\Model;
 
 class Publication extends Model
 {
@@ -15,5 +15,6 @@ class Publication extends Model
         'Proclamations',
         'Directives and Regulations',
         'Procedures',
+        'Other'
     ];
 }

@@ -8,6 +8,20 @@
 
     <v-row>
       <v-col md="8">
+        <v-tabs
+          @change="fetchPublications" background-color="primary"
+          class="shadow mb-5 rounded" dark
+          fixed-tabs
+          v-model="year"
+        >
+          <v-tab
+            :key="i"
+            v-for="i in years"
+          >
+            {{i}}
+          </v-tab>
+        </v-tabs>
+
         <v-list two-line>
           <v-list-item-group
           >
@@ -33,7 +47,7 @@
           </v-list-item-group>
         </v-list>
         <v-row class="py-5">
-          <v-pagination :length="meta.to" v-model="page"/>
+          <v-pagination :length="meta.last_page" @input="fetchPublications" v-model="page"/>
         </v-row>
       </v-col>
       <v-col class="px-8" md="4">
@@ -48,14 +62,27 @@
         >
           <v-list>
             <v-subheader>Categories</v-subheader>
-            <v-list-item-group color="primary" v-model="item">
+            <v-list-item-group @change="fetchPublications"
+                               color="primary" multiple
+                               v-model="selectedCategories"
+            >
               <v-list-item
                 :key="i"
                 v-for="(cat, i) in categories"
               >
-                <v-list-item-content>
-                  <v-list-item-title v-text="cat"/>
-                </v-list-item-content>
+                <template v-slot:default="{ active, toggle }">
+                  <v-list-item-content>
+                    <v-list-item-title v-text="cat"/>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-checkbox
+                      :input-value="active"
+                      :true-value="item"
+                      @click="toggle"
+                    />
+                  </v-list-item-action>
+                </template>
               </v-list-item>
             </v-list-item-group>
           </v-list>
@@ -80,18 +107,25 @@
     data() {
       return {
         page: 1,
-        size: 5,
-        len: 6,
-        categories: ["Press Release", "Proclamations", "Directives and Regulations", "Procedures"],
-        category: 0
+        size: 2,
+        year: 0,
+        years: ['All', 2020, 2019, 2018, 2017],
+        selectedCategories: [],
       }
     },
     methods: {
-      beautifyDate(date) {
-        return date
-      },
       fetchPublications() {
-        store.dispatch('setPublications', {page: this.page, size: this.size});
+        let cats = [];
+        let c = this.categories;
+        this.selectedCategories.forEach(function (category) {
+          cats.push(c[category]);
+        });
+        store.dispatch('setPublications', {
+          page: this.page,
+          size: this.size,
+          year: this.years[this.year],
+          category: cats,
+        });
       },
     },
     created() {
@@ -100,6 +134,7 @@
     computed: {
       data: () => store.getters.getPublications,
       meta: () => store.getters.getPublicationsMeta,
+      categories: () => store.getters.getPublicationCategories,
     },
   }
 </script>

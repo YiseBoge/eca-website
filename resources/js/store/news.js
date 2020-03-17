@@ -2,6 +2,7 @@ import ajax from "../ajax";
 
 const state = {
   news: [],
+  newsCategories: [],
   selectedNews: null,
   newsMeta: {
     current_page: 0,
@@ -18,6 +19,9 @@ const getters = {
   getNews: state => {
     return state.news;
   },
+  getNewsCategories: state => {
+    return state.newsCategories;
+  },
   getSelectedNews: state => {
     return state.selectedNews;
   },
@@ -30,6 +34,9 @@ const mutations = {
   setNews: (state, payload) => {
     state.news = payload;
   },
+  setNewsCategories: (state, payload) => {
+    state.newsCategories = payload;
+  },
   setSelectedNews: (state, payload) => {
     state.selectedNews = payload;
   },
@@ -39,11 +46,19 @@ const mutations = {
 };
 
 const actions = {
-  setNews: ({commit}, {page, size}) => {
-    ajax.get(`/news/?page=${page}&size=${size}`).then(
+  setNews: ({commit}, {page, size, year, category}) => {
+    ajax.get(`/news/?page=${page}&size=${size}&year=${year}&category=${category}`).then(
       response => {
         commit('setNews', response.data.data);
         commit('setNewsMeta', response.data.meta);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    ajax.get(`/news/categories`).then(
+      response => {
+        commit('setNewsCategories', response.data);
       },
       error => {
         console.log(error);

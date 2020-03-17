@@ -16,25 +16,32 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $category = request()->input("category", "");
-        $featured = request()->has("featured");
-        $year = request()->input("year", "");
+        $categories = request()->input("category", "");
+        $year = request()->input("year", "All");
         $size = request()->input("size", 0);
+        $featured = request()->has("featured");
+        $cat = $categories == "" ? News::getEnum('category') : explode(',', $categories);
 
-        if($featured){
-            $models = News::orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC');
-        }else{
-            $models = News::orderBy('created_at', 'DESC');
-            if($year != ""){
-                $models = $models->whereYear('created_at', strval($year));
-            }else if($category != ""){
-                $models = $models->whereIn('category', explode(', ', $category));
-            }
-        }  
 
-        $models = $models->paginate($size);
-               
-        return new NewsCollection($models);
+        if ($featured) {
+            $models = News::whereIn('category', $cat)->orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC');
+        } else {
+            $models = News::whereIn('category', $cat)->orderBy('created_at', 'DESC');
+        }
+
+        if ($year != "All")
+            $models = $models->whereYear('created_at', strval($year));
+        return new NewsCollection($models->paginate($size));
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return array
+     */
+    public function categories()
+    {
+        return News::getEnum('category');
     }
 
     /**

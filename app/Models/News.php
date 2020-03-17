@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Traits\Enums;
+use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
-    use Enums; 
+    use Enums;
     protected $fillable = ['title', 'description', 'category', 'image_url', 'is_featured', 'link'];
 
     protected $enumCategories = [
-        'Category 1',
-        'Category 2',
+        'External News',
+        'Other'
     ];
 }

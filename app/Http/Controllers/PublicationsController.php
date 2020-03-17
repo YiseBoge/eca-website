@@ -16,11 +16,26 @@ class PublicationsController extends Controller
      */
     public function index()
     {
-        $category = request()->input("category", "");
+        $categories = request()->input("category", "");
+        $year = request()->input("year", "All");
         $size = request()->input("size", 0);
-        $models = $category == "" ? Publication::orderBy('created_at', 'DESC')->paginate($size) : Publication::where("category", $category)->orderBy('created_at', 'DESC')->paginate($size);
-    
-        return new PublicationCollection($models);
+        $cat = $categories == "" ? Publication::getEnum('category') : explode(',', $categories);
+        $models = Publication::whereIn('category', $cat)->orderBy('created_at', 'DESC');
+
+        if ($year != "All")
+            $models = $models->whereYear('created_at', strval($year));
+        return new PublicationCollection($models->paginate($size));
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return array
+     */
+    public function categories()
+    {
+        return Publication::getEnum('category');
     }
 
     /**

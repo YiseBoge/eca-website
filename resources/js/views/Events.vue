@@ -62,14 +62,12 @@
     data: () => ({
       page: 1,
       size: 5,
+      past: false,
       colors: [
         'blue', 'orange', 'green'
       ],
     }),
     methods: {
-      beautifyDate(date) {
-        return 'Mar 27, 2020'
-      },
       fetchEvents() {
         store.dispatch('setEvents', {page: this.page, size: this.size});
       },

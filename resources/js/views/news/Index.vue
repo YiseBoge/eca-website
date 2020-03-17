@@ -11,15 +11,22 @@
         <v-tabs
           background-color="primary" class="shadow mb-5 rounded"
           dark fixed-tabs
+          @change="fetchNews"
+          v-model="year"
         >
           <v-tab
             :key="i"
-            v-for="i in ['All', 2020, 2019, 2018, 2017]"
+            v-for="i in years"
           >
             {{i}}
           </v-tab>
         </v-tabs>
+
+
         <v-list two-line>
+          <p class="text-muted text-muted text-center"
+             v-if="data.length === 0"
+             v-text="'Found Nothing'"/>
           <v-list-item-group
           >
             <template v-for="(item) in data">
@@ -44,7 +51,7 @@
           </v-list-item-group>
         </v-list>
         <v-row class="py-5">
-          <v-pagination :length="len" v-model="page"/>
+          <v-pagination :length="meta.last_page" @input="fetchNews" v-model="page"/>
         </v-row>
       </v-col>
       <v-col class="px-8" cols="12" md="4">
@@ -59,14 +66,27 @@
         >
           <v-list>
             <v-subheader>Categories</v-subheader>
-            <v-list-item-group color="primary">
+            <v-list-item-group @change="fetchNews"
+                               color="primary" multiple
+                               v-model="selectedCategories"
+            >
               <v-list-item
                 :key="i"
                 v-for="(cat, i) in categories"
               >
-                <v-list-item-content>
-                  <v-list-item-title v-text="cat"/>
-                </v-list-item-content>
+                <template v-slot:default="{ active, toggle }">
+                  <v-list-item-content>
+                    <v-list-item-title v-text="cat"/>
+                  </v-list-item-content>
+
+                  <v-list-item-action>
+                    <v-checkbox
+                      :input-value="active"
+                      :true-value="item"
+                      @click="toggle"
+                    />
+                  </v-list-item-action>
+                </template>
               </v-list-item>
             </v-list-item-group>
           </v-list>
@@ -91,18 +111,25 @@
     data() {
       return {
         page: 1,
-        size: 5,
-        len: 6,
-        categories: ["Real-Time", "Trial Category", "Conversions"],
-        category: 0
+        size: 2,
+        year: 0,
+        years: ['All', 2020, 2019, 2018, 2017],
+        selectedCategories: [],
       }
     },
     methods: {
-      beautifyDate(date) {
-        return date
-      },
       fetchNews() {
-        store.dispatch('setNews', {page: this.page, size: this.size});
+        let cats = [];
+        let c = this.categories;
+        this.selectedCategories.forEach(function (category) {
+          cats.push(c[category]);
+        });
+        store.dispatch('setNews', {
+          page: this.page,
+          size: this.size,
+          year: this.years[this.year],
+          category: cats,
+        });
       },
     },
     created() {
@@ -111,6 +138,7 @@
     computed: {
       data: () => store.getters.getNews,
       meta: () => store.getters.getNewsMeta,
+      categories: () => store.getters.getNewsCategories,
     },
   }
 </script>
