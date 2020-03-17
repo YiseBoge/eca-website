@@ -47,7 +47,14 @@
 
     <v-row class="py-5">
       <v-col class="text-center" cols="12">
-        <v-btn @click="fetchMedia" class="shadow-lg" color="primary" dark large rounded>Load More</v-btn>
+        <v-hover
+          close-delay="50"
+          v-slot:default="{ hover }"
+        >
+          <v-btn :class="hover ? 'shadow' : 'shadow-lg'" @click="fetchMedia" color="primary" dark large rounded>Load
+            More
+          </v-btn>
+        </v-hover>
       </v-col>
     </v-row>
     <gallery
