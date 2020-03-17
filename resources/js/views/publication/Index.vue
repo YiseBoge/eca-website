@@ -11,8 +11,7 @@
         <v-tabs
           @change="fetchPublications" background-color="primary"
           class="shadow mb-5 rounded" dark
-          fixed-tabs
-          v-model="year"
+          fixed-tabs v-model="year"
         >
           <v-tab
             :key="i"
@@ -23,6 +22,9 @@
         </v-tabs>
 
         <v-list two-line>
+          <p class="text-muted text-muted text-center mt-3"
+             v-if="data.length === 0"
+             v-text="'Found Nothing'"/>
           <v-list-item-group
           >
             <template v-for="(item) in data">
@@ -47,7 +49,18 @@
           </v-list-item-group>
         </v-list>
         <v-row class="py-5">
-          <v-pagination :length="meta.last_page" @input="fetchPublications" v-model="page"/>
+          <v-col cols="2">
+            <v-select
+              :items="sizes"
+              @change="fetchPublications" class="justify-start"
+              dense label="Show" outlined
+              v-model="size"
+            />
+          </v-col>
+          <v-col cols="10">
+            <v-pagination :length="meta.last_page" :total-visible="7" @input="fetchPublications" class="justify-end"
+                          v-model="page"/>
+          </v-col>
         </v-row>
       </v-col>
       <v-col class="px-8" md="4">
@@ -107,10 +120,11 @@
     data() {
       return {
         page: 1,
-        size: 2,
+        size: 10,
         year: 0,
-        years: ['All', 2020, 2019, 2018, 2017],
         selectedCategories: [],
+        sizes: [10, 25, 50, 100],
+        years: ['All', 2020, 2019, 2018, 2017],
       }
     },
     methods: {

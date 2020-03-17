@@ -24,7 +24,7 @@
 
 
         <v-list two-line>
-          <p class="text-muted text-muted text-center"
+          <p class="text-muted text-muted text-center mt-3"
              v-if="data.length === 0"
              v-text="'Found Nothing'"/>
           <v-list-item-group
@@ -51,7 +51,18 @@
           </v-list-item-group>
         </v-list>
         <v-row class="py-5">
-          <v-pagination :length="meta.last_page" @input="fetchNews" v-model="page"/>
+          <v-col cols="2">
+            <v-select
+              :items="sizes"
+              @change="fetchNews" class="justify-start"
+              dense label="Show" outlined
+              v-model="size"
+            />
+          </v-col>
+          <v-col cols="10">
+            <v-pagination :length="meta.last_page" :total-visible="7" @input="fetchNews" class="justify-end"
+                          v-model="page"/>
+          </v-col>
         </v-row>
       </v-col>
       <v-col class="px-8" cols="12" md="4">
@@ -66,6 +77,9 @@
         >
           <v-list>
             <v-subheader>Categories</v-subheader>
+            <p class="text-muted text-muted text-center mt-3"
+               v-if="categories.length === 0"
+               v-text="'Found Nothing'"/>
             <v-list-item-group @change="fetchNews"
                                color="primary" multiple
                                v-model="selectedCategories"
@@ -111,10 +125,11 @@
     data() {
       return {
         page: 1,
-        size: 2,
+        size: 10,
         year: 0,
-        years: ['All', 2020, 2019, 2018, 2017],
         selectedCategories: [],
+        sizes: [10, 25, 50, 100],
+        years: ['All', 2020, 2019, 2018, 2017],
       }
     },
     methods: {
