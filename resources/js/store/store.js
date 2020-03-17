@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 
+import loaders from "./loaders"
 import home from "./home"
 import events from "./event"
 import news from "./news"
@@ -19,7 +20,6 @@ export const store = new Vuex.Store({
 
   state: {
     user: null,
-    loading: false
   },
   getters: {
     getApiToken: state => {
@@ -27,9 +27,6 @@ export const store = new Vuex.Store({
         return null;
       return state.user.token;
     },
-    getLoading(state) {
-      return state.loading
-    }
   },
   mutations: {
     resetUser: (state) => {
@@ -38,9 +35,6 @@ export const store = new Vuex.Store({
     setUser: (state, payload) => {
       state.user = payload;
     },
-    setLoading: (state, payload) => {
-      state.loading = payload;
-    }
   },
 
   actions: {
@@ -52,6 +46,7 @@ export const store = new Vuex.Store({
     }
   },
   modules: {
+    loaders,
     home,
     events,
     news,

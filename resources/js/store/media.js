@@ -34,7 +34,6 @@ const actions = {
     commit('setLoading', true);
     axios.get(url).then(
       response => {
-        console.log(response);
         let ret = [];
         let res = response.data.items;
         res.forEach((vid) => {
@@ -50,12 +49,13 @@ const actions = {
         });
         commit('addMedia', ret);
         commit('setPageToken', response.data.nextPageToken);
-        commit('setLoading', false);
       },
       error => {
         console.log(error);
-      }
-    );
+      },
+    ).finally(function () {
+      commit('setLoading', false);
+    });
   }
 };
 

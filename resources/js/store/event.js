@@ -33,6 +33,7 @@ const mutations = {
 
 const actions = {
   setEvents: ({commit}, {page, size, past}) => {
+    commit('setLoading', true);
     ajax.get(`/event/?page=${page}&size=${size}${past ? '&past' : ''}`).then(
       response => {
         commit('setEvents', response.data.data);
@@ -41,7 +42,9 @@ const actions = {
       error => {
         console.log(error);
       }
-    )
+    ).finally(function () {
+      commit('setLoading', false);
+    });
   }
 };
 

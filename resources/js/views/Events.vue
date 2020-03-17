@@ -21,7 +21,10 @@
     </v-row>
     <v-row class="px-12 mb-10">
       <v-col>
-        <v-timeline>
+        <p class="text-muted text-muted text-center mt-3"
+           v-if="data.length === 0"
+           v-text="'Found Nothing'"/>
+        <v-timeline v-else>
           <v-timeline-item
             :color="time===0?colors[i%3]:colors[3]"
             :key="i" small
@@ -33,21 +36,29 @@
           v-text="formatToDate(item.start_date)"
         />
             </template>
-            <v-card :class="i === 0 && time === 0 && page === 1 ? 'shadow-lg': 'shadow'"
-                    :style="i === 0 && time === 0 && page === 1 ? 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat': ''"
-                    class="px-5"
-            >
-              <v-list-item three-line>
-                <v-list-item-content>
-                  <div class="overline"> {{ formatToMinute(item.start_date) }} -- {{ formatToMinute(item.end_date) }}
-                  </div>
-                  <p class="lead mt-2"> {{ item.title }} </p>
-                  <p class="subtitle-2 font-weight-light mb-2">{{ item.description }}</p>
-                  <v-list-item-subtitle class="font-italic"> {{ item.location }}</v-list-item-subtitle>
-                </v-list-item-content>
+            <v-fade-transition hide-on-leave>
+              <v-skeleton-loader
+                class="shadow-lg"
+                type="card-heading, list-item-three-line"
+                v-if="loading"
+              />
+              <v-card :class="i === 0 && time === 0 && page === 1 ? 'shadow-lg': 'shadow'"
+                      :style="i === 0 && time === 0 && page === 1 ? 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat': ''"
+                      class="px-5"
+                      v-else
+              >
+                <v-list-item three-line>
+                  <v-list-item-content>
+                    <div class="overline"> {{ formatToMinute(item.start_date) }} -- {{ formatToMinute(item.end_date) }}
+                    </div>
+                    <p class="lead mt-2"> {{ item.title }} </p>
+                    <p class="subtitle-2 font-weight-light mb-2">{{ item.description }}</p>
+                    <v-list-item-subtitle class="font-italic"> {{ item.location }}</v-list-item-subtitle>
+                  </v-list-item-content>
 
-              </v-list-item>
-            </v-card>
+                </v-list-item>
+              </v-card>
+            </v-fade-transition>
           </v-timeline-item>
         </v-timeline>
       </v-col>
@@ -96,6 +107,7 @@
     computed: {
       data: () => store.getters.getEvents,
       meta: () => store.getters.getEventsMeta,
+      loading: () => store.getters.getLoading,
     },
   }
 </script>

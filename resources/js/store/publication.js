@@ -47,6 +47,7 @@ const mutations = {
 
 const actions = {
   setPublications: ({commit}, {page, size, year, category}) => {
+    commit('setLoading', true);
     ajax.get(`/publication/?page=${page}&size=${size}&year=${year}&category=${category}`).then(
       response => {
         commit('setPublications', response.data.data);
@@ -55,7 +56,13 @@ const actions = {
       error => {
         console.log(error);
       }
-    );
+    ).finally(function () {
+      commit('setLoading', false);
+    });
+  },
+
+  setPublicationCategories: ({commit}) => {
+    commit('setCategoryLoading', true);
     ajax.get(`/publication/categories`).then(
       response => {
         commit('setPublicationCategories', response.data);
@@ -63,8 +70,11 @@ const actions = {
       error => {
         console.log(error);
       }
-    )
+    ).finally(function () {
+      commit('setCategoryLoading', false);
+    });
   },
+
   setSelectedPublication: ({commit}, {id}) => {
     ajax.get(`/publication/${id}`).then(
       response => {
