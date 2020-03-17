@@ -2,42 +2,35 @@ import axios from "axios";
 
 const state = {
   media: [],
-  mediaMeta: {
-    current_page: 0,
-    from: 0,
-    to: 0,
-    last_page: 0,
-    path: "",
-    per_page: "0",
-    total: 0
-  },
+  pageToken: null,
 };
 
 const getters = {
   getMedia: state => {
     return state.media;
   },
-  getMediaMeta: state => {
-    return state.mediaMeta;
+  getPageToken: state => {
+    return state.pageToken;
   }
 };
 
 const mutations = {
-  setMedia: (state, payload) => {
-    state.media = payload;
+  addMedia: (state, payload) => {
+    // console.log(payload);
+    state.media = state.media.concat(payload);
   },
-  setMediaMeta: (state, payload) => {
-    state.mediaMeta = payload;
+  setPageToken: (state, payload) => {
+    state.pageToken = payload;
   }
 };
 
 const actions = {
-  setMedia: ({commit}) => {
+  setMedia: ({commit}, {pageToken}) => {
     const api_key = "AIzaSyA4KV_OLJdpgW8siGNYRVsTXNcZr4sjSCA";
-    const max_results = 100;
+    const max_results = "12";
     const playlistId = "UUrBY82taQkWw11GjsFgeusg";
-
-    const url = "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=UUrBY82taQkWw11GjsFgeusg&key=AIzaSyA4KV_OLJdpgW8siGNYRVsTXNcZr4sjSCA";
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${max_results}&playlistId=${playlistId}&key=${api_key}${pageToken ? '&pageToken=' + pageToken : ''}`;
+    console.log(url);
     axios.get(url).then(
       response => {
         console.log(response);
@@ -54,7 +47,8 @@ const actions = {
             }
           )
         });
-        commit('setMedia', ret);
+        commit('addMedia', ret);
+        commit('setPageToken', response.data.nextPageToken);
       },
       error => {
         console.log(error);

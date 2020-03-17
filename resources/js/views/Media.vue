@@ -46,10 +46,9 @@
     </v-row>
 
     <v-row class="py-5">
-      <v-pagination
-        :length="len"
-        v-model="page"
-      />
+      <v-col class="text-center" cols="12">
+        <v-btn @click="fetchMedia" class="shadow-lg" color="primary" dark large rounded>Load More</v-btn>
+      </v-col>
     </v-row>
     <gallery
       :images="data"
@@ -73,14 +72,14 @@
 
   export default {
     data: () => ({
-      index: null
+      index: null,
     }),
     components: {
       'gallery': VueGallery
     },
     methods: {
       fetchMedia() {
-        store.dispatch('setMedia');
+        store.dispatch('setMedia', {pageToken: this.nextToken});
       },
     },
     created() {
@@ -88,6 +87,7 @@
     },
     computed: {
       data: () => store.getters.getMedia,
+      nextToken: () => store.getters.getPageToken,
     },
   }
 </script>
