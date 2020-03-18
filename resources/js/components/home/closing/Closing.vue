@@ -17,12 +17,11 @@
   </section>
 </template>
 <script>
-  import Headlines from "../articles/Headlines";
   import Leadership from "./Leadership";
   import Publications from "./Publications";
 
   export default {
-    components: {Publications, Leadership, Headlines},
+    components: {Publications, Leadership},
     mounted() {
       let recaptchaScript = document.createElement('script');
       recaptchaScript.setAttribute('src', 'https://platform.twitter.com/widgets.js');

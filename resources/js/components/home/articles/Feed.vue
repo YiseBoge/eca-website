@@ -2,44 +2,71 @@
   <v-container
     grid-list-xl
   >
-    <v-layout wrap>
-      <v-flex xs12>
-        <v-card
-          class="mx-auto row shadow-lg overflow-hidden"
-          height="210" outlined
-        >
-          <div class="col-md-8">
-            <v-list-item three-line>
-              <v-list-item-content>
-                <div class="overline mb-4">Featured</div>
-                <v-list-item-title class="headline mb-1">{{data[0].title}}</v-list-item-title>
-                <v-list-item-subtitle v-text="htmlToText(data[0].description)"/>
-                <small class="overline text-muted mt-1" v-text="formatToDate(data[0].created_at)"/>
-              </v-list-item-content>
+    <v-fade-transition hide-on-leave>
+      <v-container v-if="homeLoaders.featured">
+        <v-row>
+          <v-col cols="12">
+            <v-skeleton-loader class="shadow-lg w-100"
+                               max-height="200px"
+                               type="image"
+            />
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="6">
+            <v-skeleton-loader
+              class="shadow-lg w-100"
+              type="card"
+            />
+          </v-col>
+          <v-col cols="6">
+            <v-skeleton-loader
+              class="shadow-lg w-100"
+              type="card"
+            />
+          </v-col>
+        </v-row>
+      </v-container>
 
-            </v-list-item>
-            <v-card-actions class="pt-0">
-              <v-btn
-                color="primary accent-4" text
-                :to="'/news/'+data[0].id"
-              >
-                Read More
-              </v-btn>
-            </v-card-actions>
-          </div>
-          <div class="col-md-4"
-               :style="'background: url(' + data[0].image_url +') center;'"
-               style="background-size: cover;"
+      <v-layout v-else wrap>
+        <v-flex xs12>
+          <v-card
+            class="mx-auto row shadow-lg overflow-hidden"
+            height="210" outlined
           >
-          </div>
-        </v-card>
-      </v-flex>
+            <div class="col-md-8">
+              <v-list-item three-line>
+                <v-list-item-content>
+                  <div class="overline mb-4">Featured</div>
+                  <v-list-item-title class="headline mb-1">{{data[0].title}}</v-list-item-title>
+                  <v-list-item-subtitle v-text="htmlToText(data[0].description)"/>
+                  <small class="overline text-muted mt-1" v-text="formatToDate(data[0].created_at)"/>
+                </v-list-item-content>
 
-      <feed-card
-        :key="article.id"
-        :size="2" :value="article" v-for="(article) in [data[1], data[2]]"
-      />
-    </v-layout>
+              </v-list-item>
+              <v-card-actions class="pt-0">
+                <v-btn
+                  :to="'/news/'+data[0].id" color="primary accent-4"
+                  text
+                >
+                  Read More
+                </v-btn>
+              </v-card-actions>
+            </div>
+            <div :style="'background: url(' + data[0].image_url +') center;'"
+                 class="col-md-4"
+                 style="background-size: cover;"
+            >
+            </div>
+          </v-card>
+        </v-flex>
+
+        <feed-card
+          :key="article.id"
+          :size="2" :value="article" v-for="(article) in [data[1], data[2]]"
+        />
+      </v-layout>
+    </v-fade-transition>
   </v-container>
 </template>
 
@@ -64,6 +91,7 @@
     },
     computed: {
       data: () => store.getters.getFeatured,
+      homeLoaders: () => store.getters.getHomeLoaders,
     },
   }
 </script>
