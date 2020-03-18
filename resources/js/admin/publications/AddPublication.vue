@@ -1,21 +1,21 @@
 <template>
   <v-card>
     <v-card-title>
-      <span class="headline">Add news</span>
+      <span class="headline">New publication</span>
     </v-card-title>
     <v-card-text>
       <v-form v-model="valid">
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="news.title"></v-text-field>
+                          v-model="publication.title"></v-text-field>
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
                  @change="handleFileUpload" :rules="rules.file"/>
 
           <v-col cols="12">
-            <vue-editor v-model="news.description"
+            <vue-editor v-model="publication.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
                         :rules="rules.min_100"></vue-editor>
@@ -29,14 +29,15 @@
           </v-col>
 
           <v-col cols="2" class="mx-auto">
-            <v-switch v-model="news.is_featured" label="Featured"></v-switch>
+            <v-switch v-model="publication.is_featured" label="Featured"></v-switch>
           </v-col>
           <v-col cols="2" class="mx-auto">
-            <v-select label="Select category" v-model="news.category" :rules="rules.required" :items="categories"></v-select>
+            <v-select label="Select category" v-model="publication.category" :rules="rules.required" :items="categories">
+            </v-select>
           </v-col>
 
           <v-col cols="4">
-            <v-text-field v-model="news.link" label="External Link"></v-text-field>
+            <v-text-field v-model="publication.link" label="File Url"></v-text-field>
           </v-col>
         </v-row>
 
@@ -54,12 +55,12 @@
   import {VueEditor} from 'vue2-editor';
   import {ImageDrop} from 'quill-image-drop-module';
   import ImageResize from '@taoqf/quill-image-resize-module';
-  import {NewsModel} from "./news_model";
+  import {PublicationModel} from "./publications-model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
 
   export default {
-    name: "Add News",
+    name: "Add publication",
     components: {
       VueEditor
     },
@@ -67,7 +68,7 @@
       return {
         valid: false,
         modal: false,
-        news: NewsModel,
+        publication: PublicationModel,
         rules: Rules,
         button_text: 'Upload Image',
         categories: [
@@ -91,18 +92,18 @@
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;
-        this.news.image = this.$refs.file.files[0];
+        this.publication.image = this.$refs.file.files[0];
         this.button_text = filename.slice(0, 10);
         this.button_text += filename.length < 10 ? "" : "...";
       },
       submit() {
-        console.log(this.news);
+        console.log(this.publication);
         let formData = new FormData();
-        Object.keys(this.news).forEach((key) => {
-          formData.append(key, this.news[key])
+        Object.keys(this.publication).forEach((key) => {
+          formData.append(key, this.publication[key])
         });
         let self = this;
-        ajax.post(`news`, formData).then(
+        ajax.post(`publication`, formData).then(
           response => {
             console.log(response);
           }, error => {

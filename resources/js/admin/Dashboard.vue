@@ -120,9 +120,9 @@
             urls() {
                 return [
                     {icon: 'mdi-newspaper', title: 'News', link: '/news'},
-                    {icon: 'mdi-publish', title: 'Publishes', link: '/publishes'},
+                    {icon: 'mdi-publish', title: 'Publications', link: '/publications'},
                     {icon: 'mdi-calendar', title: 'Events', link: '/events'},
-                    {icon: 'mdi-account-tie', title: 'Leadership', link: '/leadership'},
+                    {icon: 'mdi-account-tie', title: 'Leadership', link: '/leaders'},
                 ];
             }
         }

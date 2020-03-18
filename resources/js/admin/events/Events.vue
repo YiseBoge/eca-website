@@ -2,7 +2,7 @@
   <v-card>
     <delete-dialog :open="deleteDialog" :title="title" @onConfirmation="onDeleteConfirmation"/>
     <v-card-title>
-      News
+      Events
     </v-card-title>
 
     <v-data-table
@@ -19,7 +19,7 @@
             color="primary"
             dark
             class="mb-2"
-            to="/news/add-news">Add News
+            to="/events/add-event">Add Events
           </v-btn>
         </v-toolbar>
       </template>
@@ -48,17 +48,18 @@
   import DeleteDialog from "../../components/core/DeleteDialog";
 
   export default {
-    name: "News",
+    name: "Events",
     data() {
       return {
         deleteDialog: false,
         title: null,
         headers: [
-          // {text: 'News id', value: 'news_id'},
+          // {text: 'Events id', value: 'event_id'},
           {text: 'Title', value: 'title'},
-          {text: 'Description', value: 'desc'},
-          {text: 'Category', value: 'cate'},
-          {text: 'Is featured', value: 'is_featured'},
+          // {text: 'Description', value: 'desc'},
+          {text: 'Start Date', value: 'start_date'},
+          {text: 'End Date', value: 'end_date'},
+          {text: 'Location', value: 'loc'},
           { text: 'Actions', value: 'actions', sortable: false },
         ],
         desserts: [],
@@ -71,11 +72,12 @@
       initialize() {
         this.desserts = [
           {
-            news_id: 1,
+            event_id: 1,
             title: 'Something is happening in ECA',
             desc: 'some description goes here',
-            cate: 'Politics',
-            is_featured: 'No',
+            start_date: 'Mar 12, 2017',
+            end_date: 'Mar 25, 2019',
+            loc: 'Online only'
           },
         ]
       },

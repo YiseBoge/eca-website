@@ -1,8 +1,8 @@
 <template>
   <v-card>
-    <delete-dialog :open="deleteDialog" :title="title" @onConfirmation="onDeleteConfirmation"/>
+    <delete-dialog :open="deleteDialog" :title="title" @onConfirmation="onDeleteConfirmation" />
     <v-card-title>
-      News
+      Publications
     </v-card-title>
 
     <v-data-table
@@ -19,7 +19,7 @@
             color="primary"
             dark
             class="mb-2"
-            to="/news/add-news">Add News
+            to="/publications/add-publication">Add Publication
           </v-btn>
         </v-toolbar>
       </template>
@@ -48,13 +48,13 @@
   import DeleteDialog from "../../components/core/DeleteDialog";
 
   export default {
-    name: "News",
+    name: "Publications",
     data() {
       return {
         deleteDialog: false,
         title: null,
         headers: [
-          // {text: 'News id', value: 'news_id'},
+          // {text: 'Publication id', value: 'news_id'},
           {text: 'Title', value: 'title'},
           {text: 'Description', value: 'desc'},
           {text: 'Category', value: 'cate'},

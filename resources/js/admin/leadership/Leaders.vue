@@ -2,7 +2,7 @@
   <v-card>
     <delete-dialog :open="deleteDialog" :title="title" @onConfirmation="onDeleteConfirmation"/>
     <v-card-title>
-      News
+      Leaders
     </v-card-title>
 
     <v-data-table
@@ -19,7 +19,7 @@
             color="primary"
             dark
             class="mb-2"
-            to="/news/add-news">Add News
+            to="/leaders/add-leader">Add Leaders
           </v-btn>
         </v-toolbar>
       </template>
@@ -48,21 +48,24 @@
   import DeleteDialog from "../../components/core/DeleteDialog";
 
   export default {
-    name: "News",
+    name: "Leaders",
     data() {
       return {
         deleteDialog: false,
         title: null,
         headers: [
-          // {text: 'News id', value: 'news_id'},
-          {text: 'Title', value: 'title'},
-          {text: 'Description', value: 'desc'},
-          {text: 'Category', value: 'cate'},
-          {text: 'Is featured', value: 'is_featured'},
+          {text: 'Name', value: 'name'},
+          {text: 'Position', value: 'position'},
+          {text: 'Level', value: 'level'},
+          {text: 'Description', value: 'description'},
           { text: 'Actions', value: 'actions', sortable: false },
         ],
         desserts: [],
       }
+    },
+    onDeleteConfirmation(result) {
+      console.log(result);
+      this.deleteDialog = false;
     },
     created() {
       this.initialize()
@@ -71,11 +74,10 @@
       initialize() {
         this.desserts = [
           {
-            news_id: 1,
-            title: 'Something is happening in ECA',
-            desc: 'some description goes here',
-            cate: 'Politics',
-            is_featured: 'No',
+            name: 'John Doe',
+            description: 'Some description',
+            level: 'Level 1',
+            position: 'Director',
           },
         ]
       },

@@ -1,45 +1,45 @@
 <template>
   <v-card>
     <v-card-title>
-      <span class="headline">Add news</span>
+      <span class="headline">Add leader</span>
     </v-card-title>
     <v-card-text>
       <v-form v-model="valid">
         <v-row>
-          <v-col cols="12" sm="12" md="12">
-            <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="news.title"></v-text-field>
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
+                          v-model="leader.title"></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field label="Position*" required :rules="rules.required||rules.min_20"
+                          v-model="leader.position"></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field label="Level*" required :rules="rules.required||rules.min_20"
+                          v-model="leader.level"></v-text-field>
+          </v-col>
+
+          <v-col cols="12">
+            <v-textarea
+              v-model="leader.description"
+              clearable
+              clear-icon="mdi-close"
+              label="Description"
+            ></v-textarea>
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
                  @change="handleFileUpload" :rules="rules.file"/>
 
           <v-col cols="12">
-            <vue-editor v-model="news.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_100"></vue-editor>
-          </v-col>
-
-          <v-col cols="3">
             <v-btn class="ma-2 d-block mx-auto mb-4" large tile color="info" @click="$refs.file.click()">
               <v-icon left>mdi-camera</v-icon>
               {{ button_text }}
             </v-btn>
           </v-col>
-
-          <v-col cols="2" class="mx-auto">
-            <v-switch v-model="news.is_featured" label="Featured"></v-switch>
-          </v-col>
-          <v-col cols="2" class="mx-auto">
-            <v-select label="Select category" v-model="news.category" :rules="rules.required" :items="categories"></v-select>
-          </v-col>
-
-          <v-col cols="4">
-            <v-text-field v-model="news.link" label="External Link"></v-text-field>
-          </v-col>
         </v-row>
-
         <div class="my-2 mx-auto align-center align-content-center">
           <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Save</v-btn>
         </div>
@@ -54,7 +54,7 @@
   import {VueEditor} from 'vue2-editor';
   import {ImageDrop} from 'quill-image-drop-module';
   import ImageResize from '@taoqf/quill-image-resize-module';
-  import {NewsModel} from "./news_model";
+  import {LeaderModel} from "./leader-model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
 
@@ -67,7 +67,7 @@
       return {
         valid: false,
         modal: false,
-        news: NewsModel,
+        leader: LeaderModel,
         rules: Rules,
         button_text: 'Upload Image',
         categories: [
@@ -91,18 +91,18 @@
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;
-        this.news.image = this.$refs.file.files[0];
+        this.leader.image = this.$refs.file.files[0];
         this.button_text = filename.slice(0, 10);
         this.button_text += filename.length < 10 ? "" : "...";
       },
       submit() {
-        console.log(this.news);
+        console.log(this.leader);
         let formData = new FormData();
-        Object.keys(this.news).forEach((key) => {
-          formData.append(key, this.news[key])
+        Object.keys(this.leader).forEach((key) => {
+          formData.append(key, this.leader[key])
         });
         let self = this;
-        ajax.post(`news`, formData).then(
+        ajax.post(`leader`, formData).then(
           response => {
             console.log(response);
           }, error => {
@@ -111,8 +111,7 @@
         )
       }
     },
-    computed: {
-    }
+    computed: {}
   }
 </script>
 
