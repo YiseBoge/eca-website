@@ -82,6 +82,44 @@
                   impact in our country’s development each and every day. Our seven core values and brand promise guides
                   ECA in ensuring we fulfill our purpose of building a prosperous and resilient Ethiopian economy
                   through our various works. </p>
+                  <v-simple-table height="600px" >
+                    <template v-slot:default>
+                      <tbody>
+                        <tr>
+                          <td width="25%">Independence</td>
+                          <td>To fairly regulate all service providers</td>
+                        </tr>
+                        <tr>
+                          <td>Integrity</td>
+                          <td>To our principles, to the people</td>
+                        </tr>
+                        <tr>
+                          <td>Innovation</td>
+                          <td>To promote creativity</td>
+                        </tr>
+                        <tr>
+                          <td>Lead the Way</td>
+                          <td>We have stepped up to start something very new to Ethiopia in an effort to change things for the betterment of our country with the ultimate goal to connect everyone and support others who are willing to unleash our nation’s unbound  communications potential. </td>
+                        </tr>
+                        <tr>
+                          <td>Public Stewardship</td>
+                          <td>ECA has been given a tremendous responsibility to be stewards of public trust by working to transform the communications sphere within Ethiopia as well as being the architect of bold ideas.</td>
+                        </tr>
+                        <tr>
+                          <td>Make an Impact</td>
+                          <td>When every action, big or small, can make an impact, every action contributes to building a nation that is a powerbroker. ECA is committed to making impactful decisions for the betterment of the Ethiopian society and the continent at large.</td>
+                        </tr>
+                        <tr>
+                          <td>Selfless Approach</td>
+                          <td>ECA is the echelon of Ethiopia. Everything we do is done in collaboration with others within our nations, across various sectors, and with our stakeholders— when we win, we win together. This is ECA’s depiction of Ethiopia, the New Horizon of Hope.</td>
+                        </tr>
+                        <tr>
+                          <td>Caring for the Success of All</td>
+                          <td>We have a genuine commitment to the success of each partner, company, operator, our leadership, stakeholders and our community and most importantly, our country.</td>
+                        </tr>
+                      </tbody>
+                    </template>
+                  </v-simple-table>
               </v-card-text>
             </v-card>
           </v-tab-item>
