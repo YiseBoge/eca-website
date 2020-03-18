@@ -50,7 +50,7 @@ class PublicationsController extends Controller
         $image_url = "/storage" . substr($image_url, 6);  
 
         $file_url = $request->file('file')->store('public/publication_files'); 
-        $file_url = "/storage" . substr($image_url, 6); 
+        $file_url = "/storage" . substr($file_url, 6); 
 
         $model = Publication::create([
             'title' => $request->input("title"),
