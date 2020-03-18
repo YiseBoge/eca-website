@@ -22,7 +22,7 @@
             ECA’s Corporate Brand
           </v-tab>
 
-          <v-tab-item>
+          <v-tab-item style="min-height: 700px;">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
                 <h2 class="mb-5 font-weight-thin">About Ethiopian Communications Authority</h2>
@@ -65,7 +65,7 @@
               </v-card-text>
             </v-card>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item style="min-height: 700px;">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
                 <h2 class="mb-5 font-weight-thin">Our Vision</h2>
@@ -85,7 +85,7 @@
               </v-card-text>
             </v-card>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item style="min-height: 700px;">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
                 <h2 class="mb-5 font-weight-thin">Message from the Director General</h2>
@@ -120,7 +120,7 @@
               </v-card-text>
             </v-card>
           </v-tab-item>
-          <v-tab-item>
+          <v-tab-item style="min-height: 700px;">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
                 <h2 class="mb-5 font-weight-thin">ECA’s Corporate Brand Promise</h2>

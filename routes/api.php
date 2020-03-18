@@ -40,6 +40,8 @@ Route::group(['middleware' => 'guest:api'], function () {
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 
+    Route::get('news/categories', 'NewsController@categories')->name('news.categories');
+    Route::get('publication/categories', 'PublicationsController@categories')->name('publication.categories');
     Route::apiResources([
         'news' => 'NewsController',
         'publication' => 'PublicationsController',

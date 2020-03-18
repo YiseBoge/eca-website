@@ -11,15 +11,27 @@
         <v-tabs
           background-color="primary" class="shadow mb-5 rounded"
           dark fixed-tabs
+          @change="fetchNews"
+          v-model="year"
         >
           <v-tab
             :key="i"
-            v-for="i in ['All', 2020, 2019, 2018, 2017]"
+            v-for="i in years"
           >
             {{i}}
           </v-tab>
         </v-tabs>
+
+
         <v-list two-line>
+          <p class="text-muted text-muted text-center mt-3"
+             v-if="data.length === 0"
+             v-text="'Found Nothing'"/>
+          <v-skeleton-loader
+            class="w-100"
+            type="list-item-three-line"
+            v-if="loading"
+          />
           <v-list-item-group
           >
             <template v-for="(item) in data">
@@ -44,7 +56,18 @@
           </v-list-item-group>
         </v-list>
         <v-row class="py-5">
-          <v-pagination :length="len" v-model="page"/>
+          <v-col cols="2">
+            <v-select
+              :items="sizes"
+              @change="fetchNews" class="justify-start"
+              dense label="Show" outlined
+              v-model="size"
+            />
+          </v-col>
+          <v-col cols="10">
+            <v-pagination :length="meta.last_page" :total-visible="7" @input="fetchNews" class="justify-end"
+                          v-model="page"/>
+          </v-col>
         </v-row>
       </v-col>
       <v-col class="px-8" cols="12" md="4">
@@ -54,23 +77,49 @@
         <!--          solo clearable dense-->
         <!--          clear-icon="mdi-close-circle-outline"-->
         <!--        />-->
-        <v-card
-          class="mx-auto shadow-lg"
-        >
-          <v-list>
-            <v-subheader>Categories</v-subheader>
-            <v-list-item-group color="primary">
-              <v-list-item
-                :key="i"
-                v-for="(cat, i) in categories"
+
+        <v-fade-transition hide-on-leave>
+          <v-skeleton-loader
+            class="shadow-lg"
+            type="card-heading, list-item, list-item, list-item"
+            v-if="categoryLoading"
+          />
+          <v-card
+            class="mx-auto shadow-lg rounded" tile
+            v-else
+          >
+
+            <v-list>
+              <v-subheader>Categories</v-subheader>
+              <p class="text-muted text-muted text-center mt-3"
+                 v-if="categories.length === 0"
+                 v-text="'Found Nothing'"/>
+              <v-list-item-group @change="fetchNews"
+                                 color="primary" multiple
+                                 v-model="selectedCategories"
               >
-                <v-list-item-content>
-                  <v-list-item-title v-text="cat"/>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-item-group>
-          </v-list>
-        </v-card>
+                <v-list-item
+                  :key="i"
+                  v-for="(cat, i) in categories"
+                >
+                  <template v-slot:default="{ active, toggle }">
+                    <v-list-item-content>
+                      <v-list-item-title v-text="cat"/>
+                    </v-list-item-content>
+
+                    <v-list-item-action>
+                      <v-checkbox
+                        :input-value="active"
+                        :true-value="item"
+                        @click="toggle"
+                      />
+                    </v-list-item-action>
+                  </template>
+                </v-list-item>
+              </v-list-item-group>
+            </v-list>
+          </v-card>
+        </v-fade-transition>
       </v-col>
     </v-row>
 
@@ -91,26 +140,41 @@
     data() {
       return {
         page: 1,
-        size: 5,
-        len: 6,
-        categories: ["Real-Time", "Trial Category", "Conversions"],
-        category: 0
+        size: 10,
+        year: 0,
+        selectedCategories: [],
+        sizes: [10, 25, 50, 100],
+        years: ['All', 2020, 2019, 2018, 2017],
       }
     },
     methods: {
-      beautifyDate(date) {
-        return date
-      },
       fetchNews() {
-        store.dispatch('setNews', {page: this.page, size: this.size});
+        let cats = [];
+        let c = this.categories;
+        this.selectedCategories.forEach(function (category) {
+          cats.push(c[category]);
+        });
+        store.dispatch('setNews', {
+          page: this.page,
+          size: this.size,
+          year: this.years[this.year],
+          category: cats,
+        });
+      },
+      fetchCategories() {
+        store.dispatch('setNewsCategories');
       },
     },
     created() {
+      this.fetchCategories();
       this.fetchNews();
     },
     computed: {
       data: () => store.getters.getNews,
       meta: () => store.getters.getNewsMeta,
+      categories: () => store.getters.getNewsCategories,
+      loading: () => store.getters.getLoading,
+      categoryLoading: () => store.getters.getCategoryLoading,
     },
   }
 </script>

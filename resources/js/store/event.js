@@ -27,13 +27,14 @@ const mutations = {
     state.events = payload;
   },
   setEventsMeta: (state, payload) => {
-    state.meta = payload;
+    state.eventsMeta = payload;
   }
 };
 
 const actions = {
-  setEvents: ({commit}, {page, size}) => {
-    ajax.get(`/event/?page=${page}&size=${size}`).then(
+  setEvents: ({commit}, {page, size, past}) => {
+    commit('setLoading', true);
+    ajax.get(`/event/?page=${page}&size=${size}${past ? '&past' : ''}`).then(
       response => {
         commit('setEvents', response.data.data);
         commit('setEventsMeta', response.data.meta);
@@ -41,7 +42,9 @@ const actions = {
       error => {
         console.log(error);
       }
-    )
+    ).finally(function () {
+      commit('setLoading', false);
+    });
   }
 };
 

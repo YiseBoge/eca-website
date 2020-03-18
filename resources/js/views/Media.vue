@@ -19,37 +19,61 @@
           close-delay="50"
           v-slot:default="{ hover }"
         >
-          <v-card
-            :class="hover ? 'shadow' : 'shadow-lg'" @click="index = imageIndex"
+          <v-lazy
+            :options="{threshold: .5}"
+            transition="fade-transition"
           >
-            <v-img
-              :src="image.poster"
-              height="150px"
-            />
+            <v-card
+              :class="hover ? 'shadow' : 'shadow-lg'" @click="index = imageIndex"
+            >
+              <v-img
+                :src="image.poster"
+                height="150px"
+              />
 
-            <v-tooltip bottom open-delay="1000">
-              <template v-slot:activator="{ on }">
-                <v-card-title class="lead text-truncate d-inline-block w-100 pb-0" style="font-size: 1em" v-on="on">
-                  {{image.title}}
-                </v-card-title>
-              </template>
-              <span>{{image.title}}</span>
-            </v-tooltip>
+              <v-tooltip bottom open-delay="1000">
+                <template v-slot:activator="{ on }">
+                  <v-card-title class="lead text-truncate d-inline-block w-100 pb-0" style="font-size: 1em" v-on="on">
+                    {{image.title}}
+                  </v-card-title>
+                </template>
+                <span>{{image.title}}</span>
+              </v-tooltip>
 
-            <v-card-actions class="pt-0">
-              <v-btn color="orange" text>Watch</v-btn>
-            </v-card-actions>
+              <v-card-actions class="pt-0">
+                <v-card-text class="text-truncate text-muted">
+                  {{formatToDate(image.date)}}
+                </v-card-text>
+                <v-btn class="float-right" color="orange" text>Watch</v-btn>
+              </v-card-actions>
 
-          </v-card>
+            </v-card>
+          </v-lazy>
         </v-hover>
       </v-col>
+      <v-scale-transition hide-on-leave>
+        <v-col cols="4" v-if="loading">
+          <v-skeleton-loader
+            class="shadow-lg"
+            type="card"
+          />
+        </v-col>
+      </v-scale-transition>
+
     </v-row>
 
     <v-row class="py-5">
-      <v-pagination
-        :length="len"
-        v-model="page"
-      />
+      <v-col class="text-center" cols="12">
+        <v-hover
+          close-delay="50"
+          v-slot:default="{ hover }"
+        >
+          <v-btn :class="hover ? 'shadow' : 'shadow-lg'" @click="fetchMedia" color="primary" dark large rounded
+                 v-if="!loading">
+            Load More
+          </v-btn>
+        </v-hover>
+      </v-col>
     </v-row>
     <gallery
       :images="data"
@@ -73,14 +97,14 @@
 
   export default {
     data: () => ({
-      index: null
+      index: null,
     }),
     components: {
       'gallery': VueGallery
     },
     methods: {
       fetchMedia() {
-        store.dispatch('setMedia');
+        store.dispatch('setMedia', {pageToken: this.nextToken});
       },
     },
     created() {
@@ -88,6 +112,8 @@
     },
     computed: {
       data: () => store.getters.getMedia,
+      nextToken: () => store.getters.getPageToken,
+      loading: () => store.getters.getLoading,
     },
   }
 </script>

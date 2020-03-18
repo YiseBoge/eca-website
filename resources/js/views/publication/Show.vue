@@ -4,7 +4,7 @@
       <v-col>
         <h3 class="font-weight-light">{{data.title}}</h3>
         <span class="font-italic text-muted mr-2" v-text="formatToMinute(data.created_at)"/> |
-        <a class="ml-2" href="#" v-text="data.category"/>
+        <router-link :to="'/publications'" class="ml-2" v-text="data.category"/>
       </v-col>
     </v-row>
     <v-row class="mb-6">

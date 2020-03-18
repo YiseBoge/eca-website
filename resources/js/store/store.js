@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from "vuex-persistedstate";
 
+import loaders from "./loaders"
 import home from "./home"
 import events from "./event"
 import news from "./news"
@@ -18,7 +19,7 @@ export const store = new Vuex.Store({
   ],
 
   state: {
-    user: null
+    user: null,
   },
   getters: {
     getApiToken: state => {
@@ -33,7 +34,7 @@ export const store = new Vuex.Store({
     },
     setUser: (state, payload) => {
       state.user = payload;
-    }
+    },
   },
 
   actions: {
@@ -45,6 +46,7 @@ export const store = new Vuex.Store({
     }
   },
   modules: {
+    loaders,
     home,
     events,
     news,
