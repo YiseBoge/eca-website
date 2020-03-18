@@ -51,7 +51,7 @@
     name: 'Feed',
 
     components: {
-      FeedCard: () => import('~/components/FeedCard')
+      FeedCard: () => import('~/components/home/articles/FeedCard')
     },
 
     methods: {

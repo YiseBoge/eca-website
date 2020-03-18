@@ -11,9 +11,9 @@
         name: 'Home',
 
         components: {
-          Articles: () => import('~/components/home/Articles'),
+          Articles: () => import('~/components/home/articles/Articles'),
           Events: () => import('~/components/home/Events'),
-          Closing: () => import('~/components/home/Closing')
+          Closing: () => import('~/components/home/closing/Closing'),
         }
     }
 </script>

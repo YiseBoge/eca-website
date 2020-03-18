@@ -17,9 +17,9 @@
   </section>
 </template>
 <script>
-  import Headlines from "./components/Headlines";
-  import Leadership from "./components/Leadership";
-  import Publications from "./components/Publications";
+  import Headlines from "../articles/Headlines";
+  import Leadership from "./Leadership";
+  import Publications from "./Publications";
 
   export default {
     components: {Publications, Leadership, Headlines},

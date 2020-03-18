@@ -11,7 +11,7 @@
         <v-list-item
           :key="item.title"
         >
-          <v-list-item-avatar>
+          <v-list-item-avatar style="height: 60px; width: 60px">
             <v-img :src="item.image_url"/>
           </v-list-item-avatar>
 
