@@ -30,12 +30,14 @@ class LeadersController extends Controller
      */
     public function store(Request $request)
     {
+        $image_url = $request->file('image')->store('public/leader_images'); 
+        $image_url = "/storage" . substr($image_url, 6); 
         $model = Leader::create([
             'name' => $request->input("name"),
             'position' => $request->input("position"),
             'description' => $request->input("description"),
             'level' => $request->input("level"),
-            'image_url' => $request->input("image_url"),
+            'image_url' => $image_url,
         ]);
         return new LeaderResource($model);
     }
@@ -66,7 +68,7 @@ class LeadersController extends Controller
         $model->position = $request->input("position");
         $model->description = $request->input("description");
         $model->level = $request->input("level");
-        $model->image_url = $request->input("image_url");
+        // $model->image_url = $request->input("image_url");
         $model->save();
         return new LeaderResource($model);
     }

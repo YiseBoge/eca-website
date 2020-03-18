@@ -46,12 +46,18 @@ class PublicationsController extends Controller
      */
     public function store(Request $request)
     {
+        $image_url = $request->file('image')->store('public/publication_images'); 
+        $image_url = "/storage" . substr($image_url, 6);  
+
+        $file_url = $request->file('file')->store('public/publication_files'); 
+        $file_url = "/storage" . substr($file_url, 6); 
+
         $model = Publication::create([
             'title' => $request->input("title"),
             'description' => $request->input("description"),
             'category' => $request->input("category"),
-            'image_url' => $request->input("image_url"),
-            'file_url' => $request->input("file_url"),
+            'image_url' => $image_url,
+            'file_url' => $file_url,
         ]);
         return new PublicationResource($model);
     }
@@ -81,8 +87,8 @@ class PublicationsController extends Controller
         $model->title = $request->input("title");
         $model->description = $request->input("description");
         $model->category = $request->input("category");
-        $model->image_url = $request->input("image_url");
-        $model->file_url = $request->input("file_url");
+        // $model->image_url = $request->input("image_url");
+        // $model->file_url = $request->input("file_url");
         $model->save();
         return new PublicationResource($model);
     }

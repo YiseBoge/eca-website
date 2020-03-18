@@ -52,14 +52,15 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $image_url = $request->file('image')->store('public/news_images'); 
+        $image_url = "/storage" . substr($image_url, 6); 
         $model = News::create([
             'title' => $request->input("title"),
             'description' => $request->input("description"),
             'category' => $request->input("category"),
-            'image_url' => $request->input("image_url"),
+            'image_url' => $image_url,
             'is_featured' => $request->has("is_featured"),
             'link' => $request->input("link")
-//            'file_url' => $request->input("file_url"),
         ]);
         return new NewsResource($model);
     }
@@ -89,7 +90,7 @@ class NewsController extends Controller
         $model->title = $request->input("title");
         $model->description = $request->input("description");
         $model->category = $request->input("category");
-        $model->image_url = $request->input("image_url");
+        // $model->image_url = $request->input("image_url");
         $model->is_featured = $request->has("is_featured");
         $model->link = $request->input("link");
         $model->save();
