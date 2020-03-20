@@ -57,6 +57,7 @@
   import {NewsModel} from "./news_model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
+  import {store} from "../../store/store";
 
   export default {
     name: "Add News",
@@ -70,11 +71,6 @@
         news: NewsModel,
         rules: Rules,
         button_text: 'Upload Image',
-        categories: [
-          'Category 1',
-          'Category 2',
-          'Category 3',
-        ],
         editorSettings: {
           modules: {
             imageDrop: true,
@@ -111,7 +107,13 @@
         )
       }
     },
+    created() {
+      store.dispatch('setNewsCategories');
+    },
     computed: {
+      categories () {
+        return store.getters.getNewsCategories;
+      }
     }
   }
 </script>
