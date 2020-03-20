@@ -33,9 +33,7 @@
          <p v-html="item.description"></p>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon
-          class="mr-2"
-        >
+        <v-icon class="mr-2" @click="onEdit(item)">
           mdi-pencil
         </v-icon>
         <v-icon color="red" @click="onDelete(item)">
@@ -50,6 +48,7 @@
 <script>
   import DeleteDialog from "../../components/core/DeleteDialog";
   import {store} from "../../store/store";
+  import {router} from "../../routes/admin-router";
   import ajax from "../../ajax";
 
   export default {
@@ -60,8 +59,7 @@
         title: null,
         selectedNews: null,
         headers: [
-          // {text: 'News id', value: 'news_id'},
-          {text: 'Title', value: 'title', width: "30%"},
+          {text: 'Title', value: 'title', width: "15%"},
           {text: 'Description', value: 'description'},
           {text: 'Category', value: 'category'},
           {text: 'Is featured', value: 'is_featured'},
@@ -71,18 +69,16 @@
       }
     },
     created() {
-      store.dispatch('setNews', {page: 1, size: 10, year: 'All', category: ''});
+      this.fetchTableData();
     },
     methods: {
       onDeleteConfirmation(result) {
-        console.log(result);
         this.deleteDialog = false;
         if (result) {
           console.log(this.selectedNews);
           ajax.delete(`/news/${this.selectedNews.id}`).then(
             response => {
-              // this.fetchTableData();
-              console.log("success");
+              this.fetchTableData();
             },
             error => {
               console.log(error);
@@ -95,8 +91,16 @@
         this.title = item.title;
         this.deleteDialog = true;
       },
+      onEdit(item) {
+        console.log(item);
+        store.dispatch('setSelectedNews', {id: item.id});
+        router.push(`/news/${item.id}/edit`);
+      },
       compress(val) {
         return val.length > 30 ? val.substr(0, 30) + '...' : val;
+      },
+      fetchTableData() {
+        store.dispatch('setNews', {page: 1, size: 10, year: 'All', category: ''});
       }
     },
     components: {
