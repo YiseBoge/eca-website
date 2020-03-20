@@ -15,8 +15,8 @@
 <script>
   export default {
     components: {
-      Feed: () => import('~/components/Feed'),
-      Headlines: () => import('~/components/home/components/Headlines')
+      Feed: () => import('~/components/home/articles/Feed'),
+      Headlines: () => import('~/components/home/articles/Headlines')
     }
   }
 </script>

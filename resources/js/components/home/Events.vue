@@ -3,48 +3,71 @@
            style="background: url('https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg') repeat">
     <v-container>
       <h1 class="my-3 display-1 font-weight-thin">Events</h1>
-      <v-row>
-        <div class="col-md-4 px-md-12 h-100">
-          <v-card
-            class="box overflow-hidden shadow-sm text-center"
-            max-height="250"
-          >
-            <v-card-title class="date event-date darken-3 text-muted justify-center" style="font-size: 1.5em">
-              {{formatToDate(data[0].start_date)}}
-            </v-card-title>
-            <v-card-text class="my-3 card-body">
-              <span> {{data[0].title}} </span>
+      <v-fade-transition hide-on-leave>
+        <v-row v-if="homeLoaders.homeEvents">
+          <div class="col-md-4 px-md-12 h-100">
+            <v-skeleton-loader
+              class="mt-4 shadow-lg"
+              type="card-heading,list-item-three-line,list-item-three-line"
+
+            />
+          </div>
+          <div class="col-md-4 px-md-12 h-100" v-if="true">
+            <v-skeleton-loader
+              class="mt-4 transparent"
+              type="card-heading,list-item-three-line,list-item-three-line"
+
+            />
+          </div>
+          <div class="col-md-4 px-md-12 h-100" v-if="true">
+            <v-skeleton-loader
+              class="mt-4 transparent"
+              type="card-heading,list-item-three-line,list-item-three-line"
+
+            />
+          </div>
+        </v-row>
+        <v-row v-else>
+          <div class="col-md-4 px-md-12 h-100">
+            <v-card
+              class="box overflow-hidden shadow-sm text-center"
+              max-height="250"
+            >
+              <v-card-title class="date event-date darken-3 text-muted justify-center" style="font-size: 1.5em">
+                {{formatToDate(data[0].start_date)}}
+              </v-card-title>
+              <v-card-text class="my-3 card-body">
+                <span> {{data[0].title}} </span>
+                <br>
+                <p class="small">
+                  {{data[0].location}}
+                </p>
+              </v-card-text>
+
+            </v-card>
+          </div>
+
+          <div class="col-md-4 row h-100" v-for="event in [data[1], data[2]]">
+            <p class="col-md-4 col-3 date text-center">
+              {{months[new Date(event.start_date).getMonth()]}}
+              <span class="event-date">{{new Date(event.start_date).getDate()}}</span>
+              {{new Date(event.start_date).getFullYear()}}
+            </p>
+            <div class="vertical-parent col-md-8 col-9">
+              <span> {{event.title}} </span>
               <br>
               <p class="small">
-                {{data[0].location}}
+                {{event.location}}
               </p>
-            </v-card-text>
-
-          </v-card>
-        </div>
-
-        <div class="col-md-4 row h-100" v-for="event in [data[1], data[2]]">
-          <p class="col-md-4 col-3 date text-center">
-            {{months[new Date(event.start_date).getMonth()]}}
-            <span class="event-date">{{new Date(event.start_date).getDate()}}</span>
-            {{new Date(event.start_date).getFullYear()}}
-          </p>
-          <div class="vertical-parent col-md-8 col-9">
-            <span> {{event.title}} </span>
-            <br>
-            <p class="small">
-              {{event.location}}
-            </p>
+            </div>
           </div>
-        </div>
-
-      </v-row>
+        </v-row>
+      </v-fade-transition>
       <v-row>
         <v-col>
           <v-btn class="float-right shadow" color="blue darken-2" dark tile to="/events">All Events</v-btn>
         </v-col>
       </v-row>
-
     </v-container>
   </section>
 </template>
@@ -70,6 +93,7 @@
     },
     computed: {
       data: () => store.getters.getHomeEvents,
+      homeLoaders: () => store.getters.getHomeLoaders,
     },
   }
 </script>

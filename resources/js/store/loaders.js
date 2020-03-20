@@ -1,6 +1,13 @@
 const state = {
   loading: false,
   categoryLoading: false,
+  homeLoaders: {
+    headlines: false,
+    featured: false,
+    events: false,
+    leadership: false,
+    publications: false,
+  }
 };
 
 const getters = {
@@ -10,6 +17,9 @@ const getters = {
   getCategoryLoading(state) {
     return state.categoryLoading
   },
+  getHomeLoaders(state) {
+    return state.homeLoaders
+  },
 };
 
 const mutations = {
@@ -18,6 +28,21 @@ const mutations = {
   },
   setCategoryLoading: (state, payload) => {
     state.categoryLoading = payload;
+  },
+  setHeadlinesLoading: (state, payload) => {
+    state.homeLoaders.headlines = payload;
+  },
+  setFeaturedLoading: (state, payload) => {
+    state.homeLoaders.featured = payload;
+  },
+  setHomeEventsLoading: (state, payload) => {
+    state.homeLoaders.events = payload;
+  },
+  setLeadershipLoading: (state, payload) => {
+    state.homeLoaders.leadership = payload;
+  },
+  setHomePublicationsLoading: (state, payload) => {
+    state.homeLoaders.publications = payload;
   },
 };
 

@@ -6,6 +6,7 @@ const Dashboard = () => import('~/admin/Dashboard');
 
 const News = () => import('~/admin/news/News');
 const AddNews = () => import('~/admin/news/AddNews');
+const EditNews = () => import('~/admin/news/EditNews');
 
 const Events = () => import('~/admin/events/Events');
 const AddEvent = () => import('~/admin/events/AddEvent');
@@ -25,6 +26,7 @@ export const router = new Router({
     {path: '/', name: 'dashboard', component: Dashboard},
     {path: '/news', name: 'news', component: News},
     {path: '/news/add-news', name: 'add news', component: AddNews},
+    {path: '/news/:id/edit', name: 'edit news', component: EditNews},
     {path: '/events', name: 'events', component: Events},
     {path: '/events/add-event', name: 'add events', component: AddEvent},
     {path: '/leaders', name: 'leaders', component: Leaders},
