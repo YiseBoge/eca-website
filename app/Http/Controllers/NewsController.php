@@ -52,8 +52,12 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $image_url = $request->file('image')->store('public/news_images'); 
-        $image_url = "/storage" . substr($image_url, 6); 
+        $image_url = "";
+        if($request->has('file')){
+            $image_url = $request->file('image')->store('public/news_images'); 
+            $image_url = "/storage" . substr($image_url, 6); 
+        }
+        
         $model = News::create([
             'title' => $request->input("title"),
             'description' => $request->input("description"),
