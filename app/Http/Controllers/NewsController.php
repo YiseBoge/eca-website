@@ -53,7 +53,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $image_url = "";
-        if($request->has('file')){
+        if($request->has('image')){
             $image_url = $request->file('image')->store('public/news_images'); 
             $image_url = "/storage" . substr($image_url, 6); 
         }
@@ -94,7 +94,7 @@ class NewsController extends Controller
         $model->title = $request->input("title");
         $model->description = $request->input("description");
         $model->category = $request->input("category");
-        // $model->image_url = $request->input("image_url");
+        //$model->image_url = $model->image_url;
         $model->is_featured = $request->has("is_featured");
         $model->link = $request->input("link");
         $model->save();

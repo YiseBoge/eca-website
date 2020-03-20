@@ -19,7 +19,10 @@ const getters = {
   },
   getEventsMeta: state => {
     return state.eventsMeta;
-  }
+  },
+  getSelectedEvent: state => {
+    return state.selectedEvent;
+  },
 };
 
 const mutations = {
@@ -28,7 +31,10 @@ const mutations = {
   },
   setEventsMeta: (state, payload) => {
     state.eventsMeta = payload;
-  }
+  },
+  setSelectedEvent: (state, payload) => {
+    state.selectedEvent = payload;
+  },
 };
 
 const actions = {
@@ -45,6 +51,17 @@ const actions = {
     ).finally(function () {
       commit('setLoading', false);
     });
+  }, 
+
+  setSelectedEvent: ({commit}, {id}) => {
+    ajax.get(`/event/${id}`).then(
+      response => {
+        commit('setSelectedEvent', response.data.data);
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 };
 

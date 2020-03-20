@@ -7,7 +7,7 @@
 
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="events"
       sort-by="calories"
       class=" mx-auto my-auto"
     >
@@ -24,14 +24,17 @@
         </v-toolbar>
       </template>
       <template v-slot:no-data>
-        <v-btn
-          color="primary"
-          @click="initialize">Reset
-        </v-btn>
+        <p>No data is available</p>
+      </template>
+      <template v-slot:item.title="{item}">
+        {{ compress(item.title) }}
+      </template>
+      <template v-slot:item.description="{item}">
+         <p v-html="item.description"></p>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon
-          class="mr-2"
+          class="mr-2" @click="onEdit(item)"
         >
           mdi-pencil
         </v-icon>
@@ -46,6 +49,9 @@
 
 <script>
   import DeleteDialog from "../../components/core/DeleteDialog";
+  import {store} from "../../store/store";
+  import {router} from "../../routes/admin-router";
+  import ajax from "../../ajax";
 
   export default {
     name: "Events",
@@ -53,48 +59,62 @@
       return {
         deleteDialog: false,
         title: null,
+        selectedEvent: null,
         headers: [
-          // {text: 'Events id', value: 'event_id'},
-          {text: 'Title', value: 'title'},
-          // {text: 'Description', value: 'desc'},
+          {text: 'Title', value: 'title', width: "15%"},
+          {text: 'Description', value: 'description'},
           {text: 'Start Date', value: 'start_date'},
           {text: 'End Date', value: 'end_date'},
-          {text: 'Location', value: 'loc'},
-          { text: 'Actions', value: 'actions', sortable: false },
+          {text: 'Location', value: 'location'},
+          {text: 'Actions', value: 'actions', sortable: false},
         ],
         desserts: [],
       }
     },
     created() {
-      this.initialize()
+      this.fetchTableData();
     },
     methods: {
-      initialize() {
-        this.desserts = [
-          {
-            event_id: 1,
-            title: 'Something is happening in ECA',
-            desc: 'some description goes here',
-            start_date: 'Mar 12, 2017',
-            end_date: 'Mar 25, 2019',
-            loc: 'Online only'
-          },
-        ]
-      },
       onDeleteConfirmation(result) {
-        console.log(result);
         this.deleteDialog = false;
+        if (result) {
+          console.log(this.selectedEvent);
+          ajax.delete(`/event/${this.selectedEvent.id}`).then(
+            response => {
+              this.fetchTableData();
+            },
+            error => {
+              console.log(error);
+            }
+          )
+        }
       },
       onDelete(item) {
+        this.selectedEvent = item;
         this.title = item.title;
         this.deleteDialog = true;
+      },
+      onEdit(item) {
+        console.log(item);
+        store.dispatch('setSelectedEvent', {id: item.id});
+        router.push(`/events/${item.id}/edit`);
+      },
+      compress(val) {
+        return val.length > 30 ? val.substr(0, 30) + '...' : val;
+      },
+      fetchTableData() {
+        store.dispatch('setEvents', {page: 1, size: 10});
       }
     },
     components: {
       'delete-dialog': DeleteDialog
+    },
+    computed: {
+      events() {
+        return store.getters.getEvents;
+      }
     }
   }
-
 </script>
 
 <style scoped>

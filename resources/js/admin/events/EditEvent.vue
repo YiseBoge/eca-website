@@ -1,10 +1,11 @@
 <template>
   <v-card>
     <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'Event Successfully Inserted.' : 'Error. Something Went Wrong' }}
+      {{ alertType === 'success' ? 'Event Successfully Updated.' : 'Error. Something Went Wrong' }}
     </v-alert>
+
     <v-card-title>
-      <span class="headline">New Event</span>
+      <span class="headline">Edit Event</span>
     </v-card-title>
     <v-card-text>
       <v-form v-model="valid">
@@ -60,17 +61,16 @@
 </template>
 
 <script>
-
   import {VueEditor} from 'vue2-editor';
   import {ImageDrop} from 'quill-image-drop-module';
   import ImageResize from '@taoqf/quill-image-resize-module';
-  import {EventModel} from "./event_model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
   import {store} from "../../store/store";
+  import {router} from "../../routes/admin-router";
 
   export default {
-    name: "Add Event",
+    name: "Edit Event",
     components: {
       VueEditor
     },
@@ -78,7 +78,7 @@
       return {
         valid: false,
         modal: false,
-        event: EventModel,
+        event: store.getters.getSelectedEvent,
         rules: Rules,
         showAlert: false,
         alertType: 'success',
@@ -102,10 +102,9 @@
         Object.keys(this.event).forEach((key) => {
           formData.append(key, this.event[key])
         });
-        formData.append('start_date', this.dates[0]);
-        formData.append('end_date', this.dates[1]);
+        formData.append("_method", "put");
         let self = this;
-        ajax.post(`event`, formData).then(
+        ajax.post(`event/${this.event.id}`, formData).then(
           response => {
             self.showAlert = true;
             self.alertType = 'success';
@@ -116,10 +115,16 @@
         )
       }
     },
-    computed : {
-      dateRangeText () {
-        return this.dates.join('    ~    ')
-      },
+    created() {
+      store.dispatch('setSelectedEvent', {id: router.currentRoute.params.id});
+    },
+    mounted() {
+      this.event = store.getters.getSelectedEvent
+    },
+    computed: {
+      selectedEvent() {
+        return store.getters.getSelectedEvent;
+      }
     }
   }
 </script>

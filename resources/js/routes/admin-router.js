@@ -10,6 +10,7 @@ const EditNews = () => import('~/admin/news/EditNews');
 
 const Events = () => import('~/admin/events/Events');
 const AddEvent = () => import('~/admin/events/AddEvent');
+const EditEvent = () => import('~/admin/events/EditEvent');
 
 const Publication = () => import('~/admin/publications/Publications');
 const AddPublication = () => import('~/admin/publications/AddPublication');
@@ -29,6 +30,7 @@ export const router = new Router({
     {path: '/news/:id/edit', name: 'edit news', component: EditNews},
     {path: '/events', name: 'events', component: Events},
     {path: '/events/add-event', name: 'add events', component: AddEvent},
+    {path: '/events/:id/edit', name: 'edit event', component: EditEvent},
     {path: '/leaders', name: 'leaders', component: Leaders},
     {path: '/leaders/add-leader', name: 'add leader', component: AddLeader},
     {path: '/publications', name: 'publication', component: Publication},

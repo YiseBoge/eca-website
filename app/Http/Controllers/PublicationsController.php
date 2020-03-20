@@ -46,11 +46,17 @@ class PublicationsController extends Controller
      */
     public function store(Request $request)
     {
-        $image_url = $request->file('image')->store('public/publication_images'); 
-        $image_url = "/storage" . substr($image_url, 6);  
-
-        $file_url = $request->file('file')->store('public/publication_files'); 
-        $file_url = "/storage" . substr($file_url, 6); 
+        $image_url = "";
+        if($request->has('image')){
+            $image_url = $request->file('image')->store('public/publication_images'); 
+            $image_url = "/storage" . substr($image_url, 6);
+        }
+          
+        $file_url = "";
+        if($request->has('file')){
+            $file_url = $request->file('file')->store('public/publication_files'); 
+            $file_url = "/storage" . substr($file_url, 6);
+        } 
 
         $model = Publication::create([
             'title' => $request->input("title"),
