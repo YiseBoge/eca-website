@@ -31,7 +31,7 @@ class LeadersController extends Controller
     public function store(Request $request)
     {
         $image_url = "";
-        if($request->has('image')){
+        if($request->file('image') != null){
             $image_url = $request->file('image')->store('public/leader_images'); 
             $image_url = "/storage" . substr($image_url, 6); 
         }
@@ -68,11 +68,16 @@ class LeadersController extends Controller
     public function update(Request $request, $id)
     {
         $model = Leader::findOrFail($id);
+        $image_url = $model->image_url;
+        if($request->file('image') != null){
+            $image_url = $request->file('image')->store('public/leader_images'); 
+            $image_url = "/storage" . substr($image_url, 6); 
+        }
         $model->name = $request->input("title");
         $model->position = $request->input("position");
         $model->description = $request->input("description");
         $model->level = $request->input("level");
-        // $model->image_url = $request->input("image_url");
+        $model->image_url = $image_url;
         $model->save();
         return new LeaderResource($model);
     }

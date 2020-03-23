@@ -47,13 +47,13 @@ class PublicationsController extends Controller
     public function store(Request $request)
     {
         $image_url = "";
-        if($request->has('image')){
+        if($request->file('image') != ""){
             $image_url = $request->file('image')->store('public/publication_images'); 
             $image_url = "/storage" . substr($image_url, 6);
         }
           
         $file_url = "";
-        if($request->has('file')){
+        if($request->file('file') != ""){
             $file_url = $request->file('file')->store('public/publication_files'); 
             $file_url = "/storage" . substr($file_url, 6);
         } 
@@ -90,11 +90,22 @@ class PublicationsController extends Controller
     public function update(Request $request, $id)
     {
         $model = Publication::findOrFail($id);
+        $image_url = $model->image_url;
+        if($request->file('image') != ""){
+            $image_url = $request->file('image')->store('public/publication_images'); 
+            $image_url = "/storage" . substr($image_url, 6);
+        }
+          
+        $file_url = $model->file_url;
+        if($request->file('file') != ""){
+            $file_url = $request->file('file')->store('public/publication_files'); 
+            $file_url = "/storage" . substr($file_url, 6);
+        } 
         $model->title = $request->input("title");
         $model->description = $request->input("description");
         $model->category = $request->input("category");
-        // $model->image_url = $request->input("image_url");
-        // $model->file_url = $request->input("file_url");
+        $model->image_url = $image_url;
+        $model->file_url = $file_url;
         $model->save();
         return new PublicationResource($model);
     }

@@ -19,11 +19,11 @@ class NewsController extends Controller
         $categories = request()->input("category", "");
         $year = request()->input("year", "All");
         $size = request()->input("size", 0);
-        $featured = request()->has("featured");
+        $featured = request()->input("featured");
         $cat = $categories == "" ? News::getEnum('category') : explode(',', $categories);
 
 
-        if ($featured) {
+        if ($featured == "true") {
             $models = News::whereIn('category', $cat)->orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC');
         } else {
             $models = News::whereIn('category', $cat)->orderBy('created_at', 'DESC');
@@ -53,7 +53,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $image_url = "";
-        if($request->has('image')){
+        if($request->file('image') != null){
             $image_url = $request->file('image')->store('public/news_images'); 
             $image_url = "/storage" . substr($image_url, 6); 
         }
@@ -63,7 +63,7 @@ class NewsController extends Controller
             'description' => $request->input("description"),
             'category' => $request->input("category"),
             'image_url' => $image_url,
-            'is_featured' => $request->has("is_featured"),
+            'is_featured' => $request->input("is_featured") == "true" ? 1 : 0,
             'link' => $request->input("link")
         ]);
         return new NewsResource($model);
@@ -91,11 +91,17 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         $model = News::findOrFail($id);
+        $image_url = $model->image_url;
+        if($request->file('image') != null){
+            $image_url = $request->file('image')->store('public/news_images'); 
+            $image_url = "/storage" . substr($image_url, 6); 
+        }
+
         $model->title = $request->input("title");
         $model->description = $request->input("description");
         $model->category = $request->input("category");
-        //$model->image_url = $model->image_url;
-        $model->is_featured = $request->has("is_featured");
+        $model->image_url = $image_url;
+        $model->is_featured = $request->input("is_featured") == "true" ? 1 : 0;
         $model->link = $request->input("link");
         $model->save();
         return new NewsResource($model);

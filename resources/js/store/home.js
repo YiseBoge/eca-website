@@ -47,7 +47,7 @@ const mutations = {
 const actions = {
   setFeatured: ({commit}, {page, size}) => {
     commit('setFeaturedLoading', true);
-    ajax.get(`/news/?page=${page}&size=${size}&featured`).then(
+    ajax.get(`/news/?page=${page}&size=${size}&featured=true`).then(
       response => {
         commit('setFeatured', response.data.data);
       },

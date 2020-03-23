@@ -17,10 +17,10 @@ class EventsController extends Controller
     public function index()
     {
         $size = request()->input("size", 0);
-        $past = request()->has("past");
+        $past = request()->input("past");
 
         $models = Event::orderBy('created_at', 'DESC');
-        if($past){
+        if($past == "true"){
             $models = $models->where('end_date', '<', date('Y-m-d H:i:s'));
         }else{
             $models = $models->where('end_date', '>', date('Y-m-d H:i:s'));
