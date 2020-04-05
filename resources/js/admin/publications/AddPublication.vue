@@ -21,23 +21,23 @@
                         :rules="rules.min_100"></vue-editor>
           </v-col>
 
-          <v-col cols="3">
+          <v-col cols="4">
             <v-btn class="ma-2 d-block mx-auto mb-4" large tile color="info" @click="$refs.file.click()">
               <v-icon left>mdi-camera</v-icon>
-              {{ button_text }}
+              {{ image_button_text }}
             </v-btn>
           </v-col>
 
-          <v-col cols="2" class="mx-auto">
-            <v-switch v-model="publication.is_featured" label="Featured"></v-switch>
-          </v-col>
-          <v-col cols="2" class="mx-auto">
-            <v-select label="Select category" v-model="publication.category" :rules="rules.required" :items="categories">
-            </v-select>
+          <v-col cols="4">
+            <v-btn class="ma-2 d-block mx-auto mb-4" large tile color="info" @click="$refs.file.click()">
+              <v-icon left>mdi-file</v-icon>
+              {{ file_button_text }}
+            </v-btn>
           </v-col>
 
-          <v-col cols="4">
-            <v-text-field v-model="publication.link" label="File Url"></v-text-field>
+          <v-col cols="4" class="mx-auto">
+            <v-select label="Select category" v-model="publication.category" :rules="rules.required" :items="categories">
+            </v-select>
           </v-col>
         </v-row>
 
@@ -55,12 +55,13 @@
   import {VueEditor} from 'vue2-editor';
   import {ImageDrop} from 'quill-image-drop-module';
   import ImageResize from '@taoqf/quill-image-resize-module';
-  import {PublicationModel} from "./publications-model";
+  import {PublicationModel} from "./publication_model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
+  import {store} from "../../store/store";
 
   export default {
-    name: "Add publication",
+    name: "Add Publication",
     components: {
       VueEditor
     },
@@ -70,12 +71,10 @@
         modal: false,
         publication: PublicationModel,
         rules: Rules,
-        button_text: 'Upload Image',
-        categories: [
-          'Category 1',
-          'Category 2',
-          'Category 3',
-        ],
+        showAlert: false,
+        alertType: 'success',
+        image_button_text: 'Upload Image',
+        file_button_text: 'Upload File',
         editorSettings: {
           modules: {
             imageDrop: true,
@@ -89,12 +88,19 @@
       };
     },
     methods: {
-      handleFileUpload() {
+      handleImageUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;
         this.publication.image = this.$refs.file.files[0];
-        this.button_text = filename.slice(0, 10);
-        this.button_text += filename.length < 10 ? "" : "...";
+        this.image_button_text = filename.slice(0, 10);
+        this.image_button_text += filename.length < 10 ? "" : "...";
+      },
+      handleFileUpload() {
+        // file upload handler
+        const filename = this.$refs.file.files[0].name;
+        this.publication.file = this.$refs.file.files[0];
+        this.file_button_text = filename.slice(0, 10);
+        this.file_button_text += filename.length < 10 ? "" : "...";
       },
       submit() {
         console.log(this.publication);
@@ -105,14 +111,22 @@
         let self = this;
         ajax.post(`publication`, formData).then(
           response => {
-            console.log(response);
+            self.showAlert = true;
+            self.alertType = 'success';
           }, error => {
-            console.log(error);
+            self.showAlert = true;
+            self.alertType = 'error';
           }
         )
       }
     },
+    created() {
+      store.dispatch('setPublicationCategories');
+    },
     computed: {
+      categories () {
+        return store.getters.getNewsCategories;
+      }
     }
   }
 </script>

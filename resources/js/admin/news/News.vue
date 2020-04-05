@@ -65,7 +65,6 @@
           {text: 'Is featured', value: 'is_featured'},
           { text: 'Actions', value: 'actions', sortable: false },
         ],
-        desserts: [],
       }
     },
     created() {

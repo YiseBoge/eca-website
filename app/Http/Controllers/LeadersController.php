@@ -73,7 +73,7 @@ class LeadersController extends Controller
             $image_url = $request->file('image')->store('public/leader_images'); 
             $image_url = "/storage" . substr($image_url, 6); 
         }
-        $model->name = $request->input("title");
+        $model->name = $request->input("name");
         $model->position = $request->input("position");
         $model->description = $request->input("description");
         $model->level = $request->input("level");

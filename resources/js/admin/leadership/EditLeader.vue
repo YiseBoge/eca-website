@@ -1,31 +1,32 @@
 <template>
   <v-card>
     <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'Leader Successfully Inserted.' : 'Error. Something Went Wrong' }}
+      {{ alertType === 'success' ? 'Leader Successfully updated.' : 'Error something went wrong' }}
     </v-alert>
+
     <v-card-title>
-      <span class="headline">Add Leader</span>
+      <span class="headline">Edit Leader</span>
     </v-card-title>
     <v-card-text>
       <v-form v-model="valid">
         <v-row>
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
-                          v-model="leader.name"></v-text-field>
+                          v-model="selectedLeader.name"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Position*" required :rules="rules.required||rules.min_20"
-                          v-model="leader.position"></v-text-field>
+                          v-model="selectedLeader.position"></v-text-field>
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Level*" required :rules="rules.required||rules.min_20"
-                          v-model="leader.level"></v-text-field>
+                          v-model="selectedLeader.level"></v-text-field>
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="leader.description"
+            <vue-editor v-model="selectedLeader.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
                         :rules="rules.min_20"></vue-editor>
@@ -55,10 +56,10 @@
   import {VueEditor} from 'vue2-editor';
   import {ImageDrop} from 'quill-image-drop-module';
   import ImageResize from '@taoqf/quill-image-resize-module';
-  import {LeaderModel} from "./leader_model.js";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
   import {store} from "../../store/store";
+  import {router} from "../../routes/admin-router";
 
   export default {
     name: "Add Leader",
@@ -69,10 +70,9 @@
       return {
         valid: false,
         modal: false,
-        leader: LeaderModel,
         rules: Rules,
         showAlert: false,
-        alertType: 'success',        
+        alertType: 'success',
         button_text: 'Upload Image',
         editorSettings: {
           modules: {
@@ -95,24 +95,35 @@
         this.button_text += filename.length < 10 ? "" : "...";
       },
       submit() {
-        console.log(this.leader);
+        console.log(this.selectedLeader);
         let formData = new FormData();
-        Object.keys(this.leader).forEach((key) => {
-          formData.append(key, this.leader[key])
+        Object.keys(this.selectedLeader).forEach((key) => {
+          formData.append(key, this.selectedLeader[key])
         });
+        formData.append("_method", "put");
         let self = this;
-        ajax.post(`leadership`, formData).then(
+        ajax.post(`leadership/${this.selectedLeader.id}`, formData).then(
           response => {
             self.showAlert = true;
             self.alertType = 'success';
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
-            console.log(error);
           }
         )
       }
     },
+    created() {
+      store.dispatch('setSelectedLeader', {id: router.currentRoute.params.id});
+    },
+    mounted() {
+      this.news = store.getters.getSelectedLeader;
+    },
+    computed: {
+      selectedLeader() {
+        return store.getters.getSelectedLeader;
+      }
+    }
   }
 </script>
 

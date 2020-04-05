@@ -8,7 +8,6 @@
     <v-data-table
       :headers="headers"
       :items="events"
-      sort-by="calories"
       class=" mx-auto my-auto"
     >
       <template v-slot:top>
@@ -67,8 +66,7 @@
           {text: 'End Date', value: 'end_date'},
           {text: 'Location', value: 'location'},
           {text: 'Actions', value: 'actions', sortable: false},
-        ],
-        desserts: [],
+        ]
       }
     },
     created() {

@@ -4,7 +4,7 @@
       {{ alertType === 'success' ? 'Event Successfully Inserted.' : 'Error. Something Went Wrong' }}
     </v-alert>
     <v-card-title>
-      <span class="headline">New Event</span>
+      <span class="headline">Add Event</span>
     </v-card-title>
     <v-card-text>
       <v-form v-model="valid">

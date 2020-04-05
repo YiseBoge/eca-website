@@ -12,11 +12,11 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.required"
-                          v-model="event.title"></v-text-field>
+                          v-model="selectedEvent.title"></v-text-field>
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="event.description"
+            <vue-editor v-model="selectedEvent.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
                         :rules="rules.min_20"></vue-editor>
@@ -46,7 +46,7 @@
             </v-menu>
           </v-col>
           <v-col cols="8">
-            <v-text-field label="Location" v-model="event.location" class="mx-auto"></v-text-field>
+            <v-text-field label="Location" v-model="selectedEvent.location" class="mx-auto"></v-text-field>
           </v-col>
         </v-row>
 
@@ -78,11 +78,10 @@
       return {
         valid: false,
         modal: false,
-        event: store.getters.getSelectedEvent,
+        //event: store.getters.getSelectedEvent,
         rules: Rules,
         showAlert: false,
         alertType: 'success',
-        dates: ['2019-09-10', '2019-09-20'],
         editorSettings: {
           modules: {
             imageDrop: true,
@@ -97,14 +96,16 @@
     },
     methods: {
       submit() {
-        console.log(this.event);
+        console.log(this.selectedEvent);
         let formData = new FormData();
-        Object.keys(this.event).forEach((key) => {
-          formData.append(key, this.event[key])
+        Object.keys(this.selectedEvent).forEach((key) => {
+          formData.append(key, this.selectedEvent[key])
         });
+        formData.append('start_date', this.dates[0]);
+        formData.append('end_date', this.dates[1]);
         formData.append("_method", "put");
         let self = this;
-        ajax.post(`event/${this.event.id}`, formData).then(
+        ajax.post(`event/${this.selectedEvent.id}`, formData).then(
           response => {
             self.showAlert = true;
             self.alertType = 'success';
@@ -120,11 +121,18 @@
     },
     mounted() {
       this.event = store.getters.getSelectedEvent
+      this.dateRange = this.dates;
     },
     computed: {
       selectedEvent() {
         return store.getters.getSelectedEvent;
-      }
+      },
+      dates() {
+          return [this.selectedEvent.start_date, this.selectedEvent.end_date];
+      },
+      dateRangeText () {
+        return this.dates.join("   ~   "); 
+      },
     }
   }
 </script>

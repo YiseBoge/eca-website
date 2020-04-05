@@ -1,8 +1,7 @@
 export const PublicationModel = {
   title: '',
   image: '',
-  link: '',
+  file: '',
   category: '',
-  description: '',
-  is_featured: false,
+  description: ''
 };

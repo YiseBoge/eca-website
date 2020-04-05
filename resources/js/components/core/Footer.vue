@@ -52,7 +52,7 @@
                   <a href="tel:+251 11 465 6011" target="_blank">+251 11 465 6011</a><br>
                   <v-icon size="24px">mdi-fax</v-icon>
                   <a href="tel:+251 11 465 5763" target="_blank">+251 11 465 5763</a><br>
-                  <v-icon class="mt-3" size="24px">mdi-twitter</v-icon>
+                  <v-icon size="24px">mdi-twitter</v-icon>
                   <a href="https://twitter.com/eca_ethiopia" target="_blank">@eca_ethiopia</a><br>
                 </v-flex>
 

@@ -14,9 +14,11 @@ const EditEvent = () => import('~/admin/events/EditEvent');
 
 const Publication = () => import('~/admin/publications/Publications');
 const AddPublication = () => import('~/admin/publications/AddPublication');
+const EditPublication = () => import('~/admin/publications/EditPublication');
 
 const Leaders = () => import('~/admin/leadership/Leaders');
 const AddLeader = () => import('~/admin/leadership/AddLeader');
+const EditLeader = () => import('~/admin/leadership/EditLeader');
 
 Vue.use(Router);
 
@@ -31,10 +33,12 @@ export const router = new Router({
     {path: '/events', name: 'events', component: Events},
     {path: '/events/add-event', name: 'add events', component: AddEvent},
     {path: '/events/:id/edit', name: 'edit event', component: EditEvent},
-    {path: '/leaders', name: 'leaders', component: Leaders},
-    {path: '/leaders/add-leader', name: 'add leader', component: AddLeader},
+    {path: '/leadership', name: 'leaders', component: Leaders},
+    {path: '/leadership/add-leader', name: 'add leader', component: AddLeader},
+    {path: '/leadership/:id/edit', name: 'edit leader', component: EditLeader},
     {path: '/publications', name: 'publication', component: Publication},
     {path: '/publications/add-publication', name: 'add publication', component: AddPublication},
+    {path: '/publications/:id/edit', name: 'edit publication', component: EditPublication},
     {path: '*', name: 'NotFound', component: NotFound},
   ]
 });

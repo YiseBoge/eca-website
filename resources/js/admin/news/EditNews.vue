@@ -5,7 +5,7 @@
     </v-alert>
 
     <v-card-title>
-      <span class="headline">Edit news</span>
+      <span class="headline">Edit News</span>
     </v-card-title>
     <v-card-text>
       <v-form v-model="valid">

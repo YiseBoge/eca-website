@@ -2,6 +2,7 @@ import ajax from "../ajax";
 
 const state = {
   events: [],
+  selectedEvent: null,
   eventsMeta: {
     current_page: 0,
     from: 0,
