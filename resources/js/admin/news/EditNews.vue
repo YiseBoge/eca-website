@@ -12,14 +12,14 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="news.title"></v-text-field>
+                          v-model="selectedNews.title"></v-text-field>
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
                  @change="handleFileUpload" :rules="rules.file"/>
 
           <v-col cols="12">
-            <vue-editor v-model="news.description"
+            <vue-editor v-model="selectedNews.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
                         :rules="rules.min_100"></vue-editor>
@@ -33,19 +33,19 @@
           </v-col>
 
           <v-col cols="2" class="mx-auto">
-            <v-switch v-model="news.is_featured" label="Featured"></v-switch>
+            <v-switch v-model="selectedNews.is_featured" label="Featured"></v-switch>
           </v-col>
           <v-col cols="2" class="mx-auto">
-            <v-select label="Select category" v-model="news.category" :rules="rules.required"
+            <v-select label="Select category" v-model="selectedNews.category" :rules="rules.required"
                       :items="categories"></v-select>
           </v-col>
 
           <v-col cols="4">
-            <v-text-field v-model="news.link" label="External Link"></v-text-field>
+            <v-text-field v-model="selectedNews.link" label="External Link"></v-text-field>
           </v-col>
         </v-row>
         <div class="col-md-5 mx-auto">
-          <v-img :src="`http://localhost:8000${news.image_url}`"></v-img>
+          <v-img :src="`${selectedNews.image_url}`"></v-img>
         </div>
         <div class="my-2 mx-auto align-center align-content-center">
           <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Update</v-btn>
@@ -67,7 +67,7 @@
   import {router} from "../../routes/admin-router";
 
   export default {
-    name: "Add News",
+    name: "Edit News",
     components: {
       VueEditor
     },
@@ -75,7 +75,6 @@
       return {
         valid: false,
         modal: false,
-        news: store.getters.getSelectedNews,
         rules: Rules,
         showAlert: false,
         alertType: 'success',
@@ -124,7 +123,7 @@
       store.dispatch('setNewsCategories');
     },
     mounted() {
-      this.news = store.getters.getSelectedNews
+      this.news = store.getters.getSelectedNews;
     },
     computed: {
       categories() {

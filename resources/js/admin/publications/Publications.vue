@@ -91,7 +91,7 @@
       onEdit(item) {
         console.log(item);
         store.dispatch('setSelectedPublication', {id: item.id});
-        router.push(`/publication/${item.id}/edit`);
+        router.push(`/publications/${item.id}/edit`);
       },
       compress(val) {
         return val.length > 30 ? val.substr(0, 30) + '...' : val;
