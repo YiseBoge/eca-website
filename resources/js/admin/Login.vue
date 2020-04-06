@@ -1,9 +1,9 @@
 <template>
   <v-row align="center" justify="center">
     <v-col cols="12" sm="8" md="4">
+      <v-alert type="error" v-if="sessionMessage" dismissible>{{ sessionMessage }}</v-alert>
       <v-card class="elevation-12">
         <v-toolbar color="primary" dark flat>
-
           <v-toolbar-title>Login form</v-toolbar-title>
           <v-spacer/>
         </v-toolbar>
@@ -40,7 +40,6 @@
 <script>
   import ajax from "../ajax";
   import router from "../router";
-  import {handleError} from "../auth";
   import {store} from "../store/store"
 
   export default {
@@ -51,29 +50,34 @@
         show1: false,
         errorMsg: false,
         user: {
-          email: "segnih8@gmail.com",
-          password: '12345678',
+          email: "admin@test.com",
+          password: 'admin',
         },
-                rules: {
-                    required: [val => (val || '').length > 0 || 'This field is required'],
-                },
-            }
+        rules: {
+          required: [val => (val || '').length > 0 || 'This field is required'],
         },
-        methods: {
-            submit() {
-                ajax.post("login", this.user)
-                    .then(response => {
-                        console.log(response.data.data);
-                        store.dispatch("setUser", response.data.data);
-                        store.dispatch("resetMessage");
-                        router.push("/"); // route to dashboard list if the authentication is successful
-                    }, error => {
-                        store.dispatch("setStateMessage", "The email and password you entered don't match");
-                        handleError(error);
-                    });
-            },
-        }
+      }
+    },
+    methods: {
+      submit() {
+        ajax.post("auth/login", this.user)
+          .then(response => {
+            console.log(response);
+            store.dispatch("setUser", response.data);
+            store.dispatch("resetMessage");
+            router.push("/"); // route to dashboard list if the authentication is successful
+          }, error => {
+            console.log(error);
+            store.dispatch("setStateMessage", "The email and password you entered don't match");
+          });
+      },
+    },
+    computed: {
+      sessionMessage() {
+        return store.getters.getMessage;
+      }
     }
+  }
 </script>
 
 <style scoped>

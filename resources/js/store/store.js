@@ -9,6 +9,7 @@ import news from "./news"
 import publications from "./publication"
 import leadership from "./leadership"
 import media from "./media"
+import messages from "./messages";
 
 Vue.use(Vuex);
 
@@ -54,5 +55,6 @@ export const store = new Vuex.Store({
     publications,
     leadership,
     media,
+    messages
   }
 });

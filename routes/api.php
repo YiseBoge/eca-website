@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,17 +13,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::post('logout', 'Auth\LoginController@logout');
+//Route::group(['middleware' => 'auth:api'], function () {
+//    Route::post('logout', 'Auth\LoginController@logout');
+//
+//    Route::get('/user', function (Request $request) {
+//        return $request->user();
+//    });
+//
+//    Route::patch('settings/profile', 'Settings\ProfileController@update');
+//    Route::patch('settings/password', 'Settings\PasswordController@update');
+//});
 
-    Route::get('/user', function (Request $request) {
-        return $request->user();
+Route::prefix('auth')->group(function () {
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::get('refresh', 'AuthController@refresh');
+    Route::group(['middleware' => 'auth:api'], function(){
+        Route::get('user', 'AuthController@user');
+        Route::post('logout', 'AuthController@logout');
     });
-
-    Route::patch('settings/profile', 'Settings\ProfileController@update');
-    Route::patch('settings/password', 'Settings\PasswordController@update');
-
-
 });
 
 Route::group(['middleware' => 'guest:api'], function () {

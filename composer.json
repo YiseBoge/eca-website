@@ -12,7 +12,7 @@
         "laravel/framework": "^6.0",
         "laravel/socialite": "^4.3",
         "laravel/tinker": "^1.0",
-        "tymon/jwt-auth": "^1.0.0-rc.5"
+        "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

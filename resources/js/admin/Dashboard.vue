@@ -1,4 +1,3 @@
-
 <template>
   <v-app id="sandbox">
     <v-container v-if="isLoggedIn">
@@ -51,6 +50,10 @@
 
     </v-container>
 
+    <v-container v-else>
+      <login class="mt-12"/>
+    </v-container>
+
     <v-app-bar :clipped-left="primaryDrawer.clipped" app>
 
       <v-app-bar-nav-icon v-show="isLoggedIn"
@@ -89,6 +92,7 @@
 <script>
   import {router} from "../routes/admin-router";
   import {store} from "../store/store";
+  import Login from "./Login";
 
   export default {
 
@@ -101,31 +105,34 @@
       },
       footer: {
         inset: false,
-            },
-            // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        }),
-        methods: {
-            route(link) {
-                router.push(link);
-            },
-            logout() {
-                store.dispatch('resetUser');
-                router.push('/login').then();
-            }
-        },
-        computed: {
-            isLoggedIn() {
-                return true;
-            },
-            urls() {
-                return [
-                    {icon: 'mdi-newspaper', title: 'News', link: '/news'},
-                    {icon: 'mdi-publish', title: 'Publications', link: '/publications'},
-                    {icon: 'mdi-calendar', title: 'Events', link: '/events'},
-                    {icon: 'mdi-account-tie', title: 'Leadership', link: '/leadership'},
-                ];
-            }
-        }
+      },
+      // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    }),
+    methods: {
+      route(link) {
+        router.push(link);
+      },
+      logout() {
+        store.dispatch('resetUser');
+        router.push('/').then();
+      }
+    },
+    computed: {
+      isLoggedIn() {
+        return store.getters.getApiToken !== null;
+      },
+      urls() {
+        return [
+          {icon: 'mdi-newspaper', title: 'News', link: '/news'},
+          {icon: 'mdi-publish', title: 'Publications', link: '/publications'},
+          {icon: 'mdi-calendar', title: 'Events', link: '/events'},
+          {icon: 'mdi-account-tie', title: 'Leadership', link: '/leadership'},
+        ];
+      }
+    },
+    components: {
+      'login': Login
     }
+  }
 </script>
 <style scoped></style>
