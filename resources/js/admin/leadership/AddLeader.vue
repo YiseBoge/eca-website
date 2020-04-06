@@ -69,7 +69,7 @@
       return {
         valid: false,
         modal: false,
-        leader: LeaderModel,
+        leader: new LeaderModel(),
         rules: Rules,
         showAlert: false,
         alertType: 'success',        

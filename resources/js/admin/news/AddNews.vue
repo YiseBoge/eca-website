@@ -72,7 +72,7 @@
       return {
         valid: false,
         modal: false,
-        news: NewsModel,
+        news: new NewsModel(),
         rules: Rules,
         showAlert: false,
         alertType: 'success',

@@ -1,7 +1,7 @@
-export const EventModel = {
-  title: '',
-  description: '',
-  start_date: '',
-  end_date: '',
-  location: '',
+export function EventModel() {
+  this.title = '';
+  this.description = '';
+  this.start_date = '';
+  this.end_date = '';
+  this.location = '';
 };

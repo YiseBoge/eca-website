@@ -78,7 +78,7 @@
       return {
         valid: false,
         modal: false,
-        event: EventModel,
+        event: new EventModel(),
         rules: Rules,
         showAlert: false,
         alertType: 'success',

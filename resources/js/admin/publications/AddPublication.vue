@@ -79,7 +79,7 @@
       return {
         valid: false,
         modal: false,
-        publication: PublicationModel,
+        publication: new PublicationModel(),
         rules: Rules,
         showAlert: false,
         alertType: 'success',
