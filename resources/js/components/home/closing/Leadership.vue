@@ -14,6 +14,9 @@
 
         </v-toolbar>
         <v-list class="overflow-auto" height="450" three-line>
+          <p class="text-muted text-center mt-3"
+             v-if="data.length === 0"
+             v-text="'Found Nothing'"/>
           <template v-for="(item) in data">
             <v-list-item
               :key="item.title"
@@ -25,7 +28,7 @@
               <v-list-item-content>
                 <v-list-item-title class="text-primary" v-html="item.name"/>
                 <v-list-item-subtitle v-text="item.position"/>
-                <small class="mt-1" v-if="item.description" v-text="item.description"/>
+                <small class="mt-1" v-if="item.description" v-text="htmlToText(item.description)"/>
               </v-list-item-content>
             </v-list-item>
             <v-divider class="my-0"/>

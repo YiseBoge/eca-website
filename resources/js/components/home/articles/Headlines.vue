@@ -13,10 +13,14 @@
 
       <v-list class="transparent" three-line>
         <h2 class="px-3 font-weight-thin text-primary">Headlines</h2>
+        <v-divider
+          class="my-0"
+        />
+        <p class="text-muted text-center mt-3"
+           v-if="data.length === 0"
+           v-text="'Found Nothing'"/>
+
         <template v-for="(item) in data">
-          <v-divider
-            class="my-0"
-          />
 
           <v-list-item
             :key="item.id"
@@ -32,7 +36,7 @@
           </v-list-item>
         </template>
       </v-list>
-      <v-flex align-self-end class="float-right">
+      <v-flex align-self-end class="float-right" v-if="data.length != 0">
         <router-link class="btn btn-link nav-link" to="/news">
           More Headlines
         </router-link>

@@ -10,9 +10,12 @@
     <v-card-text>
       <v-form v-model="valid">
         <v-row>
-          <v-col cols="12" sm="12" md="12">
+          <v-col md="9" sm="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="news.title"></v-text-field>
+                          v-model="news.title"/>
+          </v-col>
+          <v-col class="mx-auto" md="3">
+            <v-switch label="Featured" v-model="news.is_featured"/>
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -22,26 +25,20 @@
             <vue-editor v-model="news.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
-                        :rules="rules.min_100"></vue-editor>
+                        :rules="rules.min_100"/>
           </v-col>
 
-          <v-col cols="3">
-            <v-btn class="ma-2 d-block mx-auto mb-4" large tile color="info" @click="$refs.file.click()">
+          <v-col cols="6">
+            <v-btn @click="$refs.file.click()" class="d-block" color="info" large tile>
               <v-icon left>mdi-camera</v-icon>
               {{ button_text }}
             </v-btn>
           </v-col>
 
-          <v-col cols="2" class="mx-auto">
-            <v-switch v-model="news.is_featured" label="Featured"></v-switch>
-          </v-col>
-          <v-col cols="2" class="mx-auto">
-            <v-select label="Select category" v-model="news.category" :rules="rules.required" :items="categories"></v-select>
+          <v-col class="mx-auto" cols="6">
+            <v-select :items="categories" :rules="rules.required" label="Select category" v-model="news.category"/>
           </v-col>
 
-          <v-col cols="4">
-            <v-text-field v-model="news.link" label="External Link"></v-text-field>
-          </v-col>
         </v-row>
 
         <div class="my-2 mx-auto align-center align-content-center">
