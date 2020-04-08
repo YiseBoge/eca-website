@@ -21,7 +21,7 @@
                         :rules="rules.min_20"/>
           </v-col>
 
-          <v-col cols="12" lg="4">
+          <v-col cols="12" lg="6">
             <v-menu
               v-model="menu2"
               :close-on-content-click="false"
@@ -44,7 +44,7 @@
               <v-date-picker @input="menu2 = false" no-title range v-model="dates"/>
             </v-menu>
           </v-col>
-          <v-col cols="8">
+          <v-col cols="6">
             <v-text-field class="mx-auto" label="Location" v-model="event.location"/>
           </v-col>
         </v-row>
@@ -67,6 +67,7 @@
   import {EventModel} from "./event_model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
+  import moment from "moment";
 
   export default {
     name: "Add Event",
@@ -81,7 +82,7 @@
         rules: Rules,
         showAlert: false,
         alertType: 'success',
-        dates: ['2019-09-10', '2019-09-20'],
+        dates: [moment(Date.now()).format('YYYY-MM-DD'), moment(Date.now()).format('YYYY-MM-DD')],
         editorSettings: {
           modules: {
             imageDrop: true,
