@@ -17,16 +17,16 @@ class EventsController extends Controller
     public function index()
     {
         $size = request()->input("size", 0);
-        $past = request()->input("past");
+        $type = request()->input("type", "All");
 
-        $models = Event::orderBy('created_at', 'DESC');
-        if($past == "true"){
-            $models = $models->where('end_date', '<', date('Y-m-d H:i:s'));
-        }else{
-            $models = $models->where('end_date', '>', date('Y-m-d H:i:s'));
-        }
+        if ($type == "Past")
+            $models = Event::orderBy('start_date', 'DESC')->where('end_date', '<', date('Y-m-d'));
+        else if ($type == "Upcoming")
+            $models = Event::orderBy('start_date')->where('end_date', '>=', date('Y-m-d'));
+        else
+            $models = Event::orderBy('start_date');
+
         $models = $models->paginate($size);
-
         return new EventCollection($models);
     }
 

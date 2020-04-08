@@ -28,11 +28,21 @@ Route::prefix('auth')->group(function () {
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
     Route::get('refresh', 'AuthController@refresh');
-    Route::group(['middleware' => 'auth:api'], function(){
+    Route::group(['middleware' => 'auth:api'], function () {
         Route::get('user', 'AuthController@user');
         Route::post('logout', 'AuthController@logout');
     });
 });
+
+
+Route::get('news/categories', 'NewsController@categories')->name('news.categories');
+Route::get('publication/categories', 'PublicationsController@categories')->name('publication.categories');
+
+Route::resource('news', 'NewsController')->only(['index', 'show']);
+Route::resource('publication', 'PublicationsController')->only(['index', 'show']);
+Route::resource('event', 'EventsController')->only(['index', 'show']);
+Route::resource('leadership', 'LeadersController')->only(['index', 'show']);
+
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::post('login', 'Auth\LoginController@login');
@@ -47,12 +57,8 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 
-    Route::get('news/categories', 'NewsController@categories')->name('news.categories');
-    Route::get('publication/categories', 'PublicationsController@categories')->name('publication.categories');
-    Route::apiResources([
-        'news' => 'NewsController',
-        'publication' => 'PublicationsController',
-        'event' => 'EventsController',
-        'leadership' => 'LeadersController'
-    ]);
+    Route::resource('news', 'NewsController')->only(['store', 'update', 'destroy']);
+    Route::resource('publication', 'PublicationsController')->only(['store', 'update', 'destroy']);
+    Route::resource('event', 'EventsController')->only(['store', 'update', 'destroy']);
+    Route::resource('leadership', 'LeadersController')->only(['store', 'update', 'destroy']);
 });

@@ -15,10 +15,12 @@
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="event.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_20"/>
+            <v-textarea
+              :rules="rules.min_20"
+              hint="Short description of the event"
+              label="Description"
+              v-model="event.description"
+            />
           </v-col>
 
           <v-col cols="12" lg="6">

@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import {ifAuthenticated} from "../admin/auth";
 
 const Login = () => import('~/admin/Login');
-const Dashboard = () => import('~/admin/Dashboard');
+const Welcome = () => import('~/admin/Welcome');
 
 const News = () => import('~/admin/news/News');
 const AddNews = () => import('~/admin/news/AddNews');
@@ -28,7 +28,7 @@ export const router = new Router({
   mode: 'history',
   base: 'admin/#',
   routes: [
-    {path: '/', name: 'dashboard', component: Dashboard},
+    {path: '/', name: 'welcome', component: Welcome},
     {path: '/login', name: 'login', component: Login},
 
     {path: '/news', name: 'news', component: News, beforeEnter: ifAuthenticated},

@@ -65,8 +65,8 @@
         show1: false,
         errorMsg: false,
         user: {
-          email: "admin@test.com",
-          password: 'admin',
+          email: null,
+          password: null,
         },
         rules: {
           required: [val => (val || '').length > 0 || 'This field is required'],
