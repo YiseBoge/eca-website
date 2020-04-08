@@ -1,8 +1,8 @@
 <template>
-  <v-card>
-    <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'News Successfully updated.' : 'Error something went wrong' }}
-    </v-alert>
+  <v-card class="px-5 py-3"
+  <v-alert :type="alertType" dismissible v-show="showAlert">
+    {{ alertType === 'success' ? 'News Successfully updated.' : 'Error something went wrong' }}
+  </v-alert>
 
     <v-card-title>
       <span class="headline">Edit News</span>

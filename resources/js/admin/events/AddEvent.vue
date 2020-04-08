@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="px-5 py-3">
     <v-alert :type="alertType" dismissible v-show="showAlert">
       {{ alertType === 'success' ? 'Event Successfully Inserted.' : 'Error. Something Went Wrong' }}
     </v-alert>
@@ -11,14 +11,14 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.required"
-                          v-model="event.title"></v-text-field>
+                          v-model="event.title"/>
           </v-col>
 
           <v-col cols="12">
             <vue-editor v-model="event.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
-                        :rules="rules.min_20"></vue-editor>
+                        :rules="rules.min_20"/>
           </v-col>
 
           <v-col cols="12" lg="4">
@@ -39,13 +39,13 @@
                   prepend-icon="mdi-calendar"
                   readonly
                   v-on="on"
-                ></v-text-field>
+                />
               </template>
-              <v-date-picker v-model="dates" no-title @input="menu2 = false" range></v-date-picker>
+              <v-date-picker @input="menu2 = false" no-title range v-model="dates"/>
             </v-menu>
           </v-col>
           <v-col cols="8">
-            <v-text-field label="Location" v-model="event.location" class="mx-auto"></v-text-field>
+            <v-text-field class="mx-auto" label="Location" v-model="event.location"/>
           </v-col>
         </v-row>
 
@@ -67,7 +67,6 @@
   import {EventModel} from "./event_model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
-  import {store} from "../../store/store";
 
   export default {
     name: "Add Event",

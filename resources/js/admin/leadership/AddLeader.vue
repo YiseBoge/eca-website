@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="px-5 py-3">
     <v-alert :type="alertType" dismissible v-show="showAlert">
       {{ alertType === 'success' ? 'Leader Successfully Inserted.' : 'Error. Something Went Wrong' }}
     </v-alert>
@@ -11,24 +11,24 @@
         <v-row>
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
-                          v-model="leader.name"></v-text-field>
+                          v-model="leader.name"/>
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Position*" required :rules="rules.required||rules.min_20"
-                          v-model="leader.position"></v-text-field>
+                          v-model="leader.position"/>
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Level*" required :rules="rules.required||rules.min_20"
-                          v-model="leader.level"></v-text-field>
+                          v-model="leader.level"/>
           </v-col>
 
           <v-col cols="12">
             <vue-editor v-model="leader.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
-                        :rules="rules.min_20"></vue-editor>
+                        :rules="rules.min_20"/>
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -58,7 +58,6 @@
   import {LeaderModel} from "./leader_model.js";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
-  import {store} from "../../store/store";
 
   export default {
     name: "Add Leader",
@@ -72,7 +71,7 @@
         leader: new LeaderModel(),
         rules: Rules,
         showAlert: false,
-        alertType: 'success',        
+        alertType: 'success',
         button_text: 'Upload Image',
         editorSettings: {
           modules: {

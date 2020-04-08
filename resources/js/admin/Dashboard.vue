@@ -3,9 +3,7 @@
     <v-container v-if="isLoggedIn">
       <v-navigation-drawer
         v-model="primaryDrawer.model"
-        app
-        overflow
-        class="shadow-lg"
+        app overflow
       >
         <v-img :aspect-ratio="16/9"
                src="https://wonderfulengineering.com/wp-content/uploads/2014/09/blue-wallpaper-37.jpg">
@@ -20,7 +18,7 @@
         <v-list nav>
           <v-list-item-group
             justify="center"
-            active-class="blue--text text--accent-4"
+            active-class="primary--text"
             class="mt-5">
 
             <template v-for="(item, i) in urls">
@@ -59,12 +57,12 @@
       <v-app-bar-nav-icon @click.stop="primaryDrawer.model = !primaryDrawer.model" v-show="isLoggedIn"
       />
 
-      <v-toolbar-title> Admin Panel</v-toolbar-title>
+      <v-toolbar-title> ECA Admin</v-toolbar-title>
       <v-spacer/>
       <v-form v-model="valid" v-show="isLoggedIn">
         <input type="hidden" name="_token"> <!--:value="csrf" -->
         <v-spacer/>
-        <v-btn text icon color="indigo" @click="logout">
+        <v-btn @click="logout" color="primary" icon text>
           <v-icon>mdi-account-lock</v-icon>
         </v-btn>
       </v-form>
