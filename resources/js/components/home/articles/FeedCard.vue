@@ -1,7 +1,7 @@
 <template>
   <v-flex
     xs12
-    :class="classes"
+    class="md6"
   >
     <base-card
       :height="value.prominent ? 450 : 250"
@@ -43,7 +43,7 @@
           </v-flex>
           <v-flex align-self-end>
             <v-chip
-              @click.stop="" class="text-uppercase ma-0"
+              class="text-uppercase ma-0"
               color="primary" label small
             >
               Read More
@@ -73,7 +73,7 @@
       },
     },
     computed: {
-      classes() {
+      probably() {
         return {
           'md6': this.size === 2,
           'md4': this.size === 3

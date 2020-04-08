@@ -2,6 +2,16 @@
   <v-container
     grid-list-xl
   >
+    <v-container>
+      <v-row>
+        <v-col>
+          <p class="text-muted text-center mt-3"
+             v-if="data.length === 0"
+             v-text="'No Featured News'"/>
+        </v-col>
+      </v-row>
+    </v-container>
+
     <v-fade-transition hide-on-leave>
       <v-container v-if="homeLoaders.featured">
         <v-row>
@@ -30,9 +40,9 @@
 
       <v-layout v-else wrap>
         <v-flex xs12>
-          <v-card
-            class="mx-auto row shadow-lg overflow-hidden"
-            height="210" outlined
+          <v-card v-if="data.length >= 1"
+                  class="mx-auto row shadow-lg overflow-hidden"
+                  height="210" outlined
           >
             <div class="col-md-8">
               <v-list-item three-line>
@@ -62,8 +72,12 @@
         </v-flex>
 
         <feed-card
-          :key="article.id"
-          :size="2" :value="article" v-for="(article) in [data[1], data[2]]"
+          :key="data[1].id" :size="2"
+          :value="data[1]" v-if="data.length >= 2"
+        />
+        <feed-card
+          :key="data[2].id" :size="2"
+          :value="data[2]" v-if="data.length >= 3"
         />
       </v-layout>
     </v-fade-transition>
