@@ -1,9 +1,11 @@
 <template>
   <v-card class="overflow-hidden" raised tile>
     <v-app-bar
+      class="px-12"
       color="blue accent-2"
       dark
     >
+      <!--      <v-spacer/>-->
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
@@ -25,6 +27,7 @@
       >
         {{ link.text }}
       </v-btn>
+      <!--      <v-spacer/>-->
     </v-app-bar>
   </v-card>
 </template>

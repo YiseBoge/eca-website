@@ -9,9 +9,9 @@
     </v-row>
     <v-row class="mb-6">
       <v-col>
-        <v-card :style="'background: url(' + data.image_url + ') center no-repeat;'" class="shadow-none"
-                style="height: 500px; background-size: cover;"
-                v-if="data.image_url"/>
+        <!--        <v-card :style="'background: url(' + data.image_url + ') center no-repeat;'" class="shadow-none"-->
+        <!--                style="height: 500px; background-size: cover;"-->
+        <!--                v-if="data.image_url"/>-->
         <!--        <img class="rounded shadow-sm" :src="data.image_url"/>-->
         <p class="my-4" v-html="data.description"/>
       </v-col>

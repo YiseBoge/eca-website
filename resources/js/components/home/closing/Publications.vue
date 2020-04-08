@@ -12,27 +12,31 @@
 
       <v-list class="transparent" three-line v-else>
         <h2 class="px-3 text-primary font-weight-light display-1">Publications</h2>
+        <v-divider
+          class="my-0"
+        />
+        <p class="text-muted text-center mt-3"
+           v-if="data.length === 0"
+           v-text="'Found Nothing'"/>
         <template v-for="(item) in data">
-          <v-divider
-            class="my-0"
-          />
-
           <v-list-item
             :key="item.id"
-            class="pb-2"
           >
 
             <v-list-item-content>
               <p class="overline text-muted">{{formatToDate(item.created_at)}}</p>
               <v-list-item-title v-text="item.title"/>
               <v-list-item-subtitle v-text="htmlToText(item.description)"/>
-              <a :href="item.file_url" class="small my-1" target="_blank" v-if="item.file_url">Download</a>
+              <p class="pt-1">
+                <router-link :to="'/publications/'+item.id" class="small d-inline">Read Mode</router-link>
+                <a :href="item.file_url" class="small d-inline float-right" target="_blank" v-if="item.file_url">Download</a>
+              </p>
             </v-list-item-content>
           </v-list-item>
         </template>
       </v-list>
     </v-fade-transition>
-    <v-flex align-self-end class="float-right">
+    <v-flex align-self-end class="float-right" v-if="data.length !== 0">
       <router-link class="btn btn-link nav-link" to="/publications">
         See All
       </router-link>

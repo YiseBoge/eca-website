@@ -9,26 +9,24 @@
             <v-skeleton-loader
               class="mt-4 shadow-lg"
               type="card-heading,list-item-three-line,list-item-three-line"
-
             />
           </div>
-          <div class="col-md-4 px-md-12 h-100" v-if="true">
+          <div class="col-md-4 px-md-12 h-100">
             <v-skeleton-loader
               class="mt-4 transparent"
               type="card-heading,list-item-three-line,list-item-three-line"
-
             />
           </div>
-          <div class="col-md-4 px-md-12 h-100" v-if="true">
+          <div class="col-md-4 px-md-12 h-100">
             <v-skeleton-loader
               class="mt-4 transparent"
               type="card-heading,list-item-three-line,list-item-three-line"
-
             />
           </div>
         </v-row>
+
         <v-row v-else>
-          <div class="col-md-4 px-md-12 h-100">
+          <div class="col-md-4 px-md-12 h-100" v-if="data.length >= 1">
             <v-card
               class="box overflow-hidden shadow-sm text-center"
               max-height="250"
@@ -47,22 +45,43 @@
             </v-card>
           </div>
 
-          <div class="col-md-4 row h-100" v-for="event in [data[1], data[2]]">
+          <div class="col-md-4 row h-100" v-if="data.length >= 2">
             <p class="col-md-4 col-3 date text-center">
-              {{months[new Date(event.start_date).getMonth()]}}
-              <span class="event-date">{{new Date(event.start_date).getDate()}}</span>
-              {{new Date(event.start_date).getFullYear()}}
+              {{months[new Date(data[1].start_date).getMonth()]}}
+              <span class="event-date">{{new Date(data[1].start_date).getDate()}}</span>
+              {{new Date(data[1].start_date).getFullYear()}}
             </p>
             <div class="vertical-parent col-md-8 col-9">
-              <span> {{event.title}} </span>
+              <span> {{data[1].title}} </span>
               <br>
               <p class="small">
-                {{event.location}}
+                {{data[1].location}}
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-4 row h-100" v-if="data.length >= 3">
+            <p class="col-md-4 col-3 date text-center">
+              {{months[new Date(data[2].start_date).getMonth()]}}
+              <span class="event-date">{{new Date(data[2].start_date).getDate()}}</span>
+              {{new Date(data[2].start_date).getFullYear()}}
+            </p>
+            <div class="vertical-parent col-md-8 col-9">
+              <span> {{data[2].title}} </span>
+              <br>
+              <p class="small">
+                {{data[2].location}}
               </p>
             </div>
           </div>
         </v-row>
       </v-fade-transition>
+
+      <v-row v-if="data.length === 0">
+        <p class="text-muted text-center mx-3"
+           v-text="'No Upcoming Events'"/>
+      </v-row>
+
       <v-row>
         <v-col>
           <v-btn class="float-right shadow" color="blue darken-2" dark tile to="/events">All Events</v-btn>

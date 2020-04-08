@@ -23,7 +23,7 @@
 
         <v-list two-line>
           <p class="text-muted text-muted text-center mt-3"
-             v-if="data.length === 0"
+             v-if="data.length === 0 && !loading"
              v-text="'Found Nothing'"/>
           <v-skeleton-loader
             class="w-100"

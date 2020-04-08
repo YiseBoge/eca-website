@@ -35,16 +35,16 @@
           </v-list-item-group>
         </v-list>
 
-        <v-col
-          cols="12"
-          md="12"
-        >
-          <v-switch
-            v-model="$vuetify.theme.dark"
-            primary
-            label="Dark Theme"
-          />
-        </v-col>
+        <!--        <v-col-->
+        <!--          cols="12"-->
+        <!--          md="12"-->
+        <!--        >-->
+        <!--          <v-switch-->
+        <!--            v-model="$vuetify.theme.dark"-->
+        <!--            primary-->
+        <!--            label="Dark Theme"-->
+        <!--          />-->
+        <!--        </v-col>-->
 
       </v-navigation-drawer>
 
@@ -56,15 +56,14 @@
 
     <v-app-bar :clipped-left="primaryDrawer.clipped" app>
 
-      <v-app-bar-nav-icon v-show="isLoggedIn"
-                          @click.stop="primaryDrawer.model = !primaryDrawer.model"
-      ></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click.stop="primaryDrawer.model = !primaryDrawer.model" v-show="isLoggedIn"
+      />
 
       <v-toolbar-title> Admin Panel</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer/>
       <v-form v-model="valid" v-show="isLoggedIn">
         <input type="hidden" name="_token"> <!--:value="csrf" -->
-        <v-spacer></v-spacer>
+        <v-spacer/>
         <v-btn text icon color="indigo" @click="logout">
           <v-icon>mdi-account-lock</v-icon>
         </v-btn>
@@ -75,9 +74,7 @@
       <v-container fluid>
         <v-row align="center" justify="center">
           <v-col cols="10">
-
-            <router-view></router-view>
-
+            <router-view/>
           </v-col>
         </v-row>
       </v-container>

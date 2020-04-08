@@ -12,7 +12,7 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedNews.title"></v-text-field>
+                          v-model="selectedNews.title"/>
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -22,7 +22,7 @@
             <vue-editor v-model="selectedNews.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
-                        :rules="rules.min_100"></vue-editor>
+                        :rules="rules.min_100"/>
           </v-col>
 
           <v-col cols="3">
@@ -33,19 +33,15 @@
           </v-col>
 
           <v-col cols="2" class="mx-auto">
-            <v-switch v-model="selectedNews.is_featured" label="Featured"></v-switch>
+            <v-switch label="Featured" v-model="selectedNews.is_featured"/>
           </v-col>
           <v-col cols="2" class="mx-auto">
             <v-select label="Select category" v-model="selectedNews.category" :rules="rules.required"
-                      :items="categories"></v-select>
-          </v-col>
-
-          <v-col cols="4">
-            <v-text-field v-model="selectedNews.link" label="External Link"></v-text-field>
+                      :items="categories"/>
           </v-col>
         </v-row>
         <div class="col-md-5 mx-auto">
-          <v-img :src="`${selectedNews.image_url}`"></v-img>
+          <v-img :src="selectedNews.image_url"/>
         </div>
         <div class="my-2 mx-auto align-center align-content-center">
           <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Update</v-btn>
