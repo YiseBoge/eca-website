@@ -95,19 +95,19 @@
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;
-        this.news.image = this.$refs.file.files[0];
+        this.selectedNews.image = this.$refs.file.files[0];
         this.button_text = filename.slice(0, 10);
         this.button_text += filename.length < 10 ? "" : "...";
       },
       submit() {
-        console.log(this.news);
+        console.log(this.selectedNews);
         let formData = new FormData();
-        Object.keys(this.news).forEach((key) => {
-          formData.append(key, this.news[key])
+        Object.keys(this.selectedNews).forEach((key) => {
+          formData.append(key, this.selectedNews[key])
         });
         formData.append("_method", "put");
         let self = this;
-        ajax.post(`news/${this.news.id}`, formData).then(
+        ajax.post(`news/${this.selectedNews.id}`, formData).then(
           response => {
             self.showAlert = true;
             self.alertType = 'success';

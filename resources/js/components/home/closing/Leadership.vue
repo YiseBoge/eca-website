@@ -25,7 +25,7 @@
               <v-list-item-content>
                 <v-list-item-title class="text-primary" v-html="item.name"/>
                 <v-list-item-subtitle v-text="item.position"/>
-                <small class="mt-1" v-if="item.description" v-text="item.description"/>
+                <small class="mt-1" v-if="item.description" v-html="item.description"/>
               </v-list-item-content>
             </v-list-item>
             <v-divider class="my-0"/>

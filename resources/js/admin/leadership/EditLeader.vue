@@ -90,7 +90,7 @@
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;
-        this.leader.image = this.$refs.file.files[0];
+        this.selectedLeader.image = this.$refs.file.files[0];
         this.button_text = filename.slice(0, 10);
         this.button_text += filename.length < 10 ? "" : "...";
       },
