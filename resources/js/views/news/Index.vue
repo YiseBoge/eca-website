@@ -24,7 +24,7 @@
 
 
         <v-list two-line>
-          <p class="text-muted text-muted text-center mt-3"
+          <p class="text-muted text-center mt-3"
              v-if="data.length === 0 && !loading"
              v-text="'Found Nothing'"/>
           <v-skeleton-loader
@@ -91,7 +91,7 @@
 
             <v-list>
               <v-subheader>Categories</v-subheader>
-              <p class="text-muted text-muted text-center mt-3"
+              <p class="text-muted text-center mt-3"
                  v-if="categories.length === 0"
                  v-text="'Found Nothing'"/>
               <v-list-item-group @change="fetchNews"
