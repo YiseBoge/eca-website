@@ -70,7 +70,7 @@
       </v-form>
     </v-app-bar>
 
-    <v-content>
+    <v-content v-if="isLoggedIn">
       <v-container fluid>
         <v-row align="center" justify="center">
           <v-col cols="10">
