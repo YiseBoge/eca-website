@@ -16,10 +16,11 @@
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="selectedEvent.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_20"/>
+            <v-textarea
+              :rules="rules.min_20"
+              label="Description"
+              v-model="selectedEvent.description"
+            />
           </v-col>
 
           <v-col cols="12" lg="4">
@@ -42,11 +43,11 @@
                   v-on="on"
                 />
               </template>
-              <v-date-picker v-model="dates" no-title @input="menu2 = false" range></v-date-picker>
+              <v-date-picker @input="menu2 = false" no-title range v-model="dates"/>
             </v-menu>
           </v-col>
           <v-col cols="8">
-            <v-text-field label="Location" v-model="selectedEvent.location" class="mx-auto"></v-text-field>
+            <v-text-field class="mx-auto" label="Location" v-model="selectedEvent.location"/>
           </v-col>
         </v-row>
 

@@ -20,15 +20,19 @@
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
-            <v-text-field label="Level*" required :rules="rules.required||rules.min_20"
-                          v-model="leader.level"/>
+            <v-select :items="levels"
+                      label="Level*"
+                      required
+                      v-model="leader.level"
+            />
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="leader.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_20"/>
+            <v-textarea
+              :rules="rules.min_20"
+              label="Description"
+              v-model="leader.description"
+            />
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -68,6 +72,7 @@
       return {
         valid: false,
         modal: false,
+        levels: [1, 2, 3, 4, 5],
         leader: new LeaderModel(),
         rules: Rules,
         showAlert: false,

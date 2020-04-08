@@ -13,6 +13,7 @@
           md="4"
           sm="8"
         >
+          <v-alert dismissible type="error" v-if="sessionMessage">{{ sessionMessage }}</v-alert>
           <v-card class="elevation-12">
             <v-toolbar
               color="primary"

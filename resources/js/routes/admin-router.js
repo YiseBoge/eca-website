@@ -5,6 +5,7 @@ import {ifAuthenticated} from "../admin/auth";
 
 const Login = () => import('~/admin/Login');
 const Welcome = () => import('~/admin/Welcome');
+const NotFound = () => import('~/views/errors/NotFound');
 
 const News = () => import('~/admin/news/News');
 const AddNews = () => import('~/admin/news/AddNews');
@@ -51,7 +52,12 @@ export const router = new Router({
       component: AddPublication,
       beforeEnter: ifAuthenticated
     },
-    {path: '/publications/:id/edit', name: 'edit publication', component: EditPublication, beforeEnter: ifAuthenticated},
-    // {path: '*', name: 'NotFound', component: NotFound},
+    {
+      path: '/publications/:id/edit',
+      name: 'edit publication',
+      component: EditPublication,
+      beforeEnter: ifAuthenticated
+    },
+    {path: '*', name: 'NotFound', component: NotFound},
   ]
 });

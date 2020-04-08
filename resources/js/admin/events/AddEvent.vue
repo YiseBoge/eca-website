@@ -17,7 +17,6 @@
           <v-col cols="12">
             <v-textarea
               :rules="rules.min_20"
-              hint="Short description of the event"
               label="Description"
               v-model="event.description"
             />

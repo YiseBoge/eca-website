@@ -9,10 +9,9 @@
     >
       <v-col
         cols="12"
-        md="4"
         sm="8"
       >
-        <h1 class="display-1">
+        <h1 class="display-1 text-muted text-center">
           Welcome to the Admin Side
         </h1>
       </v-col>

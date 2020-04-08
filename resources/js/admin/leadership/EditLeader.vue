@@ -26,10 +26,11 @@
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="selectedLeader.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_20"/>
+            <v-textarea
+              :rules="rules.min_20"
+              label="Description"
+              v-model="selectedLeader.description"
+            />
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -71,6 +72,7 @@
         valid: false,
         modal: false,
         rules: Rules,
+        levels: [1, 2, 3, 4, 5],
         showAlert: false,
         alertType: 'success',
         button_text: 'Upload Image',

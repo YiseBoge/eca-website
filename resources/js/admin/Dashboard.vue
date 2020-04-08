@@ -71,7 +71,7 @@
     <v-content v-if="isLoggedIn">
       <v-container fluid>
         <v-row align="center" justify="center">
-          <v-col cols="10">
+          <v-col class="px-12 py-5">
             <router-view/>
           </v-col>
         </v-row>
@@ -118,6 +118,7 @@
       },
       urls() {
         return [
+          {icon: 'mdi-home', title: 'Welcome', link: '/'},
           {icon: 'mdi-newspaper', title: 'News', link: '/news'},
           {icon: 'mdi-publish', title: 'Publications', link: '/publications'},
           {icon: 'mdi-calendar', title: 'Events', link: '/events'},
