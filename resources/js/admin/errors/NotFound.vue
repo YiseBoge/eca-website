@@ -19,7 +19,7 @@
 </template>
 
 <script>
-  import {router} from "../../routes/router";
+  import {router} from "../../routes/admin-router";
 
   export default {
     name: 'NotFound',

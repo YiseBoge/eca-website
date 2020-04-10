@@ -14,7 +14,7 @@
           flat>
           <v-btn
             color="primary" dark
-            to="/publications/add-publication">Add New
+            to="/publications/new">Add New
           </v-btn>
         </v-toolbar>
       </v-col>

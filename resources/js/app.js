@@ -2,7 +2,7 @@ import Vue from 'vue'
 import vuetify from '~/plugins/vuetify'
 import '~/plugins/base'
 import App from '~/App.vue'
-import router from '~/router'
+import {router} from '~/routes/router'
 import {store} from '~/store/store'
 import moment from "moment";
 

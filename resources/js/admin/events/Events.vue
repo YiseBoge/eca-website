@@ -14,7 +14,7 @@
           color="white">
           <v-btn
             color="primary" dark
-            to="/events/add-event">Add New
+            to="/events/new">Add New
           </v-btn>
         </v-toolbar>
       </v-col>

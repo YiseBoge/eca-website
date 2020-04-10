@@ -4,9 +4,9 @@
 
     <v-card class="py-3 px-4">
       <v-form>
-        <v-text-field append-icon="mdi-account" v-model="user.name" label="Name"></v-text-field>
-        <v-text-field append-icon="mdi-email" v-model="user.email" label="Email"></v-text-field>
-        <v-text-field append-icon="mdi-lock" v-model="user.password" label="Password"></v-text-field>
+        <v-text-field append-icon="mdi-account" label="Name" v-model="user.name"/>
+        <v-text-field append-icon="mdi-email" label="Email" v-model="user.email"/>
+        <v-text-field append-icon="mdi-lock" label="Password" v-model="user.password"/>
         <v-btn @click="update" class="mx-auto d-block" color="blue" dark>Update</v-btn>
       </v-form>
     </v-card>

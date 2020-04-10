@@ -55,7 +55,7 @@
 
 <script>
   import ajax from "../ajax";
-  import router from "../router";
+  import {router} from "../routes/router";
   import {store} from "../store/store"
 
   export default {

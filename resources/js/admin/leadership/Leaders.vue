@@ -14,7 +14,7 @@
           flat>
           <v-btn
             color="primary" dark
-            to="/leadership/add-leader">Add New
+            to="/leadership/new">Add New
           </v-btn>
         </v-toolbar>
       </v-col>

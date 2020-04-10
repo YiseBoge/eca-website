@@ -6,7 +6,7 @@
         app class="shadow-lg" overflow
       >
         <v-img :aspect-ratio="16/9"
-               src="https://wonderfulengineering.com/wp-content/uploads/2014/09/blue-wallpaper-37.jpg">
+               src="/img/admin-head.jpg">
           <v-row align="end" class="lightbox white--text pa-2 fill-height">
             <v-col>
               <div class="subheading"></div>
@@ -108,10 +108,7 @@
   import Login from "./Login";
   import {router} from "../routes/admin-router";
   import {store} from "../store/store";
-  import {errorHandler} from "./handle-error";
   import {logout} from "./auth";
-
-  import ajax from "../ajax";
 
   export default {
 
@@ -144,6 +141,7 @@
       },
       urls() {
         return [
+          {icon: 'mdi-home', title: 'Home', link: '/'},
           {icon: 'mdi-newspaper', title: 'News', link: '/news'},
           {icon: 'mdi-publish', title: 'Publications', link: '/publications'},
           {icon: 'mdi-calendar', title: 'Events', link: '/events'},
@@ -158,4 +156,3 @@
     }
   }
 </script>
-<style scoped></style>

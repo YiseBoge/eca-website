@@ -13,10 +13,10 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/admin', function() {
+Route::get('/admin{any}', function () {
     return view('dashboard');
-});
+})->where('any', '.*');
 
-Route::get('/', function() {
+Route::get('/{any}', function () {
     return view('index');
-});
+})->where('any', '.*');

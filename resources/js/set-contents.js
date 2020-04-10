@@ -1,5 +1,4 @@
 import {store} from "./store/store";
-import router from "./router"
 
 export const setContent = (from, to, next) => {
   fetchContent(to);

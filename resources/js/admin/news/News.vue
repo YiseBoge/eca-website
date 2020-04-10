@@ -13,7 +13,7 @@
           flat>
           <v-btn
             color="primary" dark
-            to="/news/add-news">Add New
+            to="/news/new">Add New
           </v-btn>
         </v-toolbar>
       </v-col>
