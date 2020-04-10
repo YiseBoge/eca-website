@@ -57,15 +57,35 @@
       <v-app-bar-nav-icon @click.stop="primaryDrawer.model = !primaryDrawer.model" v-show="isLoggedIn"
       />
 
-      <v-toolbar-title> ECA Admin</v-toolbar-title>
+      <v-toolbar-title>ECA Admin</v-toolbar-title>
       <v-spacer/>
-      <v-form v-model="valid" v-show="isLoggedIn">
-        <input type="hidden" name="_token"> <!--:value="csrf" -->
-        <v-spacer/>
-        <v-btn @click="logout" color="primary" icon text>
-          <v-icon>mdi-account-lock</v-icon>
-        </v-btn>
-      </v-form>
+
+      <v-menu v-if="isLoggedIn" bottom left
+              :nudge-width="200"
+              offset-x>
+        <template v-slot:activator="{ on }">
+          <v-btn text icon color="indigo" v-on="on">
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item to="/profile">
+            <v-list-item-action>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-action>
+            <v-list-title>Profile</v-list-title>
+          </v-list-item>
+
+          <v-list-item @click="clearToken">
+            <v-list-item-action>
+              <v-icon>mdi-lock</v-icon>
+            </v-list-item-action>
+            <v-list-title>Logout</v-list-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
     </v-app-bar>
 
     <v-content v-if="isLoggedIn">
@@ -85,9 +105,13 @@
 </template>
 
 <script>
+  import Login from "./Login";
   import {router} from "../routes/admin-router";
   import {store} from "../store/store";
-  import Login from "./Login";
+  import {errorHandler} from "./handle-error";
+  import {logout} from "./auth";
+
+  import ajax from "../ajax";
 
   export default {
 
@@ -101,15 +125,17 @@
       footer: {
         inset: false,
       },
-      // csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+      profile: [
+        {title: 'Profile ', to: '/profile', icon: 'mdi-account'},
+        {title: 'Logout', to: '/logout', icon: 'mdi-lock'}
+      ]
     }),
     methods: {
       route(link) {
         router.push(link);
       },
-      logout() {
-        store.dispatch('resetUser');
-        router.push('/').then();
+      clearToken() {
+        logout();
       }
     },
     computed: {
@@ -118,7 +144,6 @@
       },
       urls() {
         return [
-          {icon: 'mdi-home', title: 'Welcome', link: '/'},
           {icon: 'mdi-newspaper', title: 'News', link: '/news'},
           {icon: 'mdi-publish', title: 'Publications', link: '/publications'},
           {icon: 'mdi-calendar', title: 'Events', link: '/events'},
@@ -128,6 +153,8 @@
     },
     components: {
       'login': Login
+    },
+    created() {
     }
   }
 </script>

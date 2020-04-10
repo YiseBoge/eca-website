@@ -32,6 +32,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
+//            $user = User::find(Auth::user()->id);
             return response()->json(['status' => 'success', 'token' => $token], 200)
                 ->header('Authorization', $token);
         }
@@ -64,6 +65,30 @@ class AuthController extends Controller
                 ->header('Authorization', $token);
         }
         return response()->json(['error' => 'refresh_token_error'], 401);
+    }
+
+    public function updateProfile(Request $request) {
+        $v = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'min:3',
+            'name' => 'required'
+        ]);
+        if ($v->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 422);
+        }
+        $user = User::find(Auth::user()->id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+
+        if ($request->password != null)
+            $user->password = bcrypt($request->password);
+
+        $user->save();
+        return response()->json(['status' => 'success'], 200);
+
     }
 
     private function guard()

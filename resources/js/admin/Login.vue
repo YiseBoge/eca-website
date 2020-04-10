@@ -79,9 +79,15 @@
         ajax.post("auth/login", this.user)
           .then(response => {
             console.log(response);
-            store.dispatch("setUser", response.data);
+            store.dispatch("setToken", response.data.token);
             store.dispatch("resetMessage");
             router.push("/"); // route to dashboard list if the authentication is successful
+            ajax.get("auth/user").then(
+              resp => {
+                console.log("user", resp.data.data);
+                store.dispatch('setUser', resp.data.data);
+              }
+            )
           }, error => {
             console.log(error);
             store.dispatch("setStateMessage", "The email and password you entered don't match");
