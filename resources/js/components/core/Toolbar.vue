@@ -2,7 +2,7 @@
   <v-card class="overflow-hidden" raised tile>
     <v-app-bar
       class="px-12"
-      color="blue accent-2"
+      color="primary"
       dark
     >
       <!--      <v-spacer/>-->

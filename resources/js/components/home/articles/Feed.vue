@@ -63,9 +63,8 @@
                 </v-btn>
               </v-card-actions>
             </div>
-            <div :style="'background: url(' + data[0].image_url +') center;'"
+            <div :style="'background: url(' + data[0].image_url +') center; background-size: cover;'"
                  class="col-md-4"
-                 style="background-size: cover;"
             >
             </div>
           </v-card>

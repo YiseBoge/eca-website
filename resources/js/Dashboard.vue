@@ -15,7 +15,7 @@
           </v-row>
         </v-img>
 
-        <v-list nav>
+        <v-list dense nav>
           <v-list-item-group
             justify="center"
             active-class="primary--text"
@@ -52,35 +52,35 @@
       <login class="mt-12"/>
     </v-container>
 
-    <v-app-bar :clipped-left="primaryDrawer.clipped" app class="shadow-lg">
+    <v-app-bar :clipped-left="primaryDrawer.clipped" app class="shadow-lg" color="primary" dark>
 
       <v-app-bar-nav-icon @click.stop="primaryDrawer.model = !primaryDrawer.model" v-show="isLoggedIn"
       />
 
-      <v-toolbar-title>ECA Admin</v-toolbar-title>
-      <v-spacer/>
 
+      <v-toolbar-title v-if="isLoggedIn">ECA Admin</v-toolbar-title>
+      <a href="/" v-else>
+        <v-toolbar-title>
+          <v-img src="/img/brand/white.png" style="width: 200px">
+
+          </v-img>
+        </v-toolbar-title>
+      </a>
+
+      <v-spacer/>
       <v-menu v-if="isLoggedIn" bottom left
-              :nudge-width="200"
-              offset-x>
+              :nudge-width="150">
         <template v-slot:activator="{ on }">
-          <v-btn text icon color="indigo" v-on="on">
-            <v-icon>mdi-dots-vertical</v-icon>
+          <v-btn icon text v-on="on">
+            <v-icon>mdi-account</v-icon>
           </v-btn>
         </template>
 
         <v-list>
-          <v-list-item to="/profile">
-            <v-list-item-action>
-              <v-icon>mdi-account</v-icon>
-            </v-list-item-action>
+          <v-list-item @click="route('/profile')">
             <v-list-title>Profile</v-list-title>
           </v-list-item>
-
-          <v-list-item @click="clearToken">
-            <v-list-item-action>
-              <v-icon>mdi-lock</v-icon>
-            </v-list-item-action>
+          <v-list-item @click="logout_modal = true">
             <v-list-title>Logout</v-list-title>
           </v-list-item>
         </v-list>
@@ -101,6 +101,18 @@
     <v-footer :inset="footer.inset" app class="shadow-lg">
       <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
+
+    <v-dialog max-width="300" persistent v-model="logout_modal">
+      <v-card>
+        <v-card-title class="headline">Logout</v-card-title>
+        <v-card-text>Are you sure you wish to logout?</v-card-text>
+        <v-card-actions>
+          <v-spacer/>
+          <v-btn @click="logout_modal = false" color="secondary" text>cancel</v-btn>
+          <v-btn @click="clearToken" color="primary" text top>Logout</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-app>
 </template>
 
@@ -114,6 +126,7 @@
 
     data: () => ({
       valid: false,
+      logout_modal: false,
       drawers: ['Default (no property)', 'Permanent', 'Temporary'],
       primaryDrawer: {
         model: null,
@@ -132,6 +145,7 @@
         router.push(link);
       },
       clearToken() {
+        this.logout_modal = false;
         logout();
       }
     },
@@ -143,7 +157,7 @@
         return [
           {icon: 'mdi-home', title: 'Home', link: '/'},
           {icon: 'mdi-newspaper', title: 'News', link: '/news'},
-          {icon: 'mdi-publish', title: 'Publications', link: '/publications'},
+          {icon: 'mdi-file-document', title: 'Publications', link: '/publications'},
           {icon: 'mdi-calendar', title: 'Events', link: '/events'},
           {icon: 'mdi-account-tie', title: 'Leadership', link: '/leadership'},
         ];

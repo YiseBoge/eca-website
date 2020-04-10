@@ -11,7 +11,7 @@
         cols="12"
         sm="8"
       >
-        <h1 class="display-1 text-muted text-center">
+        <h1 class="display-1 grey--text text--darken-3 text-center">
           Welcome to the Admin Side
         </h1>
       </v-col>

@@ -2,8 +2,11 @@
   <v-container class="col-md-6">
     <v-alert type="error" v-if="sessionMessage" dismissible>{{ sessionMessage }}</v-alert>
 
-    <v-card class="py-3 px-4">
-      <v-form>
+    <v-card class="px-3 py-6 shadow-lg">
+      <v-card-title>
+        Edit Profile
+      </v-card-title>
+      <v-form class="px-5 my-5">
         <v-text-field append-icon="mdi-account" label="Name" v-model="user.name"/>
         <v-text-field append-icon="mdi-email" label="Email" v-model="user.email"/>
         <v-text-field append-icon="mdi-lock" label="Password" v-model="user.password"/>
