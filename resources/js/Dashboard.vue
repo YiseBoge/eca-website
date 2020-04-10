@@ -105,10 +105,10 @@
 </template>
 
 <script>
-  import Login from "./Login";
-  import {router} from "../routes/admin-router";
-  import {store} from "../store/store";
-  import {logout} from "./auth";
+  import Login from "./admin/Login";
+  import {router} from "./routes/admin-router";
+  import {store} from "./store/store";
+  import {logout} from "./admin/auth";
 
   export default {
 
