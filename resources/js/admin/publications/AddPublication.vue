@@ -1,6 +1,6 @@
 <template>
-  <v-card>
-     <v-alert :type="alertType" dismissible v-show="showAlert">
+  <v-card class="px-5 py-3">
+    <v-alert :type="alertType" dismissible v-show="showAlert">
       {{ alertType === 'success' ? 'Publication Successfully inserted.' : 'Error something went wrong' }}
     </v-alert>
     <v-card-title>
@@ -11,13 +11,13 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="publication.title"></v-text-field>
+                          v-model="publication.title"/>
           </v-col>
           <v-col cols="12">
             <vue-editor v-model="publication.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
-                        :rules="rules.min_100"></vue-editor>
+                        :rules="rules.min_100"/>
           </v-col>
 
           <!-- <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -29,7 +29,7 @@
               {{ image_button_text }}
             </v-btn> -->
             <template>
-              <v-file-input show-size label="Upload Image" v-model="publication.image"></v-file-input>
+              <v-file-input label="Upload Image" show-size v-model="publication.image"/>
             </template>
           </v-col>
 
@@ -41,7 +41,7 @@
               {{ file_button_text }}
             </v-btn> -->
             <template>
-              <v-file-input show-size label="Upload File" v-model="publication.file"></v-file-input>
+              <v-file-input label="Upload File" show-size v-model="publication.file"/>
             </template>
           </v-col>
 

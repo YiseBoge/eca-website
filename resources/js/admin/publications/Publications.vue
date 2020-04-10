@@ -1,35 +1,38 @@
 <template>
-  <v-card>
-    <delete-dialog :open="deleteDialog" :title="title" @onConfirmation="onDeleteConfirmation" />
-    <v-card-title>
-      Publications
-    </v-card-title>
+  <v-card class="px-5 py-3">
+    <delete-dialog :open="deleteDialog" :title="title" @onConfirmation="onDeleteConfirmation"/>
+
+    <v-row>
+      <v-col cols="8">
+        <v-card-title>
+          Publications
+        </v-card-title>
+      </v-col>
+      <v-col class="py-2" cols="4">
+        <v-toolbar
+          class="float-right" color="white"
+          flat>
+          <v-btn
+            color="primary" dark
+            to="/publications/add-publication">Add New
+          </v-btn>
+        </v-toolbar>
+      </v-col>
+    </v-row>
 
     <v-data-table
       :headers="headers"
       :items="publications"
       class=" mx-auto my-auto"
     >
-      <template v-slot:top>
-        <v-toolbar
-          flat
-          color="white">
-          <v-btn
-            color="primary"
-            dark
-            class="mb-2"
-            to="/publications/add-publication">Add Publication
-          </v-btn>
-        </v-toolbar>
-      </template>
       <template v-slot:no-data>
-        <p>No data is available</p>
+        <p class="my-2">No Data Available</p>
       </template>
-       <template v-slot:item.title="{item}">
+      <template v-slot:item.title="{item}">
         {{ compress(item.title) }}
       </template>
       <template v-slot:item.description="{item}">
-         <p v-html="item.description"></p>
+        <p v-text="htmlToText(item.description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
        <v-icon class="mr-2" @click="onEdit(item)">

@@ -12,7 +12,7 @@
         >
           <v-tab
             :key="i"
-            v-for="i in ['Upcoming', 'Past']"
+            v-for="i in times"
           >
             {{i}}
           </v-tab>
@@ -89,6 +89,7 @@
       page: 1,
       size: 10,
       time: 0,
+      times: ['Upcoming', 'Past'],
       sizes: [10, 25, 50, 100],
       colors: ['blue', 'orange', 'green', 'grey'],
     }),
@@ -97,7 +98,7 @@
         store.dispatch('setEvents', {
           page: this.page,
           size: this.size,
-          past: this.time === 1,
+          type: this.times[this.time],
         });
       },
     },

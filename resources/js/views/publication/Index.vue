@@ -87,6 +87,9 @@
           >
             <v-list>
               <v-subheader>Categories</v-subheader>
+              <p class="text-muted text-center mt-3"
+                 v-if="categories.length === 0"
+                 v-text="'Found Nothing'"/>
               <v-list-item-group
                 @change="fetchPublications"
                 color="primary" multiple

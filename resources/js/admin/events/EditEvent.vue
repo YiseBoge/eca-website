@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="px-5 py-3">
     <v-alert :type="alertType" dismissible v-show="showAlert">
       {{ alertType === 'success' ? 'Event Successfully Updated.' : 'Error. Something Went Wrong' }}
     </v-alert>
@@ -12,14 +12,15 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.required"
-                          v-model="selectedEvent.title"></v-text-field>
+                          v-model="selectedEvent.title"/>
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="selectedEvent.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_20"></vue-editor>
+            <v-textarea
+              :rules="rules.min_20"
+              label="Description"
+              v-model="selectedEvent.description"
+            />
           </v-col>
 
           <v-col cols="12" lg="4">
@@ -40,13 +41,13 @@
                   prepend-icon="mdi-calendar"
                   readonly
                   v-on="on"
-                ></v-text-field>
+                />
               </template>
-              <v-date-picker v-model="dates" no-title @input="menu2 = false" range></v-date-picker>
+              <v-date-picker @input="menu2 = false" no-title range v-model="dates"/>
             </v-menu>
           </v-col>
           <v-col cols="8">
-            <v-text-field label="Location" v-model="selectedEvent.location" class="mx-auto"></v-text-field>
+            <v-text-field class="mx-auto" label="Location" v-model="selectedEvent.location"/>
           </v-col>
         </v-row>
 
@@ -120,7 +121,7 @@
       store.dispatch('setSelectedEvent', {id: router.currentRoute.params.id});
     },
     mounted() {
-      this.event = store.getters.getSelectedEvent
+      this.event = store.getters.getSelectedEvent;
       this.dateRange = this.dates;
     },
     computed: {
@@ -131,7 +132,7 @@
           return [this.selectedEvent.start_date, this.selectedEvent.end_date];
       },
       dateRangeText () {
-        return this.dates.join("   ~   "); 
+        return this.dates.join("   ~   ");
       },
     }
   }

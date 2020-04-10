@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="px-5 py-3">
     <v-alert :type="alertType" dismissible v-show="showAlert">
       {{ alertType === 'success' ? 'Leader Successfully updated.' : 'Error something went wrong' }}
     </v-alert>
@@ -12,24 +12,25 @@
         <v-row>
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedLeader.name"></v-text-field>
+                          v-model="selectedLeader.name"/>
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Position*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedLeader.position"></v-text-field>
+                          v-model="selectedLeader.position"/>
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Level*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedLeader.level"></v-text-field>
+                          v-model="selectedLeader.level"/>
           </v-col>
 
           <v-col cols="12">
-            <vue-editor v-model="selectedLeader.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_20"></vue-editor>
+            <v-textarea
+              :rules="rules.min_20"
+              label="Description"
+              v-model="selectedLeader.description"
+            />
           </v-col>
 
           <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -71,6 +72,7 @@
         valid: false,
         modal: false,
         rules: Rules,
+        levels: [1, 2, 3, 4, 5],
         showAlert: false,
         alertType: 'success',
         button_text: 'Upload Image',

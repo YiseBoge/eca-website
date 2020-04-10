@@ -1,40 +1,56 @@
 <template>
-  <v-row align="center" justify="center">
-    <v-col cols="12" sm="8" md="4">
-      <v-alert type="error" v-if="sessionMessage" dismissible>{{ sessionMessage }}</v-alert>
-      <v-card class="elevation-12">
-        <v-toolbar color="primary" dark flat>
-          <v-toolbar-title>Login form</v-toolbar-title>
-          <v-spacer/>
-        </v-toolbar>
-        <v-card-text>
-          <v-form class="mx-4 my-4" v-model="valid">
-            <v-text-field
-              :rules="rules.required"
-              v-model="user.email"
-              label="Email"
-              required
-            />
-            <v-text-field
-              :rules="rules.required"
-              :append-icon="!show1 ? 'mdi-eye-off' : 'mdi-eye'"
-              v-model="user.password"
-              label="Password"
-              :type="show1 ? 'text' : 'password'"
-              required
-              @click:append="show1 = !show1"
-            />
+  <v-content>
+    <v-container
+      class="fill-height"
+      fluid
+    >
+      <v-row
+        align="center"
+        justify="center"
+      >
+        <v-col
+          cols="12"
+          md="4"
+          sm="8"
+        >
+          <v-alert dismissible type="error" v-if="sessionMessage">{{ sessionMessage }}</v-alert>
+          <v-card class="elevation-12">
+            <v-toolbar
+              color="primary"
+              dark flat
+            >
+              <v-toolbar-title>Login</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <v-form class="mx-4 my-4" v-model="valid">
+                <v-text-field
+                  :rules="rules.required"
+                  label="Email"
+                  required
+                  v-model="user.email"
+                />
+                <v-text-field
+                  :append-icon="!show1 ? 'mdi-eye-off' : 'mdi-eye'"
+                  :rules="rules.required"
+                  :type="show1 ? 'text' : 'password'"
+                  @click:append="show1 = !show1"
+                  label="Password"
+                  required
+                  v-model="user.password"
+                />
 
-            <div class="my-2 mx-auto align-center align-content-center">
-              <v-btn :disabled="!valid" color="primary" class="d-block mx-auto"
-                     @click="submit"> Login
-              </v-btn>
-            </div>
-          </v-form>
-        </v-card-text>
-      </v-card>
-    </v-col>
-  </v-row>
+                <div class="my-2 mx-auto align-center align-content-center">
+                  <v-btn :disabled="!valid" @click="submit" class="d-block mx-auto"
+                         color="primary"> Login
+                  </v-btn>
+                </div>
+              </v-form>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-content>
 </template>
 
 <script>
@@ -50,8 +66,8 @@
         show1: false,
         errorMsg: false,
         user: {
-          email: "admin@test.com",
-          password: 'admin',
+          email: null,
+          password: null,
         },
         rules: {
           required: [val => (val || '').length > 0 || 'This field is required'],
