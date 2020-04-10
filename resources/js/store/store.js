@@ -16,27 +16,33 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   plugins: [
     createPersistedState({
-      paths: ['user'],
+      paths: ['user', 'token'],
     })
   ],
 
   state: {
     user: null,
+    token: null,
   },
   getters: {
     getApiToken: state => {
-      if (state.user === null)
-        return null;
-      return state.user.token;
+      return state.token;
     },
+    getUser: state => {
+      return state.user;
+    }
   },
   mutations: {
     resetUser: (state) => {
       state.user = null;
+      state.token = null;
     },
     setUser: (state, payload) => {
       state.user = payload;
     },
+    setToken: (state, payload) => {
+      state.token = payload;
+    }
   },
 
   actions: {
@@ -45,16 +51,19 @@ export const store = new Vuex.Store({
     },
     resetUser: ({commit}) => {
       commit("resetUser");
+    },
+    setToken: ({commit}, payload) => {
+      commit("setToken", payload);
     }
   },
   modules: {
-    loaders,
     home,
-    events,
     news,
-    publications,
-    leadership,
     media,
-    messages
+    events,
+    loaders,
+    messages,
+    leadership,
+    publications
   }
 });

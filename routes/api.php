@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::post('oauth/{driver}', 'Auth\OAuthController@redirectToProvider');
     Route::get('oauth/{driver}/callback', 'Auth\OAuthController@handleProviderCallback')->name('oauth.callback');
 
+    Route::post('user-profile/update', 'AuthController@updateProfile');
 
     Route::apiResource('news', 'NewsController')->only(['destroy', 'store', 'update']);
     Route::apiResource('event', 'EventsController')->only(['destroy', 'store', 'update']);
