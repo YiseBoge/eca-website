@@ -1,5 +1,5 @@
 <template>
-  <v-card class="px-5 py-3">
+  <v-card class="px-5 py-3 shadow-lg">
     <v-alert :type="alertType" dismissible v-show="showAlert">
       {{ alertType === 'success' ? 'News Successfully inserted.' : 'Error something went wrong' }}
     </v-alert>

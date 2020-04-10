@@ -3,7 +3,7 @@
     <v-container v-if="isLoggedIn">
       <v-navigation-drawer
         v-model="primaryDrawer.model"
-        app overflow
+        app class="shadow-lg" overflow
       >
         <v-img :aspect-ratio="16/9"
                src="https://wonderfulengineering.com/wp-content/uploads/2014/09/blue-wallpaper-37.jpg">
@@ -52,7 +52,7 @@
       <login class="mt-12"/>
     </v-container>
 
-    <v-app-bar :clipped-left="primaryDrawer.clipped" app>
+    <v-app-bar :clipped-left="primaryDrawer.clipped" app class="shadow-lg">
 
       <v-app-bar-nav-icon @click.stop="primaryDrawer.model = !primaryDrawer.model" v-show="isLoggedIn"
       />
@@ -78,7 +78,7 @@
       </v-container>
     </v-content>
 
-    <v-footer :inset="footer.inset" app>
+    <v-footer :inset="footer.inset" app class="shadow-lg">
       <span class="px-4">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>

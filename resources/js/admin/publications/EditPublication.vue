@@ -1,6 +1,6 @@
 <template>
-  <v-card>
-     <v-alert :type="alertType" dismissible v-show="showAlert">
+  <v-card class="px-5 py-3 shadow-lg">
+    <v-alert :type="alertType" dismissible v-show="showAlert">
       {{ alertType === 'success' ? 'Publication Successfully inserted.' : 'Error something went wrong' }}
     </v-alert>
     <v-card-title>

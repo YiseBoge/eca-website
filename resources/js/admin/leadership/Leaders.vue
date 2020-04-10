@@ -1,5 +1,5 @@
 <template>
-  <v-card class="px-5 py-3">
+  <v-card class="px-5 py-3 shadow-lg">
     <delete-dialog :open="deleteDialog" :title="title" @onConfirmation="onDeleteConfirmation"/>
 
     <v-row>
