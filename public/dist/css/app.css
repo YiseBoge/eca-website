@@ -193,7 +193,7 @@ var render = function() {
             "v-row",
             [
               _c("v-col", [
-                _vm.data.length === 0
+                !_vm.homeLoaders.featured && _vm.data.length === 0
                   ? _c("p", {
                       staticClass: "text-muted text-center mt-3",
                       domProps: { textContent: _vm._s("No Featured News") }
