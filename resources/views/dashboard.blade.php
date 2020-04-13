@@ -19,20 +19,20 @@ $config = [
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="{{ mix('dist/css/app.css') }}">
+  <link rel="stylesheet" href="{{ asset('dist/css/app.css') }}">
 </head>
 <body>
-  <div id="app"></div>
+<div id="app"></div>
 
-  {{-- Global configuration object --}}
-  <script>
-    window.config = @json($config);
-  </script>
+{{-- Global configuration object --}}
+<script>
+  window.config = @json($config);
+</script>
 
-  {{-- Load the application scripts --}}
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-          integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-          crossorigin="anonymous"></script>
-  <script src="{{ mix('dist/js/dashboard.js') }}"></script>
+{{-- Load the application scripts --}}
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+<script src="{{ asset('dist/js/dashboard.js') }}"></script>
 </body>
 </html>
