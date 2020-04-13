@@ -2,11 +2,10 @@
   <v-container
     grid-list-xl
   >
-    <v-container>
+    <v-container v-if="!homeLoaders.featured && data.length === 0">
       <v-row>
         <v-col>
           <p class="text-muted text-center mt-3"
-             v-if="!homeLoaders.featured && data.length === 0"
              v-text="'No Featured News'"/>
         </v-col>
       </v-row>
