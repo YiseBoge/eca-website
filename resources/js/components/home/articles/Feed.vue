@@ -6,7 +6,7 @@
       <v-row>
         <v-col>
           <p class="text-muted text-center mt-3"
-             v-if="data.length === 0"
+             v-if="!homeLoaders.featured && data.length === 0"
              v-text="'No Featured News'"/>
         </v-col>
       </v-row>
