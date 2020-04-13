@@ -11,7 +11,7 @@
       class="shadow-lg rounded"
     >
       <v-img
-        :src="value.image_url"
+        :src="server + value.image_url"
         height="100%"
         gradient="rgba(0, 0, 0, .42), rgba(0, 0, 0, .42)"
       >
@@ -56,7 +56,14 @@
 </template>
 
 <script>
+  import {SERVER_BASE_URL} from "~/ajax";
+
   export default {
+    data() {
+      return {
+        server: SERVER_BASE_URL,
+      }
+    },
     props: {
       size: {
         type: Number,

@@ -63,7 +63,7 @@
                 </v-btn>
               </v-card-actions>
             </div>
-            <div :style="'background: url(' + data[0].image_url +') center; background-size: cover;'"
+            <div :style="'background: url(' + server + data[0].image_url +') center; background-size: cover;'"
                  class="col-md-4"
             >
             </div>
@@ -86,10 +86,15 @@
 <script>
 
   import {store} from "~/store/store";
+  import {SERVER_BASE_URL} from "~/ajax";
 
   export default {
     name: 'Feed',
-
+    data() {
+      return {
+        server: SERVER_BASE_URL,
+      }
+    },
     components: {
       FeedCard: () => import('~/components/home/articles/FeedCard')
     },

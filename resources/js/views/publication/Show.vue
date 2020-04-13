@@ -14,7 +14,7 @@
         <!--                v-if="data.image_url"/>-->
         <!--        <img class="rounded shadow-sm" :src="data.image_url"/>-->
         <div class="my-4" v-html="data.description"/>
-        <a :href="data.file_url" class="btn btn-primary btn-sm text-white shadow-lg" target="_blank">
+        <a :href="server + data.file_url" class="btn btn-primary btn-sm text-white shadow-lg" target="_blank">
           <v-icon color="white" left small>mdi-download</v-icon>
           Download
         </a>
@@ -31,11 +31,13 @@
 <script>
 
   import {store} from "~/store/store";
+  import {SERVER_BASE_URL} from "~/ajax";
 
   export default {
     name: "publication-show",
     data() {
       return {
+        server: SERVER_BASE_URL,
         page: 1,
         size: 5,
         len: 6,

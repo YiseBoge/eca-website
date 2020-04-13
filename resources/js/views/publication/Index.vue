@@ -44,7 +44,7 @@
                     </v-list-item-content>
                   </v-col>
                   <v-col :class="item.image_url? 'shadow-sm' : ''"
-                         :style="'height:50%; background: url(' + item.image_url + ') center; background-size:cover;'"
+                         :style="'height:50%; background: url(' + server + item.image_url + ') center; background-size:cover;'"
                          class="d-md-block d-none rounded" cols="1">
                   </v-col>
                 </v-list-item>
@@ -131,11 +131,13 @@
 <script>
 
   import {store} from "../../store/store";
+  import {SERVER_BASE_URL} from "~/ajax";
 
   export default {
     name: "publication-index",
     data() {
       return {
+        server: SERVER_BASE_URL,
         page: 1,
         size: 10,
         year: 0,
