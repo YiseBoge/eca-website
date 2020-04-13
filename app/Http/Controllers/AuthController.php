@@ -32,7 +32,6 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         if ($token = $this->guard()->attempt($credentials)) {
-//            $user = User::find(Auth::user()->id);
             return response()->json(['status' => 'success', 'token' => $token], 200)
                 ->header('Authorization', $token);
         }
@@ -83,12 +82,31 @@ class AuthController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
 
-        if ($request->password != null)
-            $user->password = bcrypt($request->password);
-
         $user->save();
         return response()->json(['status' => 'success'], 200);
-
+    }
+    public function changePwd(Request $request) {
+        $v = Validator::make($request->all(), [
+            'old_password' => 'required',
+            'new_password' => 'required|min:3',
+        ]);
+        if ($v->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'errors' => $v->errors()
+            ], 422);
+        }
+        $user = User::find(Auth::user()->id);
+        $credentials = [
+            'email' => $user->email,
+            'password' => $request->old_password
+        ];
+        if ($this->guard()->attempt($credentials)) {
+            $user->password = bcrypt($request->new_password);
+            $user->save();
+            return response()->json(['status' => 'success'], 200);
+        }
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     private function guard()

@@ -1,16 +1,19 @@
 <template>
   <v-container class="col-md-6">
-    <v-alert type="error" v-if="sessionMessage" dismissible>{{ sessionMessage }}</v-alert>
-
     <v-card class="px-3 py-6 shadow-lg">
+      <v-alert type="error" v-if="sessionMessage" dismissible>{{ sessionMessage }}</v-alert>
       <v-card-title>
         Edit Profile
+        <v-spacer />
+
+        <change-password class="d-block mx-auto text-center"/>
       </v-card-title>
       <v-form class="px-5 my-5">
         <v-text-field append-icon="mdi-account" label="Name" v-model="user.name"/>
         <v-text-field append-icon="mdi-email" label="Email" v-model="user.email"/>
-        <v-text-field append-icon="mdi-lock" label="Password" v-model="user.password"/>
         <v-btn @click="update" class="mx-auto d-block" color="blue" dark>Update</v-btn>
+        <div class="mx-auto d-block">
+        </div>
       </v-form>
     </v-card>
   </v-container>
@@ -23,11 +26,15 @@
   import {router} from "../routes/admin-router";
   import {errorHandler} from "./handle-error";
 
+  import {Rules} from "./validation-rules";
+  import ChangePassword from "./ChangePassword";
+
   export default {
     name: "Profile",
     data() {
       return {
-        user: store.getters.getUser
+        user: store.getters.getUser,
+        rules: Rules
       }
     },
     methods: {
@@ -62,6 +69,9 @@
     },
     mounted() {
       store.dispatch("resetMessage");
+    },
+    components : {
+      'change-password': ChangePassword
     }
 
   }
