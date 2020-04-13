@@ -22,7 +22,7 @@
               :key="item.title"
             >
               <v-list-item-avatar style="height: 60px; width: 60px">
-                <v-img :src="item.image_url"/>
+                <v-img :src="server + item.image_url"/>
               </v-list-item-avatar>
 
               <v-list-item-content>
@@ -41,8 +41,14 @@
 
 <script>
   import {store} from "~/store/store";
+  import {SERVER_BASE_URL} from "~/ajax";
 
   export default {
+    data() {
+      return {
+        server: SERVER_BASE_URL,
+      }
+    },
     methods: {
       fetchLeadership() {
         store.dispatch('setLeadership', {page: 1, size: 10});

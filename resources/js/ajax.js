@@ -1,8 +1,9 @@
 import axios from 'axios';
 import {store} from "./store/store"
+export const SERVER_BASE_URL = "http://localhost:8000";
 
 const ajax = axios.create({
-  baseURL: (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : 'http://localhost:8000/api/'
+  baseURL: (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : SERVER_BASE_URL + '/api/'
 });
 
 ajax.CancelToken = axios.CancelToken;

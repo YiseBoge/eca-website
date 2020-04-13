@@ -29,7 +29,7 @@
               <v-list-item-subtitle v-text="htmlToText(item.description)"/>
               <p class="pt-1">
                 <router-link :to="'/publications/'+item.id" class="small d-inline">Read Mode</router-link>
-                <a :href="item.file_url" class="small d-inline float-right" target="_blank" v-if="item.file_url">Download</a>
+                <a :href="server + item.file_url" class="small d-inline float-right" target="_blank" v-if="item.file_url">Download</a>
               </p>
             </v-list-item-content>
           </v-list-item>
@@ -46,8 +46,14 @@
 
 <script>
   import {store} from "~/store/store";
+  import {SERVER_BASE_URL} from "~/ajax";
 
   export default {
+    data() {
+      return {
+        server: SERVER_BASE_URL,
+      }
+    },
     methods: {
       beautifyDate(date) {
         return date
