@@ -13,7 +13,7 @@
         <!--                style="height: 500px; background-size: cover;"-->
         <!--                v-if="data.image_url"/>-->
         <!--        <img class="rounded shadow-sm" :src="data.image_url"/>-->
-        <p class="my-4" v-html="data.description"/>
+        <div class="my-4" v-html="data.description"/>
       </v-col>
     </v-row>
   </v-container>

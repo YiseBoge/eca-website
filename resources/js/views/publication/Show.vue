@@ -13,7 +13,7 @@
         <!--                style="height: 500px; background-size: cover;"-->
         <!--                v-if="data.image_url"/>-->
         <!--        <img class="rounded shadow-sm" :src="data.image_url"/>-->
-        <p class="my-4" v-html="data.description"/>
+        <div class="my-4" v-html="data.description"/>
         <a :href="data.file_url" class="btn btn-primary btn-sm text-white shadow-lg" target="_blank">
           <v-icon color="white" left small>mdi-download</v-icon>
           Download
