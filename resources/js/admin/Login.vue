@@ -20,6 +20,15 @@
               dark flat
             >
               <v-toolbar-title>Login</v-toolbar-title>
+              <v-spacer/>
+              <v-progress-circular
+                v-if="loading"
+                class="mx-auto"
+                :size="50"
+                :width="7"
+                color="white"
+                indeterminate
+              ></v-progress-circular>
             </v-toolbar>
             <v-card-text>
               <v-form class="mx-4 my-4" v-model="valid">
@@ -65,6 +74,7 @@
         valid: false,
         show1: false,
         errorMsg: false,
+        loading: false,
         user: {
           email: null,
           password: null,
@@ -76,6 +86,7 @@
     },
     methods: {
       submit() {
+        this.loading = true;
         ajax.post("auth/login", this.user)
           .then(response => {
             console.log(response);
@@ -86,11 +97,13 @@
               resp => {
                 console.log("user", resp.data.data);
                 store.dispatch('setUser', resp.data.data);
+                this.loading = false;
               }
             )
           }, error => {
             console.log(error);
             store.dispatch("setStateMessage", "The email and password you entered don't match");
+            this.loading = false;
           });
       },
     },
