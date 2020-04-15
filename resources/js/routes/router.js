@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import NProgress from 'nprogress'
 import Router from 'vue-router'
 import Media from "../views/Media";
 import Events from "../views/Events";
@@ -31,3 +32,15 @@ export const router = new Router({
     {path: '*', name: 'NotFound', component: NotFound},
   ]
 });
+
+router.beforeResolve((to, from, next) => {
+  if (to.path) {
+    NProgress.start();
+  }
+  next()
+});
+
+router.afterEach(() => {
+  NProgress.done()
+});
+
