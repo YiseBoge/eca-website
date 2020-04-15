@@ -10,7 +10,6 @@
         </v-col>
       </v-row>
     </v-container>
-    </v-container>
 
     <v-fade-transition hide-on-leave>
       <v-container v-if="homeLoaders.featured">
