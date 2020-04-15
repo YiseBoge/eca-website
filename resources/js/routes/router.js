@@ -1,14 +1,16 @@
 import Vue from 'vue'
-import NProgress from 'nprogress'
+
 import Router from 'vue-router'
-import Media from "../views/Media";
-import Events from "../views/Events";
-import NewsIndex from "../views/news/Index";
-import NewsShow from "../views/news/Show";
-import NotFound from "../views/errors/NotFound";
-import PublicationIndex from "../views/publication/Index";
-import PublicationShow from "../views/publication/Show";
-import About from "../views/About";
+import NProgress from 'nprogress'
+
+const Media = () => import("~/views/Media");
+const Events = () => import("~/views/Events");
+const NewsIndex = () => import("~/views/news/Index");
+const NewsShow = () => import("~/views/news/Show");
+const NotFound = () => import("~/views/errors/NotFound");
+const PublicationIndex = () => import("~/views/publication/Index");
+const PublicationShow = () => import("~/views/publication/Show");
+const About = () => import("../views/About");
 
 const Home = () => import('~/views/Home.vue');
 

@@ -32,7 +32,7 @@
             type="list-item-three-line"
             v-if="loading"
           />
-          <v-list-item-group
+          <v-list-item-group v-else
           >
             <template v-for="(item) in data">
               <v-row>
@@ -94,7 +94,7 @@
               <p class="text-muted text-center mt-3"
                  v-if="categories.length === 0"
                  v-text="'Found Nothing'"/>
-              <v-list-item-group @change="fetchNews"
+              <v-list-item-group @change="fetchNews" v-else
                                  color="primary" multiple
                                  v-model="selectedCategories"
               >
