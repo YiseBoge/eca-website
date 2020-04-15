@@ -89,10 +89,14 @@
     </v-app-bar>
 
     <v-content v-if="isLoggedIn">
-      <v-container fluid>
+      <v-container fluid id="home" style="margin-top: -24px">
         <v-row align="center" justify="center">
-          <v-col class="px-12 py-5">
-            <router-view/>
+          <v-col class="px-12 pt-10">
+            <transition name="fade" mode="out-in">
+              <keep-alive>
+                <router-view />
+              </keep-alive>
+            </transition>
           </v-col>
         </v-row>
       </v-container>
@@ -118,9 +122,11 @@
 
 <script>
   import Login from "./admin/Login";
+  import CoreView from "./components/core/View";
   import {router} from "./routes/admin-router";
   import {store} from "./store/store";
   import {logout} from "./admin/auth";
+  import NProgress from "nprogress";
 
   export default {
 
@@ -164,9 +170,13 @@
       }
     },
     components: {
-      'login': Login
+      'login': Login,
+      'core-view': CoreView,
     },
     created() {
-    }
+      NProgress.configure({
+        parent: '#home',
+      });
+    },
   }
 </script>
