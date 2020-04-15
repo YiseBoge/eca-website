@@ -1,20 +1,19 @@
 const path = require('path');
 const fs = require('fs-extra');
 const mix = require('laravel-mix');
-require('laravel-mix-versionhash');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 mix
   .js('resources/js/app.js', 'public/dist/js')
   .js('resources/js/dashboard.js', 'public/dist/js')
   .sass('resources/sass/app.scss', 'public/dist/css')
+
   .disableNotifications();
 
-mix.versionHash();
-// .extract() // Disabled until resolved: https://github.com/JeffreyWay/laravel-mix/issues/1889
-// .version() // Use `laravel-mix-versionhash` for the generating correct Laravel Mix manifest file.
-
-if (!mix.inProduction()) {
+if (mix.inProduction()) {
+  require('laravel-mix-versionhash');
+  mix.versionHash()
+} else {
   mix.sourceMaps()
 }
 
@@ -23,7 +22,7 @@ mix.webpackConfig({
     // new BundleAnalyzerPlugin()
   ],
   resolve: {
-    extensions: ['.js', '.vue'],
+    extensions: ['.js', '.json', '.vue'],
     alias: {
       '~': path.join(__dirname, './resources/js')
     }
@@ -36,17 +35,14 @@ mix.webpackConfig({
 
 mix.then(() => {
   if (!mix.config.hmr) {
-    process.nextTick(() => publishAseets())
+    process.nextTick(() => publishAssets())
   }
 });
 
-function publishAseets() {
+function publishAssets() {
   const publicDir = path.resolve(__dirname, './public');
 
-  if (mix.inProduction()) {
-    fs.removeSync(path.join(publicDir, 'dist'))
-  }
-
+  fs.removeSync(path.join(publicDir, 'dist'));
   fs.copySync(path.join(publicDir, 'build', 'dist'), path.join(publicDir, 'dist'));
   fs.removeSync(path.join(publicDir, 'build'))
 }
