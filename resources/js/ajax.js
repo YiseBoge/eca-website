@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {store} from "./store/store"
-export const SERVER_BASE_URL = "http://localhost:80";
+export const SERVER_BASE_URL = "http://eca.thedreamerplc.com";
 
 const ajax = axios.create({
   baseURL: (process.env.VUE_APP_BASE_URL !== undefined) ? process.env.VUE_APP_BASE_URL : SERVER_BASE_URL + '/api/'
