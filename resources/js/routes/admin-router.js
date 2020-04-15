@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import {ifAuthenticated} from "../admin/auth";
+import NProgress from "nprogress";
 
 const Login = () => import('~/admin/Login');
 const Profile = () => import('~/admin/Profile');
@@ -59,4 +60,15 @@ export const router = new Router({
 
     {path: '*', name: 'NotFound', component: NotFound},
   ]
+});
+
+router.beforeResolve((to, from, next) => {
+  if (to.path) {
+    NProgress.start();
+  }
+  next()
+});
+
+router.afterEach(() => {
+  NProgress.done()
 });
