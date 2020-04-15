@@ -10,6 +10,12 @@ mix
 
   .disableNotifications();
 
+if (mix.inProduction()) {
+  require('laravel-mix-versionhash');
+  mix.versionHash()
+} else {
+  mix.sourceMaps()
+}
 
 mix.webpackConfig({
   plugins: [
