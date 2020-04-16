@@ -10,7 +10,6 @@ mix
 
   .disableNotifications();
 
-
 mix.webpackConfig({
   plugins: [
     // new BundleAnalyzerPlugin()

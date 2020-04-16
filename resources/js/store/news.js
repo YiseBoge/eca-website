@@ -1,4 +1,5 @@
 import ajax from "../ajax";
+import NProgress from "nprogress";
 
 const state = {
   news: [],
@@ -78,6 +79,7 @@ const actions = {
   },
 
   setSelectedNews: ({commit}, {id}) => {
+    NProgress.start();
     ajax.get(`/news/${id}`).then(
       response => {
         commit('setSelectedNews', response.data.data);
@@ -85,7 +87,9 @@ const actions = {
       error => {
         console.log(error);
       }
-    )
+    ).finally(function () {
+      NProgress.done();
+    });
   }
 };
 
