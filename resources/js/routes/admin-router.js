@@ -62,7 +62,7 @@ export const router = new Router({
   ]
 });
 
-router.beforeResolve((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.path) {
     NProgress.start();
   }
