@@ -16,21 +16,20 @@
         </v-img>
 
         <v-list dense nav>
-          <v-list-item-group
+          <v-list
             justify="center"
-            active-class="primary--text"
             class="mt-5">
 
             <template v-for="(item, i) in urls">
               <v-divider :key="i" v-if="item.divider"/>
-              <v-list-item v-else :key="item.title" @click="route(item.link)">
+              <v-list-item :class="currentPage.includes(item.title.toLowerCase()) || (currentPage === '/' && item.link === '/') ? 'active-list' : ''" v-else :key="item.title" @click="route(item.link)">
                 <v-list-item-action>
                   <v-icon>{{ item.icon }}</v-icon>
                 </v-list-item-action>
                 <v-list-item-title>{{ item.title }}</v-list-item-title>
               </v-list-item>
             </template>
-          </v-list-item-group>
+          </v-list>
         </v-list>
 
         <!--        <v-col-->
@@ -167,6 +166,10 @@
           {icon: 'mdi-calendar', title: 'Events', link: '/events'},
           {icon: 'mdi-account-tie', title: 'Leadership', link: '/leadership'},
         ];
+      },
+      currentPage() {
+        console.log(this.$route.path);
+        return this.$route.path;
       }
     },
     components: {
@@ -180,3 +183,19 @@
     },
   }
 </script>
+
+<style scoped>
+  .active-list{
+    background-color: rgb(25,118,210, 0.1);
+    color: rgb(25,118,210);
+  }
+
+  .active-list .v-icon {
+    color: rgb(25,118,210);
+  }
+
+  .active-list .v-list-item__title{
+    color: rgb(25,118,210);
+  }
+</style>
+
