@@ -49,7 +49,7 @@
     </v-container>
 
     <v-container v-else>
-      <login class="mt-12"/>
+      <login v-if="!isLoggedIn" class="mt-12"/>
     </v-container>
 
     <v-app-bar :clipped-left="primaryDrawer.clipped" app class="shadow-lg" color="primary" dark>

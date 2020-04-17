@@ -62,6 +62,8 @@
   import {LeaderModel} from "./leader_model.js";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
+  import {errorHandler} from "../handle-error";
+  import {store} from "../../store/store";
 
   export default {
     name: "Add Leader",
@@ -112,7 +114,7 @@
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
-            console.log(error);
+            errorHandler(error);
           }
         )
       }

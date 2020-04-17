@@ -64,6 +64,7 @@
   import ajax from "../../ajax";
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "Add Leader",
@@ -114,6 +115,7 @@
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
+            errorHandler(error);
           }
         )
       }

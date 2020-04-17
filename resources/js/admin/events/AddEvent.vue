@@ -69,6 +69,7 @@
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
   import moment from "moment";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "Add Event",
@@ -113,6 +114,7 @@
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
+            errorHandler(error);
           }
         )
       }

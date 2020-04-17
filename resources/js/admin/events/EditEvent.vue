@@ -69,6 +69,7 @@
   import ajax from "../../ajax";
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "Edit Event",
@@ -114,6 +115,7 @@
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
+            errorHandler(error);
           }
         )
       }
@@ -128,7 +130,7 @@
     computed: {
       selectedEvent() {
         let event = store.getters.getSelectedEvent;
-        this.dates = [event.start_date, event.end_date];   
+        this.dates = [event.start_date, event.end_date];
         return event;
       },
       dateRangeText () {

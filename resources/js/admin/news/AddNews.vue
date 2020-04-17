@@ -59,6 +59,7 @@
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
   import {store} from "../../store/store";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "Add News",
@@ -108,6 +109,7 @@
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
+            errorHandler(error);
           }
         )
       }
