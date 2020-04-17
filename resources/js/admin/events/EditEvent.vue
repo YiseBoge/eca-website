@@ -83,6 +83,7 @@
         rules: Rules,
         showAlert: false,
         alertType: 'success',
+        dates: [],
         editorSettings: {
           modules: {
             imageDrop: true,
@@ -126,10 +127,9 @@
     },
     computed: {
       selectedEvent() {
-        return store.getters.getSelectedEvent;
-      },
-      dates() {
-          return [this.selectedEvent.start_date, this.selectedEvent.end_date];
+        let event = store.getters.getSelectedEvent;
+        this.dates = [event.start_date, event.end_date];   
+        return event;
       },
       dateRangeText () {
         return this.dates.join("   ~   ");

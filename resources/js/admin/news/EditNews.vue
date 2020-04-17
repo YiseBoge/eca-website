@@ -98,6 +98,7 @@
       submit() {
         console.log(this.selectedNews);
         let formData = new FormData();
+        this.selectedNews.is_featured = this.selectedNews.is_featured == 1 ? true : false;
         Object.keys(this.selectedNews).forEach((key) => {
           formData.append(key, this.selectedNews[key])
         });

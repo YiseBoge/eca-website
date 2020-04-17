@@ -21,8 +21,11 @@
           </v-col>
 
           <v-col cols="12" sm="6" md="4">
-            <v-text-field label="Level*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedLeader.level"/>
+            <v-select :items="levels"
+                      label="Level*"
+                      required
+                      v-model="selectedLeader.level"
+            />
           </v-col>
 
           <v-col cols="12">
@@ -123,6 +126,8 @@
     },
     computed: {
       selectedLeader() {
+        console.log("In computed");
+        console.log(store.getters.getSelectedLeader);
         return store.getters.getSelectedLeader;
       }
     }
