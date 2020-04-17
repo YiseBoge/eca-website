@@ -111,6 +111,8 @@
           response => {
             self.showAlert = true;
             self.alertType = 'success';
+            console.log(response);
+            store.dispatch('setLeadership', {page: 1, size: 10}); // we can make this better but whatever
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';

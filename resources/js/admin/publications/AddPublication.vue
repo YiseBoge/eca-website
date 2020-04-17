@@ -124,6 +124,7 @@
           response => {
             self.showAlert = true;
             self.alertType = 'success';
+            store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';

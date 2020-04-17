@@ -70,6 +70,7 @@
   import ajax from "../../ajax";
   import moment from "moment";
   import {errorHandler} from "../handle-error";
+  import {store} from "../../store/store";
 
   export default {
     name: "Add Event",
@@ -111,6 +112,7 @@
           response => {
             self.showAlert = true;
             self.alertType = 'success';
+            store.dispatch('setEvents', {page: 1, size: 10});
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
