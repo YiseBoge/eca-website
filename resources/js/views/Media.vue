@@ -14,7 +14,7 @@
     </v-row>
 
     <v-row>
-      <v-col :key="image.href" class="p-3" cols="4" v-for="(image, imageIndex) in data">
+      <v-col :key="image.href" class="p-3" cols="12" lg="4" md="6" v-for="(image, imageIndex) in data">
         <v-hover
           close-delay="50"
           v-slot:default="{ hover }"
@@ -52,7 +52,7 @@
         </v-hover>
       </v-col>
       <v-scale-transition hide-on-leave>
-        <v-col cols="4" v-if="loading">
+        <v-col cols="12" lg="4" md="6" v-if="loading">
           <v-skeleton-loader
             class="shadow-lg"
             type="card"

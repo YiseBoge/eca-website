@@ -52,6 +52,7 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import ajax from "../../ajax";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "News",
@@ -82,7 +83,7 @@
               this.fetchTableData();
             },
             error => {
-              console.log(error);
+              errorHandler(error);
             }
           )
         }

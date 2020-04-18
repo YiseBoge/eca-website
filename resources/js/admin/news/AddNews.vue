@@ -59,6 +59,7 @@
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
   import {store} from "../../store/store";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "Add News",
@@ -105,9 +106,11 @@
           response => {
             self.showAlert = true;
             self.alertType = 'success';
+            store.dispatch('setNews', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
+            errorHandler(error);
           }
         )
       }

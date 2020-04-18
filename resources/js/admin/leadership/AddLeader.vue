@@ -62,6 +62,8 @@
   import {LeaderModel} from "./leader_model.js";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
+  import {errorHandler} from "../handle-error";
+  import {store} from "../../store/store";
 
   export default {
     name: "Add Leader",
@@ -109,10 +111,12 @@
           response => {
             self.showAlert = true;
             self.alertType = 'success';
+            console.log(response);
+            store.dispatch('setLeadership', {page: 1, size: 10}); // we can make this better but whatever
           }, error => {
             self.showAlert = true;
             self.alertType = 'error';
-            console.log(error);
+            errorHandler(error);
           }
         )
       }

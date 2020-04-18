@@ -64,7 +64,7 @@
       </v-col>
     </v-row>
     <v-row class="py-5">
-      <v-col cols="2">
+      <v-col lg="2" cols="3">
         <v-select
           :items="sizes"
           @change="fetchEvents" class="justify-start w-75"
@@ -72,7 +72,7 @@
           v-model="size"
         />
       </v-col>
-      <v-col cols="10">
+      <v-col lg="10" cols="9">
         <v-pagination :length="meta.last_page" :total-visible="7" @input="fetchEvents" class="justify-end"
                       v-model="page"/>
       </v-col>

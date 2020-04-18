@@ -55,6 +55,7 @@ const actions = {
   },
 
   setSelectedEvent: ({commit}, {id}) => {
+    commit('setSelectedEvent', null);
     ajax.get(`/event/${id}`).then(
       response => {
         commit('setSelectedEvent', response.data.data);

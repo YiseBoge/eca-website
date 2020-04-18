@@ -52,9 +52,10 @@ const actions = {
     ).finally(function () {
       commit('setLoading', false);
     });
-  }, 
+  },
 
   setSelectedLeader: ({commit}, {id}) => {
+    commit('setSelectedLeader', null);
     ajax.get(`/leadership/${id}`).then(
       response => {
         commit('setSelectedLeader', response.data.data);
