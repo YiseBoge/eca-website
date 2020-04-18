@@ -2,11 +2,11 @@
   <div>
     <v-card class="overflow-hidden" raised tile>
       <v-app-bar
-        class="px-12"
+        class="px-md-12"
         color="primary"
         dark
       >
-        <v-app-bar-nav-icon v-if="$vuetify.breakpoint.smAndDown" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon v-if="$vuetify.breakpoint.smAndDown" @click.stop="drawer = !drawer"/>
 
         <!--      <v-spacer/>-->
         <template v-slot:img="{ props }">
@@ -46,7 +46,8 @@
           class="mt-5">
 
           <template v-for="(item, i) in links">
-            <v-list-item :key="item.text" @click="route(item.to)">
+            <v-list-item :key="item.text" @click="route(item.to)" active
+                         :class="currentPage === item.to ? 'primary--text v-list-item--active' : ''">
               <v-list-item-action>
                 <v-icon>{{ item.icon }}</v-icon>
               </v-list-item-action>
@@ -63,7 +64,7 @@
 <script>
   // Utilities
   import {mapMutations} from 'vuex'
-  import {router} from "../../routes/router";
+  import {router} from "~/routes/router";
 
   export default {
     data() {
@@ -80,8 +81,12 @@
         ]
       }
     },
-    computed: {},
-
+    computed: {
+      currentPage() {
+        console.log(this.$route.path);
+        return this.$route.path;
+      },
+    },
     methods: {
       route(link) {
         router.push(link);
