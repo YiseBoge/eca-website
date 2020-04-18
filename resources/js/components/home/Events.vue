@@ -104,7 +104,7 @@
         return date
       },
       fetchHomeEvents() {
-        store.dispatch('setHomeEvents', {page: 1, size: 3});
+        store.dispatch('setHomeEvents', {page: 1, size: 3, type: "Upcoming"});
       },
     },
     created() {
