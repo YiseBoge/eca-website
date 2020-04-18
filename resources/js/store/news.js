@@ -80,6 +80,7 @@ const actions = {
 
   setSelectedNews: ({commit}, {id}) => {
     NProgress.start();
+    commit('setSelectedNews', null);
     ajax.get(`/news/${id}`).then(
       response => {
         commit('setSelectedNews', response.data.data);

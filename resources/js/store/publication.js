@@ -78,6 +78,7 @@ const actions = {
 
   setSelectedPublication: ({commit}, {id}) => {
     NProgress.start();
+    commit('setSelectedPublication', null);
     ajax.get(`/publication/${id}`).then(
       response => {
         commit('setSelectedPublication', response.data.data);
