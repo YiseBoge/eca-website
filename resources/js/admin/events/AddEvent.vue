@@ -1,7 +1,7 @@
 <template>
   <v-card class="px-5 py-3 shadow-lg">
-    <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'Event Successfully Inserted.' : 'Error. Something Went Wrong' }}
+    <v-alert :type="alert.type" dismissible v-show="alert.visible || false">
+      {{ alert.message }}
     </v-alert>
     <v-card-title>
       <span class="headline">Add Event</span>
@@ -51,7 +51,7 @@
         </v-row>
 
         <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Save</v-btn>
+          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
         </div>
       </v-form>
       <small>*indicates required field</small>
@@ -79,12 +79,16 @@
     },
     data() {
       return {
+        loading: false,
+        alert: {
+          message: "",
+          type: "",
+          visible: false
+        },
         valid: false,
         modal: false,
         event: new EventModel(),
         rules: Rules,
-        showAlert: false,
-        alertType: 'success',
         dates: [moment(Date.now()).format('YYYY-MM-DD'), moment(Date.now()).format('YYYY-MM-DD')],
         editorSettings: {
           modules: {
@@ -108,17 +112,35 @@
         formData.append('start_date', this.dates[0]);
         formData.append('end_date', this.dates[1]);
         let self = this;
+
+        self.loading = true;
         ajax.post(`event`, formData).then(
           response => {
-            self.showAlert = true;
-            self.alertType = 'success';
+            self.alert = {
+              message: "Successfully Inserted Event",
+              type: "success",
+              visible: true
+            };
             store.dispatch('setEvents', {page: 1, size: 10});
           }, error => {
-            self.showAlert = true;
-            self.alertType = 'error';
+            if (error.response.status === 500){
+              self.alert = {
+                message: "Error: Something went wrong at the server",
+                type: "error",
+                visible: true
+              }
+            } else {
+              self.alert = {
+                message: "Please fix issues before submitting",
+                type: "error",
+                visible: true
+              }
+            }
             errorHandler(error);
           }
-        )
+        ).finally(function () {
+          self.loading = false
+        });
       }
     },
     computed : {

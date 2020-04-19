@@ -1,7 +1,7 @@
 <template>
   <v-card class="px-5 py-3 shadow-lg">
-    <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'News Successfully updated.' : 'Error something went wrong' }}
+    <v-alert :type="alert.type" dismissible v-show="alert.visible || false">
+      {{ alert.message }}
     </v-alert>
 
     <v-card-title>
@@ -44,7 +44,7 @@
           <v-img :src="selectedNews.image_url"/>
         </div>
         <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Update</v-btn>
+          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Update</v-btn>
         </div>
       </v-form>
       <small>*indicates required field</small>
@@ -73,8 +73,12 @@
         valid: false,
         modal: false,
         rules: Rules,
-        showAlert: false,
-        alertType: 'success',
+        loading: false,
+        alert: {
+          message: "",
+          type: "",
+          visible: false
+        },
         button_text: 'Upload Image',
         editorSettings: {
           modules: {
@@ -105,16 +109,34 @@
         });
         formData.append("_method", "put");
         let self = this;
+
+        self.loading = true;
         ajax.post(`news/${this.selectedNews.id}`, formData).then(
           response => {
-            self.showAlert = true;
-            self.alertType = 'success';
+            self.alert = {
+              message: "Successfully Updated News",
+              type: "success",
+              visible: true
+            };
           }, error => {
-            self.showAlert = true;
-            self.alertType = 'error';
+            if (error.response.status === 500){
+              self.alert = {
+                message: "Error: Something went wrong at the server",
+                type: "error",
+                visible: true
+              }
+            } else {
+              self.alert = {
+                message: "Please fix issues before submitting",
+                type: "error",
+                visible: true
+              }
+            }
             errorHandler(error);
           }
-        )
+        ).finally(function () {
+          self.loading = false
+        });
       }
     },
     created() {

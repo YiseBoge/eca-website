@@ -1,8 +1,9 @@
 <template>
   <v-card class="px-5 py-3 shadow-lg">
-    <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'Publication Successfully inserted.' : 'Error something went wrong' }}
+    <v-alert :type="alert.type" dismissible v-show="alert.visible || false">
+      {{ alert.message }}
     </v-alert>
+
     <v-card-title>
       <span class="headline">Edit publication</span>
     </v-card-title>
@@ -11,23 +12,23 @@
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedPublication.title"></v-text-field>
+                          v-model="selectedPublication.title"/>
           </v-col>
           <v-col cols="12">
             <vue-editor v-model="selectedPublication.description"
                         :editorOptions="editorSettings"
                         :customModules="customModulesForEditor"
-                        :rules="rules.min_100"></vue-editor>
+                        :rules="rules.min_100"/>
           </v-col>
 
           <v-col cols="4">
             <template>
-              <v-file-input show-size label="Upload Image" v-model="selectedPublication.image"></v-file-input>
+              <v-file-input show-size label="Upload Image" v-model="selectedPublication.image"/>
             </template>
           </v-col>
           <v-col cols="4">
             <template>
-              <v-file-input show-size label="Upload File" v-model="selectedPublication.file"></v-file-input>
+              <v-file-input show-size label="Upload File" v-model="selectedPublication.file"/>
             </template>
           </v-col>
 
@@ -38,7 +39,7 @@
         </v-row>
 
         <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Save</v-btn>
+          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
         </div>
       </v-form>
       <small>*indicates required field</small>
@@ -67,8 +68,12 @@
         valid: false,
         modal: false,
         rules: Rules,
-        showAlert: false,
-        alertType: 'success',
+        loading: false,
+        alert: {
+          message: "",
+          type: "",
+          visible: false
+        },
         editorSettings: {
           modules: {
             imageDrop: true,
@@ -90,16 +95,34 @@
         });
         formData.append("_method", "put");
         let self = this;
+
+        self.loading = true;
         ajax.post(`publication/${this.selectedPublication.id}`, formData).then(
           response => {
-            self.showAlert = true;
-            self.alertType = 'success';
+            self.alert = {
+              message: "Successfully Updated Publication",
+              type: "success",
+              visible: true
+            };
           }, error => {
-            self.showAlert = true;
-            self.alertType = 'error';
+            if (error.response.status === 500){
+              self.alert = {
+                message: "Error: Something went wrong at the server",
+                type: "error",
+                visible: true
+              }
+            } else {
+              self.alert = {
+                message: "Please fix issues before submitting",
+                type: "error",
+                visible: true
+              }
+            }
             errorHandler(error);
           }
-        )
+        ).finally(function () {
+          self.loading = false
+        });
       }
     },
     created() {
