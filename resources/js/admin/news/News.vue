@@ -11,7 +11,7 @@
         <v-toolbar
           class="float-right" color="white"
           flat>
-          <v-btn
+          <v-btn @click="NProgress.start()"
             color="primary" dark
             to="/news/new">Add New
           </v-btn>
@@ -19,7 +19,12 @@
       </v-col>
     </v-row>
 
-    <v-data-table
+    <v-fade-transition hide-on-leave>
+      <v-skeleton-loader
+        type="list-item, divider, list-item, list-item"
+        v-if="loading"
+      />
+      <v-data-table v-else
       :headers="headers"
       :items="news"
       sort-by="calories"
@@ -43,7 +48,7 @@
         </v-icon>
       </template>
     </v-data-table>
-
+    </v-fade-transition>
   </v-card>
 </template>
 
@@ -109,9 +114,8 @@
       'delete-dialog': DeleteDialog
     },
     computed: {
-      news() {
-        return store.getters.getNews;
-      }
+      news: () => store.getters.getNews,
+      loading: () => store.getters.getLoading,
     }
   }
 
