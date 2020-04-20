@@ -55,7 +55,7 @@ const actions = {
   },
 
   setSelectedEvent: ({commit}, {id}) => {
-    commit('setSelectedEvent', null);
+    commit('setLoading', true);
     ajax.get(`/event/${id}`).then(
       response => {
         commit('setSelectedEvent', response.data.data);
@@ -63,7 +63,9 @@ const actions = {
       error => {
         console.log(error);
       }
-    )
+    ).finally(function () {
+      commit('setLoading', false);
+    });
   }
 };
 

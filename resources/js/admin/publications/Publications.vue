@@ -22,7 +22,7 @@
 
     <v-fade-transition hide-on-leave>
       <v-skeleton-loader
-        type="list-item, divider, list-item, list-item"
+        type="table"
         v-if="loading"
       />
       <v-data-table v-else
@@ -37,7 +37,7 @@
         {{ compress(item.title) }}
       </template>
       <template v-slot:item.description="{item}">
-        <p v-text="htmlToText(item.description)"/>
+        <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
        <v-icon class="mr-2" @click="onEdit(item)">
@@ -70,7 +70,7 @@
           {text: 'Title', value: 'title', width: "15%"},
           {text: 'Description', value: 'description'},
           {text: 'Category', value: 'category'},
-          { text: 'Actions', value: 'actions', sortable: false },
+          { text: 'Actions', value: 'actions', sortable: false, width: "100px" },
         ],
       }
     },
@@ -118,7 +118,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

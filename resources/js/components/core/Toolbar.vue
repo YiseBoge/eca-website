@@ -15,13 +15,13 @@
             gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
           />
         </template>
-        <router-link to="/">
+        <a href="/">
           <v-toolbar-title>
             <v-img src="/img/brand/white.png" style="width: 200px">
 
             </v-img>
           </v-toolbar-title>
-        </router-link>
+        </a>
         <v-spacer/>
         <v-btn
           :key="i" :to="link.to" class="ml-0 hidden-sm-and-down"
@@ -46,7 +46,7 @@
           class="mt-5">
 
           <template v-for="(item, i) in links">
-            <v-list-item :key="item.text" @click="route(item.to)" active
+            <v-list-item :key="item.text" @click="route(item.to)"
                          :class="currentPage === item.to ? 'primary--text v-list-item--active' : ''">
               <v-list-item-action>
                 <v-icon>{{ item.icon }}</v-icon>
@@ -73,7 +73,7 @@
         drawer: false,
         group: null,
         links: [
-          {text: 'HOME', icon: 'mdi-home', to: '/'},
+          // {text: 'HOME', icon: 'mdi-home', to: '/'},
           {text: 'ABOUT US', icon: 'mdi-information', to: '/about'},
           {text: 'NEWS', icon: 'mdi-newspaper', to: '/news'},
           {text: 'PUBLICATIONS', icon: 'mdi-file-document', to: '/publications'},
@@ -84,13 +84,14 @@
     },
     computed: {
       currentPage() {
-        console.log(this.$route.path);
         return this.$route.path;
       },
     },
     methods: {
       route(link) {
-        NProgress.start();
+        if (this.currentPage !== link){
+          NProgress.start();
+        }
         router.push(link);
         this.drawer = false;
       },

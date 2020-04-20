@@ -12,8 +12,8 @@
           class="float-right" color="white"
           flat>
           <v-btn @click="NProgress.start()"
-            color="primary" dark
-            to="/news/new">Add New
+                 color="primary" dark
+                 to="/news/new">Add New
           </v-btn>
         </v-toolbar>
       </v-col>
@@ -21,33 +21,36 @@
 
     <v-fade-transition hide-on-leave>
       <v-skeleton-loader
-        type="list-item, divider, list-item, list-item"
+        type="table"
         v-if="loading"
       />
-      <v-data-table v-else
-      :headers="headers"
-      :items="news"
-      sort-by="calories"
-      class=" mx-auto my-auto"
-    >
-      <template v-slot:no-data>
-        <p class="my-2">No Data Available</p>
-      </template>
-      <template v-slot:item.title="{item}">
-        {{ compress(item.title) }}
-      </template>
-      <template v-slot:item.description="{item}">
-        <p v-text="htmlToText(item.description)"/>
-      </template>
-      <template v-slot:item.actions="{ item }">
-        <v-icon class="mr-2" @click="onEdit(item)">
-          mdi-pencil
-        </v-icon>
-        <v-icon color="red" @click="onDelete(item)">
-          mdi-delete
-        </v-icon>
-      </template>
-    </v-data-table>
+      <v-data-table :headers="headers"
+                    :items="news"
+                    class=" mx-auto my-auto"
+                    sort-by="calories"
+                    v-else
+      >
+        <template v-slot:no-data>
+          <p class="my-2">No Data Available</p>
+        </template>
+        <template v-slot:item.title="{item}">
+          {{ compress(item.title) }}
+        </template>
+        <template v-slot:item.description="{item}">
+          <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
+        </template>
+        <template v-slot:item.is_featured="{item}">
+          <p class="my-2" v-text="item.is_featured === 1 ? 'Yes': 'No'"/>
+        </template>
+        <template v-slot:item.actions="{ item }">
+          <v-icon @click="onEdit(item)" class="mr-2">
+            mdi-pencil
+          </v-icon>
+          <v-icon @click="onDelete(item)" color="red">
+            mdi-delete
+          </v-icon>
+        </template>
+      </v-data-table>
     </v-fade-transition>
   </v-card>
 </template>
@@ -67,11 +70,11 @@
         title: null,
         selectedNews: null,
         headers: [
-          {text: 'Title', value: 'title', width: "15%"},
+          {text: 'Title', value: 'title'},
           {text: 'Description', value: 'description'},
           {text: 'Category', value: 'category'},
-          {text: 'Is featured', value: 'is_featured'},
-          { text: 'Actions', value: 'actions', sortable: false },
+          {text: 'Featured', value: 'is_featured'},
+          {text: 'Actions', value: 'actions', sortable: false, width: "100px"},
         ],
       }
     },
@@ -120,7 +123,3 @@
   }
 
 </script>
-
-<style scoped>
-
-</style>

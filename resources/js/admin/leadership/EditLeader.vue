@@ -7,51 +7,61 @@
     <v-card-title>
       <span class="headline">Edit Leader</span>
     </v-card-title>
-    <v-card-text>
-      <v-form v-model="valid">
-        <v-row>
-          <v-col cols="12" sm="6" md="4">
-            <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedLeader.name"/>
-          </v-col>
+    <v-fade-transition hide-on-leave>
+      <v-card-text v-if="loadingPage">
+        <v-skeleton-loader
+          type="list-heading, list-item, list-item-three-line, list-item-three-line, list-item, actions"
+        />
+      </v-card-text>
+      <v-card-text v-else>
+        <v-form v-model="valid">
+          <v-row>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
+                            v-model="selectedLeader.name"/>
+            </v-col>
 
-          <v-col cols="12" sm="6" md="4">
-            <v-text-field label="Position*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedLeader.position"/>
-          </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-text-field label="Position*" required :rules="rules.required||rules.min_20"
+                            v-model="selectedLeader.position"/>
+            </v-col>
 
-          <v-col cols="12" sm="6" md="4">
-            <v-select :items="levels"
-                      label="Level*"
-                      required
-                      v-model="selectedLeader.level"
-            />
-          </v-col>
+            <v-col cols="12" sm="6" md="4">
+              <v-select :items="levels"
+                        label="Level*"
+                        required
+                        v-model="selectedLeader.level"
+              />
+            </v-col>
 
-          <v-col cols="12">
-            <v-textarea
-              :rules="rules.min_20"
-              label="Description"
-              v-model="selectedLeader.description"
-            />
-          </v-col>
+            <v-col cols="12">
+              <v-textarea
+                :rules="rules.min_20"
+                label="Description"
+                v-model="selectedLeader.description"
+              />
+            </v-col>
 
-          <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
-                 @change="handleFileUpload" :rules="rules.file"/>
+            <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
+                   @change="handleFileUpload" :rules="rules.file"/>
 
-          <v-col cols="12">
-            <v-btn class="ma-2 d-block mx-auto mb-4" large tile color="info" @click="$refs.file.click()">
-              <v-icon left>mdi-camera</v-icon>
-              {{ button_text }}
-            </v-btn>
-          </v-col>
-        </v-row>
-        <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
-        </div>
-      </v-form>
-      <small>*indicates required field</small>
-    </v-card-text>
+            <v-col cols="12">
+              <v-btn class="ma-2 d-block mx-auto mb-4" large tile color="info" @click="$refs.file.click()">
+                <v-icon left>mdi-camera</v-icon>
+                {{ button_text }}
+              </v-btn>
+            </v-col>
+          </v-row>
+          <div class="col-md-5 mx-auto" v-if="selectedLeader.image_url">
+            <v-img :src="selectedLeader.image_url"/>
+          </div>
+          <div class="my-2 mx-auto align-center align-content-center">
+            <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
+          </div>
+        </v-form>
+        <small>*indicates required field</small>
+      </v-card-text>
+    </v-fade-transition>
   </v-card>
 
 </template>
@@ -121,7 +131,10 @@
               type: "success",
               visible: true
             };
+            store.dispatch('setLeadership', {page: 1, size: 10});
+            store.dispatch('setSelectedLeader', {id: router.currentRoute.params.id});
           }, error => {
+            errorHandler(error);
             if (error.response.status === 500){
               self.alert = {
                 message: "Error: Something went wrong at the server",
@@ -135,7 +148,6 @@
                 visible: true
               }
             }
-            errorHandler(error);
           }
         ).finally(function () {
           self.loading = false
@@ -153,7 +165,8 @@
         console.log("In computed");
         console.log(store.getters.getSelectedLeader);
         return store.getters.getSelectedLeader;
-      }
+      },
+      loadingPage: () => store.getters.getLoading,
     }
   }
 </script>
