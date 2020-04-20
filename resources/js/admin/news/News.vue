@@ -40,7 +40,7 @@
           <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
         </template>
         <template v-slot:item.is_featured="{item}">
-          <p class="my-2" v-text="item.is_featured === 1 ? 'Yes': 'No'"/>
+          <p class="my-2" v-text="item.is_featured ? 'Yes': 'No'"/>
         </template>
         <template v-slot:item.actions="{ item }">
           <v-icon @click="onEdit(item)" class="mr-2">
