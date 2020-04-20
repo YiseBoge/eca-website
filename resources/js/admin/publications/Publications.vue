@@ -12,7 +12,7 @@
         <v-toolbar
           class="float-right" color="white"
           flat>
-          <v-btn
+          <v-btn @click="NProgress.start()"
             color="primary" dark
             to="/publications/new">Add New
           </v-btn>
@@ -20,7 +20,12 @@
       </v-col>
     </v-row>
 
-    <v-data-table
+    <v-fade-transition hide-on-leave>
+      <v-skeleton-loader
+        type="list-item, divider, list-item, list-item"
+        v-if="loading"
+      />
+      <v-data-table v-else
       :headers="headers"
       :items="publications"
       class=" mx-auto my-auto"
@@ -43,7 +48,7 @@
         </v-icon>
       </template>
     </v-data-table>
-
+    </v-fade-transition>
   </v-card>
 </template>
 
@@ -108,9 +113,8 @@
       'delete-dialog': DeleteDialog
     },
     computed: {
-      publications() {
-        return store.getters.getPublications;
-      }
+      publications: () => store.getters.getPublications,
+      loading: () => store.getters.getLoading,
     }
   }
 </script>

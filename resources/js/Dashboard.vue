@@ -147,6 +147,7 @@
     }),
     methods: {
       route(link) {
+        NProgress.start();
         router.push(link);
       },
       clearToken() {

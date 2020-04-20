@@ -65,6 +65,7 @@
   // Utilities
   import {mapMutations} from 'vuex'
   import {router} from "~/routes/router";
+  import NProgress from "nprogress";
 
   export default {
     data() {
@@ -89,6 +90,7 @@
     },
     methods: {
       route(link) {
+        NProgress.start();
         router.push(link);
         this.drawer = false;
       },
