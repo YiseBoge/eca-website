@@ -37,11 +37,11 @@
           {{ compress(item.title) }}
         </template>
         <template v-slot:item.description="{item}">
-          <p v-text="htmlToText(item.description)"/>
+          <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
         </template>
-<!--        <template v-slot:item.is_featured="{item}">-->
-<!--          <p v-text="item.description === 0 ? 'Yes': 'No'"/>-->
-<!--        </template>-->
+        <template v-slot:item.is_featured="{item}">
+          <p class="my-2" v-text="item.is_featured === 1 ? 'Yes': 'No'"/>
+        </template>
         <template v-slot:item.actions="{ item }">
           <v-icon @click="onEdit(item)" class="mr-2">
             mdi-pencil
@@ -70,7 +70,7 @@
         title: null,
         selectedNews: null,
         headers: [
-          {text: 'Title', value: 'title', width: "15%"},
+          {text: 'Title', value: 'title'},
           {text: 'Description', value: 'description'},
           {text: 'Category', value: 'category'},
           {text: 'Featured', value: 'is_featured'},

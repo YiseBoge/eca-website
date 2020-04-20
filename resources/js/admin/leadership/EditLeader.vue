@@ -52,6 +52,9 @@
               </v-btn>
             </v-col>
           </v-row>
+          <div class="col-md-5 mx-auto" v-if="selectedLeader.image_url">
+            <v-img :src="selectedLeader.image_url"/>
+          </div>
           <div class="my-2 mx-auto align-center align-content-center">
             <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
           </div>
@@ -129,6 +132,7 @@
               visible: true
             };
             store.dispatch('setLeadership', {page: 1, size: 10});
+            store.dispatch('setSelectedLeader', {id: router.currentRoute.params.id});
           }, error => {
             errorHandler(error);
             if (error.response.status === 500){

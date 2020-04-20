@@ -16,9 +16,15 @@
       <v-card-text v-else>
         <v-form v-model="valid">
           <v-row>
-            <v-col cols="12" sm="12" md="12">
+            <v-col cols="10">
               <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
                             v-model="selectedPublication.title"/>
+            </v-col>
+            <v-col cols="2" v-if="selectedPublication.file_url">
+              <a :href="selectedPublication.file_url" class="btn btn-primary btn-sm text-white shadow-lg pr-4" target="_blank">
+                <v-icon color="white" left small>mdi-download</v-icon>
+                File
+              </a>
             </v-col>
             <v-col cols="12">
               <vue-editor v-model="selectedPublication.description"
@@ -43,6 +49,10 @@
               </v-select>
             </v-col>
           </v-row>
+
+          <div class="col-md-5 mx-auto" v-if="selectedPublication.image_url">
+            <v-img :src="selectedPublication.image_url"/>
+          </div>
 
           <div class="my-2 mx-auto align-center align-content-center">
             <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
@@ -112,6 +122,7 @@
               visible: true
             };
             store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
+            store.dispatch('setSelectedPublication', {id: router.currentRoute.params.id});
           }, error => {
             errorHandler(error);
             if (error.response.status === 500){

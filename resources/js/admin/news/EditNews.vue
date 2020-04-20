@@ -34,18 +34,18 @@
                           :rules="rules.min_100"/>
             </v-col>
 
-            <v-col cols="3">
-              <v-btn class="ma-2 d-block mx-auto mb-4" large tile color="info" @click="$refs.file.click()">
+            <v-col cols="8">
+              <v-btn class="ma-2 d-block mb-4" large tile color="info" @click="$refs.file.click()">
                 <v-icon left>mdi-camera</v-icon>
                 {{ button_text }}
               </v-btn>
             </v-col>
-            <v-col cols="2" class="mx-auto">
+            <v-col cols="4" class="mx-auto">
               <v-select label="Select category" v-model="selectedNews.category" :rules="rules.required"
                         :items="categories"/>
             </v-col>
           </v-row>
-          <div class="col-md-5 mx-auto">
+          <div class="col-md-5 mx-auto" v-if="selectedNews.image_url">
             <v-img :src="selectedNews.image_url"/>
           </div>
           <div class="my-2 mx-auto align-center align-content-center">
@@ -125,6 +125,7 @@
               visible: true
             };
             store.dispatch('setNews', {page: 1, size: 10, year: 'All', category: ''});
+            store.dispatch('setSelectedNews', {id: router.currentRoute.params.id});
           }, error => {
             errorHandler(error);
             if (error.response.status === 500){

@@ -37,7 +37,7 @@
         {{ compress(item.title) }}
       </template>
       <template v-slot:item.description="{item}">
-        <p v-text="htmlToText(item.description)"/>
+        <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon
