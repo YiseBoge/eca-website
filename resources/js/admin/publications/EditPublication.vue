@@ -7,43 +7,50 @@
     <v-card-title>
       <span class="headline">Edit publication</span>
     </v-card-title>
-    <v-card-text>
-      <v-form v-model="valid">
-        <v-row>
-          <v-col cols="12" sm="12" md="12">
-            <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="selectedPublication.title"/>
-          </v-col>
-          <v-col cols="12">
-            <vue-editor v-model="selectedPublication.description"
-                        :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_100"/>
-          </v-col>
+    <v-fade-transition hide-on-leave>
+      <v-card-text v-if="loadingPage">
+        <v-skeleton-loader
+          type="list-heading, list-item, list-item-three-line, list-item-three-line, list-item, actions"
+        />
+      </v-card-text>
+      <v-card-text v-else>
+        <v-form v-model="valid">
+          <v-row>
+            <v-col cols="12" sm="12" md="12">
+              <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
+                            v-model="selectedPublication.title"/>
+            </v-col>
+            <v-col cols="12">
+              <vue-editor v-model="selectedPublication.description"
+                          :editorOptions="editorSettings"
+                          :customModules="customModulesForEditor"
+                          :rules="rules.min_100"/>
+            </v-col>
 
-          <v-col cols="4">
-            <template>
-              <v-file-input show-size label="Upload Image" v-model="selectedPublication.image"/>
-            </template>
-          </v-col>
-          <v-col cols="4">
-            <template>
-              <v-file-input show-size label="Upload File" v-model="selectedPublication.file"/>
-            </template>
-          </v-col>
+            <v-col cols="4">
+              <template>
+                <v-file-input show-size label="Upload Image" v-model="selectedPublication.image"/>
+              </template>
+            </v-col>
+            <v-col cols="4">
+              <template>
+                <v-file-input show-size label="Upload File" v-model="selectedPublication.file"/>
+              </template>
+            </v-col>
 
-          <v-col cols="4" class="mx-auto">
-            <v-select label="Select category" v-model="selectedPublication.category" :rules="rules.required" :items="categories">
-            </v-select>
-          </v-col>
-        </v-row>
+            <v-col cols="4" class="mx-auto">
+              <v-select label="Select category" v-model="selectedPublication.category" :rules="rules.required" :items="categories">
+              </v-select>
+            </v-col>
+          </v-row>
 
-        <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
-        </div>
-      </v-form>
-      <small>*indicates required field</small>
-    </v-card-text>
+          <div class="my-2 mx-auto align-center align-content-center">
+            <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
+          </div>
+        </v-form>
+        <small>*indicates required field</small>
+      </v-card-text>
+    </v-fade-transition>
   </v-card>
 
 </template>
@@ -104,7 +111,9 @@
               type: "success",
               visible: true
             };
+            store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
+            errorHandler(error);
             if (error.response.status === 500){
               self.alert = {
                 message: "Error: Something went wrong at the server",
@@ -118,7 +127,6 @@
                 visible: true
               }
             }
-            errorHandler(error);
           }
         ).finally(function () {
           self.loading = false
@@ -138,7 +146,8 @@
       },
       selectedPublication() {
         return store.getters.getSelectedPublication;
-      }
+      },
+      loadingPage: () => store.getters.getLoading,
     }
   }
 </script>

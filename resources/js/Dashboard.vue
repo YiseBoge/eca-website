@@ -147,7 +147,9 @@
     }),
     methods: {
       route(link) {
-        NProgress.start();
+        if (this.currentPage !== link){
+          NProgress.start();
+        }
         router.push(link);
       },
       clearToken() {
@@ -169,7 +171,6 @@
         ];
       },
       currentPage() {
-        console.log(this.$route.path);
         return this.$route.path;
       }
     },

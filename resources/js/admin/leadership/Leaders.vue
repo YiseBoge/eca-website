@@ -22,7 +22,7 @@
 
     <v-fade-transition hide-on-leave>
       <v-skeleton-loader
-        type="list-item, divider, list-item, list-item"
+        type="table"
         v-if="loading"
       />
       <v-data-table v-else
@@ -72,7 +72,7 @@
           {text: 'Position', value: 'position'},
           {text: 'Level', value: 'level'},
           {text: 'Description', value: 'description'},
-          {text: 'Actions', value: 'actions', sortable: false},
+          {text: 'Actions', value: 'actions', sortable: false, width: "100px"},
         ],
       }
     },
@@ -121,7 +121,3 @@
   }
 
 </script>
-
-<style scoped>
-
-</style>
