@@ -25,6 +25,7 @@
           <v-list-item
             :key="item.id"
             :to="'/news/'+item.id"
+            @click="show(item.id)"
             class="pb-2"
           >
 
@@ -57,6 +58,10 @@
       fetchHeadlines() {
         store.dispatch('setHeadlines', {page: 1, size: 4});
       },
+      show(id){
+        store.dispatch('setSelectedNews', {id: id});
+        this.$router.push(`/news/${id}`);
+      }
     },
     created() {
       this.fetchHeadlines();

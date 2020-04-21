@@ -7,7 +7,6 @@
       :height="value.prominent ? 450 : 250"
       color="grey lighten-1"
       dark
-      :to="'/news/'+value.id"
       class="shadow-lg rounded"
     >
       <v-img
@@ -45,6 +44,7 @@
             <v-chip
               class="text-uppercase ma-0"
               color="primary" label small
+              @click="show(value.id)"
             >
               Read More
             </v-chip>
@@ -57,6 +57,7 @@
 
 <script>
   import {SERVER_BASE_URL} from "~/ajax";
+  import {store} from "~/store/store"
 
   export default {
     data() {
@@ -78,6 +79,10 @@
       beautifyDate(date) {
         return date
       },
+      show(id){
+        store.dispatch('setSelectedNews', {id: id});
+        this.$router.push(`/news/${id}`);
+      }
     },
     computed: {
       probably() {
