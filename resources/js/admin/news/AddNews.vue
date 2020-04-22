@@ -60,6 +60,8 @@
   import ajax from "../../ajax";
   import {store} from "../../store/store";
   import {errorHandler} from "../handle-error";
+  import {EventModel} from "../events/event_model";
+  import moment from "moment";
 
   export default {
     name: "Add News",
@@ -91,7 +93,18 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.news = new NewsModel();
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;

@@ -42,14 +42,16 @@
   export default {
     name: "news-show",
 
+    watch: {
+      '$route': 'selectNews'
+    },
     methods: {
-      selectNews(id) {
-        store.dispatch('setSelectedNews', {id: id});
+      selectNews() {
+        store.dispatch('setSelectedNews', {id: this.$route.params.id});
       },
     },
     created() {
-      let id = this.$route.params.id;
-      this.selectNews(id);
+      this.selectNews();
     },
     computed: {
       data: () => store.getters.getSelectedNews,

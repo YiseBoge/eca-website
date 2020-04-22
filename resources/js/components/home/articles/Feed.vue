@@ -54,8 +54,8 @@
 
               </v-list-item>
               <v-card-actions class="pt-0">
-                <v-btn
-                  :to="'/news/'+data[0].id" color="primary accent-4"
+                <v-btn color="primary accent-4"
+                  @click="$router.push(`/news/${data[0].id}`)"
                   text
                 >
                   Read More

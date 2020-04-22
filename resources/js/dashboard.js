@@ -5,6 +5,7 @@ import Dashboard from '~/Dashboard.vue'
 import {router} from '~/routes/admin-router'
 import {store} from '~/store/store'
 import moment from "moment";
+import NProgress from "nprogress";
 
 
 Vue.config.productionTip = false;
@@ -21,6 +22,10 @@ Vue.mixin({
     formatToMinute(date) {
       return moment(date).format('h:mm A, MMM DD YYYY')
     },
+  },
+  beforeRouteLeave(to, from, next) {
+    NProgress.start();
+    next()
   }
 });
 

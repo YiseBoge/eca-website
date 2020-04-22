@@ -28,8 +28,8 @@
               <v-list-item-title v-text="item.title"/>
               <v-list-item-subtitle v-text="htmlToText(item.description)"/>
               <p class="pt-1">
-                <router-link :to="'/publications/'+item.id" class="small d-inline">Read Mode</router-link>
-                <a :href="server + item.file_url" class="small d-inline float-right" target="_blank" v-if="item.file_url">Download</a>
+                <router-link :to="`/publications/${item.id}`" class="small d-inline text-primary">Read More</router-link>
+                <a :href="server + item.file_url" class="small d-inline text-primary float-right" target="_blank" v-if="item.file_url">Download</a>
               </p>
             </v-list-item-content>
           </v-list-item>

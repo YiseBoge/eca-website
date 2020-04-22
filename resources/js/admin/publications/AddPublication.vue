@@ -71,6 +71,8 @@
   import ajax from "../../ajax";
   import {store} from "../../store/store";
   import {errorHandler} from "../handle-error";
+  import {EventModel} from "../events/event_model";
+  import moment from "moment";
 
   export default {
     name: "Add Publication",
@@ -103,7 +105,18 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.publication = new PublicationModel();
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
       // handleImageUpload() {
       //   // file upload handler
       //   const filename = this.$refs.file.files[0].name;

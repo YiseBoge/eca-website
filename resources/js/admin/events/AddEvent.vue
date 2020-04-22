@@ -102,7 +102,19 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.event = new EventModel();
+        this.dates = [moment(Date.now()).format('YYYY-MM-DD'), moment(Date.now()).format('YYYY-MM-DD')];
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
       submit() {
         console.log(this.event);
         let formData = new FormData();

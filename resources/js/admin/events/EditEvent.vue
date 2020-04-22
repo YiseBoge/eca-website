@@ -77,6 +77,8 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import {errorHandler} from "../handle-error";
+  import {EventModel} from "./event_model";
+  import moment from "moment";
 
   export default {
     name: "Edit Event",
@@ -108,7 +110,21 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.loadData();
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
+      loadData() {
+        store.dispatch('setSelectedEvent', {id: router.currentRoute.params.id});
+      },
       submit() {
         console.log(this.selectedEvent);
         let formData = new FormData();
@@ -151,7 +167,7 @@
       }
     },
     created() {
-      store.dispatch('setSelectedEvent', {id: router.currentRoute.params.id});
+      this.loadData()
     },
     mounted() {
       this.event = store.getters.getSelectedEvent;
