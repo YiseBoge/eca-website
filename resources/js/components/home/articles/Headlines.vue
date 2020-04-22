@@ -24,8 +24,7 @@
 
           <v-list-item
             :key="item.id"
-            :to="'/news/'+item.id"
-            @click="show(item.id)"
+            :to="`/news/${item.id}`"
             class="pb-2"
           >
 
@@ -37,7 +36,7 @@
           </v-list-item>
         </template>
       </v-list>
-      <v-flex align-self-end class="float-right" v-if="data.length != 0">
+      <v-flex align-self-end class="float-right" v-if="data.length !== 0">
         <router-link class="btn btn-link nav-link" to="/news">
           More Headlines
         </router-link>
@@ -58,10 +57,6 @@
       fetchHeadlines() {
         store.dispatch('setHeadlines', {page: 1, size: 4});
       },
-      show(id){
-        store.dispatch('setSelectedNews', {id: id});
-        this.$router.push(`/news/${id}`);
-      }
     },
     created() {
       this.fetchHeadlines();

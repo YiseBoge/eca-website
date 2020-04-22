@@ -22,6 +22,9 @@
 
   export default {
     components: {Publications, Leadership},
+    watch: {
+      '$route': 'selectPublication'
+    },
     mounted() {
       let recaptchaScript = document.createElement('script');
       recaptchaScript.setAttribute('src', 'https://platform.twitter.com/widgets.js');
