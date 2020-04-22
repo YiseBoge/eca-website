@@ -52,9 +52,12 @@
         category: 0
       }
     },
+    watch: {
+      '$route': 'selectPublication'
+    },
     methods: {
-      selectPublication(id) {
-        store.dispatch('setSelectedPublication', {id: id});
+      selectPublication() {
+        store.dispatch('setSelectedPublication', {id: this.$route.params.id});
       },
     },
     created() {

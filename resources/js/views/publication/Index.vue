@@ -35,7 +35,7 @@
             <template v-for="(item) in data">
               <v-row>
                 <!-- <v-list-item :to="'/publications/'+item.id" class="w-100"> -->
-                <v-list-item @click="show(item.id)" class="w-100">
+                <v-list-item :to="`/publications/${item.id}`" class="w-100">
                   <v-col cols="12" md="11">
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>
@@ -164,10 +164,6 @@
       fetchCategories() {
         store.dispatch('setPublicationCategories');
       },
-      show(id){
-        store.dispatch('setSelectedPublication', {id: id});
-        this.$router.push(`/publications/${id}`);
-      }
     },
     created() {
       this.fetchCategories();

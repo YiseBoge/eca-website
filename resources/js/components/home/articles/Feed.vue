@@ -54,8 +54,8 @@
 
               </v-list-item>
               <v-card-actions class="pt-0">
-                <v-btn
-                  @click="show(data[0].id)" color="primary accent-4"
+                <v-btn color="primary accent-4"
+                  @click="$router.push(`/news/${data[0].id}`)"
                   text
                 >
                   Read More
@@ -102,10 +102,6 @@
       fetchFeatured() {
         store.dispatch('setFeatured', {page: 1, size: 3});
       },
-      show(id){
-        store.dispatch('setSelectedNews', {id: id});
-        this.$router.push(`/news/${id}`);
-      }
     },
     created() {
       this.fetchFeatured();

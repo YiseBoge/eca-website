@@ -44,7 +44,7 @@
             <v-chip
               class="text-uppercase ma-0"
               color="primary" label small
-              @click="show(value.id)"
+              :to="`/news/${value.id}`"
             >
               Read More
             </v-chip>
@@ -73,15 +73,6 @@
       value: {
         type: Object,
         default: () => ({})
-      }
-    },
-    methods: {
-      beautifyDate(date) {
-        return date
-      },
-      show(id){
-        store.dispatch('setSelectedNews', {id: id});
-        this.$router.push(`/news/${id}`);
       }
     },
     computed: {

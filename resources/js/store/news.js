@@ -80,6 +80,7 @@ const actions = {
 
   setSelectedNews: ({commit}, {id}) => {
     commit('setLoading', true);
+    console.log("fetch the news");
     ajax.get(`/news/${id}`).then(
       response => {
         commit('setSelectedNews', response.data.data);
