@@ -32,27 +32,20 @@ export const router = new Router({
   base: '/admin',
   routes: [
     {path: '/news', name: 'news', component: News, beforeEnter: ifAuthenticated},
-
     {path: '/news/new', name: 'add news', component: AddNews, beforeEnter: ifAuthenticated},
     {path: '/news/:id/edit', name: 'edit news', component: EditNews, beforeEnter: ifAuthenticated},
-    {path: '/events', name: 'events', component: Events, beforeEnter: ifAuthenticated},
 
+    {path: '/events', name: 'events', component: Events, beforeEnter: ifAuthenticated},
     {path: '/events/new', name: 'add events', component: AddEvent, beforeEnter: ifAuthenticated},
     {path: '/events/:id/edit', name: 'edit event', component: EditEvent, beforeEnter: ifAuthenticated},
 
     {path: '/leadership', name: 'leaders', component: Leaders, beforeEnter: ifAuthenticated},
     {path: '/leadership/new', name: 'add leader', component: AddLeader, beforeEnter: ifAuthenticated},
-
     {path: '/leadership/:id/edit', name: 'edit leader', component: EditLeader, beforeEnter: ifAuthenticated},
+
     {path: '/publications', name: 'publication', component: Publication, beforeEnter: ifAuthenticated},
     {path: '/publications/new', name: 'add publication', component: AddPublication, beforeEnter: ifAuthenticated},
-
-    {
-      path: '/publications/:id/edit',
-      name: 'edit publication',
-      component: EditPublication,
-      beforeEnter: ifAuthenticated
-    },
+    {path: '/publications/:id/edit', name: 'edit publication', component: EditPublication, beforeEnter: ifAuthenticated},
 
     {path: '/profile', name: 'profile', component: Profile},
     {path: '/login', name: 'login', component: Login},
@@ -62,7 +55,7 @@ export const router = new Router({
   ]
 });
 
-router.beforeResolve((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (to.path) {
     NProgress.start();
   }

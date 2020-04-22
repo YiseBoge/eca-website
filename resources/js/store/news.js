@@ -79,7 +79,7 @@ const actions = {
   },
 
   setSelectedNews: ({commit}, {id}) => {
-    NProgress.start();
+    commit('setLoading', true);
     ajax.get(`/news/${id}`).then(
       response => {
         commit('setSelectedNews', response.data.data);
@@ -88,7 +88,7 @@ const actions = {
         console.log(error);
       }
     ).finally(function () {
-      NProgress.done();
+      commit('setLoading', false);
     });
   }
 };

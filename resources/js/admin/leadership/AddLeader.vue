@@ -1,7 +1,7 @@
 <template>
   <v-card class="px-5 py-3 shadow-lg">
-    <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'Leader Successfully Inserted.' : 'Error. Something Went Wrong' }}
+    <v-alert :type="alert.type" dismissible v-show="alert.visible || false">
+      {{ alert.message }}
     </v-alert>
     <v-card-title>
       <span class="headline">Add Leader</span>
@@ -46,7 +46,7 @@
           </v-col>
         </v-row>
         <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Save</v-btn>
+          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
         </div>
       </v-form>
       <small>*indicates required field</small>
@@ -62,6 +62,8 @@
   import {LeaderModel} from "./leader_model.js";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
+  import {errorHandler} from "../handle-error";
+  import {store} from "../../store/store";
 
   export default {
     name: "Add Leader",
@@ -75,8 +77,12 @@
         levels: [1, 2, 3, 4, 5],
         leader: new LeaderModel(),
         rules: Rules,
-        showAlert: false,
-        alertType: 'success',
+        loading: false,
+        alert: {
+          message: "",
+          type: "",
+          visible: false
+        },
         button_text: 'Upload Image',
         editorSettings: {
           modules: {
@@ -105,16 +111,35 @@
           formData.append(key, this.leader[key])
         });
         let self = this;
+
+        self.loading = true;
         ajax.post(`leadership`, formData).then(
           response => {
-            self.showAlert = true;
-            self.alertType = 'success';
+            self.alert = {
+              message: "Successfully Inserted Leader",
+              type: "success",
+              visible: true
+            };
+            store.dispatch('setLeadership', {page: 1, size: 10}); // we can make this better but whatever
           }, error => {
-            self.showAlert = true;
-            self.alertType = 'error';
-            console.log(error);
+            if (error.response.status === 500){
+              self.alert = {
+                message: "Error: Something went wrong at the server",
+                type: "error",
+                visible: true
+              }
+            } else {
+              self.alert = {
+                message: "Please fix issues before submitting",
+                type: "error",
+                visible: true
+              }
+            }
+            errorHandler(error);
           }
-        )
+        ).finally(function () {
+          self.loading = false
+        });
       }
     },
   }

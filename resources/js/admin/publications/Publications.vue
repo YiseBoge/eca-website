@@ -12,7 +12,7 @@
         <v-toolbar
           class="float-right" color="white"
           flat>
-          <v-btn
+          <v-btn @click="NProgress.start()"
             color="primary" dark
             to="/publications/new">Add New
           </v-btn>
@@ -20,7 +20,12 @@
       </v-col>
     </v-row>
 
-    <v-data-table
+    <v-fade-transition hide-on-leave>
+      <v-skeleton-loader
+        type="table"
+        v-if="loading"
+      />
+      <v-data-table v-else
       :headers="headers"
       :items="publications"
       class=" mx-auto my-auto"
@@ -32,7 +37,7 @@
         {{ compress(item.title) }}
       </template>
       <template v-slot:item.description="{item}">
-        <p v-text="htmlToText(item.description)"/>
+        <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
        <v-icon class="mr-2" @click="onEdit(item)">
@@ -43,7 +48,7 @@
         </v-icon>
       </template>
     </v-data-table>
-
+    </v-fade-transition>
   </v-card>
 </template>
 
@@ -52,6 +57,7 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import ajax from "../../ajax";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "News",
@@ -64,7 +70,7 @@
           {text: 'Title', value: 'title', width: "15%"},
           {text: 'Description', value: 'description'},
           {text: 'Category', value: 'category'},
-          { text: 'Actions', value: 'actions', sortable: false },
+          { text: 'Actions', value: 'actions', sortable: false, width: "100px" },
         ],
       }
     },
@@ -81,7 +87,7 @@
               this.fetchTableData();
             },
             error => {
-              console.log(error);
+              errorHandler(error);
             }
           )
         }
@@ -107,13 +113,8 @@
       'delete-dialog': DeleteDialog
     },
     computed: {
-      publications() {
-        return store.getters.getPublications;
-      }
+      publications: () => store.getters.getPublications,
+      loading: () => store.getters.getLoading,
     }
   }
 </script>
-
-<style scoped>
-
-</style>

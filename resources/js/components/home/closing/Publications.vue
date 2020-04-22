@@ -28,7 +28,7 @@
               <v-list-item-title v-text="item.title"/>
               <v-list-item-subtitle v-text="htmlToText(item.description)"/>
               <p class="pt-1">
-                <router-link :to="'/publications/'+item.id" class="small d-inline">Read Mode</router-link>
+                <v-list-item-action-text @click="show(item.id)" class="small d-inline text-primary">Read More</v-list-item-action-text>
                 <a :href="server + item.file_url" class="small d-inline float-right" target="_blank" v-if="item.file_url">Download</a>
               </p>
             </v-list-item-content>
@@ -61,6 +61,10 @@
       fetchPublications() {
         store.dispatch('setHomePublications', {page: 1, size: 4});
       },
+      show(id){
+        store.dispatch('setSelectedPublication', {id: id});
+        this.$router.push(`/publications/${id}`);
+      }
     },
     created() {
       this.fetchPublications();

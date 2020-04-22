@@ -1,8 +1,9 @@
 <template>
   <v-card class="px-5 py-3 shadow-lg">
-    <v-alert :type="alertType" dismissible v-show="showAlert">
-      {{ alertType === 'success' ? 'Publication Successfully inserted.' : 'Error something went wrong' }}
+    <v-alert :type="alert.type" dismissible v-show="alert.visible || false">
+      {{ alert.message }}
     </v-alert>
+
     <v-card-title>
       <span class="headline">New publication</span>
     </v-card-title>
@@ -52,7 +53,7 @@
         </v-row>
 
         <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" @click="submit"> Save</v-btn>
+          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
         </div>
       </v-form>
       <small>*indicates required field</small>
@@ -69,6 +70,7 @@
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
   import {store} from "../../store/store";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "Add Publication",
@@ -81,8 +83,12 @@
         modal: false,
         publication: new PublicationModel(),
         rules: Rules,
-        showAlert: false,
-        alertType: 'success',
+        loading: false,
+        alert: {
+          message: "",
+          type: "",
+          visible: false
+        },
         image_button_text: 'Upload Image',
         file_button_text: 'Upload File',
         editorSettings: {
@@ -119,15 +125,35 @@
           formData.append(key, this.publication[key])
         });
         let self = this;
+
+        self.loading = true;
         ajax.post(`publication`, formData).then(
           response => {
-            self.showAlert = true;
-            self.alertType = 'success';
+            self.alert = {
+              message: "Successfully Inserted Publication",
+              type: "success",
+              visible: true
+            };
+            store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
-            self.showAlert = true;
-            self.alertType = 'error';
+            if (error.response.status === 500){
+              self.alert = {
+                message: "Error: Something went wrong at the server",
+                type: "error",
+                visible: true
+              }
+            } else {
+              self.alert = {
+                message: "Please fix issues before submitting",
+                type: "error",
+                visible: true
+              }
+            }
+            errorHandler(error);
           }
-        )
+        ).finally(function () {
+          self.loading = false
+        });
       }
     },
     created() {

@@ -8,8 +8,8 @@
 
     <v-row>
       <v-col cols="12">
-        <v-tabs class="mr-5 mt-5" vertical>
-          <v-tab class="border-bottom mt-5">
+        <v-tabs class="mr-5 mt-5" :vertical="!$vuetify.breakpoint.mdAndDown">
+          <v-tab class="border-bottom">
             About Ethiopian Communications Authority
           </v-tab>
           <v-tab class="border-bottom">

@@ -47,6 +47,7 @@
   import {store} from "../store/store";
   import {router} from "../routes/admin-router";
   import {logout} from "./auth";
+  import {errorHandler} from "./handle-error";
 
   export default {
     name: "ChangePassword",
@@ -82,7 +83,8 @@
           },
           err => {
             this.type = 'error';
-            this.msg = 'Unauthorized!!'
+            this.msg = 'Unauthorized!!';
+            errorHandler(error);
           }
         );
         this.showAlert = true;

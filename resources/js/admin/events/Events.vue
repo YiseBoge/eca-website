@@ -12,7 +12,7 @@
         <v-toolbar
           class="float-right" flat
           color="white">
-          <v-btn
+          <v-btn @click="NProgress.start()"
             color="primary" dark
             to="/events/new">Add New
           </v-btn>
@@ -20,7 +20,12 @@
       </v-col>
     </v-row>
 
-    <v-data-table
+    <v-fade-transition hide-on-leave>
+      <v-skeleton-loader
+        type="table"
+        v-if="loading"
+      />
+    <v-data-table v-else
       :headers="headers"
       :items="events"
       class=" mx-auto my-auto"
@@ -32,7 +37,7 @@
         {{ compress(item.title) }}
       </template>
       <template v-slot:item.description="{item}">
-        <p v-text="htmlToText(item.description)"/>
+        <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon
@@ -45,6 +50,7 @@
         </v-icon>
       </template>
     </v-data-table>
+    </v-fade-transition>
 
   </v-card>
 </template>
@@ -54,6 +60,7 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import ajax from "../../ajax";
+  import {errorHandler} from "../handle-error";
 
   export default {
     name: "Events",
@@ -68,7 +75,7 @@
           {text: 'Start Date', value: 'start_date'},
           {text: 'End Date', value: 'end_date'},
           {text: 'Location', value: 'location'},
-          {text: 'Actions', value: 'actions', sortable: false},
+          {text: 'Actions', value: 'actions', sortable: false, width: "100px"},
         ]
       }
     },
@@ -85,7 +92,7 @@
               this.fetchTableData();
             },
             error => {
-              console.log(error);
+              errorHandler(error);
             }
           )
         }
@@ -111,13 +118,8 @@
       'delete-dialog': DeleteDialog
     },
     computed: {
-      events() {
-        return store.getters.getEvents;
-      }
+      events: () => store.getters.getEvents,
+      loading: () => store.getters.getLoading,
     }
   }
 </script>
-
-<style scoped>
-
-</style>

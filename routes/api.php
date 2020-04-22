@@ -51,7 +51,7 @@ Route::get('/event', 'EventsController@index');
 Route::get('/event/{id}', 'EventsController@show');
 
 Route::get('/leadership', 'LeadersController@index');
-Route::get('/leadership/{id}', 'EventsController@show');
+Route::get('/leadership/{id}', 'LeadersController@show');
 
 Route::get('/publication', 'PublicationsController@index');
 Route::get('/publication/categories', 'PublicationsController@categories')->name('publication.categories');
