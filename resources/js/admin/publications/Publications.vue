@@ -12,9 +12,9 @@
         <v-toolbar
           class="float-right" color="white"
           flat>
-          <v-btn @click="NProgress.start()"
+          <v-btn @click="$router.push('/publications/new')"
             color="primary" dark
-            to="/publications/new">Add New
+          >Add New
           </v-btn>
         </v-toolbar>
       </v-col>
@@ -40,7 +40,7 @@
         <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
-       <v-icon class="mr-2" @click="onEdit(item)">
+       <v-icon class="mr-2" @click="$router.push(`/publications/${item.id}/edit`)">
           mdi-pencil
         </v-icon>
         <v-icon color="red" @click="onDelete(item)">
@@ -77,9 +77,6 @@
     created() {
       this.fetchTableData();
     },
-    watch: {
-      '$route': 'fetchTableData'
-    },
     methods: {
       onDeleteConfirmation(result) {
         this.deleteDialog = false;
@@ -99,11 +96,6 @@
         this.selectedPublication = item;
         this.title = item.title;
         this.deleteDialog = true;
-      },
-      onEdit(item) {
-        console.log(item);
-        store.dispatch('setSelectedPublication', {id: item.id});
-        router.push(`/publications/${item.id}/edit`);
       },
       compress(val) {
         return val.length > 30 ? val.substr(0, 30) + '...' : val;

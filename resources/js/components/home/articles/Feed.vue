@@ -43,7 +43,7 @@
                   class="mx-auto row shadow-lg overflow-hidden"
                   height="210" outlined
           >
-            <div class="col-md-8">
+            <div :class="data[0].image_url ? 'col-8': 'col-12'">
               <v-list-item three-line>
                 <v-list-item-content>
                   <div class="overline mb-4">Featured</div>
@@ -62,8 +62,8 @@
                 </v-btn>
               </v-card-actions>
             </div>
-            <div :style="'background: url(' + data[0].image_url +') center; background-size: cover;'"
-                 class="col-md-4"
+            <div v-if="data[0].image_url" :style="'background: url(' + server + data[0].image_url +') center; background-size: cover;'"
+                 class="col-4"
             >
             </div>
           </v-card>

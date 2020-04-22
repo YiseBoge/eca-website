@@ -149,6 +149,7 @@
             };
             store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
+            errorHandler(error);
             if (error.response.status === 500){
               self.alert = {
                 message: "Error: Something went wrong at the server",
@@ -162,7 +163,6 @@
                 visible: true
               }
             }
-            errorHandler(error);
           }
         ).finally(function () {
           self.loading = false

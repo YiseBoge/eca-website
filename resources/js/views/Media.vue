@@ -4,13 +4,13 @@
       <v-col md="8">
         <h1 class="font-weight-thin">Media</h1>
       </v-col>
-      <v-col md="4">
-        <a class="ma-2 text-white float-right shadow-lg btn-danger btn btn-sm" href="https://www.youtube.com"
-           target="_blank">
-          <v-icon color="white" left small>mdi-youtube</v-icon>
-          Subscribe
-        </a>
-      </v-col>
+<!--      <v-col md="4">-->
+<!--        <a class="ma-2 text-white float-right shadow-lg btn-danger btn btn-sm" href="https://www.youtube.com"-->
+<!--           target="_blank">-->
+<!--          <v-icon color="white" left small>mdi-youtube</v-icon>-->
+<!--          Subscribe-->
+<!--        </a>-->
+<!--      </v-col>-->
     </v-row>
 
     <v-row>

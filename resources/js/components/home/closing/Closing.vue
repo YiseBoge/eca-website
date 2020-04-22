@@ -22,13 +22,15 @@
 
   export default {
     components: {Publications, Leadership},
-    watch: {
-      '$route': 'selectPublication'
+    methods: {
+      loadTwitter() {
+        let recaptchaScript = document.createElement('script');
+        recaptchaScript.setAttribute('src', 'https://platform.twitter.com/widgets.js');
+        document.head.appendChild(recaptchaScript)
+      }
     },
     mounted() {
-      let recaptchaScript = document.createElement('script');
-      recaptchaScript.setAttribute('src', 'https://platform.twitter.com/widgets.js');
-      document.head.appendChild(recaptchaScript)
+      this.loadTwitter()
     },
   }
 </script>

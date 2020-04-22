@@ -34,9 +34,8 @@
           />
           <v-list-item-group v-else
           >
-            <template v-for="(item) in data">
+            <template v-for="item in data">
               <v-row>
-                <!-- <v-list-item :to="'/news/'+item.id" class="w-100"> -->
                 <v-list-item :to="'/news/' + item.id" class="w-100">
                   <v-col cols="12" md="11">
                     <v-list-item-content>

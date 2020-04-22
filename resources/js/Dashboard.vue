@@ -121,7 +121,6 @@
 
 <script>
   import Login from "./admin/Login";
-  import CoreView from "./components/core/View";
   import {router} from "./routes/admin-router";
   import {store} from "./store/store";
   import {logout} from "./admin/auth";
@@ -147,9 +146,6 @@
     }),
     methods: {
       route(link) {
-        if (this.currentPage !== link){
-          NProgress.start();
-        }
         router.push(link);
       },
       clearToken() {
@@ -176,7 +172,6 @@
     },
     components: {
       'login': Login,
-      'core-view': CoreView,
     },
     created() {
       NProgress.configure({
@@ -186,7 +181,22 @@
   }
 </script>
 
+<style>
+  @import "https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.css";
+</style>
+
 <style scoped>
+  #home{
+    min-height: 70vh;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+
+  .fade-enter, .fade-leave-to /* .fade-leave-active in <2.1.8 */ {
+    opacity: 0
+  }
+
   .active-list{
     background-color: rgb(25,118,210, 0.1);
     color: rgb(25,118,210);
