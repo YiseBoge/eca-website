@@ -75,6 +75,8 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import {errorHandler} from "../handle-error";
+  import {EventModel} from "../events/event_model";
+  import moment from "moment";
 
   export default {
     name: "Add Leader",
@@ -106,7 +108,21 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.loadData();
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
+      loadData() {
+        store.dispatch('setSelectedLeader', {id: router.currentRoute.params.id});
+      },
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;
@@ -155,7 +171,7 @@
       }
     },
     created() {
-      store.dispatch('setSelectedLeader', {id: router.currentRoute.params.id});
+      this.loadData()
     },
     mounted() {
       this.news = store.getters.getSelectedLeader;

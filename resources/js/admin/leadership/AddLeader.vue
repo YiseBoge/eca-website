@@ -64,6 +64,8 @@
   import ajax from "../../ajax";
   import {errorHandler} from "../handle-error";
   import {store} from "../../store/store";
+  import {EventModel} from "../events/event_model";
+  import moment from "moment";
 
   export default {
     name: "Add Leader",
@@ -96,7 +98,18 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.leader = new LeaderModel();
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;

@@ -81,6 +81,9 @@
     created() {
       this.fetchTableData();
     },
+    watch: {
+      '$route': 'fetchTableData'
+    },
     methods: {
       onDeleteConfirmation(result) {
         this.deleteDialog = false;
