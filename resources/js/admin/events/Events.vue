@@ -12,9 +12,9 @@
         <v-toolbar
           class="float-right" flat
           color="white">
-          <v-btn
+          <v-btn @click="$router.push('/events/new')"
             color="primary" dark
-            to="/events/new">Add New
+            >Add New
           </v-btn>
         </v-toolbar>
       </v-col>
@@ -41,7 +41,7 @@
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon
-          class="mr-2" @click="this.$router.push(`/events/${item.id}/edit`)"
+          class="mr-2" @click="$router.push(`/events/${item.id}/edit`)"
         >
           mdi-pencil
         </v-icon>
@@ -81,9 +81,6 @@
     },
     created() {
       this.fetchTableData();
-    },
-    watch: {
-      '$route': 'fetchTableData'
     },
     methods: {
       onDeleteConfirmation(result) {

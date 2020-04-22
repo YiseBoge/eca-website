@@ -35,13 +35,6 @@ export const router = new Router({
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.path) {
-    NProgress.start();
-  }
-  next()
-});
-
 router.afterEach(() => {
   NProgress.done()
 });

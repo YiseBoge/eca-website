@@ -12,9 +12,9 @@
         <v-toolbar
           class="float-right" color="white"
           flat>
-          <v-btn @click="NProgress.start()"
+          <v-btn @click="$router.push('/leadership/new')"
             color="primary" dark
-            to="/leadership/new">Add New
+          >Add New
           </v-btn>
         </v-toolbar>
       </v-col>
@@ -41,7 +41,7 @@
         <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
-        <v-icon class="mr-2" @click="onEdit(item)">
+        <v-icon class="mr-2" @click="$router.push(`/leadership/${item.id}/edit`)">
           mdi-pencil
         </v-icon>
         <v-icon color="red" @click="onDelete(item)">
@@ -56,7 +56,6 @@
 <script>
   import DeleteDialog from "../../components/core/DeleteDialog";
   import {store} from "../../store/store";
-  import {router} from "../../routes/admin-router";
   import ajax from "../../ajax";
   import {errorHandler} from "../handle-error";
 
@@ -79,9 +78,6 @@
     created() {
       this.fetchTableData();
     },
-    watch: {
-      '$route': 'fetchTableData'
-    },
     methods: {
       onDeleteConfirmation(result) {
         this.deleteDialog = false;
@@ -101,11 +97,6 @@
         this.selectedLeader = item;
         this.title = item.name;
         this.deleteDialog = true;
-      },
-      onEdit(item) {
-        console.log(item);
-        store.dispatch('setSelectedLeader', {id: item.id});
-        router.push(`/leadership/${item.id}/edit`);
       },
       compress(val) {
         return val.length > 30 ? val.substr(0, 30) + '...' : val;

@@ -135,6 +135,7 @@
             };
             store.dispatch('setLeadership', {page: 1, size: 10}); // we can make this better but whatever
           }, error => {
+            errorHandler(error);
             if (error.response.status === 500){
               self.alert = {
                 message: "Error: Something went wrong at the server",
@@ -148,7 +149,6 @@
                 visible: true
               }
             }
-            errorHandler(error);
           }
         ).finally(function () {
           self.loading = false

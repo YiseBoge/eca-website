@@ -28,7 +28,7 @@
                 :width="7"
                 color="white"
                 indeterminate
-              ></v-progress-circular>
+              />
             </v-toolbar>
             <v-card-text>
               <v-form class="mx-4 my-4" v-model="valid">
@@ -114,6 +114,3 @@
     }
   }
 </script>
-
-<style scoped>
-</style>
