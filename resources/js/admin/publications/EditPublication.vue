@@ -74,6 +74,8 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import {errorHandler} from "../handle-error";
+  import {EventModel} from "../events/event_model";
+  import moment from "moment";
 
   export default {
     name: "Edit Publication",
@@ -103,7 +105,21 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.loadData();
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
+      loadData() {
+        store.dispatch('setSelectedPublication', {id: router.currentRoute.params.id});
+      },
       submit() {
         console.log(this.selectedPublication);
         let formData = new FormData();

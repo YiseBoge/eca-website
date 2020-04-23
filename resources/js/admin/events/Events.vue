@@ -12,9 +12,9 @@
         <v-toolbar
           class="float-right" flat
           color="white">
-          <v-btn @click="NProgress.start()"
+          <v-btn @click="$router.push('/events/new')"
             color="primary" dark
-            to="/events/new">Add New
+            >Add New
           </v-btn>
         </v-toolbar>
       </v-col>
@@ -41,7 +41,7 @@
       </template>
       <template v-slot:item.actions="{ item }">
         <v-icon
-          class="mr-2" @click="onEdit(item)"
+          class="mr-2" @click="$router.push(`/events/${item.id}/edit`)"
         >
           mdi-pencil
         </v-icon>
@@ -101,11 +101,6 @@
         this.selectedEvent = item;
         this.title = item.title;
         this.deleteDialog = true;
-      },
-      onEdit(item) {
-        console.log(item);
-        store.dispatch('setSelectedEvent', {id: item.id});
-        router.push(`/events/${item.id}/edit`);
       },
       compress(val) {
         return val.length > 30 ? val.substr(0, 30) + '...' : val;

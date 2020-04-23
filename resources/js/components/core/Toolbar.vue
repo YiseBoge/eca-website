@@ -25,7 +25,7 @@
         <v-spacer/>
         <v-btn
           :key="i" :to="link.to" class="ml-0 hidden-sm-and-down"
-          flat text v-for="(link, i) in links"
+          text v-for="(link, i) in links"
           @click="onClick($event, link)"
         >
           {{ link.text }}
@@ -65,7 +65,6 @@
   // Utilities
   import {mapMutations} from 'vuex'
   import {router} from "~/routes/router";
-  import NProgress from "nprogress";
 
   export default {
     data() {
@@ -89,9 +88,6 @@
     },
     methods: {
       route(link) {
-        if (this.currentPage !== link){
-          NProgress.start();
-        }
         router.push(link);
         this.drawer = false;
       },

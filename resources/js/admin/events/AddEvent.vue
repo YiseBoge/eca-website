@@ -102,7 +102,19 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.event = new EventModel();
+        this.dates = [moment(Date.now()).format('YYYY-MM-DD'), moment(Date.now()).format('YYYY-MM-DD')];
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
       submit() {
         console.log(this.event);
         let formData = new FormData();
@@ -123,6 +135,7 @@
             };
             store.dispatch('setEvents', {page: 1, size: 10});
           }, error => {
+            errorHandler(error);
             if (error.response.status === 500){
               self.alert = {
                 message: "Error: Something went wrong at the server",
@@ -136,7 +149,6 @@
                 visible: true
               }
             }
-            errorHandler(error);
           }
         ).finally(function () {
           self.loading = false

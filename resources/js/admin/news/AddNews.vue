@@ -60,6 +60,8 @@
   import ajax from "../../ajax";
   import {store} from "../../store/store";
   import {errorHandler} from "../handle-error";
+  import {EventModel} from "../events/event_model";
+  import moment from "moment";
 
   export default {
     name: "Add News",
@@ -91,7 +93,18 @@
         ],
       };
     },
+    watch: {
+      '$route': 'clear'
+    },
     methods: {
+      clear() {
+        this.news = new NewsModel();
+        this.alert = {
+          message: "",
+          type: "",
+          visible: false
+        };
+      },
       handleFileUpload() {
         // file upload handler
         const filename = this.$refs.file.files[0].name;
@@ -117,6 +130,7 @@
             };
             store.dispatch('setNews', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
+            errorHandler(error);
             if (error.response.status === 500){
               self.alert = {
                 message: "Error: Something went wrong at the server",
@@ -130,7 +144,6 @@
                 visible: true
               }
             }
-            errorHandler(error);
           }
         ).finally(function () {
           self.loading = false

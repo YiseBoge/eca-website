@@ -11,9 +11,9 @@
         <v-toolbar
           class="float-right" color="white"
           flat>
-          <v-btn @click="NProgress.start()"
-                 color="primary" dark
-                 to="/news/new">Add New
+          <v-btn @click="$router.push('/news/new')"
+            color="primary" dark
+          >Add New
           </v-btn>
         </v-toolbar>
       </v-col>
@@ -43,7 +43,7 @@
           <p class="my-2" v-text="item.is_featured ? 'Yes': 'No'"/>
         </template>
         <template v-slot:item.actions="{ item }">
-          <v-icon @click="onEdit(item)" class="mr-2">
+          <v-icon @click="$router.push(`/news/${item.id}/edit`)" class="mr-2">
             mdi-pencil
           </v-icon>
           <v-icon @click="onDelete(item)" color="red">
@@ -58,7 +58,6 @@
 <script>
   import DeleteDialog from "../../components/core/DeleteDialog";
   import {store} from "../../store/store";
-  import {router} from "../../routes/admin-router";
   import ajax from "../../ajax";
   import {errorHandler} from "../handle-error";
 
@@ -100,11 +99,6 @@
         this.selectedNews = item;
         this.title = item.title;
         this.deleteDialog = true;
-      },
-      onEdit(item) {
-        console.log(item);
-        store.dispatch('setSelectedNews', {id: item.id});
-        router.push(`/news/${item.id}/edit`);
       },
       compress(val) {
         return val.length > 30 ? val.substr(0, 30) + '...' : val;
