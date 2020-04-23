@@ -14,4 +14,10 @@ class News extends Model
         'External News',
         'Other'
     ];
+
+    public function getListDescriptionAttribute() {
+        $description = strip_tags($this->attributes['list_description']);
+        return \Illuminate\Support\Str::limit($description, 150, '...');
+    }
+    
 }

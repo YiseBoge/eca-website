@@ -20,7 +20,9 @@ class PublicationsController extends Controller
         $year = request()->input("year", "All");
         $size = request()->input("size", 0);
         $cat = $categories == "" ? Publication::getEnum('category') : explode(',', $categories);
-        $models = Publication::whereIn('category', $cat)->orderBy('created_at', 'DESC');
+        $models = Publication::select('id as id', 'title as title', 'description as list_description', 'category as category', 'image_url as image_url', 'file_url as file_url', 'created_at as created_at', 'updated_at as updated_at');
+        
+        $models = $models->whereIn('category', $cat)->orderBy('created_at', 'DESC');
 
         if ($year != "All")
             $models = $models->whereYear('created_at', strval($year));

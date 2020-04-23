@@ -22,11 +22,11 @@ class NewsController extends Controller
         $featured = request()->input("featured");
         $cat = $categories == "" ? News::getEnum('category') : explode(',', $categories);
 
-
+        $models = News::select('id as id', 'title as title', 'description as list_description', 'category as category', 'is_featured as is_featured', 'image_url as image_url', 'created_at as created_at', 'updated_at as updated_at');
         if ($featured == "true") {
-            $models = News::whereIn('category', $cat)->orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC');
+            $models = $models->whereIn('category', $cat)->orderBy('is_featured', 'DESC')->orderBy('created_at', 'DESC');
         } else {
-            $models = News::whereIn('category', $cat)->orderBy('created_at', 'DESC');
+            $models = $models->whereIn('category', $cat)->orderBy('created_at', 'DESC');
         }
 
         if ($year != "All")

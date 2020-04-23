@@ -40,7 +40,7 @@
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>
                       <v-list-item-title v-text="item.title"/>
-                      <v-list-item-subtitle class="text--primary" v-text="htmlToText(item.description)"/>
+                      <v-list-item-subtitle class="text--primary" v-text="htmlToText(item.list_description)"/>
                       <v-list-item-subtitle v-text="formatToMinute(item.created_at)"/>
                     </v-list-item-content>
                   </v-col>
