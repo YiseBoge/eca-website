@@ -6,6 +6,8 @@ use App\Http\Resources\LeaderCollection;
 use App\Http\Resources\LeaderResource;
 use App\Models\Leader;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class LeadersController extends Controller
 {
@@ -30,20 +32,33 @@ class LeadersController extends Controller
      */
     public function store(Request $request)
     {
-        $image_url = "";
-        if($request->file('image') != null){
-            $image_url = $request->file('image')->store('public/leader_images'); 
-            $image_url = "/storage" . substr($image_url, 6); 
-        }
-        
-        $model = Leader::create([
-            'name' => $request->input("name"),
-            'position' => $request->input("position"),
-            'description' => $request->input("description"),
-            'level' => $request->input("level"),
-            'image_url' => $image_url,
+        $validation = Validator::make($request->all(),[ 
+            'name' => 'required',
+            'position' => 'required',
+            'description' => 'required',
+            'level' => 'required|numeric',
         ]);
-        return new LeaderResource($model);
+
+        $errors = $validation->errors();
+
+        if(count($errors) != 0){
+            return response($errors->toJson(), 400);
+        }else{
+            $image_url = "";
+            if($request->file('image') != null){
+                $image_url = $request->file('image')->store('public/leader_images'); 
+                $image_url = "/storage" . substr($image_url, 6); 
+            }
+            
+            $model = Leader::create([
+                'name' => $request->input("name"),
+                'position' => $request->input("position"),
+                'description' => $request->input("description"),
+                'level' => $request->input("level"),
+                'image_url' => $image_url,
+            ]);
+            return new LeaderResource($model);
+        }
     }
 
     /**
@@ -67,19 +82,32 @@ class LeadersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = Leader::findOrFail($id);
-        $image_url = $model->image_url;
-        if($request->file('image') != null){
-            $image_url = $request->file('image')->store('public/leader_images'); 
-            $image_url = "/storage" . substr($image_url, 6); 
+        $validation = Validator::make($request->all(),[ 
+            'name' => 'required',
+            'position' => 'required',
+            'description' => 'required',
+            'level' => 'required|numeric',
+        ]);
+
+        $errors = $validation->errors();
+
+        if(count($errors) != 0){
+            return response($errors->toJson(), 400);
+        }else{
+            $model = Leader::findOrFail($id);
+            $image_url = $model->image_url;
+            if($request->file('image') != null){
+                $image_url = $request->file('image')->store('public/leader_images'); 
+                $image_url = "/storage" . substr($image_url, 6); 
+            }
+            $model->name = $request->input("name");
+            $model->position = $request->input("position");
+            $model->description = $request->input("description");
+            $model->level = $request->input("level");
+            $model->image_url = $image_url;
+            $model->save();
+            return new LeaderResource($model);
         }
-        $model->name = $request->input("name");
-        $model->position = $request->input("position");
-        $model->description = $request->input("description");
-        $model->level = $request->input("level");
-        $model->image_url = $image_url;
-        $model->save();
-        return new LeaderResource($model);
     }
 
     /**
