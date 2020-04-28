@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mt-6">
       <v-col>
-        <h1 class="font-weight-thin">News</h1>
+        <h1>News</h1>
       </v-col>
     </v-row>
 

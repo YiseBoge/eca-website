@@ -10,7 +10,7 @@
               v-else
       >
         <v-toolbar class="shadow-sm" height="45">
-          <v-toolbar-title class="font-weight-light">Leadership</v-toolbar-title>
+          <v-toolbar-title>Leadership</v-toolbar-title>
 
         </v-toolbar>
         <v-list class="overflow-auto" height="450" three-line>

@@ -11,7 +11,7 @@
       />
 
       <v-list class="transparent" three-line v-else>
-        <h2 class="px-3 text-primary font-weight-light display-1">Publications</h2>
+        <h2 class="px-3 text-primary display-1">Publications</h2>
         <v-divider
           class="my-0"
         />

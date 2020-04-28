@@ -12,7 +12,7 @@
     >
 
       <v-list class="transparent" three-line>
-        <h2 class="px-3 font-weight-thin text-primary">Headlines</h2>
+        <h2 class="px-3 text-primary">Headlines</h2>
         <v-divider
           class="my-0"
         />
