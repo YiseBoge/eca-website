@@ -6,6 +6,8 @@ use App\Http\Resources\EventCollection;
 use App\Http\Resources\EventResource;
 use App\Models\Event;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class EventsController extends Controller
 {
@@ -38,14 +40,28 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        $model = Event::create([
-            'title' => $request->input("title"),
-            'description' => $request->input("description"),
-            'start_date' => $request->input("start_date"),
-            'end_date' => $request->input("end_date"),
-            'location' => $request->input("location")
+        $validation = Validator::make($request->all(),[ 
+            'title' => 'required',
+            'description' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'location' => 'required',
         ]);
-        return new EventResource($model);
+
+        $errors = $validation->errors();
+
+        if(count($errors) != 0){
+            return response($errors->toJson(), 400);
+        }else{
+            $model = Event::create([
+                'title' => $request->input("title"),
+                'description' => $request->input("description"),
+                'start_date' => $request->input("start_date"),
+                'end_date' => $request->input("end_date"),
+                'location' => $request->input("location")
+            ]);
+            return new EventResource($model);
+        }
     }
 
     /**
@@ -69,14 +85,28 @@ class EventsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $model = Event::findOrFail($id);
-        $model->title = $request->input("title");
-        $model->description = $request->input("description");
-        $model->start_date = $request->input("start_date");
-        $model->end_date = $request->input("end_date");
-        $model->location = $request->input("location");
-        $model->save();
-        return new EventResource($model);
+        $validation = Validator::make($request->all(),[ 
+            'title' => 'required',
+            'description' => 'required',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'location' => 'required',
+        ]);
+
+        $errors = $validation->errors();
+
+        if(count($errors) != 0){
+            return response($errors->toJson(), 400);
+        }else{
+            $model = Event::findOrFail($id);
+            $model->title = $request->input("title");
+            $model->description = $request->input("description");
+            $model->start_date = $request->input("start_date");
+            $model->end_date = $request->input("end_date");
+            $model->location = $request->input("location");
+            $model->save();
+            return new EventResource($model);
+        }
     }
 
     /**

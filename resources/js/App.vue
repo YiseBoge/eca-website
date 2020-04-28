@@ -60,7 +60,7 @@
     background: white;
   }
 
-  /*h1, h2, h3, h4, div{*/
-  /*  font-family: "IBM Plex Serif",serif !important;*/
-  /*}*/
+  h1, h2, h3, h4{
+    font-family: "IBM Plex Serif",serif !important;
+  }
 </style>

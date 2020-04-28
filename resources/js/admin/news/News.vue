@@ -36,8 +36,8 @@
         <template v-slot:item.title="{item}">
           {{ compress(item.title) }}
         </template>
-        <template v-slot:item.description="{item}">
-          <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
+        <template v-slot:item.list_description="{item}">
+          <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.list_description)"/>
         </template>
         <template v-slot:item.is_featured="{item}">
           <p class="my-2" v-text="item.is_featured ? 'Yes': 'No'"/>
@@ -70,7 +70,7 @@
         selectedNews: null,
         headers: [
           {text: 'Title', value: 'title'},
-          {text: 'Description', value: 'description'},
+          {text: 'Description', value: 'list_description'},
           {text: 'Category', value: 'category'},
           {text: 'Featured', value: 'is_featured'},
           {text: 'Actions', value: 'actions', sortable: false, width: "100px"},

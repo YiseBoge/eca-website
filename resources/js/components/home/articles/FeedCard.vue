@@ -36,7 +36,7 @@
               {{ value.title }}
             </h3>
             <div class="caption text-truncate">
-              {{ htmlToText(value.description) }}
+              {{ htmlToText(value.list_description) }}
             </div>
             <p class="overline my-1">{{ formatToDate(value.created_at) }}</p>
           </v-flex>

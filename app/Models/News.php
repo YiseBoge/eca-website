@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Enums;
 use Illuminate\Database\Eloquent\Model;
+use \Illuminate\Support\Str;
 
 class News extends Model
 {
@@ -14,4 +15,10 @@ class News extends Model
         'External News',
         'Other'
     ];
+
+    public function getListDescriptionAttribute() {
+        $description = strip_tags($this->attributes['list_description']);
+        return Str::limit($description, 150, '...');
+    }
+    
 }

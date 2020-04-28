@@ -1,7 +1,7 @@
 <template>
   <v-footer
     class="shadow-lg"
-    style="background: url('https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg') repeat"
+    style="background: url('img/pattern-images.jpg') repeat"
   >
     <v-card
       class="black--text w-100 transparent"
@@ -19,8 +19,8 @@
               md4
               xs12
             >
-              <img src="https://eca.et/wp-content/uploads/2019/10/logo-eca-flag-2.png" style="width: 300px">
-              <p class="mt-3">The Transparent Gateway to Prosperity </p>
+              <img src="/img/brand/white.png" style="width: 300px">
+              <p class="mt-3 text-white">The Transparent Gateway to Prosperity </p>
             </v-flex>
 
             <v-flex
@@ -28,7 +28,7 @@
               xs12
             >
 
-              <v-layout wrap>
+              <v-layout wrap class="text-white">
                 <v-flex
                   md6
                   xs12
@@ -46,14 +46,14 @@
                 >
                   <h6>CONTACT</h6>
                   <v-divider class="grey w-50"/>
-                  <v-icon size="24px">mdi-email</v-icon>
-                  <a href="mailto:contact@eca-ethiopia.com" target="_blank">contact@eca-ethiopia.com</a><br>
-                  <v-icon size="24px">mdi-phone</v-icon>
-                  <a href="tel:+251 11 465 6011" target="_blank">+251 11 465 6011</a><br>
-                  <v-icon size="24px">mdi-fax</v-icon>
-                  <a href="tel:+251 11 465 5763" target="_blank">+251 11 465 5763</a><br>
-                  <v-icon size="24px">mdi-twitter</v-icon>
-                  <a href="https://twitter.com/eca_ethiopia" target="_blank">@eca_ethiopia</a><br>
+                  <v-icon size="24px" class="text-white">mdi-email</v-icon>
+                  <a href="mailto:contact@eca-ethiopia.com" target="_blank" class="text-white">contact@eca-ethiopia.com</a><br>
+                  <v-icon size="24px" class="text-white">mdi-phone</v-icon>
+                  <a href="tel:+251 11 465 6011" target="_blank" class="text-white">+251 11 465 6011</a><br>
+                  <v-icon size="24px" class="text-white">mdi-fax</v-icon>
+                  <a href="tel:+251 11 465 5763" target="_blank" class="text-white">+251 11 465 5763</a><br>
+                  <v-icon size="24px" class="text-white">mdi-twitter</v-icon>
+                  <a href="https://twitter.com/eca_ethiopia" target="_blank" class="text-white">@eca_ethiopia</a><br>
                 </v-flex>
 
                 <!-- <v-flex
