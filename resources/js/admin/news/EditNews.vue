@@ -125,7 +125,8 @@
       submit() {
         console.log(this.selectedNews);
         let formData = new FormData();
-        this.selectedNews.is_featured = this.selectedNews.is_featured === 1;
+        console.log(this.selectedNews.is_featured);
+        this.selectedNews.is_featured = this.selectedNews.is_featured === 1 || this.selectedNews.is_featured;
         Object.keys(this.selectedNews).forEach((key) => {
           formData.append(key, this.selectedNews[key])
         });
@@ -175,6 +176,7 @@
         return store.getters.getNewsCategories;
       },
       selectedNews() {
+        console.log(store.getters.getSelectedNews);
         return store.getters.getSelectedNews;
       },
       loadingPage: () => store.getters.getLoading,

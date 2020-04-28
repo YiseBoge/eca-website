@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mt-6">
       <v-col lg="9">
-        <h1 class="font-weight-thin">Events</h1>
+        <h1>Events</h1>
       </v-col>
       <v-col lg="3">
         <v-tabs

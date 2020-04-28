@@ -48,7 +48,7 @@
                 <v-list-item-content>
                   <div class="overline mb-4">Featured</div>
                   <v-list-item-title class="headline mb-1">{{data[0].title}}</v-list-item-title>
-                  <v-list-item-subtitle v-text="htmlToText(data[0].description)"/>
+                  <v-list-item-subtitle v-text="htmlToText(data[0].list_description)"/>
                   <small class="overline text-muted mt-1" v-text="formatToDate(data[0].created_at)"/>
                 </v-list-item-content>
 

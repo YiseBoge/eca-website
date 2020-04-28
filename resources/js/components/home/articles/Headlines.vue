@@ -12,7 +12,7 @@
     >
 
       <v-list class="transparent" three-line>
-        <h2 class="px-3 font-weight-thin text-primary">Headlines</h2>
+        <h2 class="px-3 text-primary">Headlines</h2>
         <v-divider
           class="my-0"
         />
@@ -31,7 +31,7 @@
             <v-list-item-content>
               <p class="overline text-muted">{{formatToDate(item.created_at)}}</p>
               <v-list-item-title v-html="item.title"/>
-              <v-list-item-subtitle v-text="htmlToText(item.description)"/>
+              <v-list-item-subtitle v-text="htmlToText(item.list_description)"/>
             </v-list-item-content>
           </v-list-item>
         </template>

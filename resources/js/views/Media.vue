@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mt-6">
       <v-col md="8">
-        <h1 class="font-weight-thin">Media</h1>
+        <h1>Media</h1>
       </v-col>
 <!--      <v-col md="4">-->
 <!--        <a class="ma-2 text-white float-right shadow-lg btn-danger btn btn-sm" href="https://www.youtube.com"-->

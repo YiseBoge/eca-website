@@ -36,8 +36,8 @@
       <template v-slot:item.title="{item}">
         {{ compress(item.title) }}
       </template>
-      <template v-slot:item.description="{item}">
-        <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.description)"/>
+      <template v-slot:item.list_description="{item}">
+        <p class="text-truncate my-2" style="max-width: 400px" v-text="htmlToText(item.list_description)"/>
       </template>
       <template v-slot:item.actions="{ item }">
        <v-icon class="mr-2" @click="$router.push(`/publications/${item.id}/edit`)">
@@ -68,7 +68,7 @@
         selectedPublication: null,
         headers: [
           {text: 'Title', value: 'title', width: "15%"},
-          {text: 'Description', value: 'description'},
+          {text: 'Description', value: 'list_description'},
           {text: 'Category', value: 'category'},
           { text: 'Actions', value: 'actions', sortable: false, width: "100px" },
         ],

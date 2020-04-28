@@ -2,7 +2,7 @@
   <v-container>
     <v-row class="mt-6">
       <v-col>
-        <h1 class="font-weight-thin">About Us</h1>
+        <h1>About Us</h1>
       </v-col>
     </v-row>
 
@@ -25,7 +25,7 @@
           <v-tab-item style="height: 700px; overflow: auto">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
-                <h2 class="mb-5 font-weight-thin">About Ethiopian Communications Authority</h2>
+                <h2 class="mb-5">About Ethiopian Communications Authority</h2>
                 <p>
                   The Ethiopian Communications Authority (ECA) is the Communications sector Regulatory Authority in
                   Ethiopia. The ECA is established by Communications Services Proclamation No. 1148/2019, with a
@@ -68,15 +68,15 @@
           <v-tab-item style="height: 700px; overflow: auto">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
-                <h2 class="mb-5 font-weight-thin">Our Vision</h2>
+                <h2 class="mb-5">Our Vision</h2>
                 <p>Transform Ethiopia into a global digital society through fostering communications technology
                   advancement and creativity.</p>
-                <h2 class="mb-5 font-weight-thin">Our Mission</h2>
+                <h2 class="mb-5">Our Mission</h2>
                 <p>To transparently and efficiently regulate the communications sector in Ethiopia and ensure fair
                   competitive practices by all communications service providers to promote accessibility and protect the
                   interests of consumers while maintaining high-quality communications services at affordable
                   prices.</p>
-                <h2 class="mb-5 font-weight-thin">Our Values</h2>
+                <h2 class="mb-5">Our Values</h2>
                 <p>At ECA, we are inspired by the mosaic of people we work with, the nation we serve, and the people
                   within our nation and beyond. As a newly established regulatory organ, we’re dedicated to making an
                   impact in our country’s development each and every day. Our seven core values and brand promise guides
@@ -126,7 +126,7 @@
           <v-tab-item style="height: 700px; overflow: auto">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
-                <h2 class="mb-5 font-weight-thin">Message from the Director General</h2>
+                <h2 class="mb-5">Message from the Director General</h2>
                 <p>Dear valued visitors,</p>
 
                 <p>Welcome to the website of the Ethiopian Communications Authority (ECA), the communications services
@@ -161,26 +161,26 @@
           <v-tab-item style="height: 700px; overflow: auto">
             <v-card class="mx-5 mb-5" flat>
               <v-card-text>
-                <h2 class="mb-5 font-weight-thin">ECA’s Corporate Brand Promise</h2>
+                <h2 class="mb-5">ECA’s Corporate Brand Promise</h2>
                 <p>ECA will motivate you to do more with all communications and connections with our people across
                   Ethiopia, however large or small.</p>
-                <h2 class="mb-5 font-weight-thin">ECA Corporate Brand Pillars</h2>
+                <h2 class="mb-5">ECA Corporate Brand Pillars</h2>
 
-                <h4 class="font-weight-thin">People First</h4>
+                <h4>People First</h4>
                 <p>By putting our people first, we foster a culture of achievement, reliability, accountability,
                   excellence and longevity.</p>
 
-                <h4 class="font-weight-thin">Safety and Security </h4>
+                <h4>Safety and Security </h4>
                 <p>Safety is a top priority. Whether it is the physical, mental or information communications, ECA
                   ensure the safety and security of our customers, operators, clients, contractors and staff.</p>
-                <h4 class="font-weight-thin">Service Excellence</h4>
+                <h4>Service Excellence</h4>
                 <p>ECA endeavors to deliver exceptional experiences for everyone we come in contact with from domestic
                   and foreign operators, clients, community of customers across Ethiopia and stakeholders in everything
                   we do.</p>
-                <h4 class="font-weight-thin">Sustainability</h4>
+                <h4>Sustainability</h4>
                 <p>We embrace technology that is ecology friendly and powers Ethiopia’s economy, social and cultural
                   sustainability. It’s the ECA way!</p>
-                <h4 class="font-weight-thin">Community Impact</h4>
+                <h4>Community Impact</h4>
                 <p>ECA, by name, is an Ethiopian community asset. Its core mission is to enhance the quality of life of
                   Ethiopians by creating an economic and social benefits from this Regulatory organ.</p>
 

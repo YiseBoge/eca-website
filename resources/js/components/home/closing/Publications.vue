@@ -11,7 +11,7 @@
       />
 
       <v-list class="transparent" three-line v-else>
-        <h2 class="px-3 text-primary font-weight-light display-1">Publications</h2>
+        <h2 class="px-3 text-primary display-1">Publications</h2>
         <v-divider
           class="my-0"
         />
@@ -26,7 +26,7 @@
             <v-list-item-content>
               <p class="overline text-muted">{{formatToDate(item.created_at)}}</p>
               <v-list-item-title v-text="item.title"/>
-              <v-list-item-subtitle v-text="htmlToText(item.description)"/>
+              <v-list-item-subtitle v-text="htmlToText(item.list_description)"/>
               <p class="pt-1">
                 <router-link :to="`/publications/${item.id}`" class="small d-inline text-primary">Read More</router-link>
                 <a :href="server + item.file_url" class="small d-inline text-primary float-right" target="_blank" v-if="item.file_url">Download</a>
