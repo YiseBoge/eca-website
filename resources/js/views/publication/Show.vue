@@ -12,7 +12,7 @@
     <div v-else>
       <v-row class="mt-6">
         <v-col>
-          <h3 class="font-weight-light">{{data.title}}</h3>
+          <h3>{{data.title}}</h3>
           <span class="font-italic text-muted mr-2" v-text="formatToMinute(data.created_at)"/> |
           <router-link :to="'/publications'" class="ml-2" v-text="data.category"/>
         </v-col>
