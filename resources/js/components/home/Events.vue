@@ -1,11 +1,10 @@
 <template>
   <!-- <section class="my-5 py-4 shadow-lg"
            style="background:linear-gradient(0deg, rgba(128,128,128, 0.6), rgba(128,128,128, 0.6)), url('https://www.publicdomainpictures.net/pictures/260000/velka/white-simple-background.jpg') repeat;"> -->
-    <section class="my-5 py-4 shadow-lg"
-           style="background: url('img/pattern-images.jpg') repeat;"> 
+    <section class="my-5 py-4 grey lighten-2" style="box-shadow: 0 0 5px #DDDDDD">
 
     <v-container>
-      <h1 class="my-3 display-1 text-white pattern">Events</h1>
+      <h2 class="my-3 pattern">Events</h2>
       <v-fade-transition hide-on-leave>
         <v-row v-if="homeLoaders.homeEvents">
           <div class="col-md-4 px-md-12 h-100">
@@ -49,12 +48,12 @@
           </div>
 
           <div class="col-md-4 row h-100" v-if="data.length >= 2">
-            <p class="col-md-4 col-3 date text-center text-white">
+            <p class="col-md-4 col-3 date text-center">
               {{months[new Date(data[1].start_date).getMonth()]}}
               <span class="event-date">{{new Date(data[1].start_date).getDate()}}</span>
               {{new Date(data[1].start_date).getFullYear()}}
             </p>
-            <div class="vertical-parent col-md-8 col-9 text-white">
+            <div class="vertical-parent col-md-8 col-9">
               <span> {{data[1].title}} </span>
               <br>
               <p class="small">
@@ -64,12 +63,12 @@
           </div>
 
           <div class="col-md-4 row h-100" v-if="data.length >= 3">
-            <p class="col-md-4 col-3 date text-center text-white">
+            <p class="col-md-4 col-3 date text-center">
               {{months[new Date(data[2].start_date).getMonth()]}}
               <span class="event-date">{{new Date(data[2].start_date).getDate()}}</span>
               {{new Date(data[2].start_date).getFullYear()}}
             </p>
-            <div class="vertical-parent col-md-8 col-9 text-white">
+            <div class="vertical-parent col-md-8 col-9">
               <span> {{data[2].title}} </span>
               <br>
               <p class="small">

@@ -2,7 +2,7 @@
   <v-app class="bg-white">
     <core-toolbar/>
 
-    <v-content id="home">
+    <v-content id="home"  style="font-family: 'Nunito', sans-serif">
       <transition name="fade" mode="out-in">
         <keep-alive>
           <router-view />
@@ -58,9 +58,5 @@
 
   .v-content__wrap {
     background: white;
-  }
-
-  h1, h2, h3, h4{
-    font-family: "IBM Plex Serif",serif !important;
   }
 </style>

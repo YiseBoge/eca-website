@@ -1,7 +1,6 @@
 <template>
   <v-footer
-    class="shadow-lg"
-    style="background: url('img/pattern-images.jpg') repeat"
+    class="shadow-lg grey darken-2"
   >
     <v-card
       class="black--text w-100 transparent"
