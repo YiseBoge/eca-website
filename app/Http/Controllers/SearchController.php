@@ -54,6 +54,6 @@ class SearchController extends Controller
 
         $result = $result->sortByDesc('date');
 
-        return SearchItemResource::collection($result);
+        return SearchItemResource::collection($result->forPage(1, 10));
     }
 }
