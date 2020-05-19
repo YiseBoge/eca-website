@@ -6,7 +6,7 @@
     dense
     v-model="keyword"
     :items="searchedContents"
-    :loading="isLoading"
+    :loading="loading"
     :search-input.sync="search"
     clearable
     hide-details
@@ -64,22 +64,19 @@
         else if (item.type === this.resultTypes[1]) {
           router.push(`/${item.type.toLowerCase()}s/`);
         }
-        this.loading = false;
       },
       truncate(text) {
         return text.slice(0, 50);
       }
     },
     computed: {
-      searchedContents () {
-        return store.getters.getSearchResponse;
-      }
+      searchedContents: () => store.getters.getSearchResponse,
+      loading: () => store.getters.getSearchLoading
     },
     watch: {
       search (val) {
         // Items have already been loaded
         if (val.length < 3) return;
-        this.isLoading = true;
         store.dispatch('search', {keyword: val});
       }
     }

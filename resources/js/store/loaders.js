@@ -1,5 +1,6 @@
 const state = {
   loading: false,
+  searchLoading: false,
   categoryLoading: false,
   homeLoaders: {
     headlines: false,
@@ -14,6 +15,9 @@ const getters = {
   getLoading(state) {
     return state.loading
   },
+  getSearchLoading(state) {
+    return state.searchLoading
+  },
   getCategoryLoading(state) {
     return state.categoryLoading
   },
@@ -25,6 +29,9 @@ const getters = {
 const mutations = {
   setLoading: (state, payload) => {
     state.loading = payload;
+  },
+  setSearchLoading: (state, payload) => {
+    state.searchLoading = payload;
   },
   setCategoryLoading: (state, payload) => {
     state.categoryLoading = payload;

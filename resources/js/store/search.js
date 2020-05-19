@@ -18,6 +18,7 @@ const mutations = {
 
 const actions = {
   search: ({commit}, {keyword}) => {
+    commit('setSearchLoading', true);
     ajax.get(`/search/${keyword}`).then(
       response => {
         commit('setSearchResponse', response.data.data);
@@ -25,7 +26,9 @@ const actions = {
       error => {
         console.log(error);
       }
-    )
+    ).finally(() => {
+      commit('setSearchLoading', false);
+    });
   },
 };
 
