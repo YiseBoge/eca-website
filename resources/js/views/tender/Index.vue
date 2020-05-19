@@ -1,42 +1,41 @@
 <template>
   <v-container>
     <v-row class="mt-6">
-      <v-col>
-        <h1>News</h1>
+      <v-col lg="9">
+        <h1>Tenders</h1>
       </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col cols="12" md="8">
+      <v-col lg="3">
         <v-tabs
-          background-color="primary" class="shadow mb-5 rounded"
-          dark fixed-tabs
-          @change="fetchNews"
-          v-model="year"
+          @change="fetchTenders"
+          v-model="time"
+          fixed-tabs
         >
           <v-tab
             :key="i"
-            v-for="i in years"
+            v-for="i in times"
           >
             {{i}}
           </v-tab>
         </v-tabs>
+      </v-col>
+    </v-row>
 
-
+    <v-row>
+      <v-col md="8">
         <v-list two-line>
           <v-skeleton-loader
             class="w-100"
             type="list-item-three-line"
             v-if="loading"
           />
-          <p class="text-muted text-center mt-3"
+          <p class="text-muted text-muted text-center mt-3"
              v-else-if="!data || data.length === 0"
              v-text="'Found Nothing'"/>
           <v-list-item-group v-else
           >
-            <template v-for="item in data">
+            <template v-for="(item) in data">
               <v-row>
-                <v-list-item :to="'/news/' + item.id" class="w-100">
+                <v-list-item :to="`/tenders/${item.id}`" class="w-100">
                   <v-col cols="12" md="11">
                     <v-list-item-content>
                       <div class="overline">{{item.category}}</div>
@@ -45,8 +44,9 @@
                       <v-list-item-subtitle v-text="formatToMinute(item.created_at)"/>
                     </v-list-item-content>
                   </v-col>
-                  <v-col v-if="item.image_url" :style="'height:50%; background: url(' + server + item.image_url + ') center; background-size: cover;'"
-                         :class="item.image_url? 'shadow-sm' : ''" class="d-md-block d-none rounded" cols="1">
+                  <v-col :class="item.image_url? 'shadow-sm' : ''"  v-if="item.image_url"
+                         :style="'height:50%; background: url(' + server + item.image_url + ') center; background-size:cover;'"
+                         class="d-md-block d-none rounded" cols="1">
                   </v-col>
                 </v-list-item>
 
@@ -59,44 +59,42 @@
           <v-col lg="2" cols="3">
             <v-select
               :items="sizes"
-              @change="fetchNews" class="justify-start"
+              @change="fetchTenders" class="justify-start"
               dense label="Show" outlined
               v-model="size"
             />
           </v-col>
           <v-col lg="10" cols="9">
-            <v-pagination :length="meta.last_page" :total-visible="7" @input="fetchNews" class="justify-end"
+            <v-pagination :length="meta ? meta.last_page : 0" :total-visible="7" @input="fetchTenders" class="justify-end"
                           v-model="page"/>
           </v-col>
         </v-row>
       </v-col>
-      <v-col class="px-8" cols="12" md="4">
+      <v-col class="px-8" md="4">
 
         <!--        <v-text-field-->
         <!--          label="Search"-->
         <!--          solo clearable dense-->
         <!--          clear-icon="mdi-close-circle-outline"-->
         <!--        />-->
-
         <v-fade-transition hide-on-leave>
           <v-skeleton-loader
             class="shadow-lg"
             type="card-heading, list-item, list-item, list-item"
             v-if="categoryLoading"
           />
-          <v-card
-            class="mx-auto shadow-lg rounded" tile
-            v-else
+          <v-card class="mx-auto shadow-lg"
+                  v-else
           >
-
             <v-list>
               <v-subheader>Categories</v-subheader>
               <p class="text-muted text-center mt-3"
                  v-if="categories.length === 0"
                  v-text="'Found Nothing'"/>
-              <v-list-item-group @change="fetchNews" v-else
-                                 color="primary" multiple
-                                 v-model="selectedCategories"
+              <v-list-item-group v-else
+                @change="fetchTenders"
+                color="primary" multiple
+                v-model="selectedCategories"
               >
                 <v-list-item
                   :key="i"
@@ -132,48 +130,48 @@
 <!--</style>-->
 <script>
 
-  import {store} from "~/store/store";
+  import {store} from "../../store/store";
   import {SERVER_BASE_URL} from "~/ajax";
 
   export default {
-    name: "news-index",
+    name: "tender-index",
     data() {
       return {
         server: SERVER_BASE_URL,
         page: 1,
         size: 10,
-        year: 0,
+        time: 0,
+        times: ["Upcoming", "Past"],
         selectedCategories: [],
         sizes: [10, 25, 50, 100],
-        years: ['All', 2020, 2019, 2018, 2017],
       }
     },
     methods: {
-      fetchNews() {
+      fetchTenders() {
         let cats = [];
         let c = this.categories;
         this.selectedCategories.forEach(function (category) {
           cats.push(c[category]);
         });
-        store.dispatch('setNews', {
+        store.dispatch('setTenders', {
           page: this.page,
           size: this.size,
-          year: this.years[this.year],
           category: cats,
+          time: this.times[this.time]
         });
       },
       fetchCategories() {
-        store.dispatch('setNewsCategories');
+        store.dispatch('setTenderCategories');
       },
     },
     created() {
       this.fetchCategories();
-      this.fetchNews();
+      this.fetchTenders();
     },
     computed: {
-      data: () => store.getters.getNews,
-      meta: () => store.getters.getNewsMeta,
-      categories: () => store.getters.getNewsCategories,
+      data: () => store.getters.getTenders,
+      meta: () => store.getters.getTendersMeta,
+      categories: () => store.getters.getTenderCategories,
       loading: () => store.getters.getLoading,
       categoryLoading: () => store.getters.getCategoryLoading,
     },

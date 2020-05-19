@@ -26,11 +26,9 @@
         <v-btn
           :key="i" :to="link.to" class="ml-0 hidden-sm-and-down"
           text v-for="(link, i) in links"
-          @click="onClick($event, link)"
         >
           {{ link.text }}
         </v-btn>
-        <!--      <v-spacer/>-->
       </v-app-bar>
     </v-card>
     <v-navigation-drawer
@@ -76,6 +74,7 @@
           {text: 'ABOUT US', icon: 'mdi-information', to: '/about'},
           {text: 'NEWS', icon: 'mdi-newspaper', to: '/news'},
           {text: 'PUBLICATIONS', icon: 'mdi-file-document', to: '/publications'},
+          {text: 'TENDERS', icon: 'mdi-file-document', to: '/tenders'},
           {text: 'EVENTS', icon: 'mdi-calendar', to: '/events'},
           {text: 'MEDIA', icon: 'mdi-folder-multiple-image', to: '/media'},
         ]
@@ -92,13 +91,6 @@
         this.drawer = false;
       },
       ...mapMutations(['toggleDrawer']),
-      onClick(e, item) {
-        e.stopPropagation();
-
-        if (!item.to) return;
-
-        this.$vuetify.goTo(item.to)
-      }
     },
     watch: {
       group() {

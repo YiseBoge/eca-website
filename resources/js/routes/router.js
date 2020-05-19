@@ -10,6 +10,8 @@ const NewsShow = () => import("~/views/news/Show");
 const NotFound = () => import("~/views/errors/NotFound");
 const PublicationIndex = () => import("~/views/publication/Index");
 const PublicationShow = () => import("~/views/publication/Show");
+const TenderIndex = () => import("~/views/tender/Index");
+const TenderShow = () => import("~/views/tender/Show");
 const About = () => import("../views/About");
 
 const Home = () => import('~/views/Home.vue');
@@ -28,6 +30,9 @@ export const router = new Router({
 
     {path: '/publications/:id', name: 'publication-show', component: PublicationShow},
     {path: '/publications', name: 'publication-index', component: PublicationIndex},
+
+    {path: '/tenders/:id', name: 'tender-show', component: TenderShow},
+    {path: '/tenders', name: 'tender-index', component: TenderIndex},
 
     {path: '/about', name: 'about', component: About},
 

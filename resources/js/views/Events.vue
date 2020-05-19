@@ -22,7 +22,7 @@
     <v-row class="px-12 mb-10">
       <v-col>
         <p class="text-muted text-muted text-center mt-3"
-           v-if="data.length === 0"
+           v-if="!loading && data.length === 0"
            v-text="'Found Nothing'"/>
         <v-timeline v-else>
           <v-timeline-item
