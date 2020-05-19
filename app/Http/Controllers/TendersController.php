@@ -14,7 +14,7 @@ class TendersController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return TenderCollection
      */
     public function index()
     {

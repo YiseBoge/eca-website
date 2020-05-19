@@ -49,7 +49,7 @@ const mutations = {
 const actions = {
   setTenders: ({commit}, {page, size, time, category}) => {
     commit('setLoading', true);
-    ajax.get(`/tender/?page=${page}&size=${size}&time=${time}&category=${category}`).then(
+    ajax.get(`/tender/?page=${page}&size=${size}&type=${time}&category=${category}`).then(
       response => {
 
         commit('setTenders', response.data.data);
