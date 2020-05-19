@@ -23,6 +23,7 @@
           </v-toolbar-title>
         </a>
         <v-spacer/>
+        <v-spacer/>
         <search />
         <v-btn
           :key="i" :to="link.to" class="ml-0 hidden-sm-and-down"
@@ -79,7 +80,7 @@
           {text: 'ABOUT US', icon: 'mdi-information', to: '/about'},
           {text: 'NEWS', icon: 'mdi-newspaper', to: '/news'},
           {text: 'PUBLICATIONS', icon: 'mdi-file-document', to: '/publications'},
-          {text: 'TENDERS', icon: 'mdi-file-document', to: '/tenders'},
+          {text: 'TENDERS', icon: 'mdi-gavel', to: '/tenders'},
           {text: 'EVENTS', icon: 'mdi-calendar', to: '/events'},
           {text: 'MEDIA', icon: 'mdi-folder-multiple-image', to: '/media'},
         ]

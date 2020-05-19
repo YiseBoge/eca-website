@@ -1,39 +1,43 @@
 <template>
-
-  <v-autocomplete
-    flat
-    light
-    dense
-    v-model="keyword"
-    :items="searchedContents"
-    :loading="loading"
-    :search-input.sync="search"
-    clearable
-    hide-details
-    hide-selected
-    item-text="title"
-    label="Search"
-    prepend-inner-icon="mdi-magnify"
-    solo
-  >
-    <template v-slot:item="{ item }">
-      <v-list-item @click="navigate(item)">
-        <v-list-item-avatar
-          color="indigo"
-          class="headline font-weight-light white--text"
-        >
-          {{ item.title.charAt(0) }}
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title v-text="item.title" />
-          <v-list-item-subtitle class="text-truncate" v-text="truncate(htmlToText(item.description))" />
-        </v-list-item-content>
-        <v-list-item-action @click="navigate(item)">
-          <v-icon v-text="getIcon(item.type)"> </v-icon>
-        </v-list-item-action>
-      </v-list-item>
-    </template>
-  </v-autocomplete>
+  <v-row style="width: 300px">
+    <v-col cols="12">
+      <v-autocomplete
+        flat
+        light
+        dense
+        class="mx-5"
+        v-model="keyword"
+        :items="searchedContents"
+        :loading="loading"
+        :search-input.sync="search"
+        clearable
+        hide-details
+        hide-selected
+        item-text="title"
+        label="Search"
+        prepend-inner-icon="mdi-magnify"
+        solo
+      >
+        <template v-slot:item="{ item }">
+          <v-list-item @click="navigate(item)">
+            <v-list-item-avatar
+              color="primary"
+              class="headline font-weight-light white--text"
+            >
+              {{ item.title.charAt(0) }}
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title" />
+              <v-list-item-subtitle class="text-truncate" v-text="truncate(htmlToText(item.description))" />
+            </v-list-item-content>
+            <v-list-item-action @click="navigate(item)">
+              <v-icon v-text="getIcon(item.type)"> </v-icon>
+            </v-list-item-action>
+          </v-list-item>
+        </template>
+      </v-autocomplete>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
