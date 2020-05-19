@@ -23,6 +23,7 @@
           </v-toolbar-title>
         </a>
         <v-spacer/>
+        <search />
         <v-btn
           :key="i" :to="link.to" class="ml-0 hidden-sm-and-down"
           text v-for="(link, i) in links"
@@ -63,8 +64,12 @@
   // Utilities
   import {mapMutations} from 'vuex'
   import {router} from "~/routes/router";
+  import Search from "./Search";
 
   export default {
+    components: {
+      search: Search
+    },
     data() {
       return {
         drawer: false,

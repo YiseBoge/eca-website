@@ -56,3 +56,5 @@ Route::get('/leadership/{id}', 'LeadersController@show');
 Route::get('/publication', 'PublicationsController@index');
 Route::get('/publication/categories', 'PublicationsController@categories')->name('publication.categories');
 Route::get('/publication/{id}','PublicationsController@show');
+
+Route::get('/search/{keyword}', 'SearchController@index');
