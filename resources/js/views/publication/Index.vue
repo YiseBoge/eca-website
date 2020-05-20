@@ -22,14 +22,14 @@
         </v-tabs>
 
         <v-list two-line>
-          <p class="text-muted text-muted text-center mt-3"
-             v-if="data.length === 0 && !loading"
-             v-text="'Found Nothing'"/>
           <v-skeleton-loader
             class="w-100"
             type="list-item-three-line"
             v-if="loading"
           />
+          <p class="text-muted text-muted text-center mt-3"
+             v-else-if="!data || data.length === 0"
+             v-text="'Found Nothing'"/>
           <v-list-item-group v-else
           >
             <template v-for="(item) in data">
@@ -108,7 +108,6 @@
                     <v-list-item-action>
                       <v-checkbox
                         :input-value="active"
-                        :true-value="item"
                         @click="toggle"
                       />
                     </v-list-item-action>

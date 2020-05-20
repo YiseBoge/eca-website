@@ -66,7 +66,9 @@ const actions = {
     commit('setCategoryLoading', true);
     ajax.get(`/publication/categories`).then(
       response => {
-        commit('setPublicationCategories', response.data);
+        if (Array.isArray(response.data)) {
+          commit('setPublicationCategories', response.data);
+        }
       },
       error => {
         console.log(error);
