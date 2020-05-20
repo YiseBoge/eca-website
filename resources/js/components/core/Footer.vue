@@ -1,6 +1,6 @@
 <template>
   <v-footer
-    class="shadow-lg grey darken-2"
+    class="shadow-lg grey darken-4"
   >
     <v-card
       class="black--text w-100 transparent"

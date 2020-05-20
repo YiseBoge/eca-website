@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::apiResource('event', 'EventsController')->only(['destroy', 'store', 'update']);
     Route::apiResource('leadership', 'LeadersController')->only(['destroy', 'store', 'update']);
     Route::apiResource('publication', 'PublicationsController')->only(['destroy', 'store', 'update']);
+    Route::apiResource('tender', 'TendersController')->only(['destroy', 'store', 'update']);
+
+    Route::apiResource('tender-application', 'TenderApplicationsController')->only(['index', 'show']);
 });
 
 Route::get('/news', 'NewsController@index');
@@ -50,9 +53,17 @@ Route::get('/news/{id}', 'NewsController@show');
 Route::get('/event', 'EventsController@index');
 Route::get('/event/{id}', 'EventsController@show');
 
+Route::get('/tender', 'TendersController@index');
+Route::get('/tender/categories', 'TendersController@categories')->name('tender.categories');
+Route::get('/tender/{id}', 'TendersController@show');
+
+Route::post('/tender-application', 'TenderApplicationsController@store');
+
 Route::get('/leadership', 'LeadersController@index');
 Route::get('/leadership/{id}', 'LeadersController@show');
 
 Route::get('/publication', 'PublicationsController@index');
 Route::get('/publication/categories', 'PublicationsController@categories')->name('publication.categories');
 Route::get('/publication/{id}','PublicationsController@show');
+
+Route::get('/search/{keyword}', 'SearchController@index');
