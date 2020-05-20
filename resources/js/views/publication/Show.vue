@@ -20,7 +20,8 @@
       <v-row class="mb-6">
         <v-col>
           <div class="my-4" v-html="data.description"/>
-          <a :href="server + data.file_url" class="btn btn-primary btn-sm text-white shadow-lg" target="_blank">
+          <a v-if="data.file_url" :href="server + data.file_url" class="btn btn-primary btn-sm text-white shadow-lg"
+             target="_blank">
             <v-icon color="white" left small>mdi-download</v-icon>
             Download
           </a>

@@ -7,7 +7,7 @@
     </v-row>
 
     <v-row>
-      <v-col md="8">
+      <v-col md="8" cols="12">
         <v-tabs
           @change="fetchPublications" background-color="primary"
           class="shadow mb-5 rounded" dark
@@ -70,7 +70,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col class="px-8" md="4">
+      <v-col class="px-8" md="4" cols="12">
 
         <!--        <v-text-field-->
         <!--          label="Search"-->
