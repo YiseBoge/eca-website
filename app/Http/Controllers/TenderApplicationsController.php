@@ -45,10 +45,10 @@ class TenderApplicationsController extends Controller
     public function store(Request $request)
     {
         $validation = Validator::make($request->all(),[
-            'name' => 'required',
-            'email' => 'required|email',
-            'file' => 'required',
             'tender_id' => 'exists:tenders,id',
+            'name' => 'required',
+            'email' => 'required|email|unique:tender_applications,email,NULL,id,tender_id,' . $request->input("tender_id"),
+            'file' => 'required',
         ]);
 
         $errors = $validation->errors();

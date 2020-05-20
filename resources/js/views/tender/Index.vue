@@ -1,10 +1,10 @@
 <template>
   <v-container>
     <v-row class="mt-6">
-      <v-col lg="9">
+      <v-col lg="9" cols="6">
         <h1>Tenders</h1>
       </v-col>
-      <v-col lg="3">
+      <v-col lg="3" cols="6">
         <v-tabs
           @change="fetchTenders"
           v-model="time"
@@ -21,7 +21,7 @@
     </v-row>
 
     <v-row>
-      <v-col md="8">
+      <v-col md="8" cols="12">
         <v-list two-line>
           <v-skeleton-loader
             class="w-100"
@@ -70,7 +70,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col class="px-8" md="4">
+      <v-col class="px-8" md="4" cols="12">
 
         <!--        <v-text-field-->
         <!--          label="Search"-->
