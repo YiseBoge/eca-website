@@ -8,7 +8,6 @@ use App\Models\News;
 use App\Models\Leader;
 use App\Models\Event;
 use App\Models\Publication;
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class SearchController extends Controller
@@ -16,10 +15,10 @@ class SearchController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @param Request $keyword
+     * @param String $keyword
      * @return AnonymousResourceCollection
      */
-    public function index(Request $keyword)
+    public function index(String $keyword)
     {
         $result = collect();
         $news = News::select('id as id', 'title as title', 'description as list_description', 'category as category', 'created_at as created_at')

@@ -18,6 +18,9 @@
         prepend-inner-icon="mdi-magnify"
         solo
       >
+        <template v-slot:append>
+          <p />
+        </template>
         <template v-slot:item="{ item }">
           <v-list-item @click="navigate(item)">
             <v-list-item-avatar
