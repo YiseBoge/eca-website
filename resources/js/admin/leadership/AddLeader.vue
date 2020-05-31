@@ -7,7 +7,7 @@
       <span class="headline">Add Leader</span>
     </v-card-title>
     <v-card-text>
-      <v-form v-model="valid">
+      <v-form ref="form" v-model="valid">
         <v-row>
           <v-col cols="12" sm="6" md="4">
             <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
@@ -64,8 +64,6 @@
   import ajax from "../../ajax";
   import {errorHandler} from "../handle-error";
   import {store} from "../../store/store";
-  import {EventModel} from "../events/event_model";
-  import moment from "moment";
 
   export default {
     name: "Add Leader",
@@ -103,10 +101,10 @@
     },
     methods: {
       clear() {
-        this.leader = new LeaderModel();
+        this.$refs.form.reset();
         this.alert = {
           message: "",
-          type: "",
+          type: "success",
           visible: false
         };
       },

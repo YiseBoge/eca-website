@@ -14,7 +14,7 @@
         />
       </v-card-text>
       <v-card-text v-else>
-        <v-form v-model="valid">
+        <v-form ref="form" v-model="valid">
           <v-row>
             <v-col cols="9">
               <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
@@ -68,8 +68,6 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import {errorHandler} from "../handle-error";
-  import {EventModel} from "../events/event_model";
-  import moment from "moment";
 
   export default {
     name: "Edit News",
@@ -84,7 +82,7 @@
         loading: false,
         alert: {
           message: "",
-          type: "",
+          type: "success",
           visible: false
         },
         button_text: 'Upload Image',
@@ -105,6 +103,7 @@
     },
     methods: {
       clear() {
+        this.$refs.form.reset();
         this.loadData();
         this.alert = {
           message: "",
@@ -141,8 +140,8 @@
               type: "success",
               visible: true
             };
-            store.dispatch('setNews', {page: 1, size: 10, year: 'All', category: ''});
             store.dispatch('setSelectedNews', {id: router.currentRoute.params.id});
+            store.dispatch('setNews', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
             errorHandler(error);
             if (error.response.status === 500){

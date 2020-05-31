@@ -14,7 +14,7 @@
         />
       </v-card-text>
       <v-card-text v-else>
-        <v-form v-model="valid">
+        <v-form ref="form" v-model="valid">
           <v-row>
             <v-col cols="12">
               <v-text-field label="Title*" required :rules="rules.required||rules.required"
@@ -49,7 +49,7 @@
                     v-on="on"
                   />
                 </template>
-                <v-date-picker @input="menu2 = false" no-title range v-model="dates"/>
+                <v-date-picker :rules="rules.required" no-title range v-model="dates"/>
               </v-menu>
             </v-col>
             <v-col cols="6">
@@ -77,8 +77,6 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import {errorHandler} from "../handle-error";
-  import {EventModel} from "./event_model";
-  import moment from "moment";
 
   export default {
     name: "Edit Event",
@@ -115,10 +113,11 @@
     },
     methods: {
       clear() {
+        this.$refs.form.reset();
         this.loadData();
         this.alert = {
           message: "",
-          type: "",
+          type: "success",
           visible: false
         };
       },

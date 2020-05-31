@@ -7,7 +7,7 @@
       <span class="headline">Add Event</span>
     </v-card-title>
     <v-card-text>
-      <v-form v-model="valid">
+      <v-form ref="form" v-model="valid">
         <v-row>
           <v-col cols="12" sm="12" md="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.required"
@@ -42,7 +42,8 @@
                   v-on="on"
                 />
               </template>
-              <v-date-picker @input="menu2 = false" no-title range v-model="dates"/>
+              <v-date-picker
+                :rules="rules.required" @input="menu2 = false" no-title range v-model="dates"/>
             </v-menu>
           </v-col>
           <v-col cols="6">
@@ -107,11 +108,11 @@
     },
     methods: {
       clear() {
-        this.event = new EventModel();
+        this.$refs.form.reset();
         this.dates = [moment(Date.now()).format('YYYY-MM-DD'), moment(Date.now()).format('YYYY-MM-DD')];
         this.alert = {
           message: "",
-          type: "",
+          type: "success",
           visible: false
         };
       },

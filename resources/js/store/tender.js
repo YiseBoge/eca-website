@@ -1,10 +1,10 @@
 import ajax from "../ajax";
-import NProgress from "nprogress";
 
 const state = {
   tenders: [],
   tenderCategories: [],
   selectedTender: null,
+  selectedApplications: [],
   tendersMeta: {
     current_page: 0,
     from: 0,
@@ -20,6 +20,9 @@ const getters = {
   getTenders: state => {
     return state.tenders;
   },
+  getSelectedApplications: state => {
+    return state.selectedApplications;
+  },
   getTenderCategories: state => {
     return state.tenderCategories;
   },
@@ -34,6 +37,9 @@ const getters = {
 const mutations = {
   setTenders: (state, payload) => {
     state.tenders = payload;
+  },
+  setSelectedApplications: (state, payload) => {
+    state.selectedApplications = payload;
   },
   setTenderCategories: (state, payload) => {
     state.tenderCategories = payload;
@@ -84,13 +90,22 @@ const actions = {
     ajax.get(`/tender/${id}`).then(
       response => {
         commit('setSelectedTender', response.data.data);
+        ajax.get(`tender-application?tender_id=${response.data.data.id}`).then(
+          response => {
+            commit('setSelectedApplications', response.data.data);
+          },
+          error => {
+            commit('setSelectedApplications', []);
+            console.log(error);
+          }
+        ).finally(function () {
+          commit('setLoading', false);
+        });
       },
       error => {
         console.log(error);
       }
-    ).finally(function () {
-      commit('setLoading', false);
-    });
+    );
   }
 };
 
