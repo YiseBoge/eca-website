@@ -162,6 +162,7 @@
           {icon: 'mdi-home', title: 'Home', link: '/'},
           {icon: 'mdi-newspaper', title: 'News', link: '/news'},
           {icon: 'mdi-file-document', title: 'Publications', link: '/publications'},
+          {icon: 'mdi-gavel', title: 'Tenders', link: '/tenders'},
           {icon: 'mdi-calendar', title: 'Events', link: '/events'},
           {icon: 'mdi-account-tie', title: 'Leadership', link: '/leadership'},
         ];

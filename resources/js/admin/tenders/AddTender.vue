@@ -5,20 +5,42 @@
     </v-alert>
 
     <v-card-title>
-      <span class="headline">New publication</span>
+      <span class="headline">New Tender</span>
     </v-card-title>
     <v-card-text>
       <v-form ref="form" v-model="valid">
         <v-row>
-          <v-col cols="12" sm="12" md="12">
-            <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
-                          v-model="publication.title"/>
+          <v-col cols="12" md="8">
+            <v-text-field :rules="rules.required||rules.min_20" label="Title*" required
+                          v-model="tender.title"/>
+          </v-col>
+          <v-col cols="12" md="4">
+            <v-menu
+              :close-on-content-click="false"
+              max-width="290px"
+              min-width="290px"
+              offset-y
+              transition="scale-transition"
+              v-model="menu2"
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  :rules="rules.required"
+                  :value="tender.deadline ? formatToDate(tender.deadline) : null"
+                  label="Deadline*"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-on="on"
+                />
+              </template>
+              <v-date-picker @input="menu2 = false" no-title v-model="tender.deadline"/>
+            </v-menu>
           </v-col>
           <v-col cols="12">
-            <vue-editor v-model="publication.description"
+            <vue-editor :customModules="customModulesForEditor"
                         :editorOptions="editorSettings"
-                        :customModules="customModulesForEditor"
-                        :rules="rules.min_100"/>
+                        :rules="rules.min_100"
+                        v-model="tender.description"/>
           </v-col>
 
           <!-- <input type="file" accept="image/png, image/jpeg, image/bmp" v-show="false" ref="file"
@@ -30,7 +52,7 @@
               {{ image_button_text }}
             </v-btn> -->
             <template>
-              <v-file-input label="Upload Image" show-size v-model="publication.image"/>
+              <v-file-input label="Upload Image" show-size v-model="tender.image"/>
             </template>
           </v-col>
 
@@ -42,18 +64,19 @@
               {{ file_button_text }}
             </v-btn> -->
             <template>
-              <v-file-input label="Upload File" show-size v-model="publication.file"/>
+              <v-file-input label="Upload File" show-size v-model="tender.file"/>
             </template>
           </v-col>
 
-          <v-col cols="4" class="mx-auto">
-            <v-select label="Select category" v-model="publication.category" :rules="rules.required" :items="categories">
+          <v-col class="mx-auto" cols="4">
+            <v-select :items="categories" :rules="rules.required" label="Select category" v-model="tender.category">
             </v-select>
           </v-col>
         </v-row>
 
         <div class="my-2 mx-auto align-center align-content-center">
-          <v-btn :disabled="!valid" color="success" class="d-block mx-auto" :loading="loading" @click="submit"> Save</v-btn>
+          <v-btn :disabled="!valid" :loading="loading" @click="submit" class="d-block mx-auto" color="success"> Save
+          </v-btn>
         </div>
       </v-form>
       <small>*indicates required field</small>
@@ -66,14 +89,14 @@
   import {VueEditor} from 'vue2-editor';
   import {ImageDrop} from 'quill-image-drop-module';
   import ImageResize from '@taoqf/quill-image-resize-module';
-  import {PublicationModel} from "./publication_model";
+  import {TenderModel} from "./tender_model";
   import {Rules} from "../validation-rules";
   import ajax from "../../ajax";
   import {store} from "../../store/store";
   import {errorHandler} from "../handle-error";
 
   export default {
-    name: "Add Publication",
+    name: "Add Tender",
     components: {
       VueEditor
     },
@@ -81,7 +104,7 @@
       return {
         valid: false,
         modal: false,
-        publication: new PublicationModel(),
+        tender: new TenderModel(),
         rules: Rules,
         loading: false,
         alert: {
@@ -109,6 +132,7 @@
     methods: {
       clear() {
         this.$refs.form.reset();
+        this.tender = new TenderModel();
         this.alert = {
           message: "",
           type: "success",
@@ -130,25 +154,25 @@
       //   this.file_button_text += filename.length < 10 ? "" : "...";
       // },
       submit() {
-        console.log(this.publication);
+        console.log(this.tender);
         let formData = new FormData();
-        Object.keys(this.publication).forEach((key) => {
-          formData.append(key, this.publication[key])
+        Object.keys(this.tender).forEach((key) => {
+          formData.append(key, this.tender[key])
         });
         let self = this;
 
         self.loading = true;
-        ajax.post(`publication`, formData).then(
+        ajax.post(`tender`, formData).then(
           response => {
             self.alert = {
-              message: "Successfully Inserted Publication",
+              message: "Successfully Inserted Tender",
               type: "success",
               visible: true
             };
-            store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
+            store.dispatch('setTenders', {page: 1, size: 10, category: ''});
           }, error => {
             errorHandler(error);
-            if (error.response.status === 500){
+            if (error.response.status === 500) {
               self.alert = {
                 message: "Error: Something went wrong at the server",
                 type: "error",
@@ -168,11 +192,11 @@
       }
     },
     created() {
-      store.dispatch('setPublicationCategories');
+      store.dispatch('setTenderCategories');
     },
     computed: {
-      categories () {
-        return store.getters.getPublicationCategories;
+      categories() {
+        return store.getters.getTenderCategories;
       }
     }
   }

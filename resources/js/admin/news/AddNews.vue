@@ -8,7 +8,7 @@
       <span class="headline">Add news</span>
     </v-card-title>
     <v-card-text>
-      <v-form v-model="valid">
+      <v-form ref="form" v-model="valid">
         <v-row>
           <v-col md="9" sm="12">
             <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
@@ -60,8 +60,6 @@
   import ajax from "../../ajax";
   import {store} from "../../store/store";
   import {errorHandler} from "../handle-error";
-  import {EventModel} from "../events/event_model";
-  import moment from "moment";
 
   export default {
     name: "Add News",
@@ -98,10 +96,10 @@
     },
     methods: {
       clear() {
-        this.news = new NewsModel();
+        this.$refs.form.reset();
         this.alert = {
           message: "",
-          type: "",
+          type: "success",
           visible: false
         };
       },

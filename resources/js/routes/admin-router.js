@@ -21,6 +21,10 @@ const Publication = () => import('~/admin/publications/Publications');
 const AddPublication = () => import('~/admin/publications/AddPublication');
 const EditPublication = () => import('~/admin/publications/EditPublication');
 
+const Tender = () => import('~/admin/tenders/Tenders');
+const AddTender = () => import('~/admin/tenders/AddTender');
+const EditTender = () => import('~/admin/tenders/EditTender');
+
 const Leaders = () => import('~/admin/leadership/Leaders');
 const AddLeader = () => import('~/admin/leadership/AddLeader');
 const EditLeader = () => import('~/admin/leadership/EditLeader');
@@ -45,7 +49,16 @@ export const router = new Router({
 
     {path: '/publications', name: 'publication', component: Publication, beforeEnter: ifAuthenticated},
     {path: '/publications/new', name: 'add publication', component: AddPublication, beforeEnter: ifAuthenticated},
-    {path: '/publications/:id/edit', name: 'edit publication', component: EditPublication, beforeEnter: ifAuthenticated},
+    {
+      path: '/publications/:id/edit',
+      name: 'edit publication',
+      component: EditPublication,
+      beforeEnter: ifAuthenticated
+    },
+
+    {path: '/tenders', name: 'tender', component: Tender, beforeEnter: ifAuthenticated},
+    {path: '/tenders/new', name: 'add tender', component: AddTender, beforeEnter: ifAuthenticated},
+    {path: '/tenders/:id/edit', name: 'edit tender', component: EditTender, beforeEnter: ifAuthenticated},
 
     {path: '/profile', name: 'profile', component: Profile},
     {path: '/login', name: 'login', component: Login},

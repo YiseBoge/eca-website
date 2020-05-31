@@ -14,14 +14,15 @@
         />
       </v-card-text>
       <v-card-text v-else>
-        <v-form v-model="valid">
+        <v-form ref="form" v-model="valid">
           <v-row>
             <v-col cols="10">
               <v-text-field label="Title*" required :rules="rules.required||rules.min_20"
                             v-model="selectedPublication.title"/>
             </v-col>
             <v-col cols="2" v-if="selectedPublication.file_url">
-              <a :href="selectedPublication.file_url" class="btn btn-primary btn-sm text-white shadow-lg pr-4" target="_blank">
+              <a :href="selectedPublication.file_url" class="btn btn-primary btn-sm text-white shadow-lg pr-4"
+                 target="_blank">
                 <v-icon color="white" left small>mdi-download</v-icon>
                 File
               </a>
@@ -74,8 +75,6 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import {errorHandler} from "../handle-error";
-  import {EventModel} from "../events/event_model";
-  import moment from "moment";
 
   export default {
     name: "Edit Publication",
@@ -110,10 +109,11 @@
     },
     methods: {
       clear() {
+        this.$refs.form.reset();
         this.loadData();
         this.alert = {
           message: "",
-          type: "",
+          type: "success",
           visible: false
         };
       },
@@ -137,8 +137,8 @@
               type: "success",
               visible: true
             };
-            store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
             store.dispatch('setSelectedPublication', {id: router.currentRoute.params.id});
+            store.dispatch('setPublications', {page: 1, size: 10, year: 'All', category: ''});
           }, error => {
             errorHandler(error);
             if (error.response.status === 500){

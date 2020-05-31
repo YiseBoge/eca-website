@@ -14,7 +14,7 @@
         />
       </v-card-text>
       <v-card-text v-else>
-        <v-form v-model="valid">
+        <v-form ref="form" v-model="valid">
           <v-row>
             <v-col cols="12" sm="6" md="4">
               <v-text-field label="Full Name*" required :rules="rules.required||rules.min_20"
@@ -75,8 +75,6 @@
   import {store} from "../../store/store";
   import {router} from "../../routes/admin-router";
   import {errorHandler} from "../handle-error";
-  import {EventModel} from "../events/event_model";
-  import moment from "moment";
 
   export default {
     name: "Add Leader",
@@ -113,10 +111,11 @@
     },
     methods: {
       clear() {
+        this.$refs.form.reset();
         this.loadData();
         this.alert = {
           message: "",
-          type: "",
+          type: "success",
           visible: false
         };
       },
@@ -147,8 +146,8 @@
               type: "success",
               visible: true
             };
-            store.dispatch('setLeadership', {page: 1, size: 10});
             store.dispatch('setSelectedLeader', {id: router.currentRoute.params.id});
+            store.dispatch('setLeadership', {page: 1, size: 10});
           }, error => {
             errorHandler(error);
             if (error.response.status === 500){
