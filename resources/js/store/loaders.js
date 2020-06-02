@@ -6,6 +6,7 @@ const state = {
     headlines: false,
     featured: false,
     events: false,
+    tenders: false,
     leadership: false,
     publications: false,
   }
@@ -44,6 +45,9 @@ const mutations = {
   },
   setHomeEventsLoading: (state, payload) => {
     state.homeLoaders.events = payload;
+  },
+  setHomeTendersLoading: (state, payload) => {
+    state.homeLoaders.tenders = payload;
   },
   setLeadershipLoading: (state, payload) => {
     state.homeLoaders.leadership = payload;

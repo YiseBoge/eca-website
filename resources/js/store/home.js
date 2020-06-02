@@ -5,6 +5,7 @@ const state = {
   headlines: [],
   leadership: [],
   homeEvents: [],
+  homeTenders: [],
   homePublications: [],
 };
 
@@ -20,6 +21,9 @@ const getters = {
   },
   getHomeEvents: state => {
     return state.homeEvents;
+  },
+  getHomeTenders: state => {
+    return state.homeTenders;
   },
   getHomePublications: state => {
     return state.homePublications;
@@ -38,6 +42,9 @@ const mutations = {
   },
   setHomeEvents: (state, payload) => {
     state.homeEvents = payload;
+  },
+  setHomeTenders: (state, payload) => {
+    state.homeTenders = payload;
   },
   setHomePublications: (state, payload) => {
     state.homePublications = payload;
@@ -86,7 +93,7 @@ const actions = {
   },
   setHomeEvents: ({commit}, {page, size}) => {
     commit('setHomeEventsLoading', true);
-    ajax.get(`/event/?page=${page}&size=${size}`).then(
+    ajax.get(`/event/?page=${page}&size=${size}&type=Past`).then(
       response => {
         commit('setHomeEvents', response.data.data);
       },
@@ -95,6 +102,19 @@ const actions = {
       }
     ).finally(function () {
       commit('setHomeEventsLoading', false);
+    });
+  },
+  setHomeTenders: ({commit}, {page, size}) => {
+    commit('setHomeTendersLoading', true);
+    ajax.get(`/tender/?page=${page}&size=${size}&type=Upcoming`).then(
+      response => {
+        commit('setHomeTenders', response.data.data);
+      },
+      error => {
+        console.log(error);
+      }
+    ).finally(function () {
+      commit('setHomeTendersLoading', false);
     });
   },
   setHomePublications: ({commit}, {page, size}) => {

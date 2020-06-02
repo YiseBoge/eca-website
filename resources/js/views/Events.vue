@@ -7,8 +7,8 @@
       <v-col lg="3">
         <v-tabs
           @change="fetchEvents"
-          v-model="time"
           fixed-tabs
+          v-model="time"
         >
           <v-tab
             :key="i"
@@ -43,7 +43,7 @@
                 v-if="loading"
               />
               <v-card :class="i === 0 && time === 0 && page === 1 ? 'shadow-lg': 'shadow'"
-                      :style="i === 0 && time === 0 && page === 1 ? 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg\) repeat': ''"
+                      :style="i === 0 && time === 0 && page === 1 ? 'background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg) repeat': ''"
                       class="px-5"
                       v-else
               >
@@ -64,7 +64,7 @@
       </v-col>
     </v-row>
     <v-row class="py-5">
-      <v-col lg="2" cols="3">
+      <v-col cols="3" lg="2">
         <v-select
           :items="sizes"
           @change="fetchEvents" class="justify-start w-75"
@@ -72,7 +72,7 @@
           v-model="size"
         />
       </v-col>
-      <v-col lg="10" cols="9">
+      <v-col cols="9" lg="10">
         <v-pagination :length="meta.last_page" :total-visible="7" @input="fetchEvents" class="justify-end"
                       v-model="page"/>
       </v-col>

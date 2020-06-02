@@ -70,7 +70,7 @@
           </v-col>
         </v-row>
       </v-col>
-      <v-col class="px-8" md="4" cols="12">
+      <v-col class="pl-8" cols="12" md="4">
 
         <!--        <v-text-field-->
         <!--          label="Search"-->
@@ -83,18 +83,16 @@
             type="card-heading, list-item, list-item, list-item"
             v-if="categoryLoading"
           />
-          <v-card class="mx-auto shadow-lg"
-                  v-else
-          >
+          <v-card class="mx-auto shadow-lg" v-else>
             <v-list>
               <v-subheader>Categories</v-subheader>
               <p class="text-muted text-center mt-3"
                  v-if="categories.length === 0"
                  v-text="'Found Nothing'"/>
               <v-list-item-group v-else
-                @change="fetchTenders"
-                color="primary" multiple
-                v-model="selectedCategories"
+                                 @change="fetchTenders"
+                                 color="primary" multiple
+                                 v-model="selectedCategories"
               >
                 <v-list-item
                   :key="i"

@@ -57,7 +57,6 @@ const actions = {
     commit('setLoading', true);
     ajax.get(`/tender/?page=${page}&size=${size}&type=${time}&category=${category}`).then(
       response => {
-
         commit('setTenders', response.data.data);
         commit('setTendersMeta', response.data.meta);
       },

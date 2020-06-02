@@ -43,7 +43,7 @@
                   class="mx-auto row shadow-lg overflow-hidden"
                   height="210" outlined
           >
-            <div :class="data[0].image_url ? 'col-8': 'col-12'">
+            <v-col :cols="data[0].image_url ? 8 : 12">
               <v-list-item three-line>
                 <v-list-item-content>
                   <div class="overline mb-4">Featured</div>
@@ -55,17 +55,18 @@
               </v-list-item>
               <v-card-actions class="pt-0">
                 <v-btn color="primary accent-4"
-                  @click="$router.push(`/news/${data[0].id}`)"
-                  text
+                       @click="$router.push(`/news/${data[0].id}`)"
+                       text
                 >
                   Read More
                 </v-btn>
               </v-card-actions>
-            </div>
-            <div v-if="data[0].image_url" :style="'background: url(' + server + data[0].image_url +') center; background-size: cover;'"
-                 class="col-4"
+            </v-col>
+            <v-col :style="'background: url(' + server + data[0].image_url +') center; background-size: cover;'"
+                   cols="4"
+                   v-if="data[0].image_url"
             >
-            </div>
+            </v-col>
           </v-card>
         </v-flex>
 
