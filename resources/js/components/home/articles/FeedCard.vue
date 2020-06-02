@@ -57,7 +57,6 @@
 
 <script>
   import {SERVER_BASE_URL} from "~/ajax";
-  import {store} from "~/store/store"
 
   export default {
     data() {

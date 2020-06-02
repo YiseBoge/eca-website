@@ -17,7 +17,7 @@
             <span class="d-inline-block">
               Posted: <span class="font-italic text-muted" v-text="formatToDate(data.created_at)"/>
             </span>
-            <span class="d-inline-block float-right">
+            <span class="d-sm-inline-block d-block float-sm-right">
               Deadline: <span class="font-italic text-muted" v-text="formatToDate(data.deadline)"/>
             </span>
           </v-col>
