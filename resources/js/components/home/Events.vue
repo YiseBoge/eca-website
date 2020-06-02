@@ -1,7 +1,8 @@
 <template>
   <!-- <section class="my-5 py-4 shadow-lg"
            style="background:linear-gradient(0deg, rgba(128,128,128, 0.6), rgba(128,128,128, 0.6)), url('https://www.publicdomainpictures.net/pictures/260000/velka/white-simple-background.jpg') repeat;"> -->
-    <section class="my-5 py-4 grey lighten-2" style="box-shadow: 0 0 5px #DDDDDD">
+  <section class="my-12 py-4 shadow"
+           style="background : url(https://www.webdesigndev.com/wp-content/uploads/2013/06/Triangle.jpg) repeat; box-shadow: 0 0 5px #DDDDDD">
 
     <v-container>
       <h2 class="my-3 pattern">Events</h2>
@@ -106,7 +107,7 @@
         return date
       },
       fetchHomeEvents() {
-        store.dispatch('setHomeEvents', {page: 1, size: 3, type: "Upcoming"});
+        store.dispatch('setHomeEvents', {page: 1, size: 3});
       },
     },
     created() {
